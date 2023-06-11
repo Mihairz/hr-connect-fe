@@ -1,9 +1,12 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+
+
+
 
 @Component({
   selector: 'app-admin-users-table',
@@ -11,7 +14,13 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./admin-users-table.component.css'],
 })
 
-export class AdminUsersTableComponent implements OnInit, OnDestroy {
+export class AdminUsersTableComponent implements OnInit, OnDestroy,AfterViewInit  {
+
+
+
+
+
+
   // tableScriptElement: HTMLScriptElement;
   constructor(private userService: UserService) {
     // this.tableScriptElement = document.createElement("script");
@@ -23,12 +32,7 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   userList: User[] = []; // Initializam o lista goala care contine obiecte de tip User. Aceasta va fi populata la ngOnInit cu ajutorul metodei getUsers()
   columnsToDisplay = ['id', 'department', 'team', 'role', 'name', 'email', 'phone', 'action'];
 
-  // @ViewChild('paginator') paginator!: MatPaginator;
-  // dataSource = new MatTableDataSource<User>(this.userList);
-  // ngAfterViewInit() {
-  //   this.dataSource = new MatTableDataSource(this.userList);
-  //   this.dataSource.paginator=this.paginator;
-  // }
+  
 
   isLoading = false;
   isModalOpen = false; // Formularul de adaugare utilizatori noi este prestabilit ascuns
@@ -60,7 +64,11 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
     this.isModalOpen = false;
   }
 
-
+  @ViewChild('paginator') paginator!: MatPaginator;
+  dataSource = new MatTableDataSource<User>(this.userList);  
+  ngAfterViewInit() {
+    this.dataSource.paginator=this.paginator;
+  }
 
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
