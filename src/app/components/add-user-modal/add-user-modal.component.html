@@ -1,0 +1,44 @@
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <!-- Butonul de ascundere formular. La evenimentul click se apeleaza functia closeModal() a componentei curente (add-user-modal) si modala se va inchide-->
+
+        <form [formGroup]="userForm">
+            <!-- Specificam numele formularului din typescript -->
+            <p> 
+                <label for="department">Department:</label>
+                <input id="department" type="text" formControlName="department" required>
+                <!-- la fiecare input specificam numele variabilei din typescript -->
+            </p>
+            <p>
+                <label for="team">Team:</label>
+                <input id="team" type="text" formControlName="team" required>
+            </p>
+            <p>
+                <label for="role">Role:</label>
+                <input id="role" type="text" formControlName="role" required>
+            </p>
+            <p>
+                <label for="name">Name:</label>
+                <input id="name" type="text" formControlName="name" required>
+            </p>
+            <p>
+                <label for="email">E-mail:</label>
+                <input id="email" type="email" formControlName="email" required>
+            </p>
+            <p>
+                <label for="phone">Phone number:</label>
+                <input id="phone" type="text" formControlName="phone" required>
+            </p>
+            <p>
+                <label for="password">Password:</label>
+                <input id="password" type="text" formControlName="password" required>
+            </p>
+        </form>
+
+        <button type="button" (click)="addUser()">Add</button>
+        <!-- Butonul de adaugare utilizator. La evenimentul click se apeleaza functia addUser() a componentei curente (add-user-modal) si utilzatorul va fi inregistrat-->
+    </div>
+</div>

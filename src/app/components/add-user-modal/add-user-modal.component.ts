@@ -1,0 +1,61 @@
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+
+@Component({
+  selector: 'app-add-user-modal',
+  templateUrl: './add-user-modal.component.html',
+  styleUrls: ['./add-user-modal.component.css']
+})
+export class AddUserModalComponent implements OnDestroy{
+  @Output() newCloseModalEvent = new EventEmitter<string>();
+  @Output() newGetUsersEvent = new EventEmitter<string>();
+
+  // Creem formularul si campurile acestuia
+  userForm = new FormGroup ({
+    department: new FormControl(''),
+    team: new FormControl(''),
+    role: new FormControl(''),
+    name: new FormControl(''),
+    email: new FormControl(''),
+    phone: new FormControl(''),
+    password: new FormControl('')
+  })
+
+  addUserSubscription: Subscription = new Subscription(); 
+
+  constructor(private userService: UserService){} // Injectam serviciul user pentru a putea folosii metodele din acesta (put si post http requests in cazul nostru)
+
+  addUser(){
+    // Creem obiectul user ce urmeaza a fi introdus in baza de date. Daca una dintre valori a ajuns necompletata in backend aceasta va fi setata ca empty string
+    const user = {
+      department: this.userForm.value.department || '',
+      team: this.userForm.value.team || '',
+      role: this.userForm.value.role || '',
+      name: this.userForm.value.name || '',
+      email: this.userForm.value.email || '',
+      phone: this.userForm.value.phone || '',
+      password: this.userForm.value.password || ''
+    }
+
+    // Apelam functia de addUser si ii pasam ca parametru obiectul de tip User creat anterior
+    this.addUserSubscription = this.userService.addUser(user).subscribe(()=>{
+      this.newGetUsersEvent.emit();
+      this.closeModal();
+      // Dupa ce utilizatorul este adaugat,add-user-modal va emite un eveniment pe nume newGetUsersEvent ce va fi receptionat de catre componenta parinte (admin-home-page), iar lista de utilizatori de pe ecran isi va da refresh, astfel afisand inclusiv ultimul utilizator adaugat.
+      // De asemenea functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
+    })
+  }
+  
+  closeModal() {
+    this.newCloseModalEvent.emit();
+  }
+  // Functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
+
+  ngOnDestroy(): void{
+    this.addUserSubscription.unsubscribe();
+  }
+}
+
+
