@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
     ReactiveFormsModule,
     MatTableModule, 
     MatPaginatorModule,
+    MatSortModule,
     BrowserAnimationsModule, 
   ],
   providers: [],

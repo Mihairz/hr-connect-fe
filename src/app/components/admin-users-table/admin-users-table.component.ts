@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import {MatSort, Sort, MatSortModule} from '@angular/material/sort';import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+
+import {LiveAnnouncer} from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-admin-users-table',
@@ -11,11 +13,18 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./admin-users-table.component.css'],
 })
 
-export class AdminUsersTableComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AdminUsersTableComponent implements OnInit, OnDestroy {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private _liveAnnouncer: LiveAnnouncer) { }
 
   userSubscription: Subscription = new Subscription();
+
+
+  
+  
+
+
+
 
 
 
@@ -25,12 +34,28 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy, AfterViewIni
 
   columnsToDisplay = ['id', 'department', 'team', 'role', 'name', 'email', 'phone', 'action']; // Aici se specifica elementului html mat-table ce coloane din typescript sa se afiseze
 
-  @ViewChild(MatPaginator) paginator: any = MatPaginator; // Initializeaza paginator-ul din angular material
+  // Am intampinat o problema pentru ca paginator-ul se incarca inaintea datelor si astfel era undefined (din cate am inteles). Aici era prima solutie pe care am implementat-o, folosind ngAfterViewInit si setTimeout, dar dupa am gasit o solutie si mai eleganta (cea de mai jos) (ambele solutii de aici https://stackoverflow.com/questions/48785965/angular-matpaginator-doesnt-get-initialized )
 
-  ngAfterViewInit() {
+  //@ViewChild(MatPaginator) paginator: any = MatPaginator; // Initializeaza paginator-ul din angular material
+  //ngAfterViewInit() {
     // this.dataSource.paginator = this.paginator;
-    setTimeout(() => this.dataSource.paginator = this.paginator, 40);
+    //setTimeout(() => this.dataSource.paginator = this.paginator, 200);
+    // <mat-paginator> element IS inside a container that has an *ngIf on it, which does not render until the data loads asynchronously. This causes this.paginator to be undefined even in ngAfterViewInit. This causes it to silently fail as MatTableDataSource has no problem with you setting paginator to undefined.
+  //}
+
+  @ViewChild(MatPaginator, {static: false})
+  set paginator(value: MatPaginator) {
+    if (this.dataSource){
+      this.dataSource.paginator = value;
+    }
   }
+  @ViewChild(MatSort, {static: false})
+  set sort(value: MatSort) {
+    if (this.dataSource){
+      this.dataSource.sort = value;
+    }
+  }
+ 
 
 
 
