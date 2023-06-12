@@ -16,6 +16,10 @@ import { AdminUsersTableComponent } from './components/admin-users-table/admin-u
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewsletterPageComponent } from './pages/newsletter-page/newsletter-page.component';
+import { NewsletterArticleComponent } from './components/newsletter-article/newsletter-article.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserComponent,
     AddUserModalComponent,
     LoginModuleComponent, 
-    AdminUsersTableComponent
+    AdminUsersTableComponent, 
+    NewsletterPageComponent, NewsletterArticleComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     MatTableModule, 
     MatPaginatorModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

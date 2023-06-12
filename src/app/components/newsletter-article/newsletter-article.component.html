@@ -1,0 +1,14 @@
+<div class="container__article">
+  <div *ngFor="let article of articles">
+    <div class="article">
+      <h1 class="title">{{ article.title }}</h1>
+
+      <p class="info__item">
+        Added by&nbsp; {{ article.author }}&nbsp;&nbsp; • &nbsp;&nbsp;
+        {{ article.date }}
+      </p>
+
+      <p>{{ article.content }}</p>
+    </div>
+  </div>
+</div>
