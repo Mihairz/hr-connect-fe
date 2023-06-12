@@ -1,16 +1,20 @@
 <div class="form glass">
     <div class="title">Welcome to HR Connect</div>
     <!-- <div class="subtitle">Let's create your account!</div> -->
-    <div class="input-container ic1">
-        <input id="email" class="input" type="text" placeholder-login-form=" " />
-        <div class="cut cut-short"></div>
-        <label for="email" class="placeholder-login-form">Email</label>
-    </div>
-    <div class="input-container ic2">
-        <input id="password" class="input" type="password" placeholder-login-form=" " />
-        <div class="cut"></div>
-        <label for="password" class="placeholder-login-form">Password</label>
-    </div>
+
+    <form autocomplete="off">
+        <div class="input-container ic1">
+            <input id="email" class="input" type="text" placeholder-login-form=" " /> 
+            <!-- <div class="cut cut-short"></div> -->
+            <label for="email" class="placeholder-login-form">Email</label>
+        </div>
+        <div class="input-container ic2">
+            <input id="password" class="input" type="password" placeholder-login-form=" " />
+            <!-- <div class="cut"></div> -->
+            <label for="password" class="placeholder-login-form">Password</label>
+        </div>
+        
+        <a href="/admin"><button type="text" class="submit">login</button></a>
+    </form>
     
-    <a href="/admin"><button type="text" class="submit">login</button></a>
 </div> 
