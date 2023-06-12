@@ -18,7 +18,7 @@
       "email": "mihai@yahoo.com",
       "phone": "0735468543",
       "password": "a",
-      "id": 7
+      "id": 17
     },
     {
       "department": "PBG",
@@ -28,7 +28,7 @@
       "email": "w@w",
       "phone": "0735468543",
       "password": "a",
-      "id": 6
+      "id": 16
     },
     {
       "department": "PBG",
@@ -38,7 +38,7 @@
       "email": "mihai@yahoo.com",
       "phone": "0735468543",
       "password": "a",
-      "id": 7
+      "id": 18
     },
     {
       "department": "PBG",
@@ -48,7 +48,7 @@
       "email": "w@w",
       "phone": "0735468543",
       "password": "a",
-      "id": 6
+      "id": 19
     },
     {
       "department": "PBG",
@@ -58,7 +58,7 @@
       "email": "mihai@yahoo.com",
       "phone": "0735468543",
       "password": "a",
-      "id": 7
+      "id": 20
     },
     {
       "department": "PBG",
@@ -68,17 +68,7 @@
       "email": "w@w",
       "phone": "0735468543",
       "password": "a",
-      "id": 6
-    },
-    {
-      "department": "PBG",
-      "team": "a",
-      "role": "Frontend developer",
-      "name": "Mihai",
-      "email": "mihai@yahoo.com",
-      "phone": "0735468543",
-      "password": "a",
-      "id": 7
+      "id": 21
     },
     {
       "department": "PBG",
