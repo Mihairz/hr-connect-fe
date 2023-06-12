@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {MatSort, Sort, MatSortModule} from '@angular/material/sort';import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,7 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
   selector: 'app-admin-users-table',
   templateUrl: './admin-users-table.component.html',
   styleUrls: ['./admin-users-table.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class AdminUsersTableComponent implements OnInit, OnDestroy {
@@ -83,12 +84,16 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
         this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
       })
   }
+  
+  body:any= document.querySelector("body");
 
   openModal() {
     this.isModalOpen = true;
+    this.body.style.overflow = "hidden";
   }
   closeModal() {
     this.isModalOpen = false;
+    this.body.style.overflow = "auto";
   }
 
   ngOnDestroy(): void {

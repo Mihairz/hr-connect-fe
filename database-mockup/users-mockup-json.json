@@ -12,16 +12,6 @@
     },
     {
       "department": "PBG",
-      "team": "6",
-      "role": "Frontend developer",
-      "name": "Mike",
-      "email": "w@w",
-      "phone": "0735468543",
-      "password": "a",
-      "id": 6
-    },
-    {
-      "department": "PBG",
       "team": "a",
       "role": "Frontend developer",
       "name": "Mihai",
