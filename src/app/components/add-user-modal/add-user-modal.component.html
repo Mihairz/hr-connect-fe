@@ -1,7 +1,7 @@
 <!-- The Modal -->
 <div id="modal" class="modal">
     <!-- Modal content -->
-    <div class="modal-content form glass ">
+    <div  id="particles-js">
         <span class="close" (click)="closeModal()">&times;</span>
         <!-- Butonul de ascundere formular. La evenimentul click se apeleaza functia closeModal() a componentei curente (add-user-modal) si modala se va inchide-->
         <div class="title">Add new user</div>
@@ -14,43 +14,43 @@
                 <input id="department" class="input" type="text" formControlName="department" required>
                 <!-- la fiecare input specificam numele variabilei din typescript -->
                 <div class="cut cut-short"></div>
-                <label for="department" class="placeholder-login-form">Department:</label>
+                <label for="department" class="placeholder-add-user-form">Department:</label>
             </div>
 
             <div class="input-container ic2">
                 <input id="team" class="input" type="text" formControlName="team" required>
                 <div class="cut"></div>
-                <label for="team" class="placeholder-login-form">Team:</label>
+                <label for="team" class="placeholder-add-user-form">Team:</label>
             </div>
 
             <div class="input-container ic2">
                 <input id="role" class="input" type="text" formControlName="role" required>
                 <div class="cut"></div>
-                <label for="role" class="placeholder-login-form">Role:</label>
+                <label for="role" class="placeholder-add-user-form">Role:</label>
             </div>
 
             <div class="input-container ic2">
                 <input id="name" class="input" type="text" formControlName="name" required>
                 <div class="cut"></div>
-                <label for="name" class="placeholder-login-form">Name:</label>
+                <label for="name" class="placeholder-add-user-form">Name:</label>
             </div>
 
             <div class="input-container ic2">
                 <input id="email" class="input" type="email" formControlName="email" required>
                 <div class="cut"></div>
-                <label for="email" class="placeholder-login-form">E-mail:</label>
+                <label for="email" class="placeholder-add-user-form">E-mail:</label>
             </div>
 
             <div class="input-container ic2">
                 <input id="phone" class="input" type="text" formControlName="phone" required>
                 <div class="cut"></div>
-                <label for="phone" class="placeholder-login-form">Phone number:</label>
+                <label for="phone" class="placeholder-add-user-form">Phone number:</label>
             </div>
 
             <div class="input-container ic2">
                 <input id="password" class="input" type="text" formControlName="password" required>
                 <div class="cut"></div>
-                <label for="password" class="placeholder-login-form">Password:</label>
+                <label for="password" class="placeholder-add-user-form">Password:</label>
             </div>
 
         </form>
@@ -59,14 +59,14 @@
             <div class="title">Welcome to HR Connect</div>
             <!-- <div class="subtitle">Let's create your account!</div> -->
             <div class="input-container ic1">
-                <input id="email" class="input" type="text" placeholder-login-form=" " />
+                <input id="email" class="input" type="text" placeholder-add-user-form=" " />
                 <div class="cut cut-short"></div>
-                <label for="email" class="placeholder-login-form">Email</label>
+                <label for="email" class="placeholder-add-user-form">Email</label>
             </div>
             <div class="input-container ic2">
-                <input id="password" class="input" type="password" placeholder-login-form=" " />
+                <input id="password" class="input" type="password" placeholder-add-user-form=" " />
                 <div class="cut"></div>
-                <label for="password" class="placeholder-login-form">Password</label>
+                <label for="password" class="placeholder-add-user-form">Password</label>
             </div>
 
             <a href="/admin"><button type="text" class="submit">login</button></a>

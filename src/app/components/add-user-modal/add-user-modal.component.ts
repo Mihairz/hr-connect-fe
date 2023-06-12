@@ -25,7 +25,20 @@ export class AddUserModalComponent implements OnDestroy{
 
   addUserSubscription: Subscription = new Subscription(); 
 
-  constructor(private userService: UserService){} // Injectam serviciul user pentru a putea folosii metodele din acesta (put si post http requests in cazul nostru)
+  particlesScriptElement: HTMLScriptElement;
+  particlesSettingsScriptElement: HTMLScriptElement;
+
+  constructor(private userService: UserService){
+    // adaugam in mod dinamic fisierul ce contine logica pentru fundalul animat, particle.js (din folder-ul assets al angular) la HTML-ul componentei
+    this.particlesScriptElement = document.createElement("script");
+    this.particlesScriptElement.src = "assets/particles.js";
+    document.body.appendChild(this.particlesScriptElement);
+
+    // adaugam in mod dinamic fisierul ce contine setarile pentru fundalul animat, particle.js (din folder-ul assets al angular) la HTML-ul componentei
+    this.particlesSettingsScriptElement = document.createElement("script");
+    this.particlesSettingsScriptElement.src = "assets/particles-settings.js";
+    document.body.appendChild(this.particlesSettingsScriptElement);
+  } // Injectam serviciul user pentru a putea folosii metodele din acesta (put si post http requests in cazul nostru)
 
   addUser(){
     // Creem obiectul user ce urmeaza a fi introdus in baza de date. Daca una dintre valori a ajuns necompletata in backend aceasta va fi setata ca empty string
@@ -52,6 +65,7 @@ export class AddUserModalComponent implements OnDestroy{
     this.newCloseModalEvent.emit();
   }
   // Functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
+
 
   ngOnDestroy(): void{
     this.addUserSubscription.unsubscribe();
