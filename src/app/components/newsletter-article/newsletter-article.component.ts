@@ -23,7 +23,7 @@ export class NewsletterArticleComponent implements OnInit {
 
   getArticles() {
     this.articlesService.getNewsletterArticles().subscribe((response) => {
-      this.articles = response;
+      this.articles = response.reverse(); // nu e good practice si ar trebui din backend sa sortam aceste articole ca cel nou sa fie in fata
       console.log(response);
     });
   }
@@ -39,14 +39,12 @@ export class NewsletterArticleComponent implements OnInit {
   }
   addArticle() {
     const dialogRef = this.dialog.open(AddArticleModalComponent, {
-      position: {
-        top: '0',
-        left: '0'
-      },
+    
       data: { title: '', author: '', date: '',  content: '' }
       
     });
     dialogRef.afterClosed().subscribe(result => {
+      
       this.getArticles();
     });
   }

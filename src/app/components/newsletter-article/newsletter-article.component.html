@@ -1,6 +1,7 @@
-<button class="button" (click)="addArticle()">+ Add Article</button>
 
-<body>
+
+<section>
+  <button type="button" class="btn btn-light addArticle" (click)="addArticle()">+ Add Article</button>
 <div class="placeholder__container">
 <div class="container__article">
   <div *ngFor="let article of articles">
@@ -11,8 +12,8 @@
         Added by&nbsp; {{ article.author }}&nbsp;&nbsp; • &nbsp;&nbsp;
         {{ article.date }}
       </p>
-      <button class="actions__btn" (click)="editArticle(article)">Edit</button>
-      <button class="actions__btn" (click)="deleteArticle(article.id)">Delete</button>
+      <button type="button" class="btn btn-secondary" (click)="editArticle(article)">Edit</button>
+      <button type="button" class="btn btn-secondary delete" (click)="deleteArticle(article.id)">Delete</button>
       
       
       
@@ -21,4 +22,4 @@
   </div>
 </div>
 </div>
-</body>
+</section>
