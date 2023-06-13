@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginPageComponent {
   particlesScriptElement: HTMLScriptElement;
   particlesSettingsScriptElement: HTMLScriptElement;
+  particlesHostingElement: HTMLScriptElement;
 
   constructor(){
     // adaugam in mod dinamic fisierul ce contine logica pentru fundalul animat, particle.js (din folder-ul assets al angular) la HTML-ul componentei
@@ -19,6 +20,10 @@ export class LoginPageComponent {
     this.particlesSettingsScriptElement = document.createElement("script");
     this.particlesSettingsScriptElement.src = "assets/particles-settings.js";
     document.body.appendChild(this.particlesSettingsScriptElement);
-  }
 
+    // adaugam in mod dinamic elementul ce contine scriptul pentru hostingul? fundalului animat
+    this.particlesHostingElement = document.createElement("script");
+    this.particlesHostingElement.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
+    document.body.appendChild(this.particlesHostingElement);
+  }
 }
