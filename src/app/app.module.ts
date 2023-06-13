@@ -25,6 +25,9 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +38,7 @@ import { MatButtonModule } from '@angular/material/button';
     AddUserModalComponent,
     LoginModuleComponent, 
     AdminUsersTableComponent, 
-    NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent,
+    NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent, NavigationBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogModule,
     MatButtonModule,
     MatTableModule,
+    NgbModule,
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]
