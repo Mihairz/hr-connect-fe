@@ -1,4 +1,4 @@
-.users-table-div{
+.users-table-div {
     /* position: absolute;
     top: 50%;
     left: 50%; 
@@ -9,18 +9,25 @@
     box-sizing: border-box;
     height: 90%; 
     padding: 20px;
-    width: 100%; */ 
+    width: 100%; */
 
     display: flex;
     justify-content: center;
     align-items: flex-end;
     flex-direction: column;
     gap: 10px;
+
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 750px;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
 
-th{
+th {
     font-weight: bold;
 }
 
