@@ -19,7 +19,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewsletterPageComponent } from './pages/newsletter-page/newsletter-page.component';
 import { NewsletterArticleComponent } from './components/newsletter-article/newsletter-article.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AddArticleModalComponent } from './components/add-article-modal/add-article-modal.component';
 
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     AddUserModalComponent,
     LoginModuleComponent, 
     AdminUsersTableComponent, 
-    NewsletterPageComponent, NewsletterArticleComponent,
+    NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTableModule, 
     MatPaginatorModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

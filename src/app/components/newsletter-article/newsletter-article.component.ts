@@ -2,30 +2,57 @@ import { Component, OnInit } from '@angular/core';
 import { NewsletterArticle } from 'src/app/models/newsletter-article';
 import { MatDialog } from '@angular/material/dialog';
 import { NewsletterService } from 'src/app/services/newsletter.service';
+import { AddArticleModalComponent } from '../add-article-modal/add-article-modal.component';
 
 @Component({
   selector: 'app-newsletter-article',
   templateUrl: './newsletter-article.component.html',
-  styleUrls: ['./newsletter-article.component.css']
+  styleUrls: ['./newsletter-article.component.css'],
 })
 export class NewsletterArticleComponent implements OnInit {
   articles: NewsletterArticle[] = [];
 
-constructor(
-  private articlesService: NewsletterService,
-  public dialog: MatDialog
+  constructor(
+    private articlesService: NewsletterService,
+    public dialog: MatDialog
+  ) {}
+  ngOnInit() {
+    console.log('Newsletter article component works');
+    this.getArticles();
+  }
 
-) { }
-ngOnInit() {
-  console.log("Newsletter article component works")
-  this.getArticles();
-}
-
-getArticles() {
-  this.articlesService.getNewsletterArticles().subscribe((response) => {
-    this.articles = response;
-    console.log(response)
+  getArticles() {
+    this.articlesService.getNewsletterArticles().subscribe((response) => {
+      this.articles = response;
+      console.log(response);
+    });
+  }
+  editArticle(article: NewsletterArticle) {
     
-  })
-}
+    
+    const dialogRef = this.dialog.open(AddArticleModalComponent, {
+      data: { ...article }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getArticles();
+    });
+  }
+  addArticle() {
+    const dialogRef = this.dialog.open(AddArticleModalComponent, {
+      position: {
+        top: '0',
+        left: '0'
+      },
+      data: { title: '', author: '', date: '',  content: '' }
+      
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getArticles();
+    });
+  }
+  deleteArticle(id:number ) {
+    this.articlesService.deleteNewsletterArticle(id).subscribe(() => {
+      this.getArticles()
+    });
+  }
 }

@@ -1,3 +1,7 @@
+<button class="button" (click)="addArticle()">+ Add Article</button>
+
+<body>
+<div class="placeholder__container">
 <div class="container__article">
   <div *ngFor="let article of articles">
     <div class="article">
@@ -7,8 +11,12 @@
         Added by&nbsp; {{ article.author }}&nbsp;&nbsp; • &nbsp;&nbsp;
         {{ article.date }}
       </p>
+      <button class="actions__btn" (click)="editArticle(article)">Edit</button>
+      <button class="actions__btn" (click)="deleteArticle(article.id)">Delete</button>
 
       <p>{{ article.content }}</p>
     </div>
   </div>
 </div>
+</div>
+</body>
