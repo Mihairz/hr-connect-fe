@@ -1,20 +1,17 @@
-import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { tap } from 'rxjs';
 
 export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
-  return true;
+  const authService = inject(AuthService);
+  const router = inject(Router);
+  
+  return authService.isLoggedIn$.pipe(
+    tap(isLoggedIn => {
+      if(!isLoggedIn){
+        router.navigate(['login']);
+      }
+    })
+  )
 };
-
-
-import { AuthService } from '../services/auth.service';
-import { Injectable } from '@angular/core';
-
-@Injectable()
-export class IsAuthenticatedGuard implements CanActivateFn {
-  constructor(private authService: AuthService) {}
-
-  canActivate(route: any, state: any): Observable<boolean> {
-    // Access the variable from the AuthService and return its boolean value
-    return this.authService.isLoggedIn$;
-  }
-}
-
