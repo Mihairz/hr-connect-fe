@@ -33,10 +33,15 @@ export class UserService {
 
 
   // Am folosit un JWT Token fals, acesta il vom inlocuii cu cel generat real in momentul implementarii backend-ului
-  FAKE_JWT_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDb2RlIFNob3RzIFdpdGggUHJvZmFuaXMiLCJpYXQiOjE2MjQyNzU1MjUsImV4cCI6MTY1NTgxMTUyNSwiYXVkIjoiQ29kZSBTaG90IFdpdGggUHJvZmFuaXMgU3Vic2NyaWJlcnMiLCJzdWIiOiJDb2RlIFNob3QgV2l0aCBQcm9mYW5pcyBTdWJzY3JpYmVycyIsIlVzZXJuYW1lIjoicHJvZmFuaXMiLCJGaXJzdE5hbWUiOiJGYW5pcyIsIlJvbGUiOlsiQWRtaW4iLCJTdXBlciBBZG1pbiJdfQ.mT1UD7DXTWRm4etsW9BuWcg5bj2CaeAQVXaoEOIwB7o';
+
+  FAKE_JWT_TOKEN_ADMIN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJoci1jb25uZWN0LXRlYW0iLCJpYXQiOjE2MjQyNzU1MjUsImV4cCI6MTY1NTgxMTUyNSwiYXVkIjoiaHItY29ubmVjdCIsInN1YiI6ImhyLWNvbm5lY3QtYWRtaW4tdXNlciIsImRlcGFydG1lbnQiOiIiLCJqb2ItdGl0bGUiOiIiLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5kb2VAaHJjb25uZWN0LmNvbSIsInBob25lIjoiMDc4OTk3NjY3NSJ9.q-OrGYqHFoRLVO3d_-wgpu9lnOlO9p_3g6-Rh0-JULM";
+
+  FAKE_JWT_TOKEN_HR = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJoci1jb25uZWN0LXRlYW0iLCJpYXQiOjE2MjQyNzU1MjUsImV4cCI6MTY1NTgxMTUyNSwiYXVkIjoiaHItY29ubmVjdCIsInN1YiI6ImhyLWNvbm5lY3QtaHItdXNlciIsImRlcGFydG1lbnQiOiJQQkciLCJqb2ItdGl0bGUiOiJIZWFkIG9mIEhSIiwicm9sZSI6ImhyIiwibmFtZSI6IkFsaWNlIFdvbmRlcmxhbmQiLCJlbWFpbCI6ImFsaWNld29uZGVybGFuZEBocmNvbm5lY3QuY29tIiwicGhvbmUiOiIwNzY2NTU2NjY0In0.YvsdyHGVV3VHw9IuKeObhWiSh_3k3k4YzKGcEAX_0F4";
+
+  FAKE_JWT_TOKEN_EMPLOYEE = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJoci1jb25uZWN0LXRlYW0iLCJpYXQiOjE2MjQyNzU1MjUsImV4cCI6MTY1NTgxMTUyNSwiYXVkIjoiaHItY29ubmVjdCIsInN1YiI6ImhyLWNvbm5lY3QtaHItdXNlciIsImRlcGFydG1lbnQiOiJQQkciLCJqb2ItdGl0bGUiOiJIZWFkIG9mIEZyb250ZW5kIGRlcGFydG1lbnQiLCJyb2xlIjoiZW1wbG95ZWUiLCJuYW1lIjoiSWJyaWFuIE1paGFpLVJhenZhbiIsImVtYWlsIjoiaWJyaWFubWloYWlyYXp2YW5AaHJjb25uZWN0LmNvbSIsInBob25lIjoiMDczNTQ2ODU0MyJ9.WML5RoWN-AhDuAoXHlkFNsbfnWpToGCl89RQxRmt5Ec";
 
   login(email:any,password:any){
-    const token = this.FAKE_JWT_TOKEN;
+    const token = this.FAKE_JWT_TOKEN_EMPLOYEE; // aici se schimba atribuirea in functie de ce categorie de utilizatori vrei sa simulezi log in ul
     // La momentul actual functia de login este un request de tip post la server, care transmite e-mail,password si token, astfel incat response-ul sa fie un JSON cu cele 3, cu scopul ca noi sa preluam token-ul din response.
     return this.http.post('http://localhost:3000/users', { email, password,token});
   }
