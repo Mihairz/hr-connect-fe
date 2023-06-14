@@ -13,12 +13,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginModuleComponent } from './components/login-module/login-module.component';
 import { AdminUsersTableComponent } from './components/admin-users-table/admin-users-table.component';
 
+
 import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +43,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatSortModule,
     BrowserAnimationsModule, 
   ],
-  providers: [],
+  providers: [IsAuthenticatedGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
