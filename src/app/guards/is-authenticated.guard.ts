@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { tap } from 'rxjs';
+import { tap } from 'rxjs'; 
 
 
 // Verifica daca utilizatorul este autentificat in functie de valoarea variabilei isLoggednIn$, injectata din authService, care isi schimba valoarea la login sau la logout. Daca utilzatorul nu este logat, este redirectionat catre pagina de login.
