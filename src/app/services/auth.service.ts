@@ -21,9 +21,16 @@ export class AuthService {
 
   // In summary, the code creates a private _isLoggedIn$ BehaviorSubject instance variable with an initial value of false. It also exposes a public isLoggedIn$ property as an observable, derived from the private BehaviorSubject, enabling external code to subscribe to changes in the login status without directly modifying the internal state.
 
+  private readonly TOKEN_NAME = 'hr connect auth';
+  // Vom folosii aceasta denumire pentru token-ul ce va fi setat in local storage in momentul login-ului
+
+  get token(){
+    return localStorage.getItem(this.TOKEN_NAME);
+    // Obtinem valoarea token-ului stocat local storage
+  }
+
   constructor(private userService: UserService) {
-    const token = localStorage.getItem('hr connect auth');
-    this._isLoggedIn$.next(!!token)
+    this._isLoggedIn$.next(!!this.token)
     // In summary, the next method is used to emit values in the context of Observables and Subjects. It allows you to publish values to the subscribers of the Observable or Subject, enabling the propagation of data through the reactive streams.
     // Aplicam asta ca atunci cand dam refresh la pagina, utilizatorii logati sa ramana logati
   }
@@ -38,7 +45,7 @@ export class AuthService {
 
       tap((response: any) => {
         // tap operator from the RxJS library to perform a side effect without modifying the emitted values. The tap operator takes a callback function that will be executed for each emitted value. In this case, the callback function takes one parameter response of type any, which represents the response received from the login method.
-        localStorage.setItem('hr connect auth', response.token);
+        localStorage.setItem(this.TOKEN_NAME, response.token);
         // We know that the response will have a property named token. So it's important to keep the name of the variable like this in user-service/backend.
         this._isLoggedIn$.next(true);
         // This line calls the next method on an instance variable _isLoggedIn$ of type Subject<boolean>. It emits the value true, indicating that the user is logged in.

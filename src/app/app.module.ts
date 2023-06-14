@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 
 
 
@@ -44,7 +45,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatSortModule,
     BrowserAnimationsModule, 
   ],
-  providers: [],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
