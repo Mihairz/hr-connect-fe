@@ -8,7 +8,7 @@ import { User } from '../models/user';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService { 
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class UserService {
   }
 
   addUser(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:3000/users', user);
+    return this.http.post<User>('http://localhost:3000/users', user); 
      // functia primeste ca parametru un obiect de tip User
   }
 
