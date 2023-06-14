@@ -40,14 +40,29 @@ section {
   width: 100%;
   padding-top: 160px;
 }
-
+/* Add article button */
 .btn.btn-light.addArticle {
   position: relative;
-  left: 350px;
-  top: 140px;
-  background-color: antiquewhite;
-}
 
+  background-color: white;
+  border: 1px solid grey;
+  
+}
+/* search bar top of articles */
+.search-article{
+  position: relative;
+  border: 1px solid grey;
+  background-color: white;
+}
+/* container that has the search bar and the add button */
+.search-and-add-button{
+  display: flex;
+  position: relative;
+  top: 140px;
+  width: 800px;
+  justify-content: space-between;
+}
+/* the whole container for the items */
 .content-section {
   display: flex;
   flex-direction: column;
@@ -76,7 +91,7 @@ section {
   border-radius: 10px;
   margin-bottom: 20px;
 }
-
+/*right side of the card where it has title edit/de;ete button - text - read more*/
 .card-body {
   display: flex;
   flex-direction: column;

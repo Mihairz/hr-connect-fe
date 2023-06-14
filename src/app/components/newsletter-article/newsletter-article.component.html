@@ -26,46 +26,53 @@
 
 <section>
   <div class="content-section">
-    <button type="button" class="btn btn-light addArticle" (click)="addArticle()">
-      Add Article
-    </button>
-  <div class="container-articles">
-    <!-- is a for and gets all the articles one by one -->
-    <div *ngFor="let article of articles">
-      <div class="card">
-        <img src="{{ article.urlpic }}" class="card-img-top" />
-        <div class="card-body">
-         <div class="top-of-card">
-          <h5 class="card-title">{{ article.title }}</h5>
-          <div class="button-container">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              (click)="editArticle(article)"
-            >
-              Edit
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary delete"
-              (click)="deleteArticle(article.id)"
-            >
-              Delete
-            </button>
-          </div>
-        </div>
-          <p class="card-text">
-            {{ article.content }}
-          </p>
-          <div class="read-more-container">
-            <!-- routerLink - Angular specific - when clicked will navigate to the route in the brackets - for instance - article/1 , 1 being fetched in the backend  -->
-            <a [routerLink]="['/article', article.id]" class="btn btn-primary"
-              >Read more</a
-            >
+    <div class="search-and-add-button">
+      <input type="text" class="search-article" placeholder="Search..." />
+      <button
+        type="button"
+        class="btn btn-light addArticle"
+        (click)="addArticle()"
+      >
+        Add Article
+      </button>
+    </div>
+    <div class="container-articles">
+      <!-- is a for and gets all the articles one by one -->
+      <div *ngFor="let article of articles">
+        <div class="card">
+          <img src="{{ article.urlpic }}" class="card-img-top" />
+          <div class="card-body">
+            <div class="top-of-card">
+              <h5 class="card-title">{{ article.title }}</h5>
+              <div class="button-container">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  (click)="editArticle(article)"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary delete"
+                  (click)="deleteArticle(article.id)"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+            <p class="card-text">
+              {{ article.content }}
+            </p>
+            <div class="read-more-container">
+              <!-- routerLink - Angular specific - when clicked will navigate to the route in the brackets - for instance - article/1 , 1 being fetched in the backend  -->
+              <a [routerLink]="['/article', article.id]" class="btn btn-primary"
+                >Read more</a
+              >
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </section>
