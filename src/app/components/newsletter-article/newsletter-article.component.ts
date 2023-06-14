@@ -40,7 +40,7 @@ export class NewsletterArticleComponent implements OnInit {
   addArticle() {
     const dialogRef = this.dialog.open(AddArticleModalComponent, {
     
-      data: { title: '', author: '', date: '',  content: '' }
+      data: { title: '', author: '', date: '', urlpic:'',  content: '' }
       
     });
     dialogRef.afterClosed().subscribe(result => {

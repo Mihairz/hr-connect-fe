@@ -4,5 +4,6 @@ export interface NewsletterArticle {
     author: string;
     date: string;
     content: string;
+    urlpic:string;
 
 }

@@ -27,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FullDetailedArticleComponent } from './components/full-detailed-article/full-detailed-article.component';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AddUserModalComponent,
     LoginModuleComponent, 
     AdminUsersTableComponent, 
-    NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent, NavigationBarComponent,
+    NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent, NavigationBarComponent, FullDetailedArticleComponent,
   ],
   imports: [
     BrowserModule,
