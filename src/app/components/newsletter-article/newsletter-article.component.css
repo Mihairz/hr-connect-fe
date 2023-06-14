@@ -5,6 +5,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 section {
@@ -41,11 +42,19 @@ section {
 }
 
 .btn.btn-light.addArticle {
-  position: absolute;
-  right: 20px;
-  top: 70px;
+  position: relative;
+  left: 350px;
+  top: 140px;
   background-color: antiquewhite;
 }
+
+.content-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .btn.btn-secondary.delete {
   margin-left: 10px;
 }
@@ -75,9 +84,14 @@ section {
   margin-bottom: 0;
   padding-bottom: 0;
 }
-
+/* title of the card */
 .card-title {
   font-weight: bold;
+  margin: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: px;
+  
 }
 
 /*object fit cover - fills the box with the image*/
@@ -88,13 +102,20 @@ section {
   border-top-right-radius: 0;
   border-bottom-left-radius: calc(0.25rem - 1px);
 }
+/* edit and delete buttons are together */
 .button-container {
   display: flex;
-  justify-content: start;
+  justify-content: flex-end;
 }
 .read-more-container {
   display: flex;
   justify-content: flex-end;
+}
+/* here we have the title and the buttons in one container */
+.top-of-card{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  
 }
 
 /* webkit-box doesn't work on older browsers */
