@@ -31,7 +31,7 @@ export class AuthService {
 
   constructor(private userService: UserService) {
     this._isLoggedIn$.next(!!this.token)
-    // In summary, the next method is used to emit values in the context of Observables and Subjects. It allows you to publish values to the subscribers of the Observable or Subject, enabling the propagation of data through the reactive streams.
+    // next = is used to emit values in the context of Observables and Subjects. It allows you to publish values to the subscribers of the Observable or Subject, enabling the propagation of data through the reactive streams.
     // Aplicam asta ca atunci cand dam refresh la pagina, utilizatorii logati sa ramana logati
   }
 
