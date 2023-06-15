@@ -73,6 +73,12 @@ export class AuthService {
     //  To summarize, the login method calls the userService.login method with the provided email and password parameters. It then performs some side effects using the tap operator, such as storing the received token in the localStorage and emitting a true value to indicate that the user is logged in. The overall result is an observable that can be subscribed to.
   }
 
+  logout(){
+    localStorage.removeItem(this.TOKEN_NAME); // sterge token-ul din local storage
+    this._isLoggedIn$.next(false); // Calls the 'next' method on instance variable _isLoggedIn$ of type Subject<boolean>. It emits the value false, indicating that the user is NOT logged in (anymore).
+    console.log('localStorage.removeItem(this.TOKEN_NAME): '+localStorage.removeItem(this.TOKEN_NAME));
+    console.log('this._isLoggedIn$.next(false): '+this._isLoggedIn$.next(false));
+  }
 
 
   private getUserRole(token: string): User {

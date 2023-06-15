@@ -23,6 +23,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 
 
@@ -35,7 +36,7 @@ import { HasRoleDirective } from './directives/has-role.directive';
     UserComponent,
     AddUserModalComponent,
     LoginModuleComponent, 
-    AdminUsersTableComponent, NewsfeedMihaiComponent, HasRoleDirective
+    AdminUsersTableComponent, NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent
   ],
   imports: [
     BrowserModule,

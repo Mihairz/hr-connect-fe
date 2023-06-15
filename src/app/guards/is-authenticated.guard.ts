@@ -1,4 +1,4 @@
-// Se foloseste pentru a bloca sau permite accesul la diferite rute in functie daca utilizatorii sunt logati sau nu
+// Se foloseste pentru a bloca accesul la diferite rute utilizatorilor nelogati / Se atribuie rutelor destinate exclusiv utilizatorilor logati
 
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
