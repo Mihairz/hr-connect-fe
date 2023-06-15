@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./newsfeed-mihai.component.css']
 })
 export class NewsfeedMihaiComponent {
-
+  
 }

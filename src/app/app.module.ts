@@ -22,6 +22,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
+import { HasRoleDirective } from './directives/has-role.directive';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 
 
@@ -34,7 +36,7 @@ import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.co
     UserComponent,
     AddUserModalComponent,
     LoginModuleComponent, 
-    AdminUsersTableComponent, NewsfeedMihaiComponent
+    AdminUsersTableComponent, NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent
   ],
   imports: [
     BrowserModule,
