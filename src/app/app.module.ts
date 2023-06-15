@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
+import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
 
 
 
@@ -33,7 +34,7 @@ import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
     UserComponent,
     AddUserModalComponent,
     LoginModuleComponent, 
-    AdminUsersTableComponent
+    AdminUsersTableComponent, NewsfeedMihaiComponent
   ],
   imports: [
     BrowserModule,
