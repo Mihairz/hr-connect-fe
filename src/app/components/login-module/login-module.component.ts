@@ -33,7 +33,12 @@ export class LoginModuleComponent {
     this.authService
       .login(this.form.get('email')?.value, this.form.get('password')?.value)
       .subscribe((response) => {
-        this.router.navigate(['/admin']);
+        if(this.authService.userRole?.role === 'admin'){
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/newsfeed']);
+        }
+        
       })
   }
 

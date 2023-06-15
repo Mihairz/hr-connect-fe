@@ -41,7 +41,7 @@ export class UserService {
   FAKE_JWT_TOKEN_EMPLOYEE = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJoci1jb25uZWN0LXRlYW0iLCJpYXQiOjE2MjQyNzU1MjUsImV4cCI6MTY1NTgxMTUyNSwiYXVkIjoiaHItY29ubmVjdCIsInN1YiI6ImhyLWNvbm5lY3QtaHItdXNlciIsImRlcGFydG1lbnQiOiJQQkciLCJqb2ItdGl0bGUiOiJIZWFkIG9mIEZyb250ZW5kIGRlcGFydG1lbnQiLCJyb2xlIjoiZW1wbG95ZWUiLCJuYW1lIjoiSWJyaWFuIE1paGFpLVJhenZhbiIsImVtYWlsIjoiaWJyaWFubWloYWlyYXp2YW5AaHJjb25uZWN0LmNvbSIsInBob25lIjoiMDczNTQ2ODU0MyJ9.WML5RoWN-AhDuAoXHlkFNsbfnWpToGCl89RQxRmt5Ec";
 
   login(email:any,password:any){
-    const token = this.FAKE_JWT_TOKEN_EMPLOYEE; // aici se schimba atribuirea in functie de ce categorie de utilizatori vrei sa simulezi log in ul
+    const token = this.FAKE_JWT_TOKEN_ADMIN; // aici se schimba atribuirea in functie de ce categorie de utilizatori vrei sa simulezi log in ul
     // La momentul actual functia de login este un request de tip post la server, care transmite e-mail,password si token, astfel incat response-ul sa fie un JSON cu cele 3, cu scopul ca noi sa preluam token-ul din response.
     return this.http.post('http://localhost:3000/users', { email, password,token});
   }
