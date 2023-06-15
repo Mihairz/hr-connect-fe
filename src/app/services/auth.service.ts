@@ -34,6 +34,8 @@ export class AuthService {
   userRole?: User;
   // Va stoca valoarea proprietatii 'role' din JWT stocat in local storage
 
+  
+
   constructor(private userService: UserService) {
     this._isLoggedIn$.next(!!this.token)
     // next = is used to emit values in the context of Observables and Subjects. It allows you to publish values to the subscribers of the Observable or Subject, enabling the propagation of data through the reactive streams.
@@ -84,5 +86,8 @@ export class AuthService {
     // Rezumand, aceasta functie returneaza un fisiere text de tip JSON cu payload-ul JWT-ului, unde se afla proprietatea 'role' a utilizatorului logat
   }
 
-  
+  hasRole(role: string): boolean {
+    return this.userRole?.role.includes(role) || false;
+  }
+
 } 
