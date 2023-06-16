@@ -12,9 +12,11 @@ export class ProfilePageComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   logout() {
-    this.authService.logout() // Apeleaza functia logout din AuthService fara parametrii.
-    
-    this.router.navigate(['/login']); // Redirectioneaza catre pagina de login.
-  }
+    this.authService.logout().then(() => { 
+      // .then(() => { ... }) is used to chain a callback function that will be executed after the logout process is completed. It is executed when the promise returned by this.authService.logout() is resolved.
 
+      this.router.navigate(['/login']); // inside the callback function redirects to login page
+    });
+  }
+  
 }

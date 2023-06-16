@@ -3,12 +3,15 @@ import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
 import { BehaviorSubject, tap } from 'rxjs';
 import { User } from '../models/user';
+import { Router } from '@angular/router';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+
   private _isLoggedIn$ = new BehaviorSubject(false);
   isLoggedIn$ = this._isLoggedIn$.asObservable();
   //   The _isLoggedIn$ property is declared as private, which means it can only be accessed within the class itself and not from outside. It is assigned a new instance of the BehaviorSubject class with an initial value of false.
@@ -36,7 +39,7 @@ export class AuthService {
 
   
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     this._isLoggedIn$.next(!!this.token)
     // next = is used to emit values in the context of Observables and Subjects. It allows you to publish values to the subscribers of the Observable or Subject, enabling the propagation of data through the reactive streams.
     // Aplicam asta ca atunci cand dam refresh la pagina, utilizatorii logati sa ramana logati
@@ -73,11 +76,25 @@ export class AuthService {
     //  To summarize, the login method calls the userService.login method with the provided email and password parameters. It then performs some side effects using the tap operator, such as storing the received token in the localStorage and emitting a true value to indicate that the user is logged in. The overall result is an observable that can be subscribed to.
   }
 
-  logout(){
-    localStorage.removeItem(this.TOKEN_NAME); // sterge token-ul din local storage
-    this._isLoggedIn$.next(false); // Calls the 'next' method on instance variable _isLoggedIn$ of type Subject<boolean>. It emits the value false, indicating that the user is NOT logged in (anymore).
-    console.log('localStorage.removeItem(this.TOKEN_NAME): '+localStorage.removeItem(this.TOKEN_NAME));
-    console.log('this._isLoggedIn$.next(false): '+this._isLoggedIn$.next(false));
+  // logout(){
+  //   localStorage.removeItem(this.TOKEN_NAME); // sterge token-ul din local storage
+  //   this._isLoggedIn$.next(false); // Calls the 'next' method on instance variable _isLoggedIn$ of type Subject<boolean>. It emits the value false, indicating that the user is NOT logged in (anymore).
+  //   console.log('localStorage.removeItem(this.TOKEN_NAME): '+localStorage.removeItem(this.TOKEN_NAME));
+  //   console.log('this._isLoggedIn$.next(false): '+this._isLoggedIn$.next(false));
+  //   this.router.navigate(['/login']); // Redirectioneaza catre pagina de login.
+  // }
+
+  logout() {
+    return new Promise<void>((resolve) => { // It creates a new Promise that resolves to void. The resolve function is passed as an argument to the promise executor function.
+      localStorage.removeItem(this.TOKEN_NAME);
+      this._isLoggedIn$.next(false);
+      resolve(); //It resolves the promise by calling resolve(), indicating that the logout process has completed.
+    });
+  }
+
+  isLoggedIn(){
+    if(this._isLoggedIn$.value){return true}
+    return false;
   }
 
 
