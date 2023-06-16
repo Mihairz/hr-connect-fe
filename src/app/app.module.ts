@@ -28,6 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FullDetailedArticleComponent } from './components/full-detailed-article/full-detailed-article.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { FullDetailedArticleComponent } from './components/full-detailed-article
     MatButtonModule,
     MatTableModule,
     NgbModule,
+    FontAwesomeModule,
  
   ],
   providers: [],

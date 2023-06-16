@@ -1,5 +1,5 @@
 
-
+/* 
 .r-link{
     display: var(--rLinkDisplay, inline-flex) !important;
   }
@@ -16,37 +16,37 @@
     list-style: var(--rListListStyle, none) !important;
   }
   
-  
+   */
   /*
   =====
   CORE STYLES
   =====
   */
   
-  .menu{
+  /* .menu{
     --rLinkColor: var(--menuLinkColor, currentColor);
   }
   
   .menu__link{
     display: var(--menuLinkDisplay, block);
-  }
+  } */
   
   /* 
   focus state 
   */
   
-  .menu__link:focus{
+  /* .menu__link:focus{
     outline: var(--menuLinkOutlineWidth, 2px) solid var(--menuLinkOutlineColor, currentColor);
     outline-offset: var(--menuLinkOutlineOffset);
-  }
+  } */
   
   /* 
   fading siblings
   */
   
-  .menu:hover .menu__link:not(:hover){
+  /* .menu:hover .menu__link:not(:hover){
     --rLinkColor: var(--menuLinkColorUnactive, rgba(22, 22, 22, .35));
-  }
+  } */
   
   /*
   =====
@@ -54,7 +54,7 @@
   =====
   */
   
-  .menu{
+  /* .menu{
     background-color: var(--menuBackgroundColor, #f0f0f0);
     box-shadow: var(--menuBoxShadow, 0 1px 3px 0 rgba(0, 0, 0, .12), 0 1px 2px 0 rgba(0, 0, 0, .24));
   }
@@ -67,7 +67,7 @@
     padding: var(--menuLinkPadding, 1.5rem 2.5rem);
     font-weight: 700;
     text-transform: uppercase;
-  }
+  } */
   
   /* 
   =====
@@ -75,7 +75,7 @@
   =====
   */
   
-  .text-underlined{
+  /* .text-underlined{
     position: relative;
     overflow: hidden;
   
@@ -111,7 +111,7 @@
   .text-underlined:hover::after{
     width: 100%;
     transition-duration: .2s;
-  }
+  } */
   
   /*
   =====
@@ -119,12 +119,12 @@
   =====
   */
   
-  .page__custom-settings{
+  /* .page__custom-settings{
     --menuBackgroundColor: #133C7F;
     --menuLinkColor: #fff;
     --menuLinkColorUnactive: #eae8f7;
     --menuLinkOutlineOffset: -.5rem; 
-  }
+  } */
   
   /*
   =====
@@ -132,7 +132,7 @@
   =====
   */
   
-  body{
+  /* body{
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Open Sans, Ubuntu, Fira Sans, Helvetica Neue, sans-serif;
     margin: 0;
     min-height: 100vh;
@@ -190,5 +190,24 @@
     left: 0;
     width: 100%;
     z-index: 100;
+  }
+  */
+  .navbar{
+    height: 54px;
+  }
+  .nav-icon-and-text{
+    display: flex;
+    flex-direction: column ;
+    text-align: center;
+
+  }
+  .navbar{
+  background-color:#133C7F;
+  }
+  .nav-link{
+    color: white;
+  }
+  .fa-icon{
+    color: white;
   }
  
