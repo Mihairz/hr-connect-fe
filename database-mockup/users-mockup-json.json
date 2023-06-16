@@ -8,46 +8,6 @@
       "email": "w@w",
       "phone": "0735468543",
       "password": "a",
-      "id": 15
-    },
-    {
-      "department": "PBG",
-      "team": "a",
-      "role": "Frontend developer",
-      "name": "Mihai",
-      "email": "mihai@yahoo.com",
-      "phone": "0735468543",
-      "password": "a",
-      "id": 17
-    },
-    {
-      "department": "PBG",
-      "team": "6",
-      "role": "Frontend developer",
-      "name": "Mike",
-      "email": "w@w",
-      "phone": "0735468543",
-      "password": "a",
-      "id": 16
-    },
-    {
-      "department": "PBG",
-      "team": "a",
-      "role": "Frontend developer",
-      "name": "Mihai",
-      "email": "mihai@yahoo.com",
-      "phone": "0735468543",
-      "password": "a",
-      "id": 18
-    },
-    {
-      "department": "PBG",
-      "team": "6",
-      "role": "Frontend developer",
-      "name": "Mike",
-      "email": "w@w",
-      "phone": "0735468543",
-      "password": "a",
       "id": 19
     },
     {
@@ -846,12 +806,6 @@
       "email": "ss",
       "password": "ss",
       "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJoci1jb25uZWN0LXRlYW0iLCJpYXQiOjE2MjQyNzU1MjUsImV4cCI6MTY1NTgxMTUyNSwiYXVkIjoiaHItY29ubmVjdCIsInN1YiI6ImhyLWNvbm5lY3QtYWRtaW4tdXNlciIsImRlcGFydG1lbnQiOiIiLCJqb2ItdGl0bGUiOiIiLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5kb2VAaHJjb25uZWN0LmNvbSIsInBob25lIjoiMDc4OTk3NjY3NSJ9.q-OrGYqHFoRLVO3d_-wgpu9lnOlO9p_3g6-Rh0-JULM",
-      "id": 66
-    },
-    {
-      "email": "ss",
-      "password": "ss",
-      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJoci1jb25uZWN0LXRlYW0iLCJpYXQiOjE2MjQyNzU1MjUsImV4cCI6MTY1NTgxMTUyNSwiYXVkIjoiaHItY29ubmVjdCIsInN1YiI6ImhyLWNvbm5lY3QtYWRtaW4tdXNlciIsImRlcGFydG1lbnQiOiIiLCJqb2ItdGl0bGUiOiIiLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5kb2VAaHJjb25uZWN0LmNvbSIsInBob25lIjoiMDc4OTk3NjY3NSJ9.q-OrGYqHFoRLVO3d_-wgpu9lnOlO9p_3g6-Rh0-JULM",
       "id": 67
     },
     {
@@ -902,15 +856,6 @@
     },
     {
       "id": 75
-    },
-    {
-      "id": 76
-    },
-    {
-      "id": 77
-    },
-    {
-      "id": 78
     }
   ]
 }
