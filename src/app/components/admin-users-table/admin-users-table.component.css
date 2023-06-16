@@ -17,12 +17,7 @@
     flex-direction: column;
     gap: 10px;
 
-    width: 80%;
-    height: 80%;
-    position: absolute;
-    top: 750px;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    
 }
 
 

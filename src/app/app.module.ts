@@ -13,12 +13,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginModuleComponent } from './components/login-module/login-module.component';
 import { AdminUsersTableComponent } from './components/admin-users-table/admin-users-table.component';
 
+ 
 import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
+import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
+import { HasRoleDirective } from './directives/has-role.directive';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -28,7 +36,7 @@ import { MatSortModule } from '@angular/material/sort';
     UserComponent,
     AddUserModalComponent,
     LoginModuleComponent, 
-    AdminUsersTableComponent
+    AdminUsersTableComponent, NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +48,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatSortModule,
     BrowserAnimationsModule, 
   ],
-  providers: [],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

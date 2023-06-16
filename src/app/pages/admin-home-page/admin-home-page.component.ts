@@ -1,7 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-admin-home-page',
@@ -9,5 +7,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./admin-home-page.component.css']
 })
 export class AdminHomePageComponent {
-  
+  // Injectam AuthService pentru a avea acces la variabila isLoggedIn, cu scopul de a verifica daca user-ul este logat sau nu. Daca nu este logat, componenta admin-home-page nu se va incarca.
+  constructor(public authService: AuthService){}
 }
