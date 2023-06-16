@@ -7,8 +7,6 @@
 /* v2.0.0
 /* ----------------------------------------------- */
 
-// Aici se afla doar logica particulelor, nu este nevoie a se modifica codul
-
 var pJS = function(tag_id, params){
 
   var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');

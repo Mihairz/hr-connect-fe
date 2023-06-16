@@ -13,9 +13,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginModuleComponent } from './components/login-module/login-module.component';
 import { AdminUsersTableComponent } from './components/admin-users-table/admin-users-table.component';
 
-import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     MatTableModule, 
     MatPaginatorModule,
-    BrowserAnimationsModule
+    MatSortModule,
+    BrowserAnimationsModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

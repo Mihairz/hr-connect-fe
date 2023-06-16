@@ -4,6 +4,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AdminHomePageComponent } from './pages/admin-home-page/admin-home-page.component';
 
 const routes: Routes = [
+  { path: '', component: LoginPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'admin', component: AdminHomePageComponent}
 ];

@@ -1,12 +1,12 @@
 .form {
-    position: absolute;
+    position: absolute; 
     top: 50%;
     left: 50%; 
     transform: translate(-50%, -50%);
 
     border-radius: 20px;
     box-sizing: border-box;
-    height: 400px;
+    height: 400px; 
     padding: 20px;
     width: 500px;
 }
@@ -19,7 +19,7 @@
     box-shadow: 0 10px 50px rgba(0,0,0,0.1); 
 }
 
-.title {
+.title { 
     color: #0C2340;
     font-family: sans-serif;
     font-size: 36px;
@@ -79,10 +79,10 @@
     width: 50px;
 }
 
-/* .input:focus~.cut,
+.input:focus~.cut,
 .input:not(:placeholder-login-form-shown)~.cut {
     transform: translateY(10px);
-} */
+}
 
 .placeholder-login-form {
     color: #65657b;
@@ -100,6 +100,7 @@
 .input:not(:placeholder-login-form-shown)~.placeholder-login-form {
     transform: translateY(-30px) translateX(10px) scale(0.75);
 }
+
 
 .input:not(:placeholder-login-form-shown)~.placeholder-login-form {
     color: #808097;
