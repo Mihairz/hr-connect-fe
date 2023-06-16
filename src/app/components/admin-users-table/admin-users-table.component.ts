@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import {MatSort, Sort, MatSortModule} from '@angular/material/sort';import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatSort, Sort, MatSortModule } from '@angular/material/sort'; import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
-import {LiveAnnouncer} from '@angular/cdk/a11y';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Params } from '@angular/router';
 
 @Component({
   selector: 'app-admin-users-table',
@@ -16,13 +18,13 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 
 export class AdminUsersTableComponent implements OnInit, OnDestroy {
 
-  constructor(private userService: UserService, private _liveAnnouncer: LiveAnnouncer) { }
+  constructor(private userService: UserService, private _liveAnnouncer: LiveAnnouncer, private route: ActivatedRoute, private router: Router) { }
 
   userSubscription: Subscription = new Subscription();
 
 
-  
-  
+
+
 
 
 
@@ -39,24 +41,24 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
 
   //@ViewChild(MatPaginator) paginator: any = MatPaginator; // Initializeaza paginator-ul din angular material
   //ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-    //setTimeout(() => this.dataSource.paginator = this.paginator, 200);
-    // <mat-paginator> element IS inside a container that has an *ngIf on it, which does not render until the data loads asynchronously. This causes this.paginator to be undefined even in ngAfterViewInit. This causes it to silently fail as MatTableDataSource has no problem with you setting paginator to undefined.
+  // this.dataSource.paginator = this.paginator;
+  //setTimeout(() => this.dataSource.paginator = this.paginator, 200);
+  // <mat-paginator> element IS inside a container that has an *ngIf on it, which does not render until the data loads asynchronously. This causes this.paginator to be undefined even in ngAfterViewInit. This causes it to silently fail as MatTableDataSource has no problem with you setting paginator to undefined.
   //}
 
-  @ViewChild(MatPaginator, {static: false})
+  @ViewChild(MatPaginator, { static: false })
   set paginator(value: MatPaginator) {
-    if (this.dataSource){
+    if (this.dataSource) {
       this.dataSource.paginator = value;
     }
   }
-  @ViewChild(MatSort, {static: false})
+  @ViewChild(MatSort, { static: false })
   set sort(value: MatSort) {
-    if (this.dataSource){
+    if (this.dataSource) {
       this.dataSource.sort = value;
     }
   }
- 
+
 
 
 
@@ -65,10 +67,18 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   isModalOpen = false; // Formularul de adaugare utilizatori noi este prestabilit ascuns
 
   ngOnInit(): void {
-    // console.log('Admin homepage has been initialized');
+
+    
+
+    
+
+
+
+
     this.getUsers();
   }
 
+  
 
   // apeleaza functia getUsers() din serviciul user injectat si populeaza lista existenta
   getUsers() {
@@ -82,10 +92,16 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
         this.dataSource = new MatTableDataSource(responseUserList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
 
         this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
-      })
+
+       
+
+      
+      });
   }
-  
-  body:any= document.querySelector("body");
+
+ 
+
+  body: any = document.querySelector("body");
 
   openModal() {
     this.isModalOpen = true;
