@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AdminHomePageComponent } from './pages/admin-home-page/admin-home-page.component';
+import { NewsletterPageComponent } from './pages/newsletter-page/newsletter-page.component';
+import { FullDetailedArticleComponent } from './components/full-detailed-article/full-detailed-article.component';
 
 import { isAuthenticatedGuard } from './guards/is-authenticated.guard';
 // Verifica daca utilizatorul este autentificat in functie de prezenta sau absenta unui token. Daca nu este logat, este redirectionat catre pagina de login.
@@ -20,6 +22,7 @@ import { isNotAuthenticatedGuard } from './guards/is-not-authenticated.guard';
 
 
 const routes: Routes = [
+
   { path: '', component: LoginPageComponent }, // to implement homepage component
   {
     path: 'login',
@@ -40,6 +43,9 @@ const routes: Routes = [
     path: 'profile', component: ProfilePageComponent,
     canActivate: [isAuthenticatedGuard] // pagina de profile este accesibila doar utilizatorilor logati
   },
+  { path: 'article/:id', component: FullDetailedArticleComponent },
+  { path: 'newsletter', component: NewsletterPageComponent}
+
 ];
 
 @NgModule({
