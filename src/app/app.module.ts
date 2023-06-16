@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginModuleComponent } from './components/login-module/login-module.component';
 import { AdminUsersTableComponent } from './components/admin-users-table/admin-users-table.component';
 
-import {MatPaginatorModule} from '@angular/material/paginator';
+ 
 import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewsletterPageComponent } from './pages/newsletter-page/newsletter-page.component';
@@ -31,6 +31,17 @@ import { FullDetailedArticleComponent } from './components/full-detailed-article
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
+
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
+import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
+import { HasRoleDirective } from './directives/has-role.directive';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +52,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginModuleComponent, 
     AdminUsersTableComponent, 
     NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent, NavigationBarComponent, FullDetailedArticleComponent,
+   NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent
+
   ],
   imports: [
     BrowserModule,
@@ -57,11 +70,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatDialogModule,
     MatButtonModule,
     MatTableModule,
+    MatSortModule,
     NgbModule,
     FontAwesomeModule,
- 
+
   ],
-  providers: [],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
