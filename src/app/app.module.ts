@@ -40,7 +40,8 @@ import { HasRoleDirective } from './directives/has-role.directive';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import{ MatIconModule} from '@angular/material/icon';
 import { FaqPageComponent } from './pages/faq-page/faq-page.component';
-import { FaqSectionComponent } from './components/faq-section/faq-section.component'
+import { FaqSectionComponent } from './components/faq-section/faq-section.component';
+import { AddFaqModalComponent } from './components/add-faq-modal/add-faq-modal.component'
 
 
 
@@ -54,7 +55,7 @@ import { FaqSectionComponent } from './components/faq-section/faq-section.compon
     LoginModuleComponent, 
     AdminUsersTableComponent, 
     NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent, NavigationBarComponent, FullDetailedArticleComponent,
-   NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent, FaqPageComponent, FaqSectionComponent
+   NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent, FaqPageComponent, FaqSectionComponent, AddFaqModalComponent
 
   ],
   imports: [
