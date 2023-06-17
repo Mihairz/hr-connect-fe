@@ -23,7 +23,8 @@ import { isNotAuthenticatedGuard } from './guards/is-not-authenticated.guard';
 
 const routes: Routes = [
 
-  { path: '', component: LoginPageComponent }, // to implement homepage component
+  { path: '', component: NewsletterPageComponent,
+  canActivate: [isAuthenticatedGuard], }, 
   {
     path: 'login',
     component: LoginPageComponent,
@@ -35,7 +36,7 @@ const routes: Routes = [
     data: { roles: ['admin'] }, // care au rol de admin (identificat din jwt)
   },
   {
-    path: 'newsfeed', component: NewsfeedMihaiComponent,
+    path: 'newsfeed', component: NewsletterPageComponent,
     canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina de admin este accesibila doar de catre utilizatorii logati
     data: { roles: ['employee', 'hr'] }  // care au rol de employee sau hr (identificat din jwt)
   },
