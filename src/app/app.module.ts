@@ -38,6 +38,7 @@ import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ProfileCardComponent } from './components/profile-card/profile-card.component';
 
 
 
@@ -52,7 +53,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     LoginModuleComponent, 
     AdminUsersTableComponent, 
     NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent, NavigationBarComponent, FullDetailedArticleComponent,
-   NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent
+   NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent, ProfileCardComponent
 
   ],
   imports: [

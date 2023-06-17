@@ -22,20 +22,11 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
 
   userSubscription: Subscription = new Subscription();
 
-
-
-
-
-
-
-
-
-
   // SETARI TABEL 
   // userList: User[] = [];  Initializam o lista goala care contine obiecte de tip User. Aceasta va fi populata la ngOnInit cu ajutorul metodei getUsers()
   dataSource = new MatTableDataSource<User>([]); // Initializam o lista goala care contine obiecte de tip User, sub forma MatTableDataSource ca sa poata fi paginabila si filtrabila de catre angular-material
 
-  columnsToDisplay = ['id', 'department', 'team', 'role', 'name', 'email', 'phone', 'action']; // Aici se specifica elementului html mat-table ce coloane din typescript sa se afiseze
+  columnsToDisplay = ['id', 'department', 'role', 'name', 'email', 'phone', 'action']; // Aici se specifica elementului html mat-table ce coloane din typescript sa se afiseze
 
   // Am intampinat o problema pentru ca paginator-ul se incarca inaintea datelor si astfel era undefined (din cate am inteles). Aici era prima solutie pe care am implementat-o, folosind ngAfterViewInit si setTimeout, dar dupa am gasit o solutie si mai eleganta (cea de mai jos) (ambele solutii de aici https://stackoverflow.com/questions/48785965/angular-matpaginator-doesnt-get-initialized )
 
@@ -65,20 +56,14 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
 
   isLoading = false; // pentru a astepta incarcarea paginii, adica pentru a astepta pana cand se incarca toti utilizatorii
   isModalOpen = false; // Formularul de adaugare utilizatori noi este prestabilit ascuns
+  editedUser = new User();
+  modalType = "";
 
   ngOnInit(): void {
-
-    
-
-    
-
-
-
-
     this.getUsers();
   }
 
-  
+
 
   // apeleaza functia getUsers() din serviciul user injectat si populeaza lista existenta
   getUsers() {
@@ -92,14 +77,12 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
         this.dataSource = new MatTableDataSource(responseUserList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
 
         this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
-
-       
-
-      
       });
   }
 
- 
+  
+
+
 
   body: any = document.querySelector("body");
 
@@ -110,6 +93,14 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   closeModal() {
     this.isModalOpen = false;
     this.body.style.overflow = "auto";
+    this.editedUser = new User();
+    this.modalType = '';
+  }
+
+  editUser(user: User) {
+    this.modalType = 'editModalType'
+    this.editedUser = user;
+    this.openModal();
   }
 
   ngOnDestroy(): void {

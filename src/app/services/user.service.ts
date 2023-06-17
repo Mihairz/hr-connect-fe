@@ -16,12 +16,16 @@ export class UserService {
     return this.http.get<User[]>('http://localhost:3000/users');
   }
 
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`http://localhost:3000/users/${id}`);
+  }
+
   addUser(user: User): Observable<User> {
     return this.http.post<User>('http://localhost:3000/users', user);
     // functia primeste ca parametru un obiect de tip User
   }
 
-  editUser(user: User): Observable<User> {
+  updateUser(user: User): Observable<User> {
     return this.http.put<User>(`http://localhost:3000/users/${user.id}`, user);
   }
 

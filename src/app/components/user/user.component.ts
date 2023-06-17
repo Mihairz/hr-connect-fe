@@ -11,18 +11,24 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnDestroy{ 
+export class UserComponent implements OnDestroy {
 
-  constructor(private userService:UserService){}; // Injectam serviciul user pentru a putea folosii metodele din acesta (crud http requests in cazul nostru)
+  constructor(private userService: UserService) { }; // Injectam serviciul user pentru a putea folosii metodele din acesta (crud http requests in cazul nostru)
 
   deleteUserSubscription: Subscription = new Subscription();
 
-  @Input() user: User = new User(); // Initializam un obiect User gol care va fi populat de metoda getUsers() a componentei parinte (admin-home-page) (input)
-  @Output() newGetUsersEvent = new EventEmitter<string>(); // Creem un eveniment nou care va fi transmis componentei parinte (admin-home-page) (output)
+  @Input() user: User = new User(); // Initializam un obiect User gol care va fi populat de metoda getUsers() a componentei parinte (admin-users-table) (input)
+  @Output() newGetUsersEvent = new EventEmitter<string>(); // Creem un eveniment nou care va fi transmis componentei parinte (admin-users-table) (output)
+  @Output() newEditUserEvent = new EventEmitter<User>();
 
-   // apeleaza functia deleteUser() din serviciul user injectat iar apoi emite un eveniment-ul newGetUsersEvent catre componenta parinte
+  // apeleaza functia editUser() din serviciul user injectat iar apoi emite un eveniment-ul newEditUserEvent catre componenta parinte
+  editUser() {
+    this.newEditUserEvent.emit(this.user);
+  }
+
+  // apeleaza functia deleteUser() din serviciul user injectat iar apoi emite un eveniment-ul newGetUsersEvent catre componenta parinte
   deleteUser() {
-    this.deleteUserSubscription = this.userService.deleteUser(this.user.id || 0).subscribe((response)=>{ // 
+    this.deleteUserSubscription = this.userService.deleteUser(this.user.id || 0).subscribe((response) => { // 
       this.newGetUsersEvent.emit();
     })
   }

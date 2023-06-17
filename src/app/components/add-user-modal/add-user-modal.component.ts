@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,9 +9,11 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './add-user-modal.component.html',
   styleUrls: ['./add-user-modal.component.css']
 })
-export class AddUserModalComponent implements OnDestroy {
+export class AddUserModalComponent implements OnDestroy, OnInit {
   @Output() newCloseModalEvent = new EventEmitter<string>();
   @Output() newGetUsersEvent = new EventEmitter<string>();
+  @Input() editedUser: User = new User();
+  @Input() modalType: String = '';
 
   // Creem formularul si campurile acestuia
   userForm = new FormGroup({
@@ -24,6 +27,7 @@ export class AddUserModalComponent implements OnDestroy {
   })
 
   addUserSubscription: Subscription = new Subscription();
+  updatetUserSubscription: Subscription = new Subscription();
 
   particlesScriptElement: HTMLScriptElement;
   particlesSettingsScriptElement: HTMLScriptElement;
@@ -32,7 +36,6 @@ export class AddUserModalComponent implements OnDestroy {
 
   constructor(private userService: UserService) {
     // Injectam serviciul user pentru a putea folosii metodele din acesta (put si post http requests in cazul nostru)
-
 
     // adaugam in mod dinamic fisierul ce contine logica pentru fundalul animat, particle.js (din folder-ul assets al angular) la HTML-ul componentei
     this.particlesScriptElement = document.createElement("script");
@@ -49,6 +52,24 @@ export class AddUserModalComponent implements OnDestroy {
     this.particlesHostingElement.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
     document.body.appendChild(this.particlesHostingElement);
   }
+
+
+  ngOnInit(): void {
+    console.log('modal type: '+this.modalType);
+    this.userForm.patchValue({
+      department: this.editedUser.department,
+      role: this.editedUser.role,
+      name: this.editedUser.name,
+      email: this.editedUser.email,
+      phone: this.editedUser.phone,
+      password: this.editedUser.password
+    })
+  }
+
+  closeModal() {
+    this.newCloseModalEvent.emit();
+  }
+  // Functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
 
 
 
@@ -73,10 +94,22 @@ export class AddUserModalComponent implements OnDestroy {
     })
   }
 
-  closeModal() {
-    this.newCloseModalEvent.emit();
+  updateUser() {
+    const user = {
+      id: this.editedUser.id,
+      department: this.userForm.value.department || '',
+      role: this.userForm.value.role || '',
+      name: this.userForm.value.name || '',
+      email: this.userForm.value.email || '',
+      phone: this.userForm.value.phone || '',
+      password: this.userForm.value.password || ''
+    }
+
+    this.updatetUserSubscription = this.userService.updateUser(user).subscribe(() => {
+      this.newGetUsersEvent.emit();
+      this.closeModal();
+    })
   }
-  // Functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
 
 
   ngOnDestroy(): void {

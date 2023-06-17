@@ -5,24 +5,24 @@
         <div id="particles-js"></div>
         <span class="close" (click)="closeModal()">&times;</span>
         <!-- Butonul de ascundere formular. La evenimentul click se apeleaza functia closeModal() a componentei curente (add-user-modal) si modala se va inchide-->
-        <div class="title">Add new user</div>
+
+
+        <ng-template [ngIf]="modalType==='editModalType'" [ngIfElse]="addModalType">
+            <div class="title">Edit User</div>
+        </ng-template>
+        <ng-template #addModalType>
+            <div class="title">Add new user</div>
+        </ng-template>
+
 
         <form [formGroup]="userForm" autocomplete="off">
             <!-- Specificam numele formularului din typescript -->
-
 
             <div class="input-container ic1">
                 <input id="department" class="input" type="text" formControlName="department" required>
                 <!-- la fiecare input specificam numele variabilei din typescript -->
                 <!-- <div class="cut cut-short"></div> -->
                 <label for="department" class="placeholder">Department:</label>
-            </div> 
-
-            <div class="input-container ic2">
-                <input id="team" class="input" type="text" formControlName="team" required>
-                <!--<div class="cut"></div>-->
-
-                <label for="team" class="placeholder">Team:</label>
             </div>
 
             <div class="input-container ic2">
@@ -61,8 +61,17 @@
             </div>
 
         </form>
+        
 
-        <button type="button" class="submit" (click)="addUser()">Add</button>
-        <!-- Butonul de adaugare utilizator. La evenimentul click se apeleaza functia addUser() a componentei curente (add-user-modal) si utilzatorul va fi inregistrat-->
+        <ng-template [ngIf]="modalType==='editModalType'">
+            <button type="button" class="submit" (click)="updateUser()">Update</button>
+            <!-- Butonul de update utilizator. La evenimentul click se apeleaza functia updateUser() a componentei curente (add-user-modal) si utilzatorul va fi updated-->
+        </ng-template>
+        <ng-template [ngIf]="modalType!=='editModalType'">
+            <button type="button" class="submit" (click)="addUser()">Add</button>
+            <!-- Butonul de adaugare utilizator. La evenimentul click se apeleaza functia addUser() a componentei curente (add-user-modal) si utilzatorul va fi inregistrat-->
+        </ng-template>
+        <!-- Nu am folosit ngIfElse pentru ca apareau conflicte de CSS pentru un motiv anume -->
+
     </div>
 </div>
