@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewsletterService } from 'src/app/services/newsletter.service';
 import { AddArticleModalComponent } from '../add-article-modal/add-article-modal.component';
 
+// needed for the search functionality 
+
 @Component({
   selector: 'app-newsletter-article',
   templateUrl: './newsletter-article.component.html',
@@ -11,6 +13,7 @@ import { AddArticleModalComponent } from '../add-article-modal/add-article-modal
 })
 export class NewsletterArticleComponent implements OnInit {
   articles: NewsletterArticle[] = [];
+  
 
   constructor(
     private articlesService: NewsletterService,

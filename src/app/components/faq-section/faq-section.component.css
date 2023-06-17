@@ -1,0 +1,12 @@
+/* container of all the elements */
+.search-and-accordion-container {
+  width: 1100px;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* percentage that fills the viewpoint*/
+  margin: 0 auto;
+}
+.form-control{
+    margin-bottom: 30px;
+}
