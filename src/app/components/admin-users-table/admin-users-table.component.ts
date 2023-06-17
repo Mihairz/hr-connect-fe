@@ -58,6 +58,7 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   isModalOpen = false; // Formularul de adaugare utilizatori noi este prestabilit ascuns
   editedUser = new User();
   modalType = "";
+  modalRole = "admin";
 
   ngOnInit(): void {
     this.getUsers();

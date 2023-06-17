@@ -75,6 +75,6 @@
     </div>
 </ng-template>
 
-<app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType" (newCloseModalEvent)="closeModal()"
+<app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType" [modalRole]="modalRole" (newCloseModalEvent)="closeModal()"
     (newGetUsersEvent)="getUsers()"></app-add-user-modal>
 <!-- Evenimentul newCloseModalEvent este emis din componenta copil add-user-modal si este receptionat de catre componenta parinte admin-home-page, care apeleaza functia proprie closeModal() si ascunde la loc formularul de adaugare utilizatori. -->

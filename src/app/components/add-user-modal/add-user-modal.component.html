@@ -8,7 +8,7 @@
 
 
         <ng-template [ngIf]="modalType==='editModalType'" [ngIfElse]="addModalType">
-            <div class="title">Edit User</div>
+            <div class="title">Edit Account</div>
         </ng-template>
         <ng-template #addModalType>
             <div class="title">Add new user</div>
@@ -18,40 +18,43 @@
         <form [formGroup]="userForm" autocomplete="off">
             <!-- Specificam numele formularului din typescript -->
 
-            <div class="input-container ic1">
-                <input id="department" class="input" type="text" formControlName="department" required>
-                <!-- la fiecare input specificam numele variabilei din typescript -->
-                <!-- <div class="cut cut-short"></div> -->
-                <label for="department" class="placeholder">Department:</label>
-            </div>
+            <ng-template [ngIf]="modalRole==='admin'">
+                <div class="input-container ic1">
+                    <input id="department" class="input" type="text" formControlName="department" required>
+                    <!-- la fiecare input specificam numele variabilei din typescript -->
+                    <!-- <div class="cut cut-short"></div> -->
+                    <label for="department" class="placeholder">Department:</label>
+                </div>
+    
+                <div class="input-container ic2">
+                    <input id="function" class="input" type="text" formControlName="function" required>
+                    <!--<div class="cut"></div>-->
+    
+                    <label for="function" class="placeholder">Function:</label>
+                </div>
+                
+                <div class="input-container ic2">
+                    <input id="role" class="input" type="text" formControlName="role" required>
+                    <!--<div class="cut"></div>-->
+    
+                    <label for="role" class="placeholder">Role:</label>
+                </div>
+    
+                <div class="input-container ic2">
+                    <input id="name" class="input" type="text" formControlName="name" required>
+                    <!--<div class="cut"></div>-->
+    
+                    <label for="name" class="placeholder">Name:</label>
+                </div>
+    
+                <div class="input-container ic2">
+                    <input id="email" class="input" type="email" formControlName="email" required>
+                    <!--<div class="cut"></div>-->
+    
+                    <label for="email" class="placeholder">E-mail:</label>
+                </div>
+            </ng-template>
 
-            <div class="input-container ic2">
-                <input id="function" class="input" type="text" formControlName="function" required>
-                <!--<div class="cut"></div>-->
-
-                <label for="function" class="placeholder">Function:</label>
-            </div>
-            
-            <div class="input-container ic2">
-                <input id="role" class="input" type="text" formControlName="role" required>
-                <!--<div class="cut"></div>-->
-
-                <label for="role" class="placeholder">Role:</label>
-            </div>
-
-            <div class="input-container ic2">
-                <input id="name" class="input" type="text" formControlName="name" required>
-                <!--<div class="cut"></div>-->
-
-                <label for="name" class="placeholder">Name:</label>
-            </div>
-
-            <div class="input-container ic2">
-                <input id="email" class="input" type="email" formControlName="email" required>
-                <!--<div class="cut"></div>-->
-
-                <label for="email" class="placeholder">E-mail:</label>
-            </div>
 
             <div class="input-container ic2">
                 <input id="phone" class="input" type="text" formControlName="phone" required>

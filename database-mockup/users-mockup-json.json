@@ -7,7 +7,7 @@
       "role": "employee",
       "name": "Tudor",
       "email": "tudor3@gmail.com",
-      "phone": "0788299902",
+      "phone": "0722",
       "password": "1234"
     },
     {
@@ -41,14 +41,24 @@
       "id": 6
     },
     {
+      "id": 7,
+      "department": "HRCC",
+      "function": "Frontend developerr",
+      "role": "employeee",
+      "name": "mihai",
+      "email": "mihai3@yahoo.com",
+      "phone": "0733",
+      "password": "1234"
+    },
+    {
       "department": "HRC",
-      "function": "Frontend developer",
-      "role": "employee",
-      "name": "Mihai",
-      "email": "mihai@yahoo.com",
-      "phone": "07446776322",
-      "password": "1234",
-      "id": 7
+      "function": "Backend dev",
+      "role": "test",
+      "name": "Johnny",
+      "email": "johnnytest@yahopo.ro",
+      "phone": "0789212",
+      "password": "123",
+      "id": 8
     }
   ]
 }

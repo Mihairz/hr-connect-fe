@@ -45,7 +45,8 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
 
   isModalOpen = false; // Formularul de adaugare utilizatori noi este prestabilit ascuns
   editedUser = new User();
-  modalType = "";
+  modalType = "editModalType";
+  modalRole = '';
 
   body: any = document.querySelector("body");
 
@@ -57,11 +58,9 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
     this.isModalOpen = false;
     this.body.style.overflow = "auto";
     this.editedUser = new User();
-    this.modalType = '';
   }
 
   editUser(user: User) {
-    this.modalType = 'editModalType';
     this.editedUser = user;
     this.openModal();
   }
