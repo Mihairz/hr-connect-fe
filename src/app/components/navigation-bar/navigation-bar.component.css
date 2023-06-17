@@ -194,11 +194,26 @@
   */
   .navbar{
     height: 54px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+  }
+  .navbar-brand{
+    width: 41px;
+    height: 41px;
+  }
+  .space-between-image-list{
+    width: 400px;
   }
   .nav-icon-and-text{
     display: flex;
     flex-direction: column ;
     text-align: center;
+    width: 80px;
+    height: 52px;
+    justify-content: center;
 
   }
   .navbar{
@@ -206,8 +221,68 @@
   }
   .nav-link{
     color: white;
+    font-size: 11px;
+    padding: 0;
+    
   }
-  .fa-icon{
+  .ng-fa-icon{
     color: white;
+    border: 1px solid;
+   
   }
- 
+  /* all the icons in the navbar */
+  mat-icon{
+    width:24px;
+    height: 24px;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* the vertical separator */
+  .vr{
+    background-color: #f2f7fb;
+    width: 1px;
+  }
+  /* the dropdown  */
+  #dropdownBasic1 {
+    color: white;
+    border: none;
+    text-decoration: none;
+    font-size: 11px;
+    z-index: 2;
+    
+  }
+  /* change the button color when you hover over */
+  #dropdownBasic1:hover {
+    background-color: #dce0dc; 
+    color: rgb(144, 49, 49);
+  }
+/* same as the nav-icon-and-text it is the box that captures all of them */
+  .d-inline-block
+  {
+    display: flex;
+    flex-direction: column ;
+    text-align: center;
+    width: 80px;
+    height: 52px;
+    justify-content: center;
+   
+    
+  }
+  .account-image{
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+  }
+  /* the bar after the navbar brand */
+  #navbarNavDropdown{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+  }
+  /* just the container of all the links with icons */
+  .link-icons-on-the-navbar {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }

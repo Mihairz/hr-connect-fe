@@ -38,7 +38,7 @@ import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-
+import{ MatIconModule} from '@angular/material/icon'
 
 
 
@@ -73,6 +73,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     MatSortModule,
     NgbModule,
     FontAwesomeModule,
+    MatIconModule
 
   ],
   providers: [AuthInterceptorProvider],
