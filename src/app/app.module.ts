@@ -38,7 +38,9 @@ import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import{ MatIconModule} from '@angular/material/icon'
+import{ MatIconModule} from '@angular/material/icon';
+import { FaqPageComponent } from './pages/faq-page/faq-page.component';
+import { FaqSectionComponent } from './components/faq-section/faq-section.component'
 
 
 
@@ -52,7 +54,7 @@ import{ MatIconModule} from '@angular/material/icon'
     LoginModuleComponent, 
     AdminUsersTableComponent, 
     NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent, NavigationBarComponent, FullDetailedArticleComponent,
-   NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent
+   NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent, FaqPageComponent, FaqSectionComponent
 
   ],
   imports: [

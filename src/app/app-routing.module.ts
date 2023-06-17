@@ -18,6 +18,7 @@ import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.co
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 import { isNotAuthenticatedGuard } from './guards/is-not-authenticated.guard';
+import { FaqPageComponent } from './pages/faq-page/faq-page.component';
 // Se foloseste pentru a bloca accesul la diferite rute utilizatorilor logati / Se atribuie rutelor destinate exclusiv utilizatorilor nelogati (ex. login-page)
 
 
@@ -43,8 +44,9 @@ const routes: Routes = [
     path: 'profile', component: ProfilePageComponent,
     canActivate: [isAuthenticatedGuard] // pagina de profile este accesibila doar utilizatorilor logati
   },
-  { path: 'article/:id', component: FullDetailedArticleComponent },
-  { path: 'newsletter', component: NewsletterPageComponent}
+  { path: 'article/:id', component: FullDetailedArticleComponent }, // individual article page
+  { path: 'newsletter', component: NewsletterPageComponent}, // the newsfeed and main page
+  { path: 'faq', component: FaqPageComponent},
 
 ];
 
