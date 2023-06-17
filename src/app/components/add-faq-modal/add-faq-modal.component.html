@@ -1,1 +1,34 @@
-<p>add-faq-modal works!</p>
+<div class="modal__content">
+  <div class="gradient-line"></div>
+  <h2 class="title">Add/Edit article</h2>
+  <div class="inputs__container">
+    
+
+    <mat-form-field class="input">
+      <input matInput [(ngModel)]="data.title" placeholder="Title" />
+    </mat-form-field>
+
+    <mat-form-field class="input textarea">
+      <textarea
+        matInput
+        [(ngModel)]="data.content"
+        id="formContent"
+        cols="28"
+        rows="7"
+        placeholder="Content"
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="modal__buttons">
+    <button mat-button (click)="closeModal()">Anulare</button>
+    <button
+      class="button button--pink"
+      mat-button
+      cdkFocusInitial
+      (click)="saveArticle()"
+    >
+      Save
+    </button>
+  </div>
+</div>
