@@ -1,7 +1,20 @@
 <section>
   <div class="content-section">
     <div class="search-and-add-button">
-      <input type="text" class="search-article" placeholder="Search..." />
+      <div>
+        <!-- ngModel connect our input to filterText -->
+        <input
+          type="text"
+          placeholder="Search by title"
+          style="
+            width: 450px;
+            padding: 2px 20px;
+            margin: 10px 0px;
+            height: 30px;
+          "
+          [(ngModel)]="filterText"
+        />
+      </div>
       <button
         type="button"
         class="btn btn-light addArticle"
@@ -12,7 +25,7 @@
     </div>
     <div class="container-articles">
       <!-- is a for and gets all the articles one by one -->
-      <div *ngFor="let article of articles">
+      <div *ngFor="let article of filteredArticles">
         <div class="card">
           <img src="{{ article.urlpic }}" class="card-img-top" />
           <div class="card-body">
