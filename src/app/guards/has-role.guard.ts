@@ -23,7 +23,7 @@ export const hasRoleGuard: CanActivateFn = async (route: ActivatedRouteSnapshot,
   if (userRole.role) { // daca user este logat si are 'role' in token
 
     const authorizedRoles = route.data['roles'] as string[];
-    // preia lista de user roles permise sa acceseze ruta sub forma de sir de string-uri citind poprietatea 'roles' din proprietatea 'data' transmisa rutei in app-routing
+    // preia lista de user roles permise sa acceseze ruta sub forma de sir de string-uri citind proprietatea 'roles' din proprietatea 'data' transmisa rutei in app-routing
 
     if (authorizedRoles.includes(userRole.role)) {
       return true;

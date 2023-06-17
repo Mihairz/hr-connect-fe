@@ -23,7 +23,8 @@ import { isNotAuthenticatedGuard } from './guards/is-not-authenticated.guard';
 
 const routes: Routes = [
 
-  { path: '', component: NewsletterPageComponent,
+  { path: '', 
+  component: NewsletterPageComponent, // TO CHANGE WITH PROFILE
   canActivate: [isAuthenticatedGuard], }, 
   {
     path: 'login',
@@ -41,15 +42,11 @@ const routes: Routes = [
     data: { roles: ['employee', 'hr'] }  // care au rol de employee sau hr (identificat din jwt)
   },
   {
-    path: 'profile', component: ProfilePageComponent,
-    canActivate: [isAuthenticatedGuard] // pagina de profile este accesibila doar utilizatorilor logati
-  },
-  {
     path: 'profile/:id', component: ProfilePageComponent,
     canActivate: [isAuthenticatedGuard] // pagina de profile este accesibila doar utilizatorilor logati
   },
   { path: 'article/:id', component: FullDetailedArticleComponent },
-  { path: 'newsletter', component: NewsletterPageComponent}
+  
 
 ];
 

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="main-body">
-        <div *ngIf="userProfile"  class="row gutters-sm">
+        <div *ngIf="userProfile" class="row gutters-sm">
 
             <!-- LEFT COLUMN -->
             <div class="left-column">
@@ -14,7 +14,7 @@
                             <div class="mt-3">
                                 <!-- In Bootstrap, the class names that start with m refer to margin, and the class names that start with t refer to the top margin specifically. The number 3 in mt-3 represents the magnitude of the margin spacing.For example, mt-3 adds a margin-top spacing of 1rem (or 16 pixels) to the <div> element, pushing it down from the element above it. You can adjust the spacing size by changing the number in the class. -->
                                 <h4>{{userProfile.name}}</h4>
-                                <h6>{{userProfile.role}}</h6>
+                                <h6>{{userProfile.function}}</h6>
                             </div>
 
                         </div>
@@ -34,15 +34,13 @@
                     <div class="card-body">
                         <!-- By applying the card-body class to a <div> element within a card, you create a designated area for the card's content. The card-body class sets the appropriate padding and styles to ensure the content is visually separated from other card components, such as the header or footer. -->
 
-                    
-
                         <div class="row">
                             <div class="col-sm-3 text-secondary"> <!-- occupy 3 columns -->
-                                <h6 class="mb-0">Role</h6>
+                                <h6 class="mb-0">Department</h6>
                             </div>
                             <ng-container *ngFor="let role of ['employee', 'hr', 'admin']">
                                 <div *appHasRole="role" class="col-sm-9">
-                                    {{ role.toUpperCase() }}
+                                    {{ userProfile.department }}
                                 </div>
                             </ng-container>
                         </div>
@@ -63,8 +61,20 @@
                                 <h6 class="mb-0">Phone</h6>
                             </div>
                             <div class="col-sm-9">
-                                telefon
+                                {{userProfile.phone}}
                             </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-secondary"> <!-- occupy 3 columns -->
+                                <h6 class="mb-0">Role - to be deleted, i use it just for fast debug</h6>
+                            </div>
+                            <ng-container *ngFor="let role of ['employee', 'hr', 'admin']">
+                                <div *appHasRole="role" class="col-sm-9">
+                                    {{ role.toUpperCase() }}
+                                </div>
+                            </ng-container>
                         </div>
                         <hr>
 
@@ -72,11 +82,12 @@
                 </div>
             </div>
 
-            <div class="col-md-11 profile-buttons">
-                <!-- button large bootstrap class -->
-                <button class="btn-lg edit-profile-button" type="click">Edit Profile</button>
-                <button class="btn-lg logout-button" type="click" (click)="logout()">LOGOUT</button>
-            </div>
+            <app-user [user]="userProfile" (newGetUsersEvent)="getUser(userProfile.id || 0)" (newEditUserEvent)="editUser($event)"></app-user>
+
+            <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType"  (newCloseModalEvent)="closeModal()"
+    (newGetUsersEvent)="getUser(userProfile.id || 0)"></app-add-user-modal>
+
+            
 
         </div>
     </div>

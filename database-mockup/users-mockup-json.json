@@ -1,63 +1,54 @@
 {
   "users": [
     {
-      "id": 19,
-      "department": "PBG",
-      "role": "Frontend developer",
-      "name": "Mike",
-      "email": "w34@w",
-      "phone": "0735468543",
-      "password": "a"
+      "id": 2,
+      "department": "HRC",
+      "function": "Frontend developer",
+      "role": "employee",
+      "name": "Tudor",
+      "email": "tudor3@gmail.com",
+      "phone": "0788299902",
+      "password": "1234"
     },
     {
-      "department": "PBG",
-      "team": "a",
-      "role": "Frontend developer",
-      "name": "Mihai",
-      "email": "mihai@yahoo.com",
-      "phone": "0735468543",
-      "password": "a",
-      "id": 20
+      "id": 4,
+      "department": "HRC",
+      "function": "Backend developer",
+      "role": "employee",
+      "name": "testempl-name",
+      "email": "testempl",
+      "phone": "074587648",
+      "password": "testempl"
     },
     {
-      "department": "PBG",
-      "team": "6",
-      "role": "Frontend developer",
-      "name": "Mike",
-      "email": "w@w",
-      "phone": "0735468543",
-      "password": "a",
-      "id": 21
+      "department": "HR-HRC",
+      "function": "Head of Human Resources",
+      "role": "hr",
+      "name": "hr-name",
+      "email": "testhr",
+      "phone": "0789123654",
+      "password": "testhr",
+      "id": 5
     },
     {
-      "department": "PBG",
-      "team": "6",
-      "role": "Frontend developer",
-      "name": "Mike",
-      "email": "w@w",
-      "phone": "0735468543",
-      "password": "a",
+      "department": "A-HRC",
+      "function": "Head of Administration",
+      "role": "admin",
+      "name": "admin-name",
+      "email": "testadm",
+      "phone": "0755756855",
+      "password": "testadm",
       "id": 6
     },
     {
-      "department": "PBG",
-      "team": "a",
-      "role": "Frontend developer",
+      "department": "HRC",
+      "function": "Frontend developer",
+      "role": "employee",
       "name": "Mihai",
       "email": "mihai@yahoo.com",
-      "phone": "0735468543",
-      "password": "a",
+      "phone": "07446776322",
+      "password": "1234",
       "id": 7
-    },
-    {
-      "department": "PBG",
-      "team": "",
-      "role": "Frontend developer",
-      "name": "Mike",
-      "email": "w2@w",
-      "phone": "0735468543",
-      "password": "a",
-      "id": 22
     }
   ]
 }

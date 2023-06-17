@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
-})
+}) 
 export class UserComponent implements OnDestroy {
 
   constructor(private userService: UserService) { }; // Injectam serviciul user pentru a putea folosii metodele din acesta (crud http requests in cazul nostru)

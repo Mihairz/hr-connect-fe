@@ -14,11 +14,12 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   @Output() newGetUsersEvent = new EventEmitter<string>();
   @Input() editedUser: User = new User();
   @Input() modalType: String = '';
+  @Input() modalRole: String = '';
 
   // Creem formularul si campurile acestuia
   userForm = new FormGroup({
     department: new FormControl(''),
-    team: new FormControl(''),
+    function: new FormControl(''),
     role: new FormControl(''),
     name: new FormControl(''),
     email: new FormControl(''),
@@ -58,6 +59,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     console.log('modal type: '+this.modalType);
     this.userForm.patchValue({
       department: this.editedUser.department,
+      function: this.editedUser.function,
       role: this.editedUser.role,
       name: this.editedUser.name,
       email: this.editedUser.email,
@@ -77,7 +79,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // Creem obiectul user ce urmeaza a fi introdus in baza de date. Daca una dintre valori a ajuns necompletata in backend aceasta va fi setata ca empty string
     const user = {
       department: this.userForm.value.department || '',
-      team: this.userForm.value.team || '',
+      function: this.userForm.value.function || '',
       role: this.userForm.value.role || '',
       name: this.userForm.value.name || '',
       email: this.userForm.value.email || '',
@@ -98,6 +100,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     const user = {
       id: this.editedUser.id,
       department: this.userForm.value.department || '',
+      function: this.userForm.value.function || '',
       role: this.userForm.value.role || '',
       name: this.userForm.value.name || '',
       email: this.userForm.value.email || '',
