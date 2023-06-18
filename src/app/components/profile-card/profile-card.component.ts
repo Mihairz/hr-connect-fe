@@ -30,7 +30,7 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
       this.userProfile = responseUserProfile;
       // console.log(responseUserProfile);
     });
-  }
+  } 
 
   logout() {
     this.authService.logout().then(() => {

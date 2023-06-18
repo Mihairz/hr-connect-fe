@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { error } from 'jquery';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -17,6 +18,8 @@ export class LoginModuleComponent {
     password: new FormControl(null, Validators.required)
   });
 
+  errorMessage: string | null = null;
+
   // Injectam AuthService pt login si Router pt redirectionare
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -32,15 +35,22 @@ export class LoginModuleComponent {
     // Aici ma gandesc ca o sa creez o componenta pe nume dashboard in care sa pun admin-page si user-page ca si componente si sa le ascund in functie de ulterioara implementare a rolurilor de utilizator SAU poate reusesc sa implementez 2 redirectionari diferite in functie de rol
     this.authService
       .login(this.form.get('email')?.value, this.form.get('password')?.value)
-      .subscribe((response) => {
+      .subscribe(
+        (response) => {
         
-        if(this.authService.userRole?.role === 'admin'){
-          this.router.navigate(['/admin']);
-        } else {
-          this.router.navigate(['/newsfeed']);
+          if(this.authService.userRole?.role === 'admin'){
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/newsfeed']);
+          }
+        },(error) => {
+          if (error.status === 403) {
+            this.errorMessage = 'Invalid credentials. Please try again.';
+          } else {
+            this.errorMessage = 'An error occurred. Please try again later.';
+          }
         }
-        
-      })
+      )
   }
 
   // Flow-ul este login-module>auth-service>backend-auth

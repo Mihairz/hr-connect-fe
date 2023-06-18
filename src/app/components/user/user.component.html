@@ -2,6 +2,9 @@
     <button type="button" class="btn btn-primary" (click)="editUser()">Edit</button>
     <ng-template [ngIf]="page==='admin'">
         <button type="button" class="btn btn-danger" (click)="deleteUser()">Delete</button>
+    </ng-template> 
+    <ng-template [ngIf]="page==='profile'">
+        <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
     </ng-template>
 </div>
 

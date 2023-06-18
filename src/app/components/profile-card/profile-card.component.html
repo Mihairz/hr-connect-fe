@@ -82,7 +82,7 @@
                         <hr>
 
                         <div class="action-buttons-container">
-                            <app-user [user]="userProfile" (newGetUsersEvent)="getUser(userProfile.id || 0)" (newEditUserEvent)="editUser($event)"></app-user>
+                            <app-user [user]="userProfile" [page]="'profile'" (newGetUsersEvent)="getUser(userProfile.id || 0)" (newEditUserEvent)="editUser($event)"></app-user>
                         </div>
                         
                     </div>
