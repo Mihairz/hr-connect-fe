@@ -6,32 +6,28 @@
 
 .card {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+    height: 100%;
 }
 
 .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #161b22;
-    background-clip: border-box;
-    border: 1 solid #f1f7ff;
-    border-radius: .25rem;
+    
 }
 
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1rem;
-    color: white;
 }
 
+.action-buttons-container {
+    text-align: right;
+}
 
 
 .gutters-sm {
     margin-right: -8px;
     margin-left: -8px;
+    padding-top:55px;
 }
 
 .gutters-sm>.col,
@@ -61,25 +57,69 @@
     width: 25%;
 }
 
+.right-card {}
+
+.left-card {
+    /* card */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+
+    background-clip: border-box;
+    border: none;
+    border-radius: .25rem;
+}
 
 
 .profile-buttons {
     text-align: right;
 }
 
-div.circle-avatar {
-    /* make it a circle */
+
+
+.profile-picture-container {
+    width: 150px;
+    /* Set the width of the container div */
+    height: 150px;
+    /* Set the height of the container div */
     border-radius: 50%;
+    /* Make the container div a circle */
 
-    /* div height to be the same as width*/
-    padding-top: 100%;
-    /* Centering on image`s center*/
-    background-position-y: center;
-    background-position-x: center;
-    background-repeat: no-repeat;
+    /* Center the image vertically and horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Hide any overflow from the image */
+}
 
-    /* it makes the clue thing, takes smaller dimension to fill div */
-    background-size: cover;
+.profile-picture {
+    max-width: 100%;
+    /* Set the maximum width of the image to 100% of the container */
+    max-height: 100%;
+    /* Set the maximum height of the image to 100% of the container */
+    border-radius: 50%;
+    /* Make the image a circle */
+
+    /* Center the image within the container */
+    display: block;
+    margin: auto;
+}
+
+@media (max-width: 1000px) {
+    .profile-picture-circle {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 560px) {
+    .profile-picture-circle {
+        width: 70px;
+        height: 70px;
+    }
 }
 
 /* make it responsive */

@@ -1,12 +1,9 @@
 #admin-home-page {
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
     background-color: #F2F7FB;
     position: relative;
     overflow: auto;
     padding: 10px;
-    /* Adjust padding as needed */
-    box-sizing: border-box;
-
-  
 }

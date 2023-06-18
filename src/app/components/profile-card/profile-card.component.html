@@ -4,12 +4,15 @@
 
             <!-- LEFT COLUMN -->
             <div class="left-column">
-                <div class="card">
+                <div class="left-card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
 
-                            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                alt="pozaprofil" class="rounded-circle" width="150">
+                            <div class="profile-picture-container">
+                                <img src="https://images.pexels.com/photos/16160855/pexels-photo-16160855/free-photo-of-smiling-man-in-eyeglasses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                alt="profile-picture" class="profile-picture">
+                            </div>
+                            
 
                             <div class="mt-3">
                                 <!-- In Bootstrap, the class names that start with m refer to margin, and the class names that start with t refer to the top margin specifically. The number 3 in mt-3 represents the magnitude of the margin spacing.For example, mt-3 adds a margin-top spacing of 1rem (or 16 pixels) to the <div> element, pushing it down from the element above it. You can adjust the spacing size by changing the number in the class. -->
@@ -31,7 +34,7 @@
                 <div class="card mb-3">
                     <!-- In Bootstrap, the card class is used to create a container for displaying content in a card-like format. It provides a structured layout with a header, body, and footer sections. The card class sets the basic styling and structure for the card component.
                     mb = margin-bottom -->
-                    <div class="card-body">
+                    <div class="card-body right-card">
                         <!-- By applying the card-body class to a <div> element within a card, you create a designated area for the card's content. The card-body class sets the appropriate padding and styles to ensure the content is visually separated from other card components, such as the header or footer. -->
 
                         <div class="row">
@@ -68,7 +71,7 @@
 
                         <div class="row">
                             <div class="col-sm-3 text-secondary"> <!-- occupy 3 columns -->
-                                <h6 class="mb-0">Role - to be deleted, i use it just for fast debug</h6>
+                                <h6 class="mb-0">Role</h6>
                             </div>
                             <ng-container *ngFor="let role of ['employee', 'hr', 'admin']">
                                 <div *appHasRole="role" class="col-sm-9">
@@ -78,11 +81,15 @@
                         </div>
                         <hr>
 
+                        <div class="action-buttons-container">
+                            <app-user [user]="userProfile" (newGetUsersEvent)="getUser(userProfile.id || 0)" (newEditUserEvent)="editUser($event)"></app-user>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
 
-            <app-user [user]="userProfile" (newGetUsersEvent)="getUser(userProfile.id || 0)" (newEditUserEvent)="editUser($event)"></app-user>
+            
 
             <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType"  (newCloseModalEvent)="closeModal()"
     (newGetUsersEvent)="getUser(userProfile.id || 0)"></app-add-user-modal>
