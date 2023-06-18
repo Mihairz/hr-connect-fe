@@ -1,4 +1,15 @@
 <!-- <div *ngIf="condition">Content to render when condition is true.</div> -->
+<app-navigation-bar></app-navigation-bar>
+<div *ngIf="article" class="full-article-author">
+  <div class="card" style="width: 18rem;">
+    <img src="https://www.shutterstock.com/image-photo/smiling-confident-arab-young-man-260nw-2203099683.jpg" class="card-img-top author" alt="...">
+    <div class="card-body">
+      <p class="card-text">Submited by - insert author here </p>
+      <p class="card-text">Company role in italics and greyed out </p>
+  
+    </div>
+  </div>
+</div>
 <div *ngIf="article" class="full-article-container">
     <h1>{{ article.title }}</h1>
     <p>{{ article.content }}</p>

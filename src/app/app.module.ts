@@ -13,8 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginModuleComponent } from './components/login-module/login-module.component';
 import { AdminUsersTableComponent } from './components/admin-users-table/admin-users-table.component';
 
- 
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewsletterPageComponent } from './pages/newsletter-page/newsletter-page.component';
 import { NewsletterArticleComponent } from './components/newsletter-article/newsletter-article.component';
@@ -30,20 +29,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FullDetailedArticleComponent } from './components/full-detailed-article/full-detailed-article.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
-
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import{ MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { FaqPageComponent } from './pages/faq-page/faq-page.component';
 import { FaqSectionComponent } from './components/faq-section/faq-section.component';
-import { AddFaqModalComponent } from './components/add-faq-modal/add-faq-modal.component'
+import { AddFaqModalComponent } from './components/add-faq-modal/add-faq-modal.component';
 
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -52,18 +52,27 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AdminHomePageComponent,
     UserComponent,
     AddUserModalComponent,
-    LoginModuleComponent, 
-    AdminUsersTableComponent, 
-    NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent, NavigationBarComponent, FullDetailedArticleComponent,
-   NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent, FaqPageComponent, FaqSectionComponent, AddFaqModalComponent
-
+    LoginModuleComponent,
+    AdminUsersTableComponent,
+    NewsletterPageComponent,
+    NewsletterArticleComponent,
+    AddArticleModalComponent,
+    NavigationBarComponent,
+    FullDetailedArticleComponent,
+    NewsfeedMihaiComponent,
+    HasRoleDirective,
+    ProfilePageComponent,
+    FaqPageComponent,
+    FaqSectionComponent,
+    AddFaqModalComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatTableModule, 
+    MatTableModule,
     MatPaginatorModule,
     BrowserAnimationsModule,
     MatDialogModule,
@@ -77,10 +86,16 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NgbModule,
     FontAwesomeModule,
     MatIconModule,
-    NgxPaginationModule
-
+    NgxPaginationModule,
   ],
-  providers: [AuthInterceptorProvider],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthInterceptorProvider,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

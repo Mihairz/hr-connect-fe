@@ -23,12 +23,13 @@
         Add Article
       </button>
     </div>
-    <!-- paginator with ngx-paginator https://www.youtube.com/watch?v=qJ1UHAbGTWw&t=432s -->
+    <!-- paginator with ngx-paginator https://www.youtube.com/watch?v=qJ1UHAbGTWw&t=432s  + http://michaelbromley.github.io/ngx-pagination/#/-->
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
     
 
-
+    <app-spinner></app-spinner>
     <div class="container-articles">
+     
       <!-- is a for and gets all the articles one by one -->
       <div *ngFor="let article of filteredArticles | paginate: { itemsPerPage: 2, currentPage: p }">
         <div class="card">
