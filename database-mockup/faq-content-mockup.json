@@ -26,6 +26,11 @@
       "title": "TEST",
       "content": "TEST",
       "id": 5
+    },
+    {
+      "title": "ANother test",
+      "content": "Test",
+      "id": 6
     }
   ]
 }
