@@ -28,13 +28,13 @@
   </div>
   <app-spinner></app-spinner>
   <div class="container-faqs">
-    <div *ngFor="let faq of filteredFaqs">
-
-
+<!-- https://material.angular.io/cdk/drag-drop/overview#cdk-drag-drop-sorting  we have have a drop list material component that then drags and drops the accordions and arranges by the order item-->
+    <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let faq of filteredFaqs" cdkDrag>
   <div class="accordion" id="accordionPanelsStayOpen">
     <div class="accordion-item">
       <!-- we give an id to all the accordion headers | aria-expanded -> expanded or not |  -->
-      <!-- [attr.data-bs-target] -> gives an id to each collapse button this way when you open one doesn't automatically close the previous header -->
+      <!-- [attr.data-bs-target] -> attribute binding https://stackoverflow.com/questions/35943518/how-to-pass-variable-to-data-target-angular-2  -->
       <h2 class="accordion-header" id="panelsStayOpen-heading{{faq.id}}">
         <button
           class="accordion-button collapsed"
@@ -43,8 +43,9 @@
           [attr.data-bs-target]="'#panelsStayOpen-collapse' + faq.id"
           aria-expanded="false"
          
-        >
-        {{faq.id}}.  {{faq.title}} 
+        > 
+        <!-- without binding above the accordions would not open/ same for closure -->
+      Id:{{faq.id}} Order: {{faq.order}}.  {{faq.title}} 
         </button>
         <div class="button-container">
             <button
@@ -76,5 +77,6 @@
   
    
   </div>
+</div>
 </div>
   </div>

@@ -44,6 +44,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     FontAwesomeModule,
     MatIconModule,
     NgxPaginationModule,
+    DragDropModule,
   ],
   providers: [
     AuthInterceptorProvider,

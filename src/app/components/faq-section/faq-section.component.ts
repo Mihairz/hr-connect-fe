@@ -3,6 +3,7 @@ import { FaqContent } from 'src/app/models/faq';
 import { MatDialog } from '@angular/material/dialog';
 import { FaqService } from 'src/app/services/faq.service';
 import { AddFaqModalComponent } from '../add-faq-modal/add-faq-modal.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 // to filter by title used this tutorial: https://www.youtube.com/watch?v=lTOQ7Fjhcvk
 
@@ -15,6 +16,7 @@ export class FaqSectionComponent implements OnInit {
   faqs: FaqContent[] = [];
   _filterText: string = ''; 
   filteredFaqs: FaqContent [] = []; 
+
 
 get filterText(){
   return this._filterText;
@@ -52,8 +54,8 @@ editFaq(faq: FaqContent) {
 }
 addFaq() {
   const dialogRef = this.dialog.open(AddFaqModalComponent, {
-  
-    data: { title: '', content: '' }
+
+    data: { title: '', content: '' , order:''}
     
   });
   dialogRef.afterClosed().subscribe(result => {
@@ -77,6 +79,20 @@ filterFaqs(){
         return faq.title.toLowerCase().includes(this._filterText.toLowerCase()); // we return each article that includes whats written in the textbox
     })
   }
-
 }
+//event handler - triggered when a drag and drop is done. changes the faqs array
+drop(event: CdkDragDrop<string[]>) {
+  moveItemInArray(this.faqs, event.previousIndex, event.currentIndex); 
+  this.updateFaqOrders();
+}
+//is a function that adds 1 to each order when an element and also updates the backend. 
+//This way we have a plus one in order after the drop above
+updateFaqOrders() {
+  this.faqs.forEach((faq, index) => {
+    faq.order = index + 1;
+    this.faqsService.updateFaqContent(faq).subscribe();
+  });
+  this.filteredFaqs = this.faqs; //the new faqs are copied into filteredFaqs so we can have the updated displayed
+}
+
 }
