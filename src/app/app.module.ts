@@ -43,7 +43,7 @@ import { FaqPageComponent } from './pages/faq-page/faq-page.component';
 import { FaqSectionComponent } from './components/faq-section/faq-section.component';
 import { AddFaqModalComponent } from './components/add-faq-modal/add-faq-modal.component'
 
-
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -76,7 +76,8 @@ import { AddFaqModalComponent } from './components/add-faq-modal/add-faq-modal.c
     MatSortModule,
     NgbModule,
     FontAwesomeModule,
-    MatIconModule
+    MatIconModule,
+    NgxPaginationModule
 
   ],
   providers: [AuthInterceptorProvider],

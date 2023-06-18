@@ -3,6 +3,8 @@ import { NewsletterArticle } from 'src/app/models/newsletter-article';
 import { MatDialog } from '@angular/material/dialog';
 import { NewsletterService } from 'src/app/services/newsletter.service';
 import { AddArticleModalComponent } from '../add-article-modal/add-article-modal.component';
+import { PageEvent } from '@angular/material/paginator';
+
 
 // to filter by title used this tutorial: https://www.youtube.com/watch?v=lTOQ7Fjhcvk
 
@@ -15,6 +17,8 @@ export class NewsletterArticleComponent implements OnInit {
   articles: NewsletterArticle[] = [];
   _filterText: string = ''; 
   filteredArticles: NewsletterArticle [] = []; 
+  //this is for pagination, starting page
+  p: number = 1;
 
 
   get filterText(){
@@ -35,12 +39,14 @@ export class NewsletterArticleComponent implements OnInit {
     
     console.log('Newsletter article component works');
     this.getArticles();
+    
   }
 
   getArticles() {
     this.articlesService.getNewsletterArticles().subscribe((response) => {
       this.articles = response.reverse(); // nu e good practice si ar trebui din backend sa sortam aceste articole ca cel nou sa fie in fata
       this.filteredArticles = this.articles; // we make sure that filteredArticles array is a copy of articles that we actually show in our html
+    
       console.log(response);
     });
   }
@@ -81,6 +87,8 @@ export class NewsletterArticleComponent implements OnInit {
           return article.title.toLowerCase().includes(this._filterText.toLowerCase()); // we return each article that includes whats written in the textbox
       })
     }
-  
+    
 }
+
+
 }

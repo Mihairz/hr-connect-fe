@@ -23,9 +23,14 @@
         Add Article
       </button>
     </div>
+    <!-- paginator with ngx-paginator https://www.youtube.com/watch?v=qJ1UHAbGTWw&t=432s -->
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    
+
+
     <div class="container-articles">
       <!-- is a for and gets all the articles one by one -->
-      <div *ngFor="let article of filteredArticles">
+      <div *ngFor="let article of filteredArticles | paginate: { itemsPerPage: 2, currentPage: p }">
         <div class="card">
           <img src="{{ article.urlpic }}" class="card-img-top" />
           <div class="card-body">
