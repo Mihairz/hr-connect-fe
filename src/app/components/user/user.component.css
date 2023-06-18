@@ -1,0 +1,9 @@
+.buttons-container {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-edit{
+    background-color: #00A3E3;
+    color: white;
+}

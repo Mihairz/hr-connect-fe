@@ -1,0 +1,144 @@
+html,
+section {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+section {
+  flex-direction: column;
+}
+
+/* .container__article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 160px;
+}
+.article {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  margin: 10px 40px;
+  background-color: white;
+  padding: 10px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 1000px;
+} */
+
+.container-articles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 160px;
+}
+/* Add article button */
+.btn.btn-light.addArticle {
+  position: relative;
+
+  background-color: white;
+  border: 1px solid grey;
+  
+}
+/* search bar top of articles */
+.search-article{
+  position: relative;
+  border: 1px solid grey;
+  background-color: white;
+}
+/* container that has the search bar and the add button */
+.search-and-add-button{
+  display: flex;
+  position: relative;
+  top: 140px;
+  width: 800px;
+  justify-content: space-between;
+}
+/* the whole container for the items */
+.content-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.btn.btn-secondary.delete {
+  margin-left: 10px;
+}
+
+/* CSS pentru card-ul cu content-ul articolului */
+.card {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 0;
+  width: 800px;
+  height: 350px;
+
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  margin: 10px 40px;
+  background-color: white;
+  padding: 10px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+/*right side of the card where it has title edit/de;ete button - text - read more*/
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+/* title of the card */
+.card-title {
+  font-weight: bold;
+  margin: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: px;
+  
+}
+
+/*object fit cover - fills the box with the image*/
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: calc(0.25rem - 1px);
+}
+/* edit and delete buttons are together */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.read-more-container {
+  display: flex;
+  justify-content: flex-end;
+}
+/* here we have the title and the buttons in one container */
+.top-of-card{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  
+}
+
+/* webkit-box doesn't work on older browsers */
+/*line clamp = number of lines for the article*/
+/*if it overflows out the text box it will be hidden instead of over*/
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
