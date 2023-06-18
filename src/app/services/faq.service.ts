@@ -13,25 +13,25 @@ export class FaqService {
   constructor(private http: HttpClient) {
   }
   getFaqContent(): Observable<FaqContent[]> {
-    return this.http.get<FaqContent[]>('http://localhost:3100/faq').pipe(
+    return this.http.get<FaqContent[]>('http://localhost:4100/faqs-json').pipe(
       map((faqs: FaqContent[]) => faqs.sort((a, b) => a.order - b.order))
-    );
+    ) as Observable<FaqContent[]> ; 
   }
   
     getFaqContentByOrder(order: number) {
-      return this.http.get(`http://localhost:3100/faq/${order}`) as Observable<FaqContent>
+      return this.http.get(`http://localhost:4100/faqs-json/${order}`) as Observable<FaqContent>
     }
   
     addFaqContent(postObject: FaqContent) {
-      return this.http.post('http://localhost:3100/faq', postObject) as Observable<FaqContent>
+      return this.http.post('http://localhost:4100/faqs-json', postObject) as Observable<FaqContent>
     }
   
     updateFaqContent(postObject: FaqContent) {
-      return this.http.put(`http://localhost:3100/faq/${postObject.id}`, postObject) as Observable<FaqContent>
+      return this.http.put(`http://localhost:4100/faqs-json/${postObject.id}`, postObject) as Observable<FaqContent>
     }
   
     deleteFaqContent(id: number) {
-      return this.http.delete(`http://localhost:3100/faq/${id}`) as Observable<{}>
+      return this.http.delete(`http://localhost:4100/faqs-json/${id}`) as Observable<{}>
     }
 
    
