@@ -17,9 +17,10 @@ export class UserComponent implements OnDestroy {
 
   deleteUserSubscription: Subscription = new Subscription();
 
-  @Input() user: User = new User(); // Initializam un obiect User gol care va fi populat de metoda getUsers() a componentei parinte (admin-users-table) (input)
-  @Output() newGetUsersEvent = new EventEmitter<string>(); // Creem un eveniment nou care va fi transmis componentei parinte (admin-users-table) (output)
+  @Input() user: User = new User(); // Initializam un obiect User gol care va fi populat de metoda getUsers() a componentei parinte (input)
+  @Output() newGetUsersEvent = new EventEmitter<string>(); // Creem un eveniment nou care va fi transmis componentei parinte (output)
   @Output() newEditUserEvent = new EventEmitter<User>();
+  @Input() page:String = '';
 
   // apeleaza functia editUser() din serviciul user injectat iar apoi emite un eveniment-ul newEditUserEvent catre componenta parinte
   editUser() {

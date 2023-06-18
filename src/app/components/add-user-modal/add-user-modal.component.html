@@ -7,7 +7,7 @@
         <!-- Butonul de ascundere formular. La evenimentul click se apeleaza functia closeModal() a componentei curente (add-user-modal) si modala se va inchide-->
 
 
-        <ng-template [ngIf]="modalType==='editModalType'" [ngIfElse]="addModalType">
+        <ng-template [ngIf]="modalType==='editModalType'" [ngIfElse]="addModalType"> 
             <div class="title">Edit Account</div>
         </ng-template>
         <ng-template #addModalType>
