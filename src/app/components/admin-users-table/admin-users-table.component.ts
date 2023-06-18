@@ -49,6 +49,10 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
       this.dataSource.sort = value;
     }
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
 
 
@@ -81,7 +85,7 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
       });
   }
 
-  
+
 
 
 
