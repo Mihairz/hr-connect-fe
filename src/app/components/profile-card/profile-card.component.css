@@ -9,10 +9,6 @@
     height: 100%;
 }
 
-.card {
-    
-}
-
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
@@ -123,99 +119,4 @@
     }
 }
 
-/* make it responsive */
-/* max-width: 100%;
-    width:100%;
-    height:auto;
-    display:block; */
 
-
-
-
-
-
-/* it is optional, for making this div centered in parent*/
-/* margin: 0 auto;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0; }*/
-
-/*^--PROFILE--^*/
-
-.upload-profile-button {
-    background-color: #238636;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 0.5rem;
-    border: none;
-}
-
-.upload-profile-button:active {
-    background-color: #207030;
-    color: white;
-}
-
-.upload-profile-button:hover {
-    background-color: #2e9f43;
-    color: white;
-}
-
-.add-admin-buton {
-    background-color: rgba(31, 111, 235, 1);
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 0.5rem;
-}
-
-.add-admin-buton:active {
-    background-color: rgb(26, 81, 165);
-    color: white;
-}
-
-.add-admin-buton:hover {
-    background-color: rgb(42, 127, 255);
-    color: white;
-}
-
-.edit-profile-button {
-    background-color: #238636;
-    color: white;
-    width: 100px;
-    height: 50px;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 0.5rem;
-}
-
-.edit-profile-button:active {
-    background-color: #207030;
-    color: white;
-}
-
-.edit-profile-button:hover {
-    background-color: #2e9f43;
-    color: white;
-}
-
-.logout-button {
-    background-color: #dc2f55;
-    color: white;
-    text-decoration: none;
-    width: 100px;
-    height: 50px;
-    text-align: center;
-    border-radius: 0.5rem;
-}
-
-.logout-button:active {
-    background-color: #a82642;
-    color: white;
-}
-
-.logout-button:hover {
-    background-color: #ee3960;
-    color: white;
-}

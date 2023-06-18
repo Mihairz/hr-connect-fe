@@ -14,7 +14,6 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
   userId: string = '';
   userProfile: User | undefined; 
 
-
   constructor(private userService: UserService, private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
 
@@ -68,7 +67,4 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
   }
-
-
-
 }
