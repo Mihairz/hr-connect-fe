@@ -11,8 +11,7 @@
     <div class="users-table-div">
 
         <div class="search-and-add-container">
-
-            <input matInput (keyup)="applyFilter($event)" placeholder="Search" class="search-bar" #input>
+            <input matInput [formControl]="searchControl" (keyup)="applyFilter($event)" placeholder="Search" class="search-bar" #input>
 
             <button type="button" class="btn btn-add" (click)="openModal()">Add user</button>
             <!-- Butonul de adaugat users. La evenimentul click se apeleaza functia openModal() din componenta curenta (admin-home-page) si se afiseaza pe ecran formularul de adaugare -->
