@@ -4,14 +4,9 @@
       <div>
         <!-- ngModel connect our input to filterText -->
         <input
+          class="search-bar-top"
           type="text"
           placeholder="Search by title"
-          style="
-            width: 450px;
-            padding: 2px 20px;
-            margin: 10px 0px;
-            height: 30px;
-          "
           [(ngModel)]="filterText"
         />
       </div>
@@ -22,6 +17,16 @@
       >
         Add Article
       </button>
+      <!-- ngModel binds selectedCategory variable to the value in the dropdown -->
+      <!-- when the ngModelChange is triggered we will call the filter articles | seems we can also use a simple change instead  https://www.angularjswiki.com/angular/ngmodelchange-change-angular/#multiple-ngmodelchange-events  -->
+      <select [(ngModel)]="selectedCategory" (ngModelChange)="filterArticles()">
+        <option value="">All</option>
+        <option value="News">News</option>
+        <option value="HR Announcements">HR Announcements</option>
+        <option value="Policy Changes">Policy Changes</option>
+        <option value="Upcoming Events">Upcoming Events</option>
+        <option value="Training Opportunities">Training Opportunities</option>
+      </select>
     </div>
     <!-- paginator with ngx-paginator https://www.youtube.com/watch?v=qJ1UHAbGTWw&t=432s  + http://michaelbromley.github.io/ngx-pagination/#/-->
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -32,7 +37,7 @@
       <div
         *ngFor="
           let article of filteredArticles
-            | paginate : { itemsPerPage: 2, currentPage: p }
+            | paginate : { itemsPerPage: 5, currentPage: p }
         "
       >
         <div class="card">
@@ -41,7 +46,9 @@
             <div class="top-of-card">
               <div class="title-badge-container">
                 <h5 class="card-title">{{ article.title }}</h5>
-                <span class="badge badge-pill badge-danger">{{article.category}}</span>
+                <span class="badge badge-pill badge-danger">{{
+                  article.category
+                }}</span>
               </div>
 
               <div class="button-container">

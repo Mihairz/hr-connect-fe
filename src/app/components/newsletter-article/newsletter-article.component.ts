@@ -19,6 +19,7 @@ export class NewsletterArticleComponent implements OnInit {
   filteredArticles: NewsletterArticle [] = []; 
   //this is for pagination, starting page
   p: number = 1;
+  selectedCategory: string = '';
 
 
   get filterText(){
@@ -77,9 +78,14 @@ export class NewsletterArticleComponent implements OnInit {
     });
   }
 //filters the articles and keeps the ones where what we add in the textbox exists in an article title
+
   filterArticles(){
+    
+    this.filterByCategory();
+
     if(this.articles.length === 0 || this._filterText === ''){
-      this.filteredArticles = this.articles; // if the textbox is empty or we have no articles we keep the status quo
+      // this.filteredArticles = this.articles; // if the textbox is empty or we have no articles we keep the status quo 
+      //-- this one above is required if we don't implement the filter by category (there is already this.filteredArticles = this.articles; in the filter by category) - now if the field is empty do nothing - 
     } else {
       //found here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#searching_in_array
       this.filteredArticles = this.articles.filter((article) => //filter function creates a new array which includes only the items that match the filter - article is a parameter that reprisents one item of the articles array
@@ -90,5 +96,14 @@ export class NewsletterArticleComponent implements OnInit {
     
 }
 
+filterByCategory() {
+  // We copy all the articles in filteredArticles
+  this.filteredArticles = this.articles;
 
+  // Filter by category if a category is selected
+  if (this.selectedCategory !== '') {
+    this.filteredArticles = this.articles.filter(article => article.category === this.selectedCategory);
+}
+
+}
 }
