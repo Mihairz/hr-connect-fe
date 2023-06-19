@@ -11,72 +11,83 @@
     that emails are not responded to individually. However, as many queries as
     possible are turned into Frequently Asked Questions which are posted here.
   </p>
-  
 
   <div class="search-and-add-button">
     <div>
       <!-- ngModel connect our input to filterText -->
-      <input class="form-control" id="myInput" type="text" placeholder="Search by FAQ title.." [(ngModel)]="filterText" />
+      <input
+        class="form-control"
+        id="myInput"
+        type="text"
+        placeholder="Search by FAQ title.."
+        [(ngModel)]="filterText"
+      />
     </div>
-    <button
-      type="button"
-      class="btn btn-light addArticle"
-      (click)="addFaq()"
-    >
+    <button type="button" class="btn btn-light addArticle" (click)="addFaq()">
       Add FAQ
     </button>
   </div>
-  <!-- <app-spinner></app-spinner> -->
+
+  <app-spinner></app-spinner>
+
   <div class="container-faqs">
-<!-- https://material.angular.io/cdk/drag-drop/overview#cdk-drag-drop-sorting  we have have a drop list material component that then drags and drops the accordions and arranges by the order item-->
+    <!-- https://material.angular.io/cdk/drag-drop/overview#cdk-drag-drop-sorting  we have have a drop list material component that then drags and drops the accordions and arranges by the order item-->
     <div cdkDropList (cdkDropListDropped)="drop($event)">
-    <div *ngFor="let faq of filteredFaqs" cdkDrag>
-  <div class="accordion" id="accordionPanelsStayOpen">
-    <div class="accordion-item">
-      <!-- we give an id to all the accordion headers | aria-expanded -> expanded or not |  -->
-      <!-- [attr.data-bs-target] -> attribute binding https://stackoverflow.com/questions/35943518/how-to-pass-variable-to-data-target-angular-2  -->
-      <h2 class="accordion-header" id="panelsStayOpen-heading{{faq.id}}">
-        <button
-          class="accordion-button collapsed"
-          type="button"
-          data-bs-toggle="collapse"
-          [attr.data-bs-target]="'#panelsStayOpen-collapse' + faq.id"
-          aria-expanded="false"
-         
-        > 
-        <!-- without binding above the accordions would not open/ same for closure -->
-      Id:{{faq.id}} Order: {{faq.order}}.  {{faq.title}} 
-        </button>
-        <div class="button-container">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              (click)="editFaq(faq)"
-            >
-              Edit
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary delete"
-              (click)="deleteFaq(faq.id)"
-            >
-              Delete
-            </button>
+      <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
+
+      <div *ngFor="let category of faqCategories">
+        <!-- edit this for the title of the section of FAQs -->
+        <h2>{{ category }}</h2>
+        <!-- this one shows each faq in filteredFaqsByCategory[category] which are the faqs that remain if something was written in the search textbox - to match something from the title  -->
+        <div *ngFor="let faq of filteredFaqsByCategory[category]" cdkDrag>
+          <div class="accordion" id="accordionPanelsStayOpen">
+            <div class="accordion-item">
+              <!-- we give an id to all the accordion headers | aria-expanded -> expanded or not |  -->
+              <!-- [attr.data-bs-target] -> attribute binding https://stackoverflow.com/questions/35943518/how-to-pass-variable-to-data-target-angular-2  -->
+              <h2
+                class="accordion-header"
+                id="panelsStayOpen-heading{{ faq.id }}"
+              >
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  [attr.data-bs-target]="'#panelsStayOpen-collapse' + faq.id"
+                  aria-expanded="false"
+                >
+                  <!-- without binding above the accordions would not open/ same for closure -->
+                  Id:{{ faq.id }} Order: {{ faq.order }}. {{ faq.title }}
+                </button>
+                <div class="button-container">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="editFaq(faq)"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary delete"
+                    (click)="deleteFaq(faq.id)"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </h2>
+              <div
+                id="panelsStayOpen-collapse{{ faq.id }}"
+                class="accordion-collapse collapse"
+                [attr.aria-labelledby]="'panelsStayOpen-heading' + faq.id"
+              >
+                <div class="accordion-body">
+                  {{ faq.content }}
+                </div>
+              </div>
+            </div>
           </div>
-      </h2>
-      <div
-      id="panelsStayOpen-collapse{{faq.id}}"
-      class="accordion-collapse collapse"
-        [attr.aria-labelledby]="'panelsStayOpen-heading' + faq.id"
-      >
-        <div class="accordion-body">
-          {{faq.content}}
         </div>
       </div>
     </div>
-  
-   
   </div>
 </div>
-</div>
-  </div>

@@ -13,9 +13,23 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./faq-section.component.css']
 })
 export class FaqSectionComponent implements OnInit {
+  // all categories, helps us structure in html - put every item in its category an later
+  faqCategories: string[] = [
+     "Recruitment & Onboarding",
+     "Compensation & Benefits",
+     "Workplace Policies & Environment",
+     "Professional Development & Performance",
+     "Conflict Resolution & Employee Support",
+     "Employee Resources & Services"
+
+
+  ];
+
+  faqsByCategory: {[key: string]: FaqContent[]} = {};
   faqs: FaqContent[] = [];
   _filterText: string = ''; 
   filteredFaqs: FaqContent [] = []; 
+  filteredFaqsByCategory: {[key: string]: FaqContent[]} = {};
 
 
 get filterText(){
@@ -34,52 +48,61 @@ ngOnInit() {
     
   console.log('Faq content component works');
   this.getFaqs();
+  
 }
 getFaqs() {
-  this.faqsService.getFaqContent().subscribe((response) => {
-    this.faqs = response;
-    this.filteredFaqs = this.faqs; // we make sure that filteredArticles array is a copy of articles that we actually show in our html
+  this.faqsService.getFaqContent().subscribe((response) => { // makes hhtp request - fetches the faqs - sends back the response
+    this.faqCategories.forEach(category => { //This line is looping through each category in the faqCategories array
+      this.faqsByCategory[category] = response.filter(faq => faq.category === category); // so for each item in the key category we add the faq for instance we will have "Recruitment & Onboarding": [{...faq1}, etc.
+    });
+    this.filterFaqs(); 
     console.log(response);
   });
 }
 editFaq(faq: FaqContent) {
-    
-    
   const dialogRef = this.dialog.open(AddFaqModalComponent, {
     data: { ...faq }
   });
   dialogRef.afterClosed().subscribe(result => {
     this.getFaqs();
+   
   });
 }
+
 addFaq() {
   const dialogRef = this.dialog.open(AddFaqModalComponent, {
-
-    data: { title: '', content: '' , order:''}
-    
+    data: { category:'',title: '', content: '' , order:''}
   });
   dialogRef.afterClosed().subscribe(result => {
-    
     this.getFaqs();
+   
   });
 }
+
 deleteFaq(id:number ) {
   this.faqsService.deleteFaqContent(id).subscribe(() => {
-    this.getFaqs()
+    this.getFaqs();
+    
   });
 }
-//filters the articles and keeps the ones where what we add in the textbox exists in an article title
-filterFaqs(){
-  if(this.faqs.length === 0 || this._filterText === ''){
-    this.filteredFaqs= this.faqs; // if the textbox is empty or we have no articles we keep the status quo
+
+//filters the articles and keeps the ones where what we add in the textbox exists in a faq title - it will still show by category
+filterFaqs() {
+  if (this._filterText === '') {
+    this.filteredFaqsByCategory = {...this.faqsByCategory}; // if filter empty - create a new object with the same properties and values as this.faqsByCategory
   } else {
-    //found here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#searching_in_array
-    this.filteredFaqs = this.faqs.filter((faq) => //filter function creates a new array which includes only the items that match the filter - article is a parameter that reprisents one item of the articles array
-    { 
-        return faq.title.toLowerCase().includes(this._filterText.toLowerCase()); // we return each article that includes whats written in the textbox
-    })
+    for (let category of this.faqCategories) { // the function goes through each category in this.faqCategories using a for loop - then filters based on what was written in the textbox
+      this.filteredFaqsByCategory[category] = this.faqsByCategory[category].filter((faq) => {
+         //found here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#searching_in_array
+        return faq.title.toLowerCase().includes(this._filterText.toLowerCase()); // the filtered Faqs gets the filtered items that match the filter for the title and then are presented on the page - see filteredFaqsByCategory[category] in html 
+      });
+    }
   }
 }
+
+
+
+
 //event handler - triggered when a drag and drop is done. changes the faqs array
 drop(event: CdkDragDrop<string[]>) {
   moveItemInArray(this.faqs, event.previousIndex, event.currentIndex); 

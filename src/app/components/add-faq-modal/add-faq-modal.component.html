@@ -19,7 +19,17 @@
       ></textarea>
     </mat-form-field>
   </div>
-
+  <mat-form-field>
+     
+    <select matNativeControl required [(ngModel)]="data.category">
+      <option value="Recruitment & Onboarding">Recruitment & Onboarding</option>
+      <option value="Compensation & Benefits">Compensation & Benefits</option>
+      <option value="Workplace Policies & Environments">Workplace Policies & Environment</option>
+      <option value="Professional Development & Performance">Professional Development & Performance</option>
+      <option value="Conflict Resolution & Employee Support">Training Opportunities</option>
+      <option value="Employee Resources & Services">Training Opportunities</option>
+    </select>
+  </mat-form-field>
   <div class="modal__buttons">
     <button mat-button (click)="closeModal()">Anulare</button>
     <button

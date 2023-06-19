@@ -46,7 +46,7 @@ export class NewsletterArticleComponent implements OnInit {
   getArticles() {
     this.articlesService.getNewsletterArticles().subscribe((response) => {
       this.articles = response.reverse(); // nu e good practice si ar trebui din backend sa sortam aceste articole ca cel nou sa fie in fata
-      this.filteredArticles = this.articles; // we make sure that filteredArticles array is a copy of articles that we actually show in our html
+      this.filteredArticles = this.articles; // we make sure that filteredArticles array is a copy of articles | we will use filteredArticles in our function
     
       console.log(response);
     });
@@ -98,7 +98,7 @@ export class NewsletterArticleComponent implements OnInit {
 
 filterByCategory() {
   // We copy all the articles in filteredArticles
-  this.filteredArticles = this.articles;
+  this.filteredArticles = this.articles; //required so we always revert to the full articles
 
   // Filter by category if a category is selected
   if (this.selectedCategory !== '') {
