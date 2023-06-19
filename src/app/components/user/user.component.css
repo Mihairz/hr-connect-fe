@@ -7,3 +7,7 @@
     background-color: #00A3E3;
     color: white;
 }
+
+.btn-edit:hover{
+    background-color: #2282C1;
+}

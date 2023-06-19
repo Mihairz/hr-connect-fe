@@ -7,7 +7,7 @@
         <!-- Butonul de ascundere formular. La evenimentul click se apeleaza functia closeModal() a componentei curente (add-user-modal) si modala se va inchide-->
 
 
-        <ng-template [ngIf]="modalType==='editModalType'" [ngIfElse]="addModalType"> 
+        <ng-template [ngIf]="modalType==='editModalType'" [ngIfElse]="addModalType">
             <div class="title">Edit Account</div>
         </ng-template>
         <ng-template #addModalType>
@@ -20,58 +20,68 @@
 
             <ng-template [ngIf]="modalRole==='admin'">
                 <div class="input-container ic1">
-                    <input id="department" class="input" type="text" formControlName="department" placeholder=" " required>
+                    <input id="department" class="input" type="text" formControlName="department" placeholder=" "
+                        required maxlength="10">
                     <!-- la fiecare input specificam numele variabilei din typescript -->
                     <!-- <div class="cut cut-short"></div> -->
                     <label for="department" class="placeholder">Department:</label>
                 </div>
-    
+
                 <div class="input-container ic2">
-                    <input id="function" class="input" type="text" formControlName="function" placeholder=" " required>
+                    <input id="function" class="input" type="text" formControlName="function" placeholder=" " required
+                        maxlength="30">
                     <!--<div class="cut"></div>-->
-    
+
                     <label for="function" class="placeholder">Function:</label>
                 </div>
-                
+
                 <div class="input-container ic2">
-                    <input id="role" class="input" type="text" formControlName="role" placeholder=" " required>
-                    <!--<div class="cut"></div>-->
-    
-                    <label for="role" class="placeholder">Role:</label>
+                    <select id="role" class="input" name="role" formControlName="role" (change)="onRoleChange()">
+                        <option disabled selected value="">Role</option>
+                        <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+                    </select>
+
+                    <!-- <label for="role" class="placeholder"></label> -->
                 </div>
-    
+
                 <div class="input-container ic2">
-                    <input id="name" class="input" type="text" formControlName="name" placeholder=" " required>
+                    <input id="name" class="input" type="text" formControlName="name" placeholder=" " required
+                        maxlength="50">
                     <!--<div class="cut"></div>-->
-    
+
                     <label for="name" class="placeholder">Name:</label>
                 </div>
-    
+
                 <div class="input-container ic2">
-                    <input id="email" class="input" type="email" formControlName="email" placeholder=" " required>
+                    <input id="email" class="input" type="email" formControlName="email" placeholder=" " required
+                        maxlength="60">
                     <!--<div class="cut"></div>-->
-    
+
                     <label for="email" class="placeholder">E-mail:</label>
                 </div>
+    
+                  
             </ng-template>
 
 
             <div class="input-container ic2">
-                <input id="phone" class="input" type="text" formControlName="phone" placeholder=" " required>
+                <input id="phone" class="input" type="text" formControlName="phone" placeholder=" " required
+                    maxlength="10">
                 <!--<div class="cut"></div>-->
 
                 <label for="phone" class="placeholder">Phone number:</label>
             </div>
 
             <div class="input-container ic2">
-                <input id="password" class="input" type="text" formControlName="password" placeholder=" " required>
+                <input id="password" class="input" type="text" formControlName="password" placeholder=" " required
+                    maxlength="60">
                 <!--<div class="cut"></div>-->
 
                 <label for="password" class="placeholder">Password:</label>
             </div>
 
         </form>
-        
+
 
         <ng-template [ngIf]="modalType==='editModalType'">
             <button type="button" class="submit" (click)="updateUser()">Update</button>

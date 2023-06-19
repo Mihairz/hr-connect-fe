@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -14,21 +14,67 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   @Output() newGetUsersEvent = new EventEmitter<string>();
   @Input() editedUser: User = new User();
   @Input() modalType: String = '';
-  @Input() modalRole: String = '';
+  @Input() modalRole: String = ''; 
+  roles: string[] = ['employee','hr','admin'];
+  selectedRole: string= '';
 
   // Creem formularul si campurile acestuia
   userForm = new FormGroup({
-    department: new FormControl(''),
-    function: new FormControl(''),
-    role: new FormControl(''),
-    name: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl(''),
-    password: new FormControl('')
+
+    department: new FormControl('',[
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(10),
+      Validators.pattern(/^[a-zA-Z0-9\s]*$/) // only alphanumeric
+    ]),
+
+    function: new FormControl('',[
+      Validators.required,
+      Validators.minLength(7),
+      Validators.maxLength(30),
+      Validators.pattern(/^[a-zA-Z0-9\s]*$/) // only alphanumeric
+    ]),
+
+    role: new FormControl('',[
+      Validators.required,
+    ]),
+
+    name: new FormControl('',[
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(50),
+      Validators.pattern(/^[a-zA-Z\s]*$/) // only alphabetic
+    ]),
+
+    email: new FormControl('',[
+      Validators.required,
+      Validators.minLength(7),
+      Validators.maxLength(60),
+      Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) // email format
+    ]),
+
+    phone: new FormControl('',[
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(10),
+      Validators.pattern(/^[a-zA-Z0-9\s]*$/) // only alphanumeric
+    ]),
+
+    password: new FormControl('',[
+      Validators.required,
+      Validators.minLength(7),
+      Validators.maxLength(60),
+      Validators.pattern(/^[a-zA-Z0-9\s]*$/) // only alphanumeric
+    ])
   })
 
+  onRoleChange() {
+    this.selectedRole = this.userForm.value.role || "";
+    console.log('Selected Role:', this.selectedRole);
+  }
+
   addUserSubscription: Subscription = new Subscription();
-  updatetUserSubscription: Subscription = new Subscription();
+  updatedUserSubscription: Subscription = new Subscription();
 
   particlesScriptElement: HTMLScriptElement;
   particlesSettingsScriptElement: HTMLScriptElement;
@@ -56,6 +102,8 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
 
   ngOnInit(): void {
+    // Daca modala a fost apelata de pe butonul Edit, initializam formularul completat cu datele utilizatorului ce urmeaza a fi editat. 
+    // Daca modala a fost apelata de pe butonul Add, initializam formularul cu campurile goale 
     console.log('modal type: '+this.modalType);
     this.userForm.patchValue({
       department: this.editedUser.department,
@@ -66,21 +114,28 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       phone: this.editedUser.phone,
       password: this.editedUser.password
     })
+    this.selectedRole = this.userForm.value.role || "";
   }
 
   closeModal() {
     this.newCloseModalEvent.emit();
+    // Functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
   }
-  // Functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
+  
 
 
 
   addUser() {
+
+    if(this.userForm.invalid){
+      return;
+    }
+
     // Creem obiectul user ce urmeaza a fi introdus in baza de date. Daca una dintre valori a ajuns necompletata in backend aceasta va fi setata ca empty string
     const user = {
       department: this.userForm.value.department || '',
       function: this.userForm.value.function || '',
-      role: this.userForm.value.role || '',
+      role: this.selectedRole || '',
       name: this.userForm.value.name || '',
       email: this.userForm.value.email || '',
       phone: this.userForm.value.phone || '',
@@ -108,12 +163,36 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       password: this.userForm.value.password || ''
     }
 
-    this.updatetUserSubscription = this.userService.updateUser(user).subscribe(() => {
+    this.updatedUserSubscription = this.userService.updateUser(user).subscribe(() => {
       this.newGetUsersEvent.emit();
       this.closeModal();
     })
   }
 
+  getErrorMessage(controlName: string): string {
+    const control = this.userForm.get(controlName);
+  
+    if (control?.errors?.['required']) {
+      return `${controlName} is required.`;
+    }
+  
+    if (control?.errors?.['minlength']) {
+      return `${controlName} must have at least ${control.errors ['minlength'].requiredLength} characters.`;
+    }
+  
+    if (control?.errors?.['maxlength']) {
+      return `${controlName} must have at most ${control.errors ['maxlength'].requiredLength} characters.`;
+    }
+  
+    if (control?.errors?.['pattern']) {
+      return `Please provide a valid ${controlName}.`;
+    }
+  
+    // Add more conditions for other validation errors if needed
+  
+    return '';
+  }
+  
 
   ngOnDestroy(): void {
     this.addUserSubscription.unsubscribe();

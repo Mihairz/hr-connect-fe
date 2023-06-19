@@ -24,6 +24,7 @@ import { AddArticleModalComponent } from './components/add-article-modal/add-art
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -67,6 +68,7 @@ import { ProfileCardComponent } from './components/profile-card/profile-card.com
     MatDialogModule,
     FormsModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatInputModule,
     MatDialogModule,
     MatButtonModule,
@@ -74,7 +76,6 @@ import { ProfileCardComponent } from './components/profile-card/profile-card.com
     MatSortModule,
     NgbModule,
     FontAwesomeModule,
-
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]

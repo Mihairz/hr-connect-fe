@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginModuleComponent {
 
   // Creem formularul in ts
-  form = new FormGroup({
+  form = new FormGroup({ 
 
     email: new FormControl(null, [
       Validators.required,
@@ -62,18 +62,17 @@ export class LoginModuleComponent {
   // Creem metoda submitForm, ce va fi apelata cand se apasa butonul de login
   submitForm() {
     
-    if (this.form.invalid) {
-      if (this.form.controls.email.errors?.['pattern']) {
-        this.errorMessage = 'Invalid e-mail format. Please enter a valid e-mail address.';
+    
+    if (this.form.invalid) { // Daca formularul este receptionat ca invalid
+      if (this.form.controls.email.errors?.['pattern']) { // Verificam daca este din cauza e-mail-ului
+        this.errorMessage = 'Invalid e-mail format. Please enter a valid e-mail address.'; // Daca este din cauza e-mail-ului, afisam un mesaj despre asta
       } else {
-        this.errorMessage = 'Invalid credentials. Please try again.';
+        this.errorMessage = 'Invalid credentials. Please try again.'; // Daca este din cauza oricarui alt camp, afisam un mesaj general
       }
       return;
     }
 
     // Apeleaza functia login din AuthService pasand ca parametrii input-urile din formular. In response redirectioneaza catre pagina de admin.
-
-    // Aici ma gandesc ca o sa creez o componenta pe nume dashboard in care sa pun admin-page si user-page ca si componente si sa le ascund in functie de ulterioara implementare a rolurilor de utilizator SAU poate reusesc sa implementez 2 redirectionari diferite in functie de rol
     this.authService
       .login(this.form.get('email')?.value, this.form.get('password')?.value)
       .subscribe(

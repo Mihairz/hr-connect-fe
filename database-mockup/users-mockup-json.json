@@ -59,6 +59,16 @@
       "phone": "0789212",
       "password": "123",
       "id": 8
+    },
+    {
+      "id": 9,
+      "department": "wqewq",
+      "function": "ewqeq",
+      "role": "employee",
+      "name": "wqeq",
+      "email": "ewq@dsda.ro",
+      "phone": "4434342332",
+      "password": "3211"
     }
   ]
 }
