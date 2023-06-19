@@ -142,3 +142,6 @@ section {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.badge{
+  color: black;
+}

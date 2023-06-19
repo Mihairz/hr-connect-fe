@@ -25,18 +25,25 @@
     </div>
     <!-- paginator with ngx-paginator https://www.youtube.com/watch?v=qJ1UHAbGTWw&t=432s  + http://michaelbromley.github.io/ngx-pagination/#/-->
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
-    
 
-    <app-spinner></app-spinner>
+    <!-- <app-spinner></app-spinner> -->
     <div class="container-articles">
-     
       <!-- is a for and gets all the articles one by one -->
-      <div *ngFor="let article of filteredArticles | paginate: { itemsPerPage: 2, currentPage: p }">
+      <div
+        *ngFor="
+          let article of filteredArticles
+            | paginate : { itemsPerPage: 2, currentPage: p }
+        "
+      >
         <div class="card">
           <img src="{{ article.urlpic }}" class="card-img-top" />
           <div class="card-body">
             <div class="top-of-card">
-              <h5 class="card-title">{{ article.title }}</h5>
+              <div class="title-badge-container">
+                <h5 class="card-title">{{ article.title }}</h5>
+                <span class="badge badge-pill badge-danger">{{article.category}}</span>
+              </div>
+
               <div class="button-container">
                 <button
                   type="button"

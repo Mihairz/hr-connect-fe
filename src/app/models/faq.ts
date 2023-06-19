@@ -4,6 +4,7 @@ export interface FaqContent {
     content: string;
     order: number;
     id: number;
+    
   
 
 }
