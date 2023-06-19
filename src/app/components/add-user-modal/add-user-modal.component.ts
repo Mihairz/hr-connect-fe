@@ -141,7 +141,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorSource = 'department';
         switch (true) {
           case !!this.userForm.controls.department.errors?.['required']:
-            this.errorMessage = 'Every user must be part of a department';
+            this.errorMessage = 'Every user must be part of a department.';
             break;
           case !!this.userForm.controls.department.errors?.['pattern']:
             this.errorMessage = 'Department name can contain only aphanumeric characters.';
@@ -163,7 +163,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorSource = 'function';
         switch (true) {
           case !!this.userForm.controls.function.errors?.['required']:
-            this.errorMessage = 'Every user must be have a function';
+            this.errorMessage = 'Every user must be have a function.';
             break;
           case !!this.userForm.controls.function.errors?.['pattern']:
             this.errorMessage = 'Function name can contain only aphanumeric characters.';
@@ -196,7 +196,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorSource = 'name';
         switch (true) {
           case !!this.userForm.controls.name.errors?.['required']:
-            this.errorMessage = 'Every user must have a name';
+            this.errorMessage = 'Every user must have a name.';
             break;
           case !!this.userForm.controls.name.errors?.['pattern']:
             this.errorMessage = 'User name can contain only alphabetic characters.';
@@ -218,7 +218,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorSource = 'email';
         switch (true) {
           case !!this.userForm.controls.email.errors?.['required']:
-            this.errorMessage = 'Every user must have an e-mail';
+            this.errorMessage = 'Every user must have an e-mail.';
             break;
           case !!this.userForm.controls.email.errors?.['pattern']:
             this.errorMessage = 'Invalid e-mail format. Please enter a valid e-mail address.';
@@ -240,7 +240,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorSource = 'phone';
         switch (true) {
           case !!this.userForm.controls.phone.errors?.['required']:
-            this.errorMessage = 'Every user must have a phone number';
+            this.errorMessage = 'Every user must have a phone number.';
             break;
           case !!this.userForm.controls.phone.errors?.['pattern']:
             this.errorMessage = 'Phone number can contain only numeric characters.';
@@ -262,7 +262,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorSource = 'password';
         switch (true) {
           case !!this.userForm.controls.password.errors?.['required']:
-            this.errorMessage = 'Every user must have a password';
+            this.errorMessage = 'Every user must have a password.';
             break;
           case !!this.userForm.controls.password.errors?.['minlength']:
             this.errorMessage = 'Password must contain at least 7 characters.';
@@ -279,7 +279,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       // If formular is invalid, but because of reasons different than invalid input
       default:
         this.errorSource = 'default';
-        this.errorMessage = 'Something went wrong';
+        this.errorMessage = 'Something went wrong.';
         break;
       }
   }

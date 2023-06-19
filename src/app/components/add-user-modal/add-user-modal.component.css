@@ -23,7 +23,6 @@
 
     border-radius: 20px;
     box-sizing: border-box;
-    height: 90%;
     padding: 20px;
     width: 500px;
 
@@ -194,3 +193,7 @@ color of the placeholder text when some input was written but the input field si
     display: none;
 }
 
+.alert{
+    margin-top: 26px;
+    margin-bottom: 0px
+}
