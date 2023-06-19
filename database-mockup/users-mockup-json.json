@@ -69,6 +69,16 @@
       "email": "ewq@dsda.ro",
       "phone": "4434342332",
       "password": "3211"
+    },
+    {
+      "id": 10,
+      "department": "dasdas",
+      "function": "dasdass",
+      "role": "employee",
+      "name": "dasdaa",
+      "email": "d@d.ro",
+      "phone": "11111111111",
+      "password": "{{style=\"background:black;\"}}"
     }
   ]
 }
