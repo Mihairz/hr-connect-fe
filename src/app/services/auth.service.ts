@@ -106,7 +106,7 @@ export class AuthService {
 
     // JSON.parser preia un string si il transforma intr-un JSON
 
-    // Rezumand, aceasta functie returneaza un fisiere text de tip JSON cu payload-ul JWT-ului, unde se afla proprietatea 'role' a utilizatorului logat
+    // Rezumand, aceasta functie returneaza un fisiere text de tip JSON cu payload-ul JWT-ului; din care preia doar proprietatile unui obiect de tip user (noi preluam doar role)
   }
 
   hasRole(role: string): boolean {

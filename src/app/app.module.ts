@@ -24,6 +24,7 @@ import { AddArticleModalComponent } from './components/add-article-modal/add-art
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -38,6 +39,7 @@ import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ProfileCardComponent } from './components/profile-card/profile-card.component';
 
 
 
@@ -52,7 +54,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     LoginModuleComponent, 
     AdminUsersTableComponent, 
     NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent, NavigationBarComponent, FullDetailedArticleComponent,
-   NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent
+   NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent, ProfileCardComponent
 
   ],
   imports: [
@@ -66,6 +68,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     MatDialogModule,
     FormsModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatInputModule,
     MatDialogModule,
     MatButtonModule,
@@ -73,7 +76,6 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     MatSortModule,
     NgbModule,
     FontAwesomeModule,
-
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]

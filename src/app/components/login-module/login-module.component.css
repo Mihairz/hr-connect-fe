@@ -6,7 +6,7 @@
 
     border-radius: 20px;
     box-sizing: border-box; 
-    height: 400px; 
+
     padding: 20px;
     width: 500px;
 }
@@ -85,7 +85,7 @@
 }
 
 .placeholder {
-    color: #65657b;
+    color: #c4c5c5;
     font-family: sans-serif;
     left: 20px;
     line-height: 14px;
@@ -102,6 +102,7 @@
 .input:focus ~ .placeholder,
 .input:not(:placeholder-shown) ~ .placeholder {
   transform: translateY(-40px)  scale(1);
+  color: #0C2340;
 }
 
 
@@ -120,7 +121,7 @@ color of the placeholder text when some input was written but the input field si
     border: 0;
     box-sizing: border-box;
     color: #eee;
-    cursor: pointer;
+    cursor: pointer; 
     font-size: 18px;
     height: 50px;
     margin-top: 38px;
@@ -131,4 +132,11 @@ color of the placeholder text when some input was written but the input field si
 
 .submit:active {
     background-color: #2282C1;
+}
+
+.alert {
+    
+    margin-bottom: 0px !important;
+    margin-top: 22px !important;
+
 }
