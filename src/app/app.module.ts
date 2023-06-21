@@ -13,8 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginModuleComponent } from './components/login-module/login-module.component';
 import { AdminUsersTableComponent } from './components/admin-users-table/admin-users-table.component';
 
- 
-import {MatTableModule} from '@angular/material/table';
+
+import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewsletterPageComponent } from './pages/newsletter-page/newsletter-page.component';
 import { NewsletterArticleComponent } from './components/newsletter-article/newsletter-article.component';
@@ -24,7 +24,7 @@ import { AddArticleModalComponent } from './components/add-article-modal/add-art
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -33,7 +33,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
@@ -51,10 +51,17 @@ import { ProfileCardComponent } from './components/profile-card/profile-card.com
     AdminHomePageComponent,
     UserComponent,
     AddUserModalComponent,
-    LoginModuleComponent, 
-    AdminUsersTableComponent, 
-    NewsletterPageComponent, NewsletterArticleComponent, AddArticleModalComponent, NavigationBarComponent, FullDetailedArticleComponent,
-   NewsfeedMihaiComponent, HasRoleDirective, ProfilePageComponent, ProfileCardComponent
+    LoginModuleComponent,
+    AdminUsersTableComponent,
+    NewsletterPageComponent, 
+    NewsletterArticleComponent, 
+    AddArticleModalComponent, 
+    NavigationBarComponent, 
+    FullDetailedArticleComponent,
+    NewsfeedMihaiComponent, 
+    HasRoleDirective, 
+    ProfilePageComponent, 
+    ProfileCardComponent
 
   ],
   imports: [
@@ -62,7 +69,7 @@ import { ProfileCardComponent } from './components/profile-card/profile-card.com
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatTableModule, 
+    MatTableModule,
     MatPaginatorModule,
     BrowserAnimationsModule,
     MatDialogModule,
