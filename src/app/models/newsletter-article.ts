@@ -5,5 +5,6 @@ export interface NewsletterArticle {
     date: string;
     content: string;
     urlpic:string;
+    category: string;
 
 }

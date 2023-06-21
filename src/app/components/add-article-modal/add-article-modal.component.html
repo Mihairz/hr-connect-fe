@@ -22,7 +22,17 @@
           placeholder="Content"></textarea>
       </mat-form-field>
     </div>
-  
+    <h4>Basic native select</h4>
+    <mat-form-field>
+     
+      <select matNativeControl required [(ngModel)]="data.category">
+        <option value="News">News</option>
+        <option value="HR Announcements">HR Announcements</option>
+        <option value="Policy Changes">Policy Changes</option>
+        <option value="Upcoming Events">Upcoming Events</option>
+        <option value="Training Opportunities">Training Opportunities</option>
+      </select>
+    </mat-form-field>
     
       <div class="modal__buttons">
         <button mat-button (click)="closeModal()">Anulare</button>
