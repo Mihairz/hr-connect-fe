@@ -45,6 +45,14 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+
+//for uploading documents -> https://owrrpon.medium.com/angular-material-file-uploader-b78aa070f77d (if we want the more evolved version)
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatRippleModule} from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -67,6 +75,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     FaqSectionComponent,
     AddFaqModalComponent,
     SpinnerComponent,
+    FileUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +98,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatIconModule,
     NgxPaginationModule,
     DragDropModule,
+    MatExpansionModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatRippleModule
   ],
   providers: [
     AuthInterceptorProvider,
