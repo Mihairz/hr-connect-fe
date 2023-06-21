@@ -23,6 +23,7 @@ import { AddArticleModalComponent } from './components/add-article-modal/add-art
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -35,10 +36,13 @@ import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+
 import { MatIconModule } from '@angular/material/icon';
 import { FaqPageComponent } from './pages/faq-page/faq-page.component';
 import { FaqSectionComponent } from './components/faq-section/faq-section.component';
 import { AddFaqModalComponent } from './components/add-faq-modal/add-faq-modal.component';
+import { ProfileCardComponent } from './components/profile-card/profile-card.component';
+
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SpinnerComponent } from './components/spinner/spinner.component';
@@ -61,6 +65,7 @@ import {MatRippleModule} from '@angular/material/core';
     AdminHomePageComponent,
     UserComponent,
     AddUserModalComponent,
+
     LoginModuleComponent,
     AdminUsersTableComponent,
     NewsletterPageComponent,
@@ -76,6 +81,7 @@ import {MatRippleModule} from '@angular/material/core';
     AddFaqModalComponent,
     SpinnerComponent,
     FileUploadComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -88,6 +94,7 @@ import {MatRippleModule} from '@angular/material/core';
     MatDialogModule,
     FormsModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatInputModule,
     MatDialogModule,
     MatButtonModule,
@@ -95,6 +102,7 @@ import {MatRippleModule} from '@angular/material/core';
     MatSortModule,
     NgbModule,
     FontAwesomeModule,
+
     MatIconModule,
     NgxPaginationModule,
     DragDropModule,
@@ -110,6 +118,7 @@ import {MatRippleModule} from '@angular/material/core';
       useClass: LoadingInterceptor,
       multi: true,
     },
+
   ],
   bootstrap: [AppComponent],
 })

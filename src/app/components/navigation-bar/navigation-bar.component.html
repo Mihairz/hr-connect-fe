@@ -32,18 +32,23 @@
       <ul class="navbar-nav">
         <li class="nav-item active">
           <div class="nav-icon-and-text">
+
             <mat-icon>home</mat-icon>
             <!-- <fa-icon [icon]="faHouse"></fa-icon> -->
             <a class="nav-link" id="style-2" href="#">Home</a>
-
+            
         </div>
         </li>
         
         <li class="nav-item">
+
           <div class="nav-icon-and-text">
             <mat-icon>quiz</mat-icon>
           <a class="nav-link" href="#">FAQ</a>
         </div>
+
+          <a [routerLink]="['/profile']"class="nav-link" href="#">Profile</a>
+
         </li>
       
         <li class="nav-item">
