@@ -76,6 +76,7 @@ import {MatRippleModule} from '@angular/material/core';
     NewsfeedMihaiComponent,
     HasRoleDirective,
     ProfilePageComponent,
+    ProfileCardComponent,
     FaqPageComponent,
     FaqSectionComponent,
     AddFaqModalComponent,
