@@ -1,7 +1,15 @@
 <section>
   <div class="content-section">
     <div class="search-and-add-button">
-      <input type="text" class="search-article" placeholder="Search..." />
+      <div>
+        <!-- ngModel connect our input to filterText -->
+        <input
+          class="search-bar-top"
+          type="text"
+          placeholder="Search by title"
+          [(ngModel)]="filterText"
+        />
+      </div>
       <button
         type="button"
         class="btn btn-light addArticle"
@@ -9,15 +17,41 @@
       >
         Add Article
       </button>
+      <!-- ngModel binds selectedCategory variable to the value in the dropdown -->
+      <!-- when the ngModelChange is triggered we will call the filter articles | seems we can also use a simple change instead  https://www.angularjswiki.com/angular/ngmodelchange-change-angular/#multiple-ngmodelchange-events  -->
+      <select [(ngModel)]="selectedCategory" (ngModelChange)="filterArticles()">
+        <option value="">All</option>
+        <option value="News">News</option>
+        <option value="HR Announcements">HR Announcements</option>
+        <option value="Policy Changes">Policy Changes</option>
+        <option value="Upcoming Events">Upcoming Events</option>
+        <option value="Training Opportunities">Training Opportunities</option>
+      </select>
     </div>
+    <!-- paginator with ngx-paginator https://www.youtube.com/watch?v=qJ1UHAbGTWw&t=432s  + http://michaelbromley.github.io/ngx-pagination/#/-->
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    <!-- <app-spinner></app-spinner> -->
     <div class="container-articles">
       <!-- is a for and gets all the articles one by one -->
-      <div *ngFor="let article of articles">
+      <div
+        *ngFor="
+          let article of filteredArticles
+            | paginate : { itemsPerPage: 5, currentPage: p }
+        "
+      >
         <div class="card">
           <img src="{{ article.urlpic }}" class="card-img-top" />
           <div class="card-body">
             <div class="top-of-card">
-              <h5 class="card-title">{{ article.title }}</h5>
+              <div class="title-badge-container">
+                <h5 class="card-title">{{ article.title }}</h5>
+                <span class="badge badge-pill badge-danger">{{
+                  article.category
+                }}</span>
+                <p>{{article.date}}</p>
+              </div>
+
               <div class="button-container">
                 <button
                   type="button"

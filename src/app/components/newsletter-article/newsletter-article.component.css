@@ -142,3 +142,15 @@ section {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.badge{
+  color: black;
+}
+.search-bar-top{
+  width: 450px;
+  padding: 2px 20px;
+  margin: 10px 0px;
+  height: 30px;
+}
+.the-name-of-app{
+  color: white;
+}
