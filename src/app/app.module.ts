@@ -56,6 +56,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatRippleModule} from '@angular/material/core';
+import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.component';
+import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 
 
 @NgModule({
@@ -82,6 +84,8 @@ import {MatRippleModule} from '@angular/material/core';
     AddFaqModalComponent,
     SpinnerComponent,
     FileUploadComponent,
+    FeedbackPageComponent,
+    FeedbackFormComponent,
 
   ],
   imports: [
