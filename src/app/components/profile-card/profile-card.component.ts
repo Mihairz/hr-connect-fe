@@ -28,7 +28,7 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
     this.userService.getUserById(id).subscribe((responseUserProfile) => {
       this.userProfile = responseUserProfile;
       // console.log(responseUserProfile);
-    });
+    }); 
   } 
 
   logout() {

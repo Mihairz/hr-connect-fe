@@ -10,16 +10,100 @@
 
             <!-- <label for="role" class="placeholder"></label> -->
         </div>
-        <!-- <div *ngIf="errorSource === 'reqType'" class="alert alert-danger" role="alert">
-            {{ errorMessage }}
-        </div> -->
+
+        <section *ngIf="selectedReqType === 'Employee certificate'" class="request-text">
+            <h2>ADEVERINȚĂ</h2>
+
+            Prin prezenta, se adeverește că domnul/doamna <p style="background-color: grey;display: inline-block;">
+                {{userProfile.name}} </p>
+
+            domiciliat/ă în <input id="country" type="text" formControlName="country" placeholder="country" required
+                maxlength="50">
+            <label for="country" class="placeholder"></label>,
+
+            județul <input id="county" type="text" formControlName="county" placeholder="county" required
+                maxlength="50">
+            <label for="county"></label>,
+
+            localitatea <input id="city" type="text" formControlName="city" placeholder="city" required maxlength="50">
+            <label for="city"></label>,
+
+            <input id="addressLine" type="text" formControlName="addressLine" placeholder="address line" required
+                maxlength="50">
+            <label for="addressLine"></label>
+
+            identificat/ă prin CNP <input id="CNP" type="text" formControlName="CNP" placeholder="CNP" required
+                maxlength="50">
+            <label for="CNP"></label>
+
+            act de identitate CI
+
+            seria <input id="series" type="text" formControlName="series" placeholder="series" required maxlength="50">
+            <label for="series"></label>
+
+            nr. <input id="idNumber" type="text" formControlName="idNumber" placeholder="number" required
+                maxlength="50">
+            <label for="idNumber"></label>
+
+            eliberat de <input id="issuingAuthority" type="text" formControlName="issuingAuthority"
+                placeholder="issuing authority" required maxlength="50">
+            <label for="issuingAuthority"></label>
+
+            la data de <input id="idReleaseDate" type="text" formControlName="idReleaseDate"
+                placeholder="id release date" required maxlength="50">
+            <label for="idReleaseDate"></label>,
+
+            este angajat(ă) al/a HR Connect
+            pe perioadă nedeterminată/determinată începând cu data de JOIN-DATE,
+
+            în funcția de <input id="jobTitle" type="text" formControlName="jobTitle" placeholder="function" required
+                maxlength="50">
+            <label for="jobTitle"></label>,
+
+            conform
+            contractului individual de muncă nr. {{userProfile.id}}/«numberOfUsers», înregistrat în Registrul General de
+            evidență a salariaților conform legii.
+
+            Prezenta se eliberează spre a-i servi la <input id="reason" type="text" formControlName="reason"
+                placeholder="reason" required maxlength="50">
+            <label for="reason"></label>
+        </section>
+
+        <section *ngIf="selectedReqType==='Change personal data'" class="request-text">
+            Doresc sa imi schimb <select id="dataToChange" class="input" name="dataToChange"
+                formControlName="dataToChange" (change)="onDataToChangeChange()">
+                <option *ngFor="let dataToChange of changableData" [value]="dataToChange">{{ dataToChange }}</option>
+            </select>
+
+            <p *ngIf="selectedDataToChange === 'name'">
+                My new name is <input id="newName" type="text" formControlName="newName" placeholder="New name" required
+                    maxlength="50">
+                <label for="newName"></label>
+            </p>
+
+            <p *ngIf="selectedDataToChange === 'email'">
+                My new e-mail is <input id="newEmail" type="text" formControlName="newEmail" placeholder="New e-mail" required
+                    maxlength="50">
+                <label for="newEmail"></label>
+            </p>
+        </section>
+
+        <section class="request-text">
+            My new e-mail is <input id="newEmail" type="text" formControlName="newEmail" placeholder="New e-mail" required
+                    maxlength="50">
+                <label for="newEmail"></label>
+        </section>
+
+
+
+
+
     </form>
+
+
+
+
 
     <button type="button" class="submit" (click)="submitRequest()">Send request</button>
     <!-- Butonul de update utilizator. La evenimentul click se apeleaza functia updateUser() a componentei curente (add-user-modal) si utilzatorul va fi updated-->
 </div>
-
-
-
-
-
