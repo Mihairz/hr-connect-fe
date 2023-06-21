@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Params } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-users-table',
@@ -49,10 +50,18 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
       this.dataSource.sort = value;
     }
   }
+  searchControl = new FormControl('', [Validators.pattern(/^[a-zA-Z0-9\s]*$/)]); // Make search bar accept only alphanumeric 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.searchControl.hasError('pattern')){
+      return; // if user inputs special characters into searchbar, applyFilter does not reach dataSource / page doesn't reload / nothing is searched
+    } else{ 
+      const filterValue = (event.target as HTMLInputElement).value; // user input
+      this.dataSource.filter = filterValue.trim().toLowerCase(); // toLowerCase because that's how mat-table filter algorithm functions
+      // Angular automatically sanitizes the input provided by users when using data binding or property binding. Therefore, when we bind the filterValue to the this.dataSource.filter, it is automatically sanitized.
+    }
   }
+
+  
 
 
 

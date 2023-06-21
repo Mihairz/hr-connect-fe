@@ -85,7 +85,7 @@
 }
 
 .placeholder {
-    color: #65657b;
+    color: #c4c5c5;
     font-family: sans-serif;
     left: 20px;
     line-height: 14px;
@@ -102,6 +102,7 @@
 .input:focus ~ .placeholder,
 .input:not(:placeholder-shown) ~ .placeholder {
   transform: translateY(-40px)  scale(1);
+  color: #0C2340;
 }
 
 
