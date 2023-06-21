@@ -60,6 +60,7 @@ import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.compo
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +87,7 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     FileUploadComponent,
     FeedbackPageComponent,
     FeedbackFormComponent,
+   
 
   ],
   imports: [
