@@ -85,7 +85,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       Validators.maxLength(60), 
       Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) // email format
     ]),
-
+ 
     phone: new FormControl('', [
       Validators.required,
       Validators.minLength(10),

@@ -1,0 +1,25 @@
+<div class="form-div">
+    <form [formGroup]="userReqForm" autocomplete="off">
+
+        <div class="input-container ic2">
+            Select request type:
+            <select id="reqType" class="input" name="reqType" formControlName="reqType" (change)="onReqTypeChange()">
+                <option disabled selected value="">Request type</option>
+                <option *ngFor="let reqType of reqTypes" [value]="reqType">{{ reqType }}</option>
+            </select>
+
+            <!-- <label for="role" class="placeholder"></label> -->
+        </div>
+        <!-- <div *ngIf="errorSource === 'reqType'" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+        </div> -->
+    </form>
+
+    <button type="button" class="submit" (click)="submitRequest()">Send request</button>
+    <!-- Butonul de update utilizator. La evenimentul click se apeleaza functia updateUser() a componentei curente (add-user-modal) si utilzatorul va fi updated-->
+</div>
+
+
+
+
+

@@ -96,7 +96,8 @@
 
             <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType"
                 (newCloseModalEvent)="closeModal()"
-                (newGetUsersEvent)="getUser(userProfile.id || 0)"></app-add-user-modal>
+                (newGetUsersEvent)="getUser(userProfile.id || 0)">
+            </app-add-user-modal>
 
 
 

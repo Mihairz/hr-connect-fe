@@ -56,6 +56,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatRippleModule} from '@angular/material/core';
+import { RequestsPageComponent } from './pages/requests-page/requests-page.component';
+import { RequestsUserComponent } from './components/requests-user/requests-user.component';
 
 
 @NgModule({
@@ -82,6 +84,8 @@ import {MatRippleModule} from '@angular/material/core';
     AddFaqModalComponent,
     SpinnerComponent,
     FileUploadComponent,
+    RequestsPageComponent,
+    RequestsUserComponent,
 
   ],
   imports: [

@@ -19,6 +19,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 
 import { isNotAuthenticatedGuard } from './guards/is-not-authenticated.guard';
 import { FaqPageComponent } from './pages/faq-page/faq-page.component';
+import { RequestsPageComponent } from './pages/requests-page/requests-page.component';
 // Se foloseste pentru a bloca accesul la diferite rute utilizatorilor logati / Se atribuie rutelor destinate exclusiv utilizatorilor nelogati (ex. login-page)
 
 
@@ -50,6 +51,8 @@ const routes: Routes = [
   { path: 'article/:id', component: FullDetailedArticleComponent }, // individual article page
   { path: 'newsletter', component: NewsletterPageComponent}, // the newsfeed and main page
   { path: 'faq', component: FaqPageComponent},
+
+  {path: 'requests', component: RequestsPageComponent}
 
 
 ];

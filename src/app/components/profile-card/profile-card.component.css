@@ -1,7 +1,12 @@
 /*v--PROFILE--v*/
+.container{
+    overflow: hidden;
+}
+
 .main-body {
     padding: 15px;
     margin-top: 50px;
+    overflow: hidden;
 }
 
 .card {
