@@ -18,17 +18,29 @@
     </mat-form-field>
     <button type="submit">Submit</button>
   </form>
-<table>
-    <tr>
-      <th>Type</th>
-      <th>Title</th>
-      <th>Textarea</th>
-    </tr>
-    <tr *ngFor="let feedback of feedbacks">
-      <td>{{feedback.category}}</td>
-      <td>{{feedback.title}}</td>
-      <td>{{feedback.content}}</td>
-    </tr>
-  </table>
- 
+  <!-- https://material.angular.io/components/table/overview -->
+  <mat-table [dataSource]="feedbacks" class="mat-elevation-z8">
+    
+    <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let feedback"> {{feedback.category}} </mat-cell>
+    </ng-container>
+
+  
+    <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+        <mat-cell *matCellDef="let feedback"> {{feedback.title}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="content">
+        <mat-header-cell *matHeaderCellDef> Textarea </mat-header-cell>
+        <mat-cell *matCellDef="let feedback"> {{feedback.content}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+ <!-- https://material.angular.io/components/table/overview#table-row-binding this is to create an event -->
   

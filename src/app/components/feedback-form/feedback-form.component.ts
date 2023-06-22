@@ -10,7 +10,8 @@ import { FeedbackFormService } from 'src/app/services/feedback-form.service';
 })
 export class FeedbackFormComponent implements OnInit {
   feedbackForm: FormGroup; //Tracks the value and validity state of a group of FormControl instances.
-  feedbacks: Feedback[] = []; // arrau that will hold the feedback object
+  feedbacks: Feedback[] = []; // array that will hold the feedback object
+  displayedColumns: string[] = ['category', 'title', 'content']; //column of the tabel
 
   constructor(private feedbackService: FeedbackFormService) {
     this.feedbackForm = new FormGroup({

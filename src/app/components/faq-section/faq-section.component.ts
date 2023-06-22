@@ -5,6 +5,7 @@ import { FaqService } from 'src/app/services/faq.service';
 import { AddFaqModalComponent } from '../add-faq-modal/add-faq-modal.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
+
 // to filter by title used this tutorial: https://www.youtube.com/watch?v=lTOQ7Fjhcvk
 
 @Component({
