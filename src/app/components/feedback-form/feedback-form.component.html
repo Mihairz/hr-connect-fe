@@ -1,3 +1,5 @@
+<!-- A FormGroup aggregates the values of each child FormControl into one object, with each control name as the key.  -->
+<!-- onSubmit() Method called when the "submit" event is triggered on the form. Triggers the ngSubmit emitter to emit the "submit" event as its payload. -->
 <form [formGroup]="feedbackForm" (ngSubmit)="saveFeedback()">
     <mat-form-field>
       <mat-label>Select</mat-label>

@@ -9,8 +9,8 @@ import { FeedbackFormService } from 'src/app/services/feedback-form.service';
   styleUrls: ['./feedback-form.component.css']
 })
 export class FeedbackFormComponent implements OnInit {
-  feedbackForm: FormGroup;
-  feedbacks: Feedback[] = [];
+  feedbackForm: FormGroup; //Tracks the value and validity state of a group of FormControl instances.
+  feedbacks: Feedback[] = []; // arrau that will hold the feedback object
 
   constructor(private feedbackService: FeedbackFormService) {
     this.feedbackForm = new FormGroup({
@@ -29,18 +29,15 @@ export class FeedbackFormComponent implements OnInit {
       this.feedbacks = response.reverse();
     });
   }
-
+//method when we submit the form 
   saveFeedback() {
-    if (this.feedbackForm.valid) {
+    //if the form is valid
+    if (this.feedbackForm.valid)  { 
       this.feedbackService.addFeedback(this.feedbackForm.value).subscribe(() => {
         this.feedbackForm.reset();
-        this.refreshFeedbacks();
+        this.getFeedbacks();
       });
     }
   }
-  refreshFeedbacks() {
-    this.feedbackService.getFeedback().subscribe((response) => {
-      this.feedbacks = response.reverse();
-    });
-  }
+ 
 }
