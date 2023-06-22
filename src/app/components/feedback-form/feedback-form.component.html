@@ -19,7 +19,7 @@
     <button type="submit">Submit</button>
   </form>
   <!-- https://material.angular.io/components/table/overview -->
-  <mat-table [dataSource]="feedbacks" class="mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     
     <ng-container matColumnDef="category">
         <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
@@ -40,7 +40,15 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
 </mat-table>
+<mat-paginator [length]="feedbacks.length"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page"
+              #paginator>
+</mat-paginator>
+
 
  <!-- https://material.angular.io/components/table/overview#table-row-binding this is to create an event -->
   
