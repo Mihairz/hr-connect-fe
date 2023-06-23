@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { Feedback } from 'src/app/models/feedback';
@@ -12,7 +12,7 @@ import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
   templateUrl: './feedback-form.component.html',
   styleUrls: ['./feedback-form.component.css']
 })
-export class FeedbackFormComponent implements OnInit {
+export class FeedbackFormComponent implements OnInit, AfterViewInit  {
   feedbackForm: FormGroup; //Tracks the value and validity state of a group of FormControl instances.
   feedbacks: Feedback[] = []; // array that will hold the feedback object
   displayedColumns: string[] = ['category', 'title', 'content']; //column of the tabel
@@ -28,30 +28,32 @@ export class FeedbackFormComponent implements OnInit {
   }
   @ViewChild('paginator') paginator!: MatPaginator ;
   
-  dataSource!: MatTableDataSource<Feedback>;
+  dataSource = new MatTableDataSource(this.feedbacks);
+  // dataSource!: MatTableDataSource<Feedback>;
  
-  @ViewChild(MatSort, { static: false })
-  set sort(value: MatSort) {
-    if (this.dataSource) {
-      this.dataSource.sort = value;
-    }
-  }
+  // @ViewChild(MatSort, { static: false })
+  // set sort(value: MatSort) {
+  //   if (this.dataSource) {
+  //     this.dataSource.sort = value;
+  //   }
+  // }
 
-  
+  @ViewChild(MatSort) sort!: MatSort;
   
   ngOnInit() {
     this.getFeedbacks();
    
   }
   ngAfterViewInit() {
-   
-    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  this.dataSource.paginator = this.paginator;
 }
 
 getFeedbacks() {
   this.feedbackService.getFeedback().subscribe((response) => {
     this.feedbacks = response.reverse();
     this.dataSource = new MatTableDataSource(this.feedbacks); //sets the dataSource property 
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator; //sets the paginator property 
   });
 }

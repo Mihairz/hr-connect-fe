@@ -25,19 +25,19 @@
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"  >
     
     <ng-container matColumnDef="category">
-        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Type"> Type </mat-header-cell>
         <mat-cell *matCellDef="let feedback"> {{feedback.category}} </mat-cell>
     </ng-container>
 
   
     <ng-container matColumnDef="title">
-        <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Title"> Title </mat-header-cell>
         <mat-cell *matCellDef="let feedback"> {{feedback.title}} </mat-cell>
     </ng-container>
 
     
     <ng-container matColumnDef="content">
-        <mat-header-cell *matHeaderCellDef> Textarea </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Textarea"> Textarea </mat-header-cell>
         <mat-cell *matCellDef="let feedback"> {{feedback.content}} </mat-cell>
     </ng-container>
 
