@@ -26,15 +26,19 @@ export class FaqService {
       return this.http.post('http://localhost:8082/faq', postObject) as Observable<FaqContent>
     }
   
-    updateFaqContent(postObject: FaqContent) {
-      return this.http.put(`http://localhost:8082/faq/${postObject.id}`, postObject) as Observable<FaqContent>
-    }
+    // updateFaqContent(postObject: FaqContent) {
+    //   return this.http.put(`http://localhost:8082/faq/${postObject.id}`, postObject) as Observable<FaqContent>
+    // }
   
+    updateFaqContent(postObject: FaqContent) {
+      return this.http.post(`http://localhost:8082/faq`, postObject) as Observable<FaqContent>
+    }
+
     deleteFaqContent(id: number) {
       //Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0YWRtQGVtYWlsLnJvIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjg3NTEzNzgyLCJpYXQiOjE2ODc1MDc3ODJ9.5R6d4y1_ZG_cudFojLYVV29kcDrETLKkFznq7lsHBzo
       const headers = new HttpHeaders();
       headers.set('Access-Control-Allow-Origin', 'application/json; charset=utf-8');
-      return this.http.delete(`http://localhost:8082/faq/${id}`, {}) as Observable<{}>
+      return this.http.delete(`http://localhost:8082/faq?id=${id}`, {}) as Observable<{}>
     }
 
    

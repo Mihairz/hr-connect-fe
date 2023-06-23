@@ -20,7 +20,7 @@
 
             <ng-template [ngIf]="modalRole==='admin'">
                 <div class="input-container ic1">
-                    <input id="department" class="input" type="text" formControlName="department" placeholder=" "
+                    <input id="department" class="input" type="text" formControllastName="department" placeholder=" "
                         required maxlength="10">
                     <!-- la fiecare input specificam numele variabilei din typescript -->
                     <!-- <div class="cut cut-short"></div> -->
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="input-container ic2">
-                    <input id="function" class="input" type="text" formControlName="function" placeholder=" " required
+                    <input id="function" class="input" type="text" formControllastName="function" placeholder=" " required
                         maxlength="30">
                     <!--<div class="cut"></div>-->
 
@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="input-container ic2">
-                    <select id="role" class="input" name="role" formControlName="role" (change)="onRoleChange()">
+                    <select id="role" class="input" lastName="role" formControllastName="role" (change)="onRoleChange()">
                         <option disabled selected value="">Role</option>
                         <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
                     </select>
@@ -54,18 +54,18 @@
                 </div>
 
                 <div class="input-container ic2">
-                    <input id="name" class="input" type="text" formControlName="name" placeholder=" " required
+                    <input id="lastName" class="input" type="text" formControllastName="lastName" placeholder=" " required
                         maxlength="50">
                     <!--<div class="cut"></div>-->
 
-                    <label for="name" class="placeholder">Name:</label>
+                    <label for="lastName" class="placeholder">lastName:</label>
                 </div>
-                <div *ngIf="errorSource === 'name'" class="alert alert-danger" role="alert">
+                <div *ngIf="errorSource === 'lastName'" class="alert alert-danger" role="alert">
                     {{ errorMessage }}
                 </div>
 
                 <div class="input-container ic2">
-                    <input id="email" class="input" type="email" formControlName="email" placeholder=" " required
+                    <input id="email" class="input" type="email" formControllastName="email" placeholder=" " required
                         maxlength="60">
                     <!--<div class="cut"></div>-->
 
@@ -81,7 +81,7 @@
 
 
             <div class="input-container ic2">
-                <input id="phone" class="input" type="text" formControlName="phone" placeholder=" " required
+                <input id="phone" class="input" type="text" formControllastName="phone" placeholder=" " required
                     maxlength="10">
                 <!--<div class="cut"></div>-->
 
@@ -92,7 +92,7 @@
             </div>
 
             <div class="input-container ic2">
-                <input id="password" class="input" type="text" formControlName="password" placeholder=" " required
+                <input id="password" class="input" type="text" formControllastName="password" placeholder=" " required
                     maxlength="60">
                 <!--<div class="cut"></div>-->
 
