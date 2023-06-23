@@ -78,7 +78,7 @@ export class LoginModuleComponent {
       .subscribe(
         (response) => {
 
-          if (this.authService.userRole?.role === 'admin') {
+          if (this.authService.userRole?.loginDetails?.role === 'admin') {
             this.router.navigate(['/admin']);
           } else {
             this.router.navigate(['/newsfeed']);

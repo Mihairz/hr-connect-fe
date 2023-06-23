@@ -19,7 +19,7 @@ export class Address {
     addressLine: string = '';
 }
 
-export class LoginDetails {
+export class LoginDetails { 
     id: number = 0;
     email: string = '';
     password: string = '';

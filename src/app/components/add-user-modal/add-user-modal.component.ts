@@ -56,8 +56,14 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    joinDate: new FormControl(''),
-    phoneNumber: 
+    phoneNumber: new FormControl(''),
+    
+    country: new FormControl(''),
+    county: new FormControl(''),
+    city: new FormControl(''),
+    addressLine: new FormControl(''),
+
+
 
     department: new FormControl('', [
       Validators.required,
@@ -66,43 +72,51 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       Validators.pattern(/^[a-zA-Z0-9\s]*$/) // only alphanumeric
     ]),
 
-    function: new FormControl('', [
+    position: new FormControl('', [
       Validators.required,
       Validators.minLength(7),
       Validators.maxLength(30),
       Validators.pattern(/^[a-zA-Z0-9\s]*$/) // only alphanumeric
     ]),
 
+    email: new FormControl(''),
+    password: new FormControl(''),
     role: new FormControl('', [
       Validators.required,
     ]),
 
-    name: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(50),
-      Validators.pattern(/^[a-zA-Z\s]*$/) // only alphabetic
-    ]),
+    cnp: new FormControl(''),
+    number: new FormControl(0),
+    series: new FormControl(''),
+    issuer: new FormControl(''),
+    issuing_date: new FormControl(new Date())
 
-    email: new FormControl('', [
-      Validators.required,
-      Validators.minLength(7), 
-      Validators.maxLength(60), 
-      Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) // email format
-    ]),
+    // name: new FormControl('', [
+    //   Validators.required,
+    //   Validators.minLength(5),
+    //   Validators.maxLength(50),
+    //   Validators.pattern(/^[a-zA-Z\s]*$/) // only alphabetic
+    // ]),
+
+    // email: new FormControl('', [
+    //   Validators.required,
+    //   Validators.minLength(7), 
+    //   Validators.maxLength(60), 
+    //   Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) // email format
+    // ]),
  
-    phone: new FormControl('', [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(10),
-      Validators.pattern('^[0-9]+$') // only numeric
-    ]),
+    // phone: new FormControl('', [
+    //   Validators.required,
+    //   Validators.minLength(10),
+    //   Validators.maxLength(10),
+    //   Validators.pattern('^[0-9]+$') // only numeric
+    // ]),
 
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(7),
-      Validators.maxLength(60),
-    ])
+    // password: new FormControl('', [
+    //   Validators.required,
+    //   Validators.minLength(7),
+    //   Validators.maxLength(60),
+    // ])
   })
 
 
@@ -110,19 +124,33 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // Daca modala a fost apelata de pe butonul Edit, initializam formularul completat cu datele utilizatorului ce urmeaza a fi editat. 
     // Daca modala a fost apelata de pe butonul Add, initializam formularul cu campurile goale 
     console.log('modal type: ' + this.modalType);
+
     this.userForm.patchValue({
       firstName: this.editedUser.firstName,
       lastName: this.editedUser.lastName,
+      phoneNumber: this.editedUser.phoneNumber,
+
+      country: this.editedUser.address?.country,
+      county: this.editedUser.address?.county,
+      city: this.editedUser.address?.city,
+      addressLine: this.editedUser.address?.addressLine,
 
       department: this.editedUser.department,
-      // position: this.editedUser.position,
-      joinDate: this.editedUser.joinDate,
-      phoneNumber: this.editedUser.phoneNumber,
-      address: this.editedUser.address,
-      loginDetails: this.editedUser.loginDetails,
-      identityCard: this.editedUser.identityCard
+      position: this.editedUser.position,
+      
+      email: this.editedUser.loginDetails?.email,
+      password: this.editedUser.loginDetails?.password,
+      
+
+      cnp: this.editedUser.identityCard?.cnp,
+      number: this.editedUser.identityCard?.number,
+      series: this.editedUser.identityCard?.series,
+      issuer: this.editedUser.identityCard?.issuer,
+      issuing_date: this.editedUser.identityCard?.issuing_date
+
       
     })
+    // this.join date
     this.selectedRole = this.userForm.value.role || "";
   }
 
@@ -168,24 +196,24 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         break;
 
       // Checking if errors come from function field
-      case !!this.userForm.controls.function.errors:
+      case !!this.userForm.controls.position.errors:
         this.errorSource = 'function';
         switch (true) {
-          case !!this.userForm.controls.function.errors?.['required']:
+          case !!this.userForm.controls.position.errors?.['required']:
             this.errorMessage = 'Every user must be have a function.';
             break;
-          case !!this.userForm.controls.function.errors?.['pattern']:
+          case !!this.userForm.controls.position.errors?.['pattern']:
             this.errorMessage = 'Function name can contain only aphanumeric characters.';
             break;
-          case !!this.userForm.controls.function.errors?.['minlength']:
+          case !!this.userForm.controls.position.errors?.['minlength']:
             console.log('min length error')
             this.errorMessage = 'Function must contain at least 7 characters.';
             break;
-          case !!this.userForm.controls.function.errors?.['maxlength']:
+          case !!this.userForm.controls.position.errors?.['maxlength']:
             this.errorMessage = 'Function can contain a maximum of 30 characters.';
             break;
           default:
-            if (this.userForm.controls.function.errors) {
+            if (this.userForm.controls.position.errors) {
               this.errorMessage = 'Something went wrong with the function field.';
             } else {
               this.errorMessage = 'Something went wrong.';
@@ -201,19 +229,19 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         break;
 
       // Checking if errors come from name field
-      case !!this.userForm.controls.name.errors:
+      case !!this.userForm.controls.firstName.errors:
         this.errorSource = 'name';
         switch (true) {
-          case !!this.userForm.controls.name.errors?.['required']:
+          case !!this.userForm.controls.firstName.errors?.['required']:
             this.errorMessage = 'Every user must have a name.';
             break;
-          case !!this.userForm.controls.name.errors?.['pattern']:
+          case !!this.userForm.controls.firstName.errors?.['pattern']:
             this.errorMessage = 'User name can contain only alphabetic characters.';
             break;
-          case !!this.userForm.controls.name.errors?.['minlength']:
+          case !!this.userForm.controls.firstName.errors?.['minlength']:
             this.errorMessage = 'User name must contain at least 5 characters.';
             break;
-          case !!this.userForm.controls.name.errors?.['maxlength']:
+          case !!this.userForm.controls.firstName.errors?.['maxlength']:
             this.errorMessage = 'User name can contain a maximum of 50 characters.';
             break;
           default:
@@ -245,19 +273,19 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         break;
 
       // Checking if errors come from phone field
-      case !!this.userForm.controls.phone.errors:
+      case !!this.userForm.controls.phoneNumber.errors:
         this.errorSource = 'phone';
         switch (true) {
-          case !!this.userForm.controls.phone.errors?.['required']:
+          case !!this.userForm.controls.phoneNumber.errors?.['required']:
             this.errorMessage = 'Every user must have a phone number.';
             break;
-          case !!this.userForm.controls.phone.errors?.['pattern']:
+          case !!this.userForm.controls.phoneNumber.errors?.['pattern']:
             this.errorMessage = 'Phone number can contain only numeric characters.';
             break;
-          case !!this.userForm.controls.phone.errors?.['minlength']:
+          case !!this.userForm.controls.phoneNumber.errors?.['minlength']:
             this.errorMessage = 'Phone number must contain at least 10 characters.';
             break;
-          case !!this.userForm.controls.phone.errors?.['maxlength']:
+          case !!this.userForm.controls.phoneNumber.errors?.['maxlength']:
             this.errorMessage = 'Phone number can contain a maximum of 10 characters.';
             break;
           default:
@@ -309,13 +337,42 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
     // Creem obiectul user ce urmeaza a fi introdus in baza de date. Daca una dintre valori a ajuns necompletata in backend aceasta va fi setata ca empty string
     const user = {
+      firstName: this.userForm.value.firstName || '',
+      lastName: this.userForm.value.lastName || '',
+      phoneNumber: this.userForm.value.phoneNumber || '',
+
+      country: this.userForm.value.country || '',
+      county: this.userForm.value.county || '',
+      city: this.userForm.value.city || '',
+      addressLine: this.userForm.value.addressLine || '',
+
       department: this.userForm.value.department || '',
-      function: this.userForm.value.function || '',
-      role: this.selectedRole || '',
-      name: this.userForm.value.name || '',
+      position: this.userForm.value.position || '',
+      
       email: this.userForm.value.email || '',
-      phone: this.userForm.value.phone || '',
-      password: this.sanitizeInput(this.userForm.controls.password.value || "") || ''
+      password:this.sanitizeInput(this.userForm.controls.password.value || "") || '' ,
+      
+
+      cnp: this.userForm.value.cnp || '',
+      number: this.userForm.value.number || '',
+      series: this.userForm.value.series || '',
+      issuer: this.userForm.value.issuer || '',
+      issuing_date: this.userForm.value.issuing_date || ''
+
+
+
+
+
+
+
+
+      // department: this.userForm.value.department || '',
+      // function: this.userForm.value.position || '',
+      // role: this.selectedRole || '',
+      // name: this.userForm.value.firstName || '',
+      // email: this.userForm.value.email || '',
+      // phone: this.userForm.value.phoneNumber || '',
+      // password: this.sanitizeInput(this.userForm.controls.password.value || "") || ''
     }
 
     // Apelam functia de addUser si ii pasam ca parametru obiectul de tip User creat anterior
@@ -331,13 +388,29 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // Creem un obiect de tip user cu valorile completate in formular
     const user = {
       id: this.editedUser.id,
+      joinDate: this.editedUser.joinDate,
+      
+      firstName: this.userForm.value.firstName || '',
+      lastName: this.userForm.value.lastName || '',
+      phoneNumber: this.userForm.value.phoneNumber || '',
+
+      country: this.userForm.value.country || '',
+      county: this.userForm.value.county || '',
+      city: this.userForm.value.city || '',
+      addressLine: this.userForm.value.addressLine || '',
+
       department: this.userForm.value.department || '',
-      function: this.userForm.value.function || '',
-      role: this.userForm.value.role || '',
-      name: this.userForm.value.name || '',
+      position: this.userForm.value.position || '',
+      
       email: this.userForm.value.email || '',
-      phone: this.userForm.value.phone || '',
-      password: this.userForm.value.password || ''
+      password:this.sanitizeInput(this.userForm.controls.password.value || "") || '' ,
+      
+
+      cnp: this.userForm.value.cnp || '',
+      number: this.userForm.value.number || '',
+      series: this.userForm.value.series || '',
+      issuer: this.userForm.value.issuer || '',
+      issuing_date: this.userForm.value.issuing_date || ''
     }
 
     // Apelam functia de updateUser() si ii pasam ca parametru obiectul de tip User creat anterior
