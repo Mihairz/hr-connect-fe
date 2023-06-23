@@ -21,9 +21,8 @@ export class FaqSectionComponent implements OnInit {
      "Workplace Policies & Environment",
      "Professional Development & Performance",
      "Conflict Resolution & Employee Support",
-     "Employee Resources & Services"
-
-
+     "Employee Resources & Services",
+     "News"
   ];
 
   faqsByCategory: {[key: string]: FaqContent[]} = {};
@@ -72,7 +71,7 @@ editFaq(faq: FaqContent) {
 
 addFaq() {
   const dialogRef = this.dialog.open(AddFaqModalComponent, {
-    data: { category:'',title: '', content: '' , order:''}
+    data: { category:'',title: '', content: '' , order_number:''}
   });
   dialogRef.afterClosed().subscribe(result => {
     this.getFaqs();
@@ -113,7 +112,7 @@ drop(event: CdkDragDrop<string[]>) {
 //This way we have a plus one in order after the drop above
 updateFaqOrders() {
   this.faqs.forEach((faq, index) => {
-    faq.order = index + 1;
+    faq.order_number = index + 1;
     this.faqsService.updateFaqContent(faq).subscribe();
   });
   this.filteredFaqs = this.faqs; //the new faqs are copied into filteredFaqs so we can have the updated displayed

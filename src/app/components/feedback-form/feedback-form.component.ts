@@ -5,7 +5,7 @@ import { Feedback } from 'src/app/models/feedback';
 import { FeedbackFormService } from 'src/app/services/feedback-form.service';
 //https://stackoverflow.com/questions/50995170/angular-mattabledatasource-error
 import { MatTableDataSource } from '@angular/material/table';
-
+import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-feedback-form',
@@ -29,7 +29,13 @@ export class FeedbackFormComponent implements OnInit {
   @ViewChild('paginator') paginator!: MatPaginator ;
   
   dataSource!: MatTableDataSource<Feedback>;
-
+ 
+  @ViewChild(MatSort, { static: false })
+  set sort(value: MatSort) {
+    if (this.dataSource) {
+      this.dataSource.sort = value;
+    }
+  }
 
   
   

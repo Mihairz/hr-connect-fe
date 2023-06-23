@@ -19,7 +19,10 @@
     <button type="submit">Submit</button>
   </form>
   <!-- https://material.angular.io/components/table/overview -->
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner> - if we want a spinner -->
+<!-- </div> -->
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"  >
     
     <ng-container matColumnDef="category">
         <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
@@ -41,7 +44,7 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     
-</mat-table>
+  </table>
 <mat-paginator [length]="feedbacks.length"
               [pageSize]="10"
               [pageSizeOptions]="[5, 10, 25, 100]"
