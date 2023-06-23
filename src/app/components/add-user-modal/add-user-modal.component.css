@@ -197,3 +197,9 @@ color of the placeholder text when some input was written but the input field si
     margin-top: 26px;
     margin-bottom: 0px
 }
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as needed */
+    grid-gap: 10px; /* Adjust the gap between columns */
+  }

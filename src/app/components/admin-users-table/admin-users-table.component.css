@@ -67,3 +67,11 @@ th {
 th.mat-sort-header-sorted {
     color: black;
 }
+
+.mat-mdc-paginator-container {
+    background-color: #F2F7FB;
+}
+
+.mat-mdc-text-field-wrapper{
+    background-color: white;
+}
