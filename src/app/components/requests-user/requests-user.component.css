@@ -1,8 +1,9 @@
 .form-div {
     position: absolute;
-    top: 50%;
+    top: 250px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
+    max-height: calc(100vh - 200px);
 
     border-radius: 20px;
     box-sizing: border-box;
@@ -10,7 +11,10 @@
     width: 500px;
 
     /* background: rgba(255, 255, 255, 0.7); */
-    background-color: pink;
+    /* background-color: pink; */
+    margin-bottom: 200px;
+   
+
 }
 
 .input-container {
@@ -53,4 +57,12 @@
 
 .request-text{
     padding-top:60px;
+}
+
+.request-text h3{
+    text-align: center;
+}
+
+.document-model{
+    background-color: white;
 }

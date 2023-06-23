@@ -54,6 +54,11 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   // Creem formularul si campurile acestuia, cu restrictiile specifice
   userForm = new FormGroup({
 
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    joinDate: new FormControl(''),
+    phoneNumber: 
+
     department: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
@@ -106,13 +111,17 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // Daca modala a fost apelata de pe butonul Add, initializam formularul cu campurile goale 
     console.log('modal type: ' + this.modalType);
     this.userForm.patchValue({
+      firstName: this.editedUser.firstName,
+      lastName: this.editedUser.lastName,
+
       department: this.editedUser.department,
-      function: this.editedUser.function,
-      role: this.editedUser.role,
-      name: this.editedUser.name,
-      email: this.editedUser.email,
-      phone: this.editedUser.phone,
-      password: this.editedUser.password
+      // position: this.editedUser.position,
+      joinDate: this.editedUser.joinDate,
+      phoneNumber: this.editedUser.phoneNumber,
+      address: this.editedUser.address,
+      loginDetails: this.editedUser.loginDetails,
+      identityCard: this.editedUser.identityCard
+      
     })
     this.selectedRole = this.userForm.value.role || "";
   }
@@ -291,7 +300,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   }
 
   addUser() {
-
+ 
     // Verificam formularul
     if (this.userForm.invalid) {
       this.handleUserFormError();

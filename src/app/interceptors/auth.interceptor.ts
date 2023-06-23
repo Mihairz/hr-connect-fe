@@ -14,7 +14,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authService:AuthService) {}
+  constructor(private authService:AuthService) {} 
   // Injectam AuthService ca sa putem accesa token-ul
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {

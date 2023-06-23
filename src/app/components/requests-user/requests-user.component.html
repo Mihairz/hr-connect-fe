@@ -1,21 +1,24 @@
 <div class="form-div">
-    <form [formGroup]="userReqForm" autocomplete="off">
 
-        <div class="input-container ic2">
-            Select request type:
-            <select id="reqType" class="input" name="reqType" formControlName="reqType" (change)="onReqTypeChange()">
-                <option disabled selected value="">Request type</option>
-                <option *ngFor="let reqType of reqTypes" [value]="reqType">{{ reqType }}</option>
-            </select>
+    <div class="input-container ic2">
+        Select request type:
+        <select id="reqType" class="input" name="reqType"  (change)="onReqTypeChange()">
+            <option disabled selected value="">Request type</option>
+            <option *ngFor="let reqType of reqTypes" [value]="reqType">{{ reqType }}</option>
+        </select>
+    </div>
 
-            <!-- <label for="role" class="placeholder"></label> -->
-        </div>
 
-        <section *ngIf="selectedReqType === 'Employee certificate'" class="request-text">
-            <h2>ADEVERINȚĂ</h2>
+
+    <!-- ADEVERINTA ANGAJAT -->
+    <form *ngIf="selectedReqType === 'Employee certificate'" [formGroup]="employeeCertificateForm" autocomplete="off">
+
+        
+        <section  class="request-text document-model">
+            <h3>ADEVERINȚĂ</h3>
 
             Prin prezenta, se adeverește că domnul/doamna <p style="background-color: grey;display: inline-block;">
-                {{userProfile.name}} </p>
+                {{userProfile.lastName}} {{userProfile.firstName}} </p>
 
             domiciliat/ă în <input id="country" type="text" formControlName="country" placeholder="country" required
                 maxlength="50">
@@ -68,10 +71,13 @@
                 placeholder="reason" required maxlength="50">
             <label for="reason"></label>
         </section>
+    </form>
 
-        <section *ngIf="selectedReqType==='Change personal data'" class="request-text">
-            Doresc sa imi schimb <select id="dataToChange" class="input" name="dataToChange"
+        <!-- SCHIMBAT INFORMATII PERSONALE -->
+        <!-- <section *ngIf="selectedReqType==='Change personal data'" class="request-text">
+            I want to change my <select id="dataToChange" class="input" name="dataToChange"
                 formControlName="dataToChange" (change)="onDataToChangeChange()">
+                <option disabled selected value="">Data to change</option>
                 <option *ngFor="let dataToChange of changableData" [value]="dataToChange">{{ dataToChange }}</option>
             </select>
 
@@ -82,23 +88,25 @@
             </p>
 
             <p *ngIf="selectedDataToChange === 'email'">
-                My new e-mail is <input id="newEmail" type="text" formControlName="newEmail" placeholder="New e-mail" required
-                    maxlength="50">
+                My new e-mail is <input id="newEmail" type="text" formControlName="newEmail" placeholder="New e-mail"
+                    required maxlength="50">
                 <label for="newEmail"></label>
             </p>
-        </section>
+        </section> -->
 
-        <section class="request-text">
-            My new e-mail is <input id="newEmail" type="text" formControlName="newEmail" placeholder="New e-mail" required
-                    maxlength="50">
-                <label for="newEmail"></label>
-        </section>
+        <!-- CUSTOM REQUEST -->
+        <!-- <section *ngIf="selectedReqType==='Custom request'" class="request-text">
+            If you did not found the type of request you wish for among the existent templates, you can write your own
+            down below. Include all the necessary details for it.
+            <textarea id="customRequest"  formControlName="customRequest" name="customRequest" placeholder="Custom request" required rows="4" cols="50"></textarea>
+            <label for="customRequest"></label>
+        </section> -->
 
 
 
 
 
-    </form>
+    
 
 
 
