@@ -19,6 +19,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
+    logRequestHeaders(request); // Display original headers
+
     // the set() method of the HttpHeaders class expects a non-null value for the header's value. However, this.authService.token can be null. To solve this we check if the token is not null before setting the authorization header
     const headers = this.authService.token
       ? request.headers.set('authorization', this.authService.token)
@@ -29,8 +31,19 @@ export class AuthInterceptor implements HttpInterceptor {
     request = request.clone({ headers });
     // Creem un nou request pentru ca nu putem sa mutam requestul existent
 
+    logRequestHeaders(request); // Display modified headers
+
     return next.handle(request);
   }
+}
+
+function logRequestHeaders(request: HttpRequest<any>) {
+  console.log('Request Headers:');
+  const headers = request.headers.keys();
+  headers.forEach(header => {
+    const headerValue = request.headers.get(header);
+    console.log(`${header}: ${headerValue}`);
+  });
 }
 
 // Aceasta o vom importa in app.module.ts la proprietatea providers

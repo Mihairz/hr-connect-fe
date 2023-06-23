@@ -16,7 +16,10 @@ export class Address {
     country: string = '';
     county: string = '';
     city: string = '';
-    addressLine: string = '';
+    street: string = '';
+    streetNumber: string = '';
+    flatNumber: string = '';
+    // apartment: string = '';
 }
 
 export class LoginDetails { 

@@ -61,7 +61,9 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     country: new FormControl(''),
     county: new FormControl(''),
     city: new FormControl(''),
-    addressLine: new FormControl(''),
+    street: new FormControl(''),
+    streetNumber: new FormControl(''),
+    flatNumber: new FormControl(''),
 
 
 
@@ -133,7 +135,9 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       country: this.editedUser.address?.country,
       county: this.editedUser.address?.county,
       city: this.editedUser.address?.city,
-      addressLine: this.editedUser.address?.addressLine,
+      street: this.editedUser.address?.street,
+      streetNumber: this.editedUser.address?.streetNumber,
+      flatNumber: this.editedUser.address?.flatNumber,
 
       department: this.editedUser.department,
       position: this.editedUser.position,
@@ -344,7 +348,9 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       country: this.userForm.value.country || '',
       county: this.userForm.value.county || '',
       city: this.userForm.value.city || '',
-      addressLine: this.userForm.value.addressLine || '',
+      street: this.userForm.value.street || '',
+      streetNumber: this.userForm.value.streetNumber || '',
+      flatNumber:this.userForm.value.flatNumber || '',
 
       department: this.userForm.value.department || '',
       position: this.userForm.value.position || '',
@@ -397,7 +403,9 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       country: this.userForm.value.country || '',
       county: this.userForm.value.county || '',
       city: this.userForm.value.city || '',
-      addressLine: this.userForm.value.addressLine || '',
+      street: this.userForm.value.street || '',
+      streetNumber: this.userForm.value.streetNumber || '',
+      flatNumber: this.userForm.value.flatNumber || '',
 
       department: this.userForm.value.department || '',
       position: this.userForm.value.position || '',
