@@ -12,7 +12,7 @@
         </ng-template>
         <ng-template #addModalType> 
             <div class="title">Add new user</div>
-        </ng-template>
+        </ng-template> 
 
 
         <form [formGroup]="userForm" autocomplete="off" class="form-grid">
@@ -25,33 +25,32 @@
                     <h3 class="subtitle">User details</h3>
 
                     <div class="input-container ic1">
-                        <!-- la fiecare input specificam numele variabilei din typescript -->
-                        <input id="department" class="input" type="text" formControlName="department" placeholder=" "
-                            required maxlength="10">
-                        <label for="department" class="placeholder">Department:</label>
-                    </div>
-                    <div *ngIf="errorSource === 'department'" class="alert alert-danger" role="alert">
-                        {{ errorMessage }}
-                    </div>
-    
-                    <div class="input-container ic2">
-                        <input id="position" class="input" type="text" formControlName="position" placeholder=" " required
-                            maxlength="30">
-                        <label for="position" class="placeholder">Position:</label>
-                    </div>
-                    <div *ngIf="errorSource === 'position'" class="alert alert-danger" role="alert">
-                        {{ errorMessage }}
-                    </div>
-
-                    <div class="input-container ic2">
                         <select id="role" class="input" name="role" formControlName="role" (change)="onRoleChange()">
                             <option disabled selected value="">Role</option>
                             <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
                         </select>
-    
-                        <!-- <label for="role" class="placeholder"></label> -->
                     </div>
                     <div *ngIf="errorSource === 'role'" class="alert alert-danger" role="alert">
+                        {{ errorMessage }}
+                    </div>
+
+                    <div class="input-container ic2">
+                        <select id="department" class="input" name="department" formControlName="department" (change)="onDepartmentChange()">
+                            <option disabled selected value="">Department</option>
+                            <option *ngFor="let department of departments" [value]="department">{{ department.replace('_',' ') }}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="errorSource === 'department'" class="alert alert-danger" role="alert">
+                        {{ errorMessage }}
+                    </div>
+
+                    <div class="input-container ic2">
+                        <select id="position" class="input" name="position" formControlName="position" (change)="onPositionChange()">
+                            <option disabled selected value="">Position</option>
+                            <option *ngFor="let position of positions" [value]="position">{{ position.replace('_',' ') }}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="errorSource === 'position'" class="alert alert-danger" role="alert">
                         {{ errorMessage }}
                     </div>
 
@@ -69,7 +68,7 @@
                 <div class="contact-container">
                     <h3 class="subtitle">Contact</h3>
 
-                    <div class="input-container ic2">
+                    <div class="input-container ic1">
                         <input id="email" class="input" type="email" formControlName="email" placeholder=" " required
                             maxlength="60">
                         <!--<div class="cut"></div>-->
@@ -106,7 +105,7 @@
                             {{ errorMessage }}
                         </div> -->
         
-                        <div class="input-container ic1">
+                        <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
                             <input id="lastName" class="input" type="text" formControlName="lastName" placeholder=" "
                                 required maxlength="10">    
@@ -117,7 +116,7 @@
                         </div> -->
         
                         
-                        <div class="input-container ic1">
+                        <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
                             <input id="cnp" class="input" type="text" formControlName="cnp" placeholder=" "
                                 required maxlength="10">    
@@ -127,7 +126,7 @@
                             {{ errorMessage }}
                         </div> -->
         
-                        <div class="input-container ic1">
+                        <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
                             <input id="number" class="input" type="text" formControlName="number" placeholder=" "
                                 required maxlength="10">    
@@ -137,7 +136,7 @@
                             {{ errorMessage }}
                         </div> -->
         
-                        <div class="input-container ic1">
+                        <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
                             <input id="series" class="input" type="text" formControlName="series" placeholder=" "
                                 required maxlength="10">    
@@ -147,7 +146,7 @@
                             {{ errorMessage }}
                         </div> -->
         
-                        <div class="input-container ic1">
+                        <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
                             <input id="issuer" class="input" type="text" formControlName="issuer" placeholder=" "
                                 required maxlength="10">    
@@ -157,11 +156,11 @@
                             {{ errorMessage }}
                         </div> -->
         
-                        <div class="input-container ic1">
+                        <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
-                            <input id="issuing_date" class="input" type="text" formControlName="issuing_date" placeholder=" "
+                            <input id="issuingDate" class="input" type="text" formControlName="issuingDate" placeholder=" "
                                 required maxlength="10">    
-                            <label for="issuing_date" class="placeholder">Identity Card Issuing Date:</label>
+                            <label for="issuingDate" class="placeholder">Identity Card Issuing Date:</label>
                         </div>
                         <!-- <div *ngIf="errorSource === 'department'" class="alert alert-danger" role="alert">
                             {{ errorMessage }}
@@ -179,7 +178,7 @@
                             {{ errorMessage }}
                         </div> -->
         
-                        <div class="input-container ic1">
+                        <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
                             <input id="county" class="input" type="text" formControlName="county" placeholder=" "
                                 required maxlength="10">    
@@ -189,7 +188,7 @@
                             {{ errorMessage }}
                         </div> -->
                        
-                        <div class="input-container ic1">
+                        <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
                             <input id="city" class="input" type="text" formControlName="city" placeholder=" "
                                 required maxlength="10">    
@@ -199,7 +198,7 @@
                             {{ errorMessage }}
                         </div> -->    
 
-                        <div class="input-container ic1">
+                        <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
                             <input id="street" class="input" type="text" formControlName="street" placeholder=" "
                                 required maxlength="10">    
@@ -209,7 +208,7 @@
                             {{ errorMessage }}
                         </div> -->
 
-                        <div class="input-container ic1">
+                        <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
                             <input id="streetNumber" class="input" type="text" formControlName="streetNumber" placeholder=" "
                                 required maxlength="10">    
@@ -219,7 +218,7 @@
                             {{ errorMessage }}
                         </div> -->
 
-                        <div class="input-container ic1">
+                        <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
                             <input id="flatNumber" class="input" type="text" formControlName="flatNumber" placeholder=" "
                                 required maxlength="10">    

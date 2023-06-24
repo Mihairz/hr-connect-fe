@@ -35,8 +35,8 @@ const routes: Routes = [
   }, 
   {
     path: 'admin', component: AdminHomePageComponent,
-    // canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina de admin este accesibila doar de catre utilizatorii logati
-    // data: { roles: ['admin'] }, // care au rol de admin (identificat din jwt)
+    canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina de admin este accesibila doar de catre utilizatorii logati
+    data: { roles: ['admin'] }, // care au rol de admin (identificat din jwt)
   },
   { 
     path: 'newsfeed', component: NewsletterPageComponent,

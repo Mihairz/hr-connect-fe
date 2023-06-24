@@ -2,7 +2,7 @@ export class User {
     id?: number;
     firstName: string = '';
     lastName: string = '';
-    joinDate?: string;
+    joinDate?: Date;
     phoneNumber: string = '';
     address?: Address;
     department: string = '';
@@ -35,5 +35,5 @@ export class IdentityCard {
     number: number = 0;
     series: string = '';
     issuer: string = '';
-    issuing_date?: Date;
+    issuingDate?: Date;
 }

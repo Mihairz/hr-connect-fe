@@ -88,6 +88,10 @@
     text-align: center;
 }
 
+.contact-container h3{
+    margin-top:30px;
+}
+
 .input-container {
     height: 50px;
     position: relative;
@@ -204,7 +208,7 @@ color of the placeholder text when some input was written but the input field si
 .form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
     grid-gap: 30px;
 }
 

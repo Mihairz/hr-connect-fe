@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
@@ -21,8 +21,10 @@ export class UserService {
   }
 
   addUser(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:8082/user', user);
+    
+    // return this.http.post<User>('http://localhost:8082/user', user);
     // functia primeste ca parametru un obiect de tip User
+    return this.http.post('http://localhost:8082/user', user) as Observable<User>
   }
 
   // updateUser(user: User): Observable<User> {
@@ -30,13 +32,13 @@ export class UserService {
   // }
 
   updateUser(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:8082/user', user);
+    // return this.http.post<User>('http://localhost:8082/user', user);
+
+    return this.http.post(`http://localhost:8082/user`, user) as Observable<User>
   }
 
   deleteUser(id: number): Observable<{}> {
-    return this.http.delete<{}>(`http://localhost:3000/users/${id}`);
-    // return this.http.delete(`http://localhost:8082/faq?id=${id}`, {})
-    // transmitem prin URL id-ul user-ului ce va fi eliminat
+    return this.http.delete(`http://localhost:8082/user?id=${id}`, {}) as Observable<{}>
   }
 
 

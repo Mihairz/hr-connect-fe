@@ -16,15 +16,15 @@ export const hasRoleGuard: CanActivateFn = async (route: ActivatedRouteSnapshot,
 
   // console.log("user role: "+authService.userRole?.role);
 
-  const userRole = authService.userRole || { role: 'not-authorized' }
+  const userRole = authService.userLoginDetails || { role: 'not-authorized' }
   // daca authService.userRole e undefined sau null inseamna ca user nu este logat; dar ii dam variabilei userRole valoarea de rezerva 'not-authorized' ca sa evitam niste compile errors
 
-  if (authService.userRole?.loginDetails?.role) { // daca user este logat si are 'role' in token
+  if (authService.userLoginDetails?.role) { // daca user este logat si are 'role' in token
 
     const authorizedRoles = route.data['roles'] as string[];
     // preia lista de user roles permise sa acceseze ruta sub forma de sir de string-uri citind proprietatea 'roles' din proprietatea 'data' transmisa rutei in app-routing
 
-    if (authorizedRoles.includes(authService.userRole.loginDetails.role)) {
+    if (authorizedRoles.includes(authService.userLoginDetails.role)) {
       return true;
     } else {
       await router.navigateByUrl('');
