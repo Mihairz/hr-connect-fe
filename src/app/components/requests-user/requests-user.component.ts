@@ -34,7 +34,7 @@ export class RequestsUserComponent implements OnInit {
 
   // response is the data that we require 
   getUser(id: number) {
-    this.userService.getUserById(id).subscribe((responseUserProfile) => {
+    this.userService.getUserSelf().subscribe((responseUserProfile) => {
       this.userProfile = responseUserProfile;
       // console.log(responseUserProfile);
     });

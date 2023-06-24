@@ -11,21 +11,19 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./profile-card.component.css']
 })
 export class ProfileCardComponent implements OnInit, OnDestroy {
-  userId: string = '';
+
   userProfile: User | undefined; 
 
   constructor(private userService: UserService, private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.userId = id !== null ? id : '';
-    this.getUser(parseInt(this.userId)); 
+    this.getUser(); 
   }
 
   // response is the data that we require 
-  getUser(id: number) {
-    this.userService.getUserById(id).subscribe((responseUserProfile) => {
+  getUser() {
+    this.userService.getUserSelf().subscribe((responseUserProfile) => {
       this.userProfile = responseUserProfile;
       // console.log(responseUserProfile);
     }); 
@@ -42,7 +40,7 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
 
   userSubscription: Subscription = new Subscription();
 
-  isModalOpen = false; // Formularul de adaugare utilizatori noi este prestabilit ascuns
+  isModalOpen = false; // Formularul de edit este prestabilit ascuns
   editedUser = new User();
   modalType = "editModalType";
   modalRole = '';

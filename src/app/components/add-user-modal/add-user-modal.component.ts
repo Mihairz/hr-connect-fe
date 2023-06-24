@@ -76,7 +76,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   // Creem formularul si campurile acestuia, cu restrictiile specifice
   userForm = new FormGroup({
 
-    // User details====================================================================================================
+    // USER DETAILS ==============================================================================================================================================
     role: new FormControl('', [
       Validators.required,
       Validators.minLength(2)
@@ -98,7 +98,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       Validators.maxLength(60),
     ]),
 
-    // Contact==========================================================================================================
+    // CONTACT =======================================================================================================================================================
     email: new FormControl('', [
       Validators.required,
       Validators.minLength(7),
@@ -114,7 +114,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     ]),
 
 
-    // Personal information=============================================================================================
+    // PERSONAL INFORMATION ===========================================================================================================================================
     firstName: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
@@ -157,7 +157,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
     issuingDate: new FormControl(new Date(), [
       Validators.required,
-      this.isValidDate
+      // this.isValidDate
     ]),
 
 
@@ -205,35 +205,6 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     ]),
   })
 
-  // Verifica daca o data introdusa intr-un text input este format data dd/mm/yyyy si este valida
-  // Folosita in formularul de add user la input-ul text Identity card issuing date
-  isValidDate(control: AbstractControl): { [key: string]: any } | null {
-    const datePattern = /^\d{2}\/\d{2}\/\d{4}$/; // Verifica formatul
-    const value = control.value;
-
-    if (!datePattern.test(value)) {
-      return { invalidFormat: true };
-    }
-
-    // Incearca sa creeze un obiect de tip Date cu input-ul introdus
-    const dateParts = value.split('/');
-    const day = parseInt(dateParts[0], 10);
-    const month = parseInt(dateParts[1], 10);
-    const year = parseInt(dateParts[2], 10);
-
-    const date = new Date(year, month - 1, day);
-    // month-1 pentru ca in clasa Date lunile sunt numerotate de la 0 la 11
-
-    if (
-      date.getFullYear() !== year ||
-      date.getMonth() !== month - 1 ||
-      date.getDate() !== day
-    ) {
-      return { invalidDate: true };
-    }
-
-    return null;
-  }
 
 
 
@@ -246,7 +217,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     console.log('modal type: ' + this.modalType);
 
     this.userForm.patchValue({
-      role:this.editedUser.loginDetails?.role || "",
+      role: this.editedUser.loginDetails?.role || "",
       department: this.editedUser.department,
       position: this.editedUser.position,
       password: this.editedUser.loginDetails?.password,
@@ -280,6 +251,8 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // Functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte si va inchide modala
   }
 
+  
+
 
 
 
@@ -294,6 +267,8 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // !! = obtine valoarea boolean a unui element
 
     switch (true) {
+
+      // USER DETAILS ===============================================================================================================================================
 
       // Checking if errors come from role field
       case !!this.userForm.controls.role.errors:
@@ -314,8 +289,6 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
           this.errorMessage = 'Something went wrong.'
         }
         break;
-
-
 
       // Checking if errors come from function field
       case !!this.userForm.controls.position.errors:
@@ -346,7 +319,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         }
         break;
 
-      // =======================================================================  
+      // CONTACT ===========================================================================================================================================================  
 
       // Checking if errors come from e-mail field
       case !!this.userForm.controls.email.errors:
@@ -393,7 +366,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         }
         break;
 
-      // ===================================================================  
+      // PERSONAL INFO =====================================================================================================================================================  
 
       // Checking if errors come from first name field
       case !!this.userForm.controls.firstName.errors:
@@ -533,9 +506,6 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         switch (true) {
           case !!this.userForm.controls.issuingDate.errors?.['required']:
             this.errorMessage = 'Identity card must have an issuing date.';
-            break;
-          case !!this.userForm.controls.issuingDate.errors?.['isValidDate']:
-            this.errorMessage = 'Date is not valid';
             break;
           default:
             this.errorMessage = 'Something went wrong.';
@@ -707,36 +677,47 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       return;
     }
 
-    // Creem obiectul user ce urmeaza a fi introdus in baza de date. Daca una dintre valori a ajuns necompletata in backend aceasta va fi setata ca empty string
+    // Creem obiectul user ce urmeaza a fi introdus in baza de date
     const user = {
-      role: this.selectedRole || '',
       department: this.userForm.value.department || '',
       position: this.userForm.value.position || '',
-      password: this.sanitizeInput(this.userForm.controls.password.value || "") || '',
-
-      email: this.userForm.value.email || '',
-      phoneNumber: this.userForm.value.phoneNumber || '',
 
       firstName: this.userForm.value.firstName || '',
       lastName: this.userForm.value.lastName || '',
-      cnp: this.userForm.value.cnp || '',
-      number: this.userForm.value.number || '',
-      series: this.userForm.value.series || '',
-      issuer: this.userForm.value.issuer || '',
-      issuingDate: this.userForm.value.issuingDate || '',
 
+      phoneNumber: this.userForm.value.phoneNumber || '',
+
+      joinDate: new Date()
+    }
+
+    // Creem obiectul loginDetails aferent ce urmeaza a fi introdus in baza de date
+    const loginDetails = {
+      email: this.userForm.value.email || '',
+      password: this.sanitizeInput(this.userForm.controls.password.value || "") || '',
+      role: this.selectedRole || '',
+    }
+
+    // Creem obiectul address aferent ce urmeaza a fi introdus in baza de date
+    const address = {
       country: this.userForm.value.country || '',
       county: this.userForm.value.county || '',
       city: this.userForm.value.city || '',
       street: this.userForm.value.street || '',
       streetNumber: this.userForm.value.streetNumber || '',
       flatNumber: this.userForm.value.flatNumber || '',
-
-      joinDate: new Date()
     }
 
-    // Apelam functia de addUser si ii pasam ca parametru obiectul de tip User creat anterior
-    this.addUserSubscription = this.userService.addUser(user).subscribe(() => {
+    // Creem obiectul identity card aferent ce urmeaza a fi introdus in baza de date
+    const identityCard = {
+      cnp: this.userForm.value.cnp || '',
+      number: this.userForm.value.number || 0,
+      series: this.userForm.value.series || '',
+      issuer: this.userForm.value.issuer || '',
+      issuingDate: this.userForm.value.issuingDate || undefined,
+    }
+
+    // Apelam functia de addUser si ii pasam ca parametru obiectele de tip user,login details, address, identity card create anterior
+    this.addUserSubscription = this.userService.addUser(user, loginDetails, address, identityCard).subscribe(() => {
       this.newGetUsersEvent.emit();
       this.closeModal();
       // Dupa ce utilizatorul este adaugat,add-user-modal va emite un eveniment pe nume newGetUsersEvent ce va fi receptionat de catre componenta parinte (admin-home-page), iar lista de utilizatori de pe ecran isi va da refresh, astfel afisand inclusiv ultimul utilizator adaugat.
@@ -753,38 +734,49 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     }
 
 
-    // Creem un obiect de tip user cu valorile completate in formular
+    // Creem obiectul de tip user cu valorile completate in formular
     const user = {
       id: this.editedUser.id,
 
-      role: this.userForm.value.role || '',
       department: this.userForm.value.department || '',
       position: this.userForm.value.position || '',
-      password: this.sanitizeInput(this.userForm.controls.password.value || "") || '',
-
-      email: this.userForm.value.email || '',
-      phoneNumber: this.userForm.value.phoneNumber || '',
 
       firstName: this.userForm.value.firstName || '',
       lastName: this.userForm.value.lastName || '',
-      cnp: this.userForm.value.cnp || '',
-      number: this.userForm.value.number || '',
-      series: this.userForm.value.series || '',
-      issuer: this.userForm.value.issuer || '',
-      issuingDate: this.userForm.value.issuingDate || '',
 
+      phoneNumber: this.userForm.value.phoneNumber || '',
+
+      joinDate: this.editedUser.joinDate,
+    }
+
+    // Creem obiectul de tip login details cu valorile completate in formular
+    const loginDetails = {
+      email: this.userForm.value.email || '',
+      password: this.sanitizeInput(this.userForm.controls.password.value || "") || '',
+      role: this.userForm.value.role || '',
+    }
+
+    // Creem obiectul de tip address cu valorile completate in formular
+    const address = {
       country: this.userForm.value.country || '',
       county: this.userForm.value.county || '',
       city: this.userForm.value.city || '',
       street: this.userForm.value.street || '',
       streetNumber: this.userForm.value.streetNumber || '',
       flatNumber: this.userForm.value.flatNumber || '',
-
-      joinDate: this.editedUser.joinDate,
     }
 
-    // Apelam functia de updateUser() si ii pasam ca parametru obiectul de tip User creat anterior
-    this.updatedUserSubscription = this.userService.updateUser(user).subscribe(() => {
+    // Creem obiectul de tip identity card cu valorile completate in formular
+    const identityCard = {
+      cnp: this.userForm.value.cnp || '',
+      number: this.userForm.value.number || 0,
+      series: this.userForm.value.series || '',
+      issuer: this.userForm.value.issuer || '',
+      issuingDate: this.userForm.value.issuingDate || undefined,
+    }
+
+    // Apelam functia de updateUser() si ii pasam ca parametru obiectele de tip user, login details, address, identity card create anterior
+    this.updatedUserSubscription = this.userService.updateUser(user,loginDetails,address,identityCard).subscribe(() => {
       this.newGetUsersEvent.emit();
       this.closeModal();
     })

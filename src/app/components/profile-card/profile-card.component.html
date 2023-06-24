@@ -84,7 +84,7 @@
 
                         <div class="action-buttons-container">
                             <app-user [user]="userProfile" [page]="'profile'"
-                                (newGetUsersEvent)="getUser(userProfile.id || 0)"
+                                (newGetUsersEvent)="getUser()"
                                 (newEditUserEvent)="editUser($event)"></app-user>
                         </div>
 
@@ -96,7 +96,7 @@
 
             <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType"
                 (newCloseModalEvent)="closeModal()"
-                (newGetUsersEvent)="getUser(userProfile.id || 0)">
+                (newGetUsersEvent)="getUser()">
             </app-add-user-modal>
 
 

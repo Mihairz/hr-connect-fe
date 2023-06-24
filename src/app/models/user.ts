@@ -1,18 +1,31 @@
 export class User {
     id?: number;
-    firstName: string = '';
-    lastName: string = '';
-    joinDate?: Date;
-    phoneNumber: string = '';
-    address?: Address;
+
     department: string = '';
     position:string='';
+
+    firstName: string = '';
+    lastName: string = '';
+
+    joinDate?: Date;
+
+    phoneNumber: string = '';
     loginDetails?: LoginDetails;
+    
+    address?: Address;
+    
     identityCard?: IdentityCard;
 }
 
+export class LoginDetails { 
+    id?: number = 0;
+    email: string = '';
+    password: string = '';
+    role: string = '';
+}
+
 export class Address {
-    id: number = 0;
+    id?: number = 0;
     country: string = '';
     county: string = '';
     city: string = '';
@@ -22,15 +35,8 @@ export class Address {
     // apartment: string = '';
 }
 
-export class LoginDetails { 
-    id: number = 0;
-    email: string = '';
-    password: string = '';
-    role: string = '';
-}
-
 export class IdentityCard {
-    id: number = 0;
+    id?: number = 0;
     cnp: string = '';
     number: number = 0;
     series: string = '';

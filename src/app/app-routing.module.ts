@@ -44,7 +44,7 @@ const routes: Routes = [
     data: { roles: ['employee', 'hr'] }  // care au rol de employee sau hr (identificat din jwt)
   },
   {
-    path: 'profile/:id', component: ProfilePageComponent,
+    path: 'profile', component: ProfilePageComponent,
     canActivate: [isAuthenticatedGuard] // pagina de profile este accesibila doar utilizatorilor logati
   },
 

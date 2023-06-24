@@ -158,9 +158,8 @@
         
                         <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
-                            <input id="issuingDate" class="input" type="text" formControlName="issuingDate" placeholder=" "
-                                required maxlength="10">    
-                            <label for="issuingDate" class="placeholder">ID date (dd/mm/yyyy):</label>
+                            <input id="issuingDate" class="input" type="text" formControlName="issuingDate" placeholder="Identity Card issuing date:"  required onfocus="(this.type = 'date')">
+                            <label for="issuingDate" class="placeholder"></label>
                         </div>
                         <div *ngIf="errorSource === 'issuingDate'" class="alert alert-danger" role="alert">
                             {{ errorMessage }}
