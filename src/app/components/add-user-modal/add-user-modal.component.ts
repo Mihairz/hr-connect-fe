@@ -136,22 +136,22 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       Validators.pattern('^[0-9]+$') // only numeric 
     ]),
 
-    number: new FormControl(0, [
-      Validators.required,
-      Validators.min(100000),
-      Validators.max(999999),
-      Validators.pattern('^[0-9]+$') // only numeric
-    ]),
-
     series: new FormControl('', [
       Validators.minLength(2),
       Validators.maxLength(3),
       Validators.pattern(/^[a-zA-Z]*$/) // only alphabetic
     ]),
 
+    number: new FormControl(0, [
+      Validators.required,
+      Validators.min(100000), // ????????????????????????????????????????????????????
+      Validators.max(999999),
+      Validators.pattern('^[0-9]+$') // only numeric
+    ]),
+
     issuer: new FormControl('', [
       Validators.minLength(2),
-      Validators.maxLength(5),
+      Validators.maxLength(15),
       Validators.pattern(/^[a-zA-Z0-9\s]*$/) // only alphanumeric with spaces
     ]),
 
@@ -159,6 +159,8 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       Validators.required,
       this.isValidDate
     ]),
+
+
 
     country: new FormControl('', [
       Validators.required,
@@ -244,7 +246,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     console.log('modal type: ' + this.modalType);
 
     this.userForm.patchValue({
-      role: this.editedUser.loginDetails?.role,
+      role:this.editedUser.loginDetails?.role || "",
       department: this.editedUser.department,
       position: this.editedUser.position,
       password: this.editedUser.loginDetails?.password,
@@ -318,53 +320,33 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       // Checking if errors come from function field
       case !!this.userForm.controls.position.errors:
         this.errorSource = 'position';
-        switch (true) {
-          case !!this.userForm.controls.position.errors?.['required']:
-            this.errorMessage = 'Every user must be have a function.';
-            break;
-          case !!this.userForm.controls.position.errors?.['pattern']:
-            this.errorMessage = 'Function name can contain only aphanumeric characters.';
-            break;
-          case !!this.userForm.controls.position.errors?.['minlength']:
-            console.log('min length error')
-            this.errorMessage = 'Function must contain at least 7 characters.';
-            break;
-          case !!this.userForm.controls.position.errors?.['maxlength']:
-            this.errorMessage = 'Function can contain a maximum of 30 characters.';
-            break;
-          default:
-            if (this.userForm.controls.position.errors) {
-              this.errorMessage = 'Something went wrong with the function field.';
-            } else {
-              this.errorMessage = 'Something went wrong.';
-            }
-            break;
+        if (!!this.userForm.controls.position.errors?.['required']) {
+          this.errorMessage = 'Every user must have a position.';
+        } else {
+          this.errorMessage = 'Something went wrong.'
         }
         break;
 
-
-
-      // Checking if errors come from name field
-      case !!this.userForm.controls.firstName.errors:
-        this.errorSource = 'name';
+      // Checking if errors come from password field
+      case !!this.userForm.controls.password.errors:
+        this.errorSource = 'password';
         switch (true) {
-          case !!this.userForm.controls.firstName.errors?.['required']:
-            this.errorMessage = 'Every user must have a name.';
+          case !!this.userForm.controls.password.errors?.['required']:
+            this.errorMessage = 'Every user must have a password.';
             break;
-          case !!this.userForm.controls.firstName.errors?.['pattern']:
-            this.errorMessage = 'User name can contain only alphabetic characters.';
+          case !!this.userForm.controls.password.errors?.['minlength']:
+            this.errorMessage = 'Password must contain at least 7 characters.';
             break;
-          case !!this.userForm.controls.firstName.errors?.['minlength']:
-            this.errorMessage = 'User name must contain at least 5 characters.';
-            break;
-          case !!this.userForm.controls.firstName.errors?.['maxlength']:
-            this.errorMessage = 'User name can contain a maximum of 50 characters.';
+          case !!this.userForm.controls.password.errors?.['maxlength']:
+            this.errorMessage = 'Password can contain maximum 60 characters.';
             break;
           default:
             this.errorMessage = 'Something went wrong.';
             break;
         }
         break;
+
+      // =======================================================================  
 
       // Checking if errors come from e-mail field
       case !!this.userForm.controls.email.errors:
@@ -380,13 +362,14 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
             this.errorMessage = 'E-mail must contain at least 7 characters.';
             break;
           case !!this.userForm.controls.email.errors?.['maxlength']:
-            this.errorMessage = 'E-mail can contain a maximum of 60 characters.';
+            this.errorMessage = 'E-mail can contain maximum 60 characters.';
             break;
           default:
             this.errorMessage = 'Something went wrong.';
             break;
         }
         break;
+
 
       // Checking if errors come from phone field
       case !!this.userForm.controls.phoneNumber.errors:
@@ -402,7 +385,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
             this.errorMessage = 'Phone number must contain at least 10 characters.';
             break;
           case !!this.userForm.controls.phoneNumber.errors?.['maxlength']:
-            this.errorMessage = 'Phone number can contain a maximum of 10 characters.';
+            this.errorMessage = 'Phone number can contain maximum 10 characters.';
             break;
           default:
             this.errorMessage = 'Something went wrong.';
@@ -410,18 +393,283 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         }
         break;
 
-      // Checking if errors come from password field
-      case !!this.userForm.controls.password.errors:
-        this.errorSource = 'password';
+      // ===================================================================  
+
+      // Checking if errors come from first name field
+      case !!this.userForm.controls.firstName.errors:
+        this.errorSource = 'firstName';
         switch (true) {
-          case !!this.userForm.controls.password.errors?.['required']:
-            this.errorMessage = 'Every user must have a password.';
+          case !!this.userForm.controls.firstName.errors?.['required']:
+            this.errorMessage = 'Every user must have a first name.';
             break;
-          case !!this.userForm.controls.password.errors?.['minlength']:
-            this.errorMessage = 'Password must contain at least 7 characters.';
+          case !!this.userForm.controls.firstName.errors?.['pattern']:
+            this.errorMessage = 'First name can contain only alphabetic characters.';
             break;
-          case !!this.userForm.controls.password.errors?.['maxlength']:
-            this.errorMessage = 'Password can contain a maximum of 60 characters.';
+          case !!this.userForm.controls.firstName.errors?.['minlength']:
+            this.errorMessage = 'First name must contain at least 5 characters.';
+            break;
+          case !!this.userForm.controls.firstName.errors?.['maxlength']:
+            this.errorMessage = 'First name can contain maximum 50 characters.';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+      // Checking if errors come from last name field
+      case !!this.userForm.controls.lastName.errors:
+        this.errorSource = 'lastName';
+        switch (true) {
+          case !!this.userForm.controls.lastName.errors?.['required']:
+            this.errorMessage = 'Every user must have a last name.';
+            break;
+          case !!this.userForm.controls.lastName.errors?.['pattern']:
+            this.errorMessage = 'Last name can contain only alphabetic characters.';
+            break;
+          case !!this.userForm.controls.lastName.errors?.['minlength']:
+            this.errorMessage = 'Last name must contain at least 5 characters.';
+            break;
+          case !!this.userForm.controls.lastName.errors?.['maxlength']:
+            this.errorMessage = 'Last name can contain maximum 50 characters.';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+      // Checking if errors come from cnp field
+      case !!this.userForm.controls.cnp.errors:
+        this.errorSource = 'cnp';
+        switch (true) {
+          case !!this.userForm.controls.cnp.errors?.['required']:
+            this.errorMessage = 'Identity card must have a cnp.';
+            break;
+          case !!this.userForm.controls.cnp.errors?.['pattern']:
+            this.errorMessage = 'Cnp can contain only numeric characters.';
+            break;
+          case !!this.userForm.controls.cnp.errors?.['minlength']:
+            this.errorMessage = 'Cnp must contain at least 13 characters.';
+            break;
+          case !!this.userForm.controls.cnp.errors?.['maxlength']:
+            this.errorMessage = 'Cnp can contain maximum 13 characters.';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+      // Checking if errors come from identity series field
+      case !!this.userForm.controls.series.errors:
+        this.errorSource = 'series';
+        switch (true) {
+          case !!this.userForm.controls.series.errors?.['required']:
+            this.errorMessage = 'Identity card must have a series.';
+            break;
+          case !!this.userForm.controls.series.errors?.['pattern']:
+            this.errorMessage = 'Identity card series can contain only alphabetic characters.';
+            break;
+          case !!this.userForm.controls.series.errors?.['minlength']:
+            this.errorMessage = 'Identity card series must contain at least 2 characters.';
+            break;
+          case !!this.userForm.controls.series.errors?.['maxlength']:
+            this.errorMessage = 'Identity card series can contain maximum 3 characters.';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+      // Checking if errors come from identity card number field
+      case !!this.userForm.controls.number.errors:
+        this.errorSource = 'number';
+        switch (true) {
+          case !!this.userForm.controls.number.errors?.['required']:
+            this.errorMessage = 'Identity card must have a number.';
+            break;
+          case !!this.userForm.controls.number.errors?.['pattern']:
+            this.errorMessage = 'Identity card number can contain only numeric characters.';
+            break;
+          case !!this.userForm.controls.number.errors?.['minlength']:
+            this.errorMessage = 'Identity card number must contain at least 6 digits.';
+            break;
+          case !!this.userForm.controls.number.errors?.['maxlength']:
+            this.errorMessage = 'Identity card number can contain maximum 6 digits.';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+      // Checking if errors come from identity card issuer field
+      case !!this.userForm.controls.issuer.errors:
+        this.errorSource = 'issuer';
+        switch (true) {
+          case !!this.userForm.controls.issuer.errors?.['required']:
+            this.errorMessage = 'Identity card must have a issuer.';
+            break;
+          case !!this.userForm.controls.issuer.errors?.['pattern']:
+            this.errorMessage = 'Identity card issuer can contain only alphanumeric characters.';
+            break;
+          case !!this.userForm.controls.issuer.errors?.['minlength']:
+            this.errorMessage = 'Identity card issuer must contain at least 2 characters.';
+            break;
+          case !!this.userForm.controls.issuer.errors?.['maxlength']:
+            this.errorMessage = 'Identity card issuer can contain maximum 15 characters.';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+      // Checking if errors come from identity card issuingDate field
+      case !!this.userForm.controls.issuingDate.errors:
+        this.errorSource = 'issuingDate';
+        switch (true) {
+          case !!this.userForm.controls.issuingDate.errors?.['required']:
+            this.errorMessage = 'Identity card must have an issuing date.';
+            break;
+          case !!this.userForm.controls.issuingDate.errors?.['isValidDate']:
+            this.errorMessage = 'Date is not valid';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+
+      // Checking if errors come from country field
+      case !!this.userForm.controls.country.errors:
+        this.errorSource = 'country';
+        switch (true) {
+          case !!this.userForm.controls.country.errors?.['required']:
+            this.errorMessage = 'Every user must have a provenience country.';
+            break;
+          case !!this.userForm.controls.country.errors?.['pattern']:
+            this.errorMessage = 'Country name can contain only alphabetic characters.';
+            break;
+          case !!this.userForm.controls.country.errors?.['minlength']:
+            this.errorMessage = 'Country name must contain at least 5 characters.';
+            break;
+          case !!this.userForm.controls.country.errors?.['maxlength']:
+            this.errorMessage = 'Country name can contain maximum 50 characters.';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+      // Checking if errors come from county field
+      case !!this.userForm.controls.county.errors:
+        this.errorSource = 'county';
+        switch (true) {
+          case !!this.userForm.controls.county.errors?.['required']:
+            this.errorMessage = 'Every user must have a provenience county.';
+            break;
+          case !!this.userForm.controls.county.errors?.['pattern']:
+            this.errorMessage = 'County name can contain only alphabetic characters.';
+            break;
+          case !!this.userForm.controls.county.errors?.['minlength']:
+            this.errorMessage = 'County name must contain at least 5 characters.';
+            break;
+          case !!this.userForm.controls.county.errors?.['maxlength']:
+            this.errorMessage = 'County name can contain maximum 50 characters.';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+      // Checking if errors come from city field
+      case !!this.userForm.controls.city.errors:
+        this.errorSource = 'city';
+        switch (true) {
+          case !!this.userForm.controls.city.errors?.['required']:
+            this.errorMessage = 'Every user must have a provenience city.';
+            break;
+          case !!this.userForm.controls.city.errors?.['pattern']:
+            this.errorMessage = 'City name can contain only alphabetic characters.';
+            break;
+          case !!this.userForm.controls.city.errors?.['minlength']:
+            this.errorMessage = 'City name must contain at least 5 characters.';
+            break;
+          case !!this.userForm.controls.city.errors?.['maxlength']:
+            this.errorMessage = 'City name can contain maximum 50 characters.';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+
+      // Checking if errors come from street field
+      case !!this.userForm.controls.street.errors:
+        this.errorSource = 'street';
+        switch (true) {
+          case !!this.userForm.controls.street.errors?.['required']:
+            this.errorMessage = 'Street name is required.';
+            break;
+          case !!this.userForm.controls.street.errors?.['pattern']:
+            this.errorMessage = 'Street name can contain only alphabetic characters.';
+            break;
+          case !!this.userForm.controls.street.errors?.['minlength']:
+            this.errorMessage = 'Street name must contain at least 5 characters.';
+            break;
+          case !!this.userForm.controls.street.errors?.['maxlength']:
+            this.errorMessage = 'Street name can contain maximum 50 characters.';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+      // Checking if errors come from street number field
+      case !!this.userForm.controls.streetNumber.errors:
+        this.errorSource = 'streetNumber';
+        switch (true) {
+          case !!this.userForm.controls.streetNumber.errors?.['required']:
+            this.errorMessage = 'Street number is required.';
+            break;
+          case !!this.userForm.controls.streetNumber.errors?.['pattern']:
+            this.errorMessage = 'Street number can contain only alphanumeric characters.';
+            break;
+          case !!this.userForm.controls.streetNumber.errors?.['minlength']:
+            this.errorMessage = 'Street number must contain at least 1 character.';
+            break;
+          case !!this.userForm.controls.streetNumber.errors?.['maxlength']:
+            this.errorMessage = 'Street number can contain maximum 10 characters.';
+            break;
+          default:
+            this.errorMessage = 'Something went wrong.';
+            break;
+        }
+        break;
+
+      // Checking if errors come from flat number field
+      case !!this.userForm.controls.flatNumber.errors:
+        this.errorSource = 'flatNumber';
+        switch (true) {
+          case !!this.userForm.controls.flatNumber.errors?.['required']:
+            this.errorMessage = 'Flat number is required.';
+            break;
+          case !!this.userForm.controls.flatNumber.errors?.['pattern']:
+            this.errorMessage = 'Flat number can contain only alphanumeric characters.';
+            break;
+          case !!this.userForm.controls.flatNumber.errors?.['minlength']:
+            this.errorMessage = 'Flat number must contain at least 1 character.';
+            break;
+          case !!this.userForm.controls.flatNumber.errors?.['maxlength']:
+            this.errorMessage = 'Flat number can contain maximum 10 characters.';
             break;
           default:
             this.errorMessage = 'Something went wrong.';
@@ -449,7 +697,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
 
 
-  
+
 
   addUser() {
 
@@ -461,7 +709,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
     // Creem obiectul user ce urmeaza a fi introdus in baza de date. Daca una dintre valori a ajuns necompletata in backend aceasta va fi setata ca empty string
     const user = {
-      role: this.userForm.value.role || '',
+      role: this.selectedRole || '',
       department: this.userForm.value.department || '',
       position: this.userForm.value.position || '',
       password: this.sanitizeInput(this.userForm.controls.password.value || "") || '',
@@ -497,6 +745,14 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   }
 
   updateUser() {
+
+    // Verificam formularul
+    if (this.userForm.invalid) {
+      this.handleUserFormError();
+      return;
+    }
+
+
     // Creem un obiect de tip user cu valorile completate in formular
     const user = {
       id: this.editedUser.id,
