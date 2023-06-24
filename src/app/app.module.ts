@@ -59,7 +59,7 @@ import {MatRippleModule} from '@angular/material/core';
 import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.component';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -117,7 +117,8 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     MatExpansionModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSlideToggleModule,
   ],
   providers: [
     AuthInterceptorProvider,

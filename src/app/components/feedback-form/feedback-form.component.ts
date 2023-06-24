@@ -15,7 +15,7 @@ import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 export class FeedbackFormComponent implements OnInit, AfterViewInit  {
   feedbackForm: FormGroup; //Tracks the value and validity state of a group of FormControl instances.
   feedbacks: Feedback[] = []; // array that will hold the feedback object
-  displayedColumns: string[] = ['category', 'title', 'content']; //column of the tabel
+  displayedColumns: string[] = ['category', 'title', 'content', 'favourite']; //column of the tabel
   
 
   constructor(private feedbackService: FeedbackFormService) {
@@ -71,4 +71,16 @@ getFeedbacks() {
     }
   }
  
+  toggleFavourite(feedback: Feedback) {
+   
+    feedback.favourite = !feedback.favourite;
+
+   
+    this.feedbackService.updateFeedback(feedback).subscribe(() => {
+
+      this.getFeedbacks();
+    });
+  }
+
+
 }

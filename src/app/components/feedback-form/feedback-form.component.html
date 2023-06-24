@@ -40,6 +40,12 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Textarea"> Textarea </mat-header-cell>
         <mat-cell *matCellDef="let feedback"> {{feedback.content}} </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="favourite">
+      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Favourite"> Favourite </mat-header-cell>
+      <mat-cell *matCellDef="let feedback"> 
+        <mat-slide-toggle [checked]="feedback.favourite" (change)="toggleFavourite(feedback)"></mat-slide-toggle>
+      </mat-cell>
+    </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
