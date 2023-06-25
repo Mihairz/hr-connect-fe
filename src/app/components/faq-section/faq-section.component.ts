@@ -17,10 +17,9 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class FaqSectionComponent implements OnInit {
   // all categories, helps us structure in html - put every item in its category an later
   faqCategories: string[] = [
-     "Recruitment & Onboarding",
-     "Compensation & Benefits",
-     "Workplace Policies & Environment",
-     "Professional Development & Performance",
+    
+     "Important_HR_announcement",
+     "Upcoming_events",
      "Policy_changes",
      "Training_opportunities",
      "News"
@@ -105,14 +104,14 @@ filterFaqs() {
 
 
 
-
+//when you drop an item checks if is in the same category then updates the order
 drop(event: CdkDragDrop<FaqContent[]>) {
   if (event.previousContainer === event.container) {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     this.updateFaqOrders(event.container.data);
   }
 }
-
+// updates the faq order and sends the update to the database
 updateFaqOrders(faqs: FaqContent[]) {
   faqs.forEach((faq, index) => {
     faq.orderNumber = index + 1;
@@ -124,5 +123,15 @@ updateFaqOrders(faqs: FaqContent[]) {
 startDrag(category: string) {
   this.draggingFromCategory = category;
 }
+
+// This is how we change the display name of the categories in the HTML
+categoryDisplayNames: {[key: string]: string} = {
+
+  "Important_HR_announcement": "Important HR announcement",
+  "Upcoming_events": "Upcoming events",
+  "Policy_changes": "Updates to Policy",
+  "Training_opportunities": "Training Opportunities",
+  "News": "Latest Updates"
+};
 
 }

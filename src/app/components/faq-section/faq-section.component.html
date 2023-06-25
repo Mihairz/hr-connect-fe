@@ -36,14 +36,17 @@
     <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
 
     <div *ngFor="let category of faqCategories">
-      <!-- edit this for the title of the section of FAQs -->
-      <h2>{{ category }}</h2>
-      <!-- this one shows each faq in filteredFaqsByCategory[category] which are the faqs that remain if something was written in the search textbox - to match something from the title  -->
+      <!-- filter the categories that do not have any items in them so they don't appear when we are searching for data  -->
+      <div *ngIf="filteredFaqsByCategory[category].length > 0">
+      <!-- the faq will have an updated name instead of the one in the database-->
+      <h2>{{ categoryDisplayNames[category] }}</h2>
+     
       <div
         cdkDropList
         [cdkDropListData]="filteredFaqsByCategory[category]"
         (cdkDropListDropped)="drop($event)"
       >
+      
         <div
           *ngFor="let faq of filteredFaqsByCategory[category]"
           cdkDrag
@@ -102,6 +105,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </div>
