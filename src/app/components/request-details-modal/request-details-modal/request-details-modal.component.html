@@ -11,9 +11,82 @@
         <div class="request-details-grid">
 
             <div class="request-data-container">
-                <ul>
-                    <li>Department: {{editedRequest.requester?.department}}</li>
-                </ul>
+
+                <div class="requester-container">
+                    <h3 class="subtitle">Requester</h3>
+                    <table>
+                        <tr>
+                            <td>Department:</td>
+                            <td> {{editedRequest.requester?.department}}</td>
+                        </tr>
+                        <tr>
+                            <td>Position:</td>
+                            <td>{{editedRequest.requester?.position?.replace('_',' ')}}</td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{editedRequest.requester?.lastName}} {{editedRequest.requester?.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <td>E-mail:</td>
+                            <td>{{editedRequest.requester?.loginDetails?.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>{{editedRequest.requester?.phoneNumber}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="request-container">
+                    <h3 class="subtitle">Request</h3>
+                    <table>
+                        <tr>
+                            <td>Type:</td>
+                            <td>{{editedRequest.type}}</td>
+                        </tr>
+                        <tr>
+                            <td>Status:</td>
+                            <td [ngStyle]="{'color':
+                            editedRequest.status === 'Pending' ? '#00A3E3' : editedRequest.status === 'Approved' ? 'green' : 'red'}">{{editedRequest.status}}</td>
+                        </tr>
+                        <tr>
+                            <td>Submit date:</td>
+                            <td>{{editedRequest.requestDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Finish date:</td>
+                            <td>{{editedRequest.finishDate}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="responder-container">
+                    <h3 class="subtitle">Responder</h3>
+                    <table *ngIf="editedRequest.responder">
+                        <tr>
+                            <td>Department:</td>
+                            <td>{{editedRequest.responder.department}}</td>
+                        </tr>
+                        <tr>
+                            <td>Position:</td>
+                            <td>{{editedRequest.responder.position}}</td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{editedRequest.responder.lastName}} {{editedRequest.responder.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <td>E-mail:</td>
+                            <td>{{editedRequest.responder.loginDetails?.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>{{editedRequest.responder.phoneNumber}}</td>
+                        </tr>
+                    </table>
+                </div>
+
             </div>
 
             <div class="request-details-container"></div>
