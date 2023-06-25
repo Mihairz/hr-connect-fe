@@ -117,14 +117,14 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // PERSONAL INFORMATION ===========================================================================================================================================
     firstName: new FormControl('', [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(2),
       Validators.maxLength(50),
       Validators.pattern(/^[a-zA-Z]*$/) // only alphabetic
     ]),
 
     lastName: new FormControl('', [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(2),
       Validators.maxLength(50),
       Validators.pattern(/^[a-zA-Z]*$/) // only alphabetic
     ]),
@@ -379,7 +379,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
             this.errorMessage = 'First name can contain only alphabetic characters.';
             break;
           case !!this.userForm.controls.firstName.errors?.['minlength']:
-            this.errorMessage = 'First name must contain at least 5 characters.';
+            this.errorMessage = 'First name must contain at least 2 characters.';
             break;
           case !!this.userForm.controls.firstName.errors?.['maxlength']:
             this.errorMessage = 'First name can contain maximum 50 characters.';
@@ -401,7 +401,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
             this.errorMessage = 'Last name can contain only alphabetic characters.';
             break;
           case !!this.userForm.controls.lastName.errors?.['minlength']:
-            this.errorMessage = 'Last name must contain at least 5 characters.';
+            this.errorMessage = 'Last name must contain at least 2 characters.';
             break;
           case !!this.userForm.controls.lastName.errors?.['maxlength']:
             this.errorMessage = 'Last name can contain maximum 50 characters.';

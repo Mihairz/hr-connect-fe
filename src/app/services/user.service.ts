@@ -24,11 +24,8 @@ export class UserService {
     return this.http.put<User>('http://localhost:8082/user', {user,loginDetails,address,identityCard} );
   }
 
-  updateUser(user: User,loginDetails: LoginDetails, address: Address,  identityCard:IdentityCard): Observable<User> {
-    // return this.http.post<User>('http://localhost:8082/user', user);
-    return this.http.put<User>('http://localhost:8082/user', user);
-
-    // return this.http.post(`http://localhost:8082/user`, user) as Observable<User>
+  updateUser(user: any,loginDetails: LoginDetails, address: Address,  identityCard:IdentityCard): Observable<User> {
+    return this.http.put<User>('http://localhost:8082/user', {user,loginDetails,address,identityCard} );
   }
 
   deleteUser(id: number): Observable<{}> {
