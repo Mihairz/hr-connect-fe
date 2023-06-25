@@ -28,19 +28,27 @@
     </button>
   </div>
 
-  
   <app-spinner></app-spinner>
 
   <div class="container-faqs">
     <!-- https://material.angular.io/cdk/drag-drop/overview#cdk-drag-drop-sorting  we have have a drop list material component that then drags and drops the accordions and arranges by the order item-->
-    <div cdkDropList (cdkDropListDropped)="drop($event)">
-      <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
 
-      <div *ngFor="let category of faqCategories">
-        <!-- edit this for the title of the section of FAQs -->
-        <h2>{{ category }}</h2>
-        <!-- this one shows each faq in filteredFaqsByCategory[category] which are the faqs that remain if something was written in the search textbox - to match something from the title  -->
-        <div *ngFor="let faq of filteredFaqsByCategory[category]" cdkDrag>
+    <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
+
+    <div *ngFor="let category of faqCategories">
+      <!-- edit this for the title of the section of FAQs -->
+      <h2>{{ category }}</h2>
+      <!-- this one shows each faq in filteredFaqsByCategory[category] which are the faqs that remain if something was written in the search textbox - to match something from the title  -->
+      <div
+        cdkDropList
+        [cdkDropListData]="filteredFaqsByCategory[category]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          *ngFor="let faq of filteredFaqsByCategory[category]"
+          cdkDrag
+          [cdkDragData]="faq"
+        >
           <div class="accordion" id="accordionPanelsStayOpen">
             <div class="accordion-item">
               <!-- we give an id to all the accordion headers | aria-expanded -> expanded or not |  -->
@@ -57,7 +65,7 @@
                   aria-expanded="false"
                 >
                   <!-- without binding above the accordions would not open/ same for closure -->
-                  Id:{{ faq.id }} Order: {{ faq.order_number }}. {{ faq.title }}
+                  Id:{{ faq.id }} Order: {{ faq.orderNumber }}. {{ faq.title }}
                 </button>
                 <div class="button-container">
                   <button

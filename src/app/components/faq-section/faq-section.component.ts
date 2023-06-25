@@ -6,6 +6,7 @@ import { AddFaqModalComponent } from '../add-faq-modal/add-faq-modal.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 
+
 // to filter by title used this tutorial: https://www.youtube.com/watch?v=lTOQ7Fjhcvk
 
 @Component({
@@ -20,8 +21,8 @@ export class FaqSectionComponent implements OnInit {
      "Compensation & Benefits",
      "Workplace Policies & Environment",
      "Professional Development & Performance",
-     "Conflict Resolution & Employee Support",
-     "Employee Resources & Services",
+     "Policy_changes",
+     "Training_opportunities",
      "News"
   ];
 
@@ -30,6 +31,8 @@ export class FaqSectionComponent implements OnInit {
   _filterText: string = ''; 
   filteredFaqs: FaqContent [] = []; 
   filteredFaqsByCategory: {[key: string]: FaqContent[]} = {};
+  // Add a new field to remember which category we're dragging from
+draggingFromCategory!: string;
 
 
 get filterText(){
@@ -71,7 +74,7 @@ editFaq(faq: FaqContent) {
 
 addFaq() {
   const dialogRef = this.dialog.open(AddFaqModalComponent, {
-    data: { category:'',title: '', content: '' , order_number:''}
+    data: { category:'',title: '', content: '' , orderNumber:''}
   });
   dialogRef.afterClosed().subscribe(result => {
     this.getFaqs();
@@ -103,19 +106,23 @@ filterFaqs() {
 
 
 
-//event handler - triggered when a drag and drop is done. changes the faqs array
-drop(event: CdkDragDrop<string[]>) {
-  moveItemInArray(this.faqs, event.previousIndex, event.currentIndex); 
-  this.updateFaqOrders();
+drop(event: CdkDragDrop<FaqContent[]>) {
+  if (event.previousContainer === event.container) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    this.updateFaqOrders(event.container.data);
+  }
 }
-//is a function that adds 1 to each order when an element and also updates the backend. 
-//This way we have a plus one in order after the drop above
-updateFaqOrders() {
-  this.faqs.forEach((faq, index) => {
-    faq.order_number = index + 1;
+
+updateFaqOrders(faqs: FaqContent[]) {
+  faqs.forEach((faq, index) => {
+    faq.orderNumber = index + 1;
     this.faqsService.updateFaqContent(faq).subscribe();
   });
-  this.filteredFaqs = this.faqs; //the new faqs are copied into filteredFaqs so we can have the updated displayed
+}
+
+// Method to remember from which category we're starting the drag
+startDrag(category: string) {
+  this.draggingFromCategory = category;
 }
 
 }

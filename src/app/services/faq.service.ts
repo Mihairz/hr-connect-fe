@@ -14,12 +14,12 @@ export class FaqService {
   }
   getFaqContent(): Observable<FaqContent[]> {
     return this.http.get<FaqContent[]>('http://localhost:8082/faq').pipe(
-      map((faqs: FaqContent[]) => faqs.sort((a, b) => a.order_number - b.order_number))
+      map((faqs: FaqContent[]) => faqs.sort((a, b) => a.orderNumber - b.orderNumber))
     ) as Observable<FaqContent[]> ; 
   }
   
     getFaqContentByOrder(order: number) {
-      return this.http.get(`http://localhost:4100/faqs-json/${order}`) as Observable<FaqContent>
+      return this.http.get(`http://localhost:8082/faq/${order}`) as Observable<FaqContent>
     }
   
     addFaqContent(postObject: FaqContent) {
