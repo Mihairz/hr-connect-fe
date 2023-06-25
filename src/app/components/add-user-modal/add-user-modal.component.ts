@@ -751,6 +751,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
     // Creem obiectul de tip login details cu valorile completate in formular
     const loginDetails = {
+      id: this.editedUser.loginDetails?.id,
       email: this.userForm.value.email || '',
       password: this.sanitizeInput(this.userForm.controls.password.value || "") || '',
       role: this.userForm.value.role || '',
@@ -758,6 +759,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
     // Creem obiectul de tip address cu valorile completate in formular
     const address = {
+      id: this.editedUser.address?.id,
       country: this.userForm.value.country || '',
       county: this.userForm.value.county || '',
       city: this.userForm.value.city || '',
@@ -768,6 +770,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
     // Creem obiectul de tip identity card cu valorile completate in formular
     const identityCard = {
+      id: this.editedUser.identityCard?.id,
       cnp: this.userForm.value.cnp || '',
       number: this.userForm.value.number || 0,
       series: this.userForm.value.series || '',

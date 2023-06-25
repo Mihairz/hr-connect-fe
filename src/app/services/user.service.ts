@@ -16,15 +16,15 @@ export class UserService {
     return this.http.get<User[]>('http://localhost:8082/user/all');
   }
 
-  getUserSelf(): Observable<User> {
-    return this.http.get<User>('http://localhost:8082/self');
+  getUserSelf(): Observable<any> {
+    return this.http.get<any>('http://localhost:8082/self');
   }
 
   addUser(user: User,loginDetails: LoginDetails, address: Address,  identityCard:IdentityCard): Observable<User> {
     return this.http.put<User>('http://localhost:8082/user', {user,loginDetails,address,identityCard} );
   }
 
-  updateUser(user: any,loginDetails: LoginDetails, address: Address,  identityCard:IdentityCard): Observable<User> {
+  updateUser(user: User,loginDetails: LoginDetails, address: Address,  identityCard:IdentityCard): Observable<User> {
     return this.http.put<User>('http://localhost:8082/user', {user,loginDetails,address,identityCard} );
   }
 
