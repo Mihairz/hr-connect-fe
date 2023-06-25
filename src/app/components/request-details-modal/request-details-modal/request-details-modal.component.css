@@ -24,7 +24,7 @@
     border-radius: 20px;
     box-sizing: border-box;
     padding: 20px;
-    width: 1000px;
+    width: 90%;
 
     background: rgba(255, 255, 255, 0.7);
 }
@@ -87,9 +87,6 @@
     margin: 11px;
 }
 
-.contact-container h3 {
-    margin-top: 30px;
-}
 
 .input-container {
     height: 50px;
@@ -212,8 +209,7 @@ color of the placeholder text when some input was written but the input field si
     display: grid;
     grid-template-columns: 2fr 3fr;
     grid-template-rows: 3fr 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    gap:15px;
 }
 
 .request-data-container {
@@ -238,17 +234,15 @@ color of the placeholder text when some input was written but the input field si
 .request-data-container table{
     font-size: 20px;
     width:100%;
+    margin:0px 20px 20px 20px;
 }
 
-.request-data-container div{
+.action-buttons-container, .request-details-container, .request-data-container div{
     background: white;
     border-radius: 20px;
     border: 1px solid lightgray;
 }
 
-.request-data-container table{
-    margin:0px 20px 20px 20px;
-}
 
 .request-details-container{
     grid-area: 1 / 2 / 2 / 3;
@@ -256,4 +250,20 @@ color of the placeholder text when some input was written but the input field si
 
 .action-buttons-container{
     grid-area: 2 / 2 / 3 / 3;
+}
+
+.unchangeable-field {
+    background-color: lightgray;
+    display: inline-block;
+}
+
+.request-text{
+    padding:0px 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    padding-bottom: 0;
+}
+
+h3{
+    text-align:center;
 }
