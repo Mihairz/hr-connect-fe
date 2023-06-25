@@ -73,7 +73,7 @@ editFaq(faq: FaqContent) {
 
 addFaq() {
   const dialogRef = this.dialog.open(AddFaqModalComponent, {
-    data: { category:'',title: '', content: '' , orderNumber:''}
+    data: { category:'',title: '', content: '' , orderNumber:'', documentUrl:''}
   });
   dialogRef.afterClosed().subscribe(result => {
     this.getFaqs();

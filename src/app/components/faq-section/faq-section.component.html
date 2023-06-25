@@ -96,8 +96,9 @@
                   {{ faq.content }}
                 </div>
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body" *ngIf="faq.documentUrl">
                     For more details please click on this document
+                    <a href="{{ faq.documentUrl }}" target="_blank">this document</a>
                   </div>
                 </div>
               </div>
