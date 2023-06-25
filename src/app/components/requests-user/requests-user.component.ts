@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { UserRequestService } from 'src/app/services/userRequest.service';
 import { UserService } from 'src/app/services/user.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-requests-user',
@@ -12,15 +13,25 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RequestsUserComponent implements OnInit {
 
-  constructor(private userService: UserService, private userRequestService: UserRequestService) { }
+  constructor(private userService: UserService, private userRequestService: UserRequestService, private sanitizer: DomSanitizer) { }
 
   userProfile: User = new User();
 
   reqTypes: string[] = ['Employee certificate', 'Change personal data', 'Custom request'];
   selectedReqType: string = '';
+  // Urmareste valoarea campului request type(care este un dropdown cu mai multe optiuni)
+  onReqTypeChange() {
+    this.selectedReqType = (<HTMLSelectElement>document.getElementById('reqType')).value;
+    console.log('Selected req type:', this.selectedReqType);
+  }
 
   changableData = ['name', 'email'];
   selectedDataToChange = '';
+  // Urmareste valoarea campului data to change(care este un dropdown cu mai multe optiuni)
+  onDataToChangeChange() {
+    this.selectedDataToChange = this.userReqForm.value.dataToChange || "";
+    console.log('Selected req type:', this.selectedDataToChange);
+  }
 
   errorMessage: string = '';
   errorSource: string = '';
@@ -29,11 +40,11 @@ export class RequestsUserComponent implements OnInit {
 
   ngOnInit() {
     const id = 2; // o sa luam id-ul sau e-mail-ul din token, dar momentan il hardcodam
-    this.getUser(id); // obtinem datele utilizatorului logat
+    this.getUser(); // obtinem datele utilizatorului logat
   }
 
   // response is the data that we require 
-  getUser(id: number) {
+  getUser() {
     this.userService.getUserSelf().subscribe((responseUserProfile) => {
       this.userProfile = responseUserProfile;
       // console.log(responseUserProfile);
@@ -41,55 +52,14 @@ export class RequestsUserComponent implements OnInit {
   }
 
   employeeCertificateForm = new FormGroup({
-    country: new FormControl('', [
-      Validators.required,
-    ]),
-
-    county: new FormControl('', [
-      Validators.required,
-    ]),
-
-    city: new FormControl('', [
-      Validators.required,
-    ]),
-
-    addressLine: new FormControl('', [
-      Validators.required,
-    ]),
-
-    CNP: new FormControl('', [
-      Validators.required,
-    ]),
-
-    series: new FormControl('', [
-      Validators.required,
-    ]),
-
-    idNumber: new FormControl('', [
-      Validators.required,
-    ]),
-
-    issuingAuthority: new FormControl('', [
-      Validators.required,
-    ]),
-
-    idReleaseDate: new FormControl('', [
-      Validators.required,
-    ]),
-
-    jobTitle: new FormControl('', [
-      Validators.required,
-    ]),
-
     reason: new FormControl('', [
       Validators.required,
-    ]),
-
+      Validators.minLength(10),
+      Validators.maxLength(250),
+    ])
   })
 
   userReqForm = new FormGroup({
-
-
 
     dataToChange: new FormControl('', [
       Validators.required,
@@ -105,79 +75,79 @@ export class RequestsUserComponent implements OnInit {
 
   })
 
-  // Urmareste valoarea campului request type(care este un dropdown cu mai multe optiuni)
-  onReqTypeChange() {
-    this.selectedReqType = (<HTMLSelectElement>document.getElementById('reqType')).value;
-    console.log('Selected req type:', this.selectedReqType);
+
+
+
+  sanitizeInput(input: string): string {
+    // Sanitize the input to prevent XSS
+    const sanitizedInput = this.sanitizer.sanitize(SecurityContext.HTML, input);
+    // Return the sanitized input
+    return sanitizedInput || '';
   }
+  
 
-  // Urmareste valoarea campului data to change(care este un dropdown cu mai multe optiuni)
-  onDataToChangeChange() {
-    this.selectedDataToChange = this.userReqForm.value.dataToChange || "";
-    console.log('Selected req type:', this.selectedDataToChange);
-  }
+submitRequest() {
 
+  // Verificam formularul
+  // if (this.userForm.invalid) {
+  //   this.handleUserFormError();
+  //   return;
+  // }
 
+  // Creem obiectul request ce urmeaza a fi introdus in baza de date. Daca una dintre valori a ajuns necompletata in backend aceasta va fi setata ca empty string
 
+  if (this.selectedReqType === 'Employee certificate') {
 
-  submitRequest() {
+    const employeeCertificateRequest = {
+      requesterId: this.userProfile.id,
+      type: this.selectedReqType,
 
-    // Verificam formularul
-    // if (this.userForm.invalid) {
-    //   this.handleUserFormError();
-    //   return;
-    // }
+      firstName: this.userProfile.firstName,
+      lastName: this.userProfile.lastName,
 
-    // Creem obiectul request ce urmeaza a fi introdus in baza de date. Daca una dintre valori a ajuns necompletata in backend aceasta va fi setata ca empty string
+      country: this.userProfile.address?.country,
+      county: this.userProfile.address?.county,
+      city: this.userProfile.address?.city,
+      street: this.userProfile.address?.street,
+      streetNumber: this.userProfile.address?.streetNumber,
+      flatNumber: this.userProfile.address?.flatNumber,
 
-    if (this.selectedReqType === 'Employee certificate') {
+      CNP: this.userProfile.identityCard?.cnp,
+      series: this.userProfile.identityCard?.series,
+      number: this.userProfile.identityCard?.number,
+      issuer: this.userProfile.identityCard?.issuer,
+      issuingDate: this.userProfile.identityCard?.issuingDate,
 
-      const employeeCertificateRequest = {
-        requesterId: this.userProfile.id,
-        type: this.selectedReqType,
+      joinDate: this.userProfile.joinDate,
+      position: this.userProfile.position,
 
-        firstName: this.userProfile.firstName,
-        lastName: this.userProfile.lastName,
-        country: this.employeeCertificateForm.value.country,
-        county: this.employeeCertificateForm.value.county,
-        city: this.employeeCertificateForm.value.city,
-        addressLine: this.employeeCertificateForm.value.addressLine,
-        CNP: this.employeeCertificateForm.value.CNP,
-        series: this.employeeCertificateForm.value.series,
-        idNumber: this.employeeCertificateForm.value.idNumber,
-        issuingAuthority: this.employeeCertificateForm.value.issuingAuthority,
-        idReleaseDate: this.employeeCertificateForm.value.idReleaseDate,
-        joinDate: new Date(), // to modify
-        jobTitle: this.employeeCertificateForm.value.jobTitle,
-        reason: this.employeeCertificateForm.value.reason,
+      reason: this.sanitizeInput(this.employeeCertificateForm.value.reason || 'somethingWentWrong'),
 
-        requestDate: new Date(),
-        finishDate: undefined,
-        status: 'pending',
-        responderID: 0
-      }
-
-      console.log('submit request for employee certificate working');
-      // console.log(employeeCertificateRequest.name + " " + employeeCertificateRequest.city)
-
-      // Apelam functia de submitRequest si ii pasam ca parametru obiectul de tip User creat anterior
-      // this.submitRequestSubscription = this.userRequestService.addUserRequest(employeeCertificateRequest).subscribe(() => {
-      //   // this.newGetUsersEvent.emit();
-        
-      //   // Dupa ce utilizatorul este adaugat,add-user-modal va emite un eveniment pe nume newGetUsersEvent ce va fi receptionat de catre componenta parinte (admin-home-page), iar lista de utilizatori de pe ecran isi va da refresh, astfel afisand inclusiv ultimul utilizator adaugat.
-      //   // De asemenea functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
-      // })
-
+      requestDate: new Date(),
+      finishDate: undefined,
+      status: 'pending',
+      responderID: 0
     }
 
+    console.log('submit request for employee certificate working');
 
 
-    // Apelam functia de addUser si ii pasam ca parametru obiectul de tip User creat anterior
-    // this.addUserSubscription = this.userService.addUser(user).subscribe(() => {
-    //   this.newGetUsersEvent.emit();
-    //   this.closeModal();
-    // Dupa ce utilizatorul este adaugat,add-user-modal va emite un eveniment pe nume newGetUsersEvent ce va fi receptionat de catre componenta parinte (admin-home-page), iar lista de utilizatori de pe ecran isi va da refresh, astfel afisand inclusiv ultimul utilizator adaugat.
-    // De asemenea functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
-    // })
   }
+
+  // DE STABILIT CU BE SUB CE FORMA TREBUIE TRIMISE
+  // DUPA ASTA O SA MA GANDESC SI CE SE INTAMPLA DUPA CE SA DE SUBMIT (ex refresh pagina de request/ mesaj de confirmare/etc)
+
+  //Apelam functia de submitRequest si ii pasam ca parametru obiectul de tip request creat anterior
+  // this.submitRequestSubscription = this.userRequestService.addUserRequest(issuingDate).subscribe(() => {
+  // this.newGetUsersEvent.emit();
+
+  // Dupa ce utilizatorul este adaugat,add-user-modal va emite un eveniment pe nume newGetUsersEvent ce va fi receptionat de catre componenta parinte (admin-home-page), iar lista de utilizatori de pe ecran isi va da refresh, astfel afisand inclusiv ultimul utilizator adaugat.
+  // De asemenea functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
+  // })
 }
+
+
+
+
+}
+

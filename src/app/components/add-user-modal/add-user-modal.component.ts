@@ -655,7 +655,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     }
   }
 
-  // Used on password field because it's the only input field that accepts special characters
+  // Applied on password field in addUser() and editUser() because it's the only input field that accepts special characters
   sanitizeInput(input: string): string {
     // Sanitize the input to prevent XSS
     const sanitizedInput = this.sanitizer.sanitize(SecurityContext.HTML, input);

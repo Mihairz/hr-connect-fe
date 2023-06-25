@@ -1,18 +1,18 @@
 .form-div {
     position: absolute;
-    top: 250px;
+    
     left: 50%;
     transform: translateX(-50%);
     max-height: calc(100vh - 200px);
 
     border-radius: 20px;
     box-sizing: border-box;
-    padding: 20px;
-    width: 500px;
+    
+    width: 60%;
 
     /* background: rgba(255, 255, 255, 0.7); */
     /* background-color: pink; */
-    margin-bottom: 200px;
+    margin-bottom: 200px; 
    
 
 }
@@ -23,8 +23,9 @@
     width: 100%;
 }
 
-.ic2 {
-    margin-top: 30px;
+.unchangeable-field {
+    background-color: lightgray;
+    display: inline-block;
 }
 
 .input {
@@ -56,13 +57,22 @@
 }
 
 .request-text{
-    padding-top:60px;
+    padding:60px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    padding-bottom: 0;
 }
 
 .request-text h3{
     text-align: center;
+    padding-bottom: 20px;
 }
 
 .document-model{
     background-color: white;
+}
+
+#reason{
+    width: 600px;
+    border:1px solid grey;
 }

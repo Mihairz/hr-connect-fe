@@ -1,8 +1,8 @@
 <div class="form-div">
 
-    <div class="input-container ic2">
+    <div class="input-container">
         Select request type:
-        <select id="reqType" class="input" name="reqType"  (change)="onReqTypeChange()">
+        <select id="reqType" class="input" name="reqType" (change)="onReqTypeChange()">
             <option disabled selected value="">Request type</option>
             <option *ngFor="let reqType of reqTypes" [value]="reqType">{{ reqType }}</option>
         </select>
@@ -11,70 +11,60 @@
 
 
     <!-- ADEVERINTA ANGAJAT -->
-    <form *ngIf="selectedReqType === 'Employee certificate'" [formGroup]="employeeCertificateForm" autocomplete="off">
+    <div *ngIf="selectedReqType === 'Employee certificate'" class="document-model">
+        <form [formGroup]="employeeCertificateForm" autocomplete="off">
 
-        
-        <section  class="request-text document-model">
-            <h3>ADEVERINȚĂ</h3>
 
-            Prin prezenta, se adeverește că domnul/doamna <p style="background-color: grey;display: inline-block;">
-                {{userProfile.lastName}} {{userProfile.firstName}} </p>
+            <section class="request-text">
+                <h3>ADEVERINȚĂ</h3>
 
-            domiciliat/ă în <input id="country" type="text" formControlName="country" placeholder="country" required
-                maxlength="50">
-            <label for="country" class="placeholder"></label>,
+                Prin prezenta, se adeverește că domnul/doamna <p class="unchangeable-field">BE-LAST-NAME BE-FIRST-NAME
+                </p>
 
-            județul <input id="county" type="text" formControlName="county" placeholder="county" required
-                maxlength="50">
-            <label for="county"></label>,
+                domiciliat/ă în <p class="unchangeable-field">BE-COUNTRY</p>,
 
-            localitatea <input id="city" type="text" formControlName="city" placeholder="city" required maxlength="50">
-            <label for="city"></label>,
+                județul <p class="unchangeable-field">BE-COUNTY</p>,
 
-            <input id="addressLine" type="text" formControlName="addressLine" placeholder="address line" required
-                maxlength="50">
-            <label for="addressLine"></label>
+                localitatea <p class="unchangeable-field">BE-CITY</p>,
 
-            identificat/ă prin CNP <input id="CNP" type="text" formControlName="CNP" placeholder="CNP" required
-                maxlength="50">
-            <label for="CNP"></label>
+                <p class="unchangeable-field">BE-STREET BE-STREET-NR BE-FLAT-NUMBER</p>
 
-            act de identitate CI
+                identificat/ă prin CNP <p class="unchangeable-field">BE-CNP</p>
 
-            seria <input id="series" type="text" formControlName="series" placeholder="series" required maxlength="50">
-            <label for="series"></label>
+                act de identitate CI
 
-            nr. <input id="idNumber" type="text" formControlName="idNumber" placeholder="number" required
-                maxlength="50">
-            <label for="idNumber"></label>
+                seria <p class="unchangeable-field">BE-IDENTITY-CARD-SERIES</p>
 
-            eliberat de <input id="issuingAuthority" type="text" formControlName="issuingAuthority"
-                placeholder="issuing authority" required maxlength="50">
-            <label for="issuingAuthority"></label>
+                nr. <p class="unchangeable-field">BE-IDENTITY-CARD-NR</p>
 
-            la data de <input id="idReleaseDate" type="text" formControlName="idReleaseDate"
-                placeholder="id release date" required maxlength="50">
-            <label for="idReleaseDate"></label>,
+                eliberat de <p class="unchangeable-field">BE-IDENTITY-CARD-ISSUER</p>
 
-            este angajat(ă) al/a HR Connect
-            pe perioadă nedeterminată/determinată începând cu data de JOIN-DATE,
+                la data de <p class="unchangeable-field">BE-IDENTITY-CARD-ISSUING-DATE</p>,
 
-            în funcția de <input id="jobTitle" type="text" formControlName="jobTitle" placeholder="function" required
-                maxlength="50">
-            <label for="jobTitle"></label>,
+                este angajat(ă) al/a HR Connect
+                pe perioadă nedeterminată/determinată începând cu data de <p class="unchangeable-field">
+                    BE-USER-JOIN-DATE</p>,
 
-            conform
-            contractului individual de muncă nr. {{userProfile.id}}/«numberOfUsers», înregistrat în Registrul General de
-            evidență a salariaților conform legii.
+                în funcția de <p class="unchangeable-field">BE-POSITION</p>,
 
-            Prezenta se eliberează spre a-i servi la <input id="reason" type="text" formControlName="reason"
-                placeholder="reason" required maxlength="50">
-            <label for="reason"></label>
-        </section>
-    </form>
+                conform
+                contractului individual de muncă nr. <p class="unchangeable-field">BE-USER-ID</p>/2048,
+                înregistrat în Registrul General de evidență a salariaților conform legii.
 
-        <!-- SCHIMBAT INFORMATII PERSONALE -->
-        <!-- <section *ngIf="selectedReqType==='Change personal data'" class="request-text">
+                Prezenta se eliberează spre a-i servi la <input id="reason" type="text" formControlName="reason"
+                    placeholder="reason" required maxlength="250">
+                <label for="reason"></label>
+            </section>
+
+        </form>
+
+        <button type="button" class="submit" (click)="submitRequest()">Send request</button>
+        <!-- Butonul de submit request. La evenimentul click se apeleaza functia submitRequest() a componentei curente (requests-user) si cererea va fi aplicata-->
+    </div>
+
+
+    <!-- SCHIMBAT INFORMATII PERSONALE -->
+    <!-- <section *ngIf="selectedReqType==='Change personal data'" class="request-text">
             I want to change my <select id="dataToChange" class="input" name="dataToChange"
                 formControlName="dataToChange" (change)="onDataToChangeChange()">
                 <option disabled selected value="">Data to change</option>
@@ -94,8 +84,8 @@
             </p>
         </section> -->
 
-        <!-- CUSTOM REQUEST -->
-        <!-- <section *ngIf="selectedReqType==='Custom request'" class="request-text">
+    <!-- CUSTOM REQUEST -->
+    <!-- <section *ngIf="selectedReqType==='Custom request'" class="request-text">
             If you did not found the type of request you wish for among the existent templates, you can write your own
             down below. Include all the necessary details for it.
             <textarea id="customRequest"  formControlName="customRequest" name="customRequest" placeholder="Custom request" required rows="4" cols="50"></textarea>
@@ -106,12 +96,11 @@
 
 
 
-    
 
 
 
 
 
-    <button type="button" class="submit" (click)="submitRequest()">Send request</button>
-    <!-- Butonul de update utilizator. La evenimentul click se apeleaza functia updateUser() a componentei curente (add-user-modal) si utilzatorul va fi updated-->
+
+
 </div>
