@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, SecurityCont
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/models/user';
+import { LoginDetails, User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -92,11 +92,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       Validators.minLength(5),
     ]),
 
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(7),
-      Validators.maxLength(60),
-    ]),
+    password: new FormControl(''),
 
     // CONTACT =======================================================================================================================================================
     email: new FormControl('', [
@@ -220,7 +216,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       role: this.editedUser.loginDetails?.role || "",
       department: this.editedUser.department,
       position: this.editedUser.position,
-      password: this.editedUser.loginDetails?.password,
+
 
       email: this.editedUser.loginDetails?.email,
       phoneNumber: this.editedUser.phoneNumber,
@@ -251,7 +247,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // Functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte si va inchide modala
   }
 
-  
+
 
 
 
@@ -300,24 +296,9 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         }
         break;
 
-      // Checking if errors come from password field
-      case !!this.userForm.controls.password.errors:
-        this.errorSource = 'password';
-        switch (true) {
-          case !!this.userForm.controls.password.errors?.['required']:
-            this.errorMessage = 'Every user must have a password.';
-            break;
-          case !!this.userForm.controls.password.errors?.['minlength']:
-            this.errorMessage = 'Password must contain at least 7 characters.';
-            break;
-          case !!this.userForm.controls.password.errors?.['maxlength']:
-            this.errorMessage = 'Password can contain maximum 60 characters.';
-            break;
-          default:
-            this.errorMessage = 'Something went wrong.';
-            break;
-        }
-        break;
+
+      // password se aplica diferit pentru add si pt edit deci au fost adaugate separata la inceputul metodelor addUser() si editUser()
+
 
       // CONTACT ===========================================================================================================================================================  
 
@@ -671,7 +652,23 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
   addUser() {
 
-    // Verificam formularul
+    // Am ales sa verific input-ul password separat pentru ca difera la updateUser() 
+    switch (true) {
+      case (this.userForm.value.password == ''):
+        this.errorSource = 'password';
+        this.errorMessage = 'Every user must have a password.';
+        return;
+      case ((this.userForm.value.password?.length || 0) < 7):
+        this.errorSource = 'password';
+        this.errorMessage = 'Password must contain at least 7 characters.';
+        return;
+      case ((this.userForm.value.password?.length || 0) > 60):
+        this.errorSource = 'password';
+        this.errorMessage = 'Password can contain maximum 60 characters.';
+        return;
+    }
+    
+    // Verificam restul input-urilor
     if (this.userForm.invalid) {
       this.handleUserFormError();
       return;
@@ -727,7 +724,21 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
   updateUser() {
 
-    // Verificam formularul
+    // Am ales sa verific input-ul password separat pentru ca difera la addUser() 
+    if(this.userForm.value.password != ''){
+      switch (true) {
+        case ((this.userForm.value.password?.length || 0) <7):
+          this.errorSource = 'password';
+          this.errorMessage = 'Password must contain at least 7 characters.';
+          return;
+        case ((this.userForm.value.password?.length || 0) > 60):
+          this.errorSource = 'password';
+          this.errorMessage = 'Password can contain maximum 60 characters.';
+          return;
+      }
+    }
+    
+    // Verificam restul input-urilor
     if (this.userForm.invalid) {
       this.handleUserFormError();
       return;
@@ -749,12 +760,25 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       joinDate: this.editedUser.joinDate,
     }
 
+
+
     // Creem obiectul de tip login details cu valorile completate in formular
-    const loginDetails = {
-      id: this.editedUser.loginDetails?.id,
-      email: this.userForm.value.email || '',
-      password: this.sanitizeInput(this.userForm.controls.password.value || "") || '',
-      role: this.userForm.value.role || '',
+    let loginDetails: LoginDetails;
+
+    if (!!this.userForm.controls.password.value) {
+      loginDetails = {
+        id: this.editedUser.loginDetails?.id,
+        email: this.userForm.value.email || '',
+        password: this.sanitizeInput(this.userForm.controls.password.value || "") || '',
+        role: this.userForm.value.role || ''
+      }
+    } else {
+      loginDetails = {
+        id: this.editedUser.loginDetails?.id,
+        email: this.userForm.value.email || '',
+        password: this.editedUser.loginDetails?.password,
+        role: this.userForm.value.role || ''
+      }
     }
 
     // Creem obiectul de tip address cu valorile completate in formular
@@ -779,7 +803,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     }
 
     // Apelam functia de updateUser() si ii pasam ca parametru obiectele de tip user, login details, address, identity card create anterior
-    this.updatedUserSubscription = this.userService.updateUser(user,loginDetails,address,identityCard).subscribe(() => {
+    this.updatedUserSubscription = this.userService.updateUser(user, loginDetails, address, identityCard).subscribe(() => {
       this.newGetUsersEvent.emit();
       this.closeModal();
     })
