@@ -16,7 +16,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
   @Input() editedUser: User = new User();
   @Input() modalType: String = '';
-  @Input() modalRole: String = '';
+  @Input() modalRole: String = ''; 
 
   particlesScriptElement: HTMLScriptElement;
   particlesSettingsScriptElement: HTMLScriptElement;

@@ -13,7 +13,7 @@ import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-admin-users-table',
   templateUrl: './admin-users-table.component.html',
-  styleUrls: ['./admin-users-table.component.css'],
+  styleUrls: ['./admin-users-table.component.css'], 
   encapsulation: ViewEncapsulation.None
 })
 
@@ -72,7 +72,7 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   editedUser = new User();
   modalType = "";
   modalRole = "admin";
-
+ 
   ngOnInit(): void {
     this.getUsers();
   }

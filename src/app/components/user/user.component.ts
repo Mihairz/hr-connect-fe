@@ -24,7 +24,7 @@ export class UserComponent implements OnDestroy {
   @Output() newEditUserEvent = new EventEmitter<User>();
   @Input() page:String = '';
 
-  // apeleaza functia editUser() din serviciul user injectat iar apoi emite un eveniment-ul newEditUserEvent catre componenta parinte
+  // Emite evenimentul newEditUserEvent catre componenta parinte pasand ca si atribut user-ul din input
   editUser() {
     this.newEditUserEvent.emit(this.user);
   }

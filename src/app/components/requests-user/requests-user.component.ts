@@ -2,7 +2,7 @@ import { Component, OnInit, SecurityContext } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
-import { UserRequestService } from 'src/app/services/userRequest.service';
+
 import { UserService } from 'src/app/services/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -13,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class RequestsUserComponent implements OnInit {
 
-  constructor(private userService: UserService, private userRequestService: UserRequestService, private sanitizer: DomSanitizer) { }
+  constructor(private userService: UserService, private sanitizer: DomSanitizer) { }
 
   userProfile: User = new User();
 

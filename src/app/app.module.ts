@@ -58,6 +58,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatRippleModule} from '@angular/material/core';
 import { RequestsPageComponent } from './pages/requests-page/requests-page.component';
 import { RequestsUserComponent } from './components/requests-user/requests-user.component';
+import { RequestsHrComponent } from './components/requests-hr/requests-hr/requests-hr.component';
+import { RequestActionsComponent } from './components/request-actions/request-actions/request-actions.component';
+import { RequestEachComponent } from './components/request-each/request-each/request-each.component';
+import { RequestDetailsModalComponent } from './components/request-details-modal/request-details-modal/request-details-modal.component';
 
 
 @NgModule({
@@ -86,6 +90,10 @@ import { RequestsUserComponent } from './components/requests-user/requests-user.
     FileUploadComponent,
     RequestsPageComponent,
     RequestsUserComponent,
+    RequestsHrComponent,
+    RequestActionsComponent,
+    RequestEachComponent,
+    RequestDetailsModalComponent,
 
   ],
   imports: [

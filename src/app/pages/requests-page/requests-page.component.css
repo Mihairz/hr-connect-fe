@@ -4,16 +4,8 @@
     height: 100%;
     background-color: #F2F7FB;
     position: relative;
-   padding-bottom: 20px;
+    overflow: auto;
+    padding: 10px;
+    padding-top:55px;
 }
 
-h1 {
-    padding-top:100px;
-}
-h1, h4 {
-    text-align: center;
-}
-
-h4 {
-    padding-bottom: 20px;
-}
