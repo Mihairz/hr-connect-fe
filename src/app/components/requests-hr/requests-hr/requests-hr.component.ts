@@ -21,7 +21,9 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
   requestSubscription: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.getRequests();
+    // this.getAllPendingRequests();
+
+    this.getAllRequests();
   }
 
 
@@ -56,6 +58,23 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
     }
   }
 
+  
+  openCity(cityName: string): void {
+    let i: number;
+    const x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+      (x[i] as HTMLElement).style.display = "none";
+    }
+    (document.getElementById(cityName) as HTMLElement).style.display = "block";
+  }
+
+  loadAllRequestsTab(){
+    this.getAllRequests();
+  }
+  loadJustAllPendingRequests(){
+    this.getAllPendingRequests();
+  }
+  
 
 
 
@@ -69,12 +88,26 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
   // modalType = "";
   // modalRole = "hr";
 
-  // apeleaza functia getUsers() din serviciul user injectat si populeaza lista existenta
-  getRequests() {
+  // apeleaza functia getRequests() din serviciul RequestUser injectat si populeaza lista
+  getAllRequests() {
     this.isLoading = true; // am setat isLoading pe true la inceputul unui proces care poate dura mai mult
 
     this.requestSubscription =
-      this.requestHrService.getRequests().subscribe((responseRequestsList) => {
+      this.requestHrService.getAllRequests().subscribe((responseRequestsList) => {
+        // console.log(responseRequestsList);
+
+        this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
+
+        this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
+      });
+  }
+
+  // apeleaza functia getRequests() din serviciul RequestUser injectat si populeaza lista
+  getAllPendingRequests() {
+    this.isLoading = true; // am setat isLoading pe true la inceputul unui proces care poate dura mai mult
+
+    this.requestSubscription =
+      this.requestHrService.getAllPendingRequests().subscribe((responseRequestsList) => {
         // console.log(responseRequestsList);
 
         this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
@@ -108,20 +141,12 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
   // }
 
   viewDetails(requestUser: RequestUser){
-    // this.modalType
+    // this.modalType 
     this.editedRequest = requestUser;
     this.openModal();
-
-    console.log('view details reached');
-    console.log("edited request: "+this.editedRequest.requester?.firstName+" "+this.editedRequest.status)
   }
 
   ngOnDestroy(): void {
     this.requestSubscription.unsubscribe();
   }
-
-
-
-
-
 }

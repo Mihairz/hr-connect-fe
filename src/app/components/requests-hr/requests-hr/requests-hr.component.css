@@ -1,6 +1,7 @@
 h1 {
 
     text-align: center;
+    font-weight: bold;
 }
 
 
@@ -13,37 +14,38 @@ h1 {
     gap: 10px;
 }
 
-.search-container{
+.search-container {
     box-sizing: border-box;
     width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
 }
+
 .search-bar {
     height: 37px !important;
     width: 16% !important;
     border: 1px solid lightgrey !important;
 }
 
-.mdc-data-table__header-cell{
+.mdc-data-table__header-cell {
     font-weight: 1000;
 }
 
-.btn-add{
+.btn-add {
     background-color: #133C7F;
-    color:white;
+    color: white;
 }
 
 th {
     background-color: #2282C1;
 }
 
-.table{
+.table {
     border: 1px solid lightgrey !important;
 }
 
-.mat-mdc-header-cell{
+.mat-mdc-header-cell {
     background-color: #DDECF6 !important;
 }
 
@@ -67,6 +69,77 @@ th.mat-sort-header-sorted {
     background-color: #F2F7FB;
 }
 
-.mat-mdc-text-field-wrapper{
+.mat-mdc-text-field-wrapper {
     background-color: white;
+}
+
+
+
+
+
+.search-and-tabs-container {
+    display: flex;
+    width: 100%;
+}
+
+.search-and-tabs-container label{
+    height: 37px;
+    width: 200px;
+    border: 1px solid lightgrey;
+}
+
+
+
+
+.tabs {
+    display: flex;
+}
+
+.tabs label {
+    order: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    background-color: #F2F7FB;
+    font-weight: bold;
+    transition: background ease 0.3s;
+}
+
+.tabs .tab {
+    order: 9;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding: 1rem;
+    background: #fff;
+    padding: 20px;
+    box-shadow: -10px 10px 0px 0px black;
+}
+
+.tabs input[type="radio"] {
+    display: none;
+}
+
+.tabs input[type="radio"]:checked+label {
+    background: #fff;
+}
+
+.tabs input[type="radio"]:checked+label+.tab {
+    display: block;
+}
+
+@media (max-width: 465px) {
+
+    .tabs .tab,
+    .tabs label {
+        order: initial;
+    }
+
+    .tabs label {
+        width: 100%;
+        margin-left: 50px;
+    }
 }
