@@ -20,7 +20,7 @@ export class User {
 export class LoginDetails { 
     id?: number = 0;
     email: string = '';
-    password: string = '';
+    password?: string = '';
     role: string = '';
 }
 
