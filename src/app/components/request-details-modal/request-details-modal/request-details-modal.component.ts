@@ -14,7 +14,8 @@ export class RequestDetailsModalComponent {
   @Output() newGetRequestsEvent = new EventEmitter<string>(); // Creem un eveniment nou care va fi transmis componentei parinte (output)
   @Input() editedRequest: RequestUser = new RequestUser();
 
-  deleteRequestSubscription: Subscription = new Subscription();
+  denyRequestSubscription: Subscription = new Subscription();
+  approveRequestSubscription: Subscription = new Subscription();
 
 
   particlesScriptElement: HTMLScriptElement;
@@ -43,9 +44,18 @@ export class RequestDetailsModalComponent {
     // Functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte si va inchide modala
   }
 
+  
+
   // apeleaza functia deleteRequest() din serviciul RequestUser injectat iar apoi emite evenimentul newGetUsersEvent catre componenta parinte
-  deleteRequest() {
-    this.deleteRequestSubscription = this.requestHrService.deleteRequest(this.editedRequest.id).subscribe((response) => { 
+  denyRequest() {
+    this.denyRequestSubscription = this.requestHrService.denyRequest(this.editedRequest.id).subscribe((response) => { 
+      this.newGetRequestsEvent.emit();
+    })
+  }
+
+  // apeleaza functia deleteRequest() din serviciul RequestUser injectat iar apoi emite evenimentul newGetUsersEvent catre componenta parinte
+  approveRequest() {
+    this.approveRequestSubscription = this.requestHrService.approveRequest(this.editedRequest.id).subscribe((response) => { 
       this.newGetRequestsEvent.emit();
     })
   }

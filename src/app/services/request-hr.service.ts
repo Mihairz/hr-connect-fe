@@ -9,11 +9,24 @@ import { RequestUser } from '../models/request-user';
 export class RequestHrService{
   constructor(private http: HttpClient) { }
 
-  getRequests(): Observable<RequestUser[]> {
+  getAllRequests(): Observable<RequestUser[]> {
     return this.http.get<RequestUser[]>('http://localhost:8082/request/allRequests');
   }
 
-  deleteRequest(id?: number): Observable<{}> {
-    return this.http.delete(`http://localhost:8082/request?id=${id}`, {}) as Observable<{}>
+  getAllPendingRequests(): Observable<RequestUser[]> {
+    return this.http.get<RequestUser[]>('http://localhost:8082/request/allInPendingRequests');
   }
+
+  denyRequest(id?: number): Observable<any> {
+    return this.http.delete(`http://localhost:8082/request/respond-to-request?requestId=${id}&status=false`);  
+  }
+
+  approveRequest(id?: number): Observable<any> {
+    return this.http.delete(`http://localhost:8082/request/respond-to-request?requestId=${id}&status=true`); 
+  }
+
+  addRequest(type:string,details:string): Observable<RequestUser>{
+    return this.http.put<RequestUser>('http://localhost:8082/request/add',{type,details});
+  }
+
 }

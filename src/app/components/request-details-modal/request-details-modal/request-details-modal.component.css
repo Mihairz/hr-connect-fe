@@ -208,13 +208,11 @@ color of the placeholder text when some input was written but the input field si
 .request-details-grid {
     display: grid;
     grid-template-columns: 2fr 3fr;
-    grid-template-rows: 3fr 1fr;
+    grid-template-rows: 1fr;
     gap:15px;
 }
 
 .request-data-container {
-    grid-area: 1 / 1 / 3 / 2;
-
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, 1fr);
@@ -245,19 +243,22 @@ color of the placeholder text when some input was written but the input field si
     font-weight: bold;
 }
 
-.action-buttons-container, .request-details-container, .request-data-container div{
+.request-details-container, .request-data-container div{
     background: white;
     border-radius: 20px;
     border: 1px solid lightgray;
 }
 
 
-.request-details-container{
-    grid-area: 1 / 2 / 2 / 3;
+.request-details-content{
+    display: grid;
+    align-content: space-between;
+    height: 92%;
 }
 
 .action-buttons-container{
-    grid-area: 2 / 2 / 3 / 3;
+    display:flex;
+    justify-content: space-between;
 }
 
 .unchangeable-field {
@@ -274,4 +275,15 @@ color of the placeholder text when some input was written but the input field si
 h3{
     text-align:center;
     padding-bottom: 10px;
+}
+
+.btn-approve{
+    background-color: #00A3E3;
+    color: white;
+}
+
+button {
+    width: 300px;
+    height: 50px;
+    font-size: 18px;
 }
