@@ -7,16 +7,24 @@ import { FeedbackFormService } from 'src/app/services/feedback-form.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
+
+
+
 @Component({
   selector: 'app-feedback-form',
   templateUrl: './feedback-form.component.html',
-  styleUrls: ['./feedback-form.component.css']
+  styleUrls: ['./feedback-form.component.css'],
+
 })
 export class FeedbackFormComponent implements OnInit, AfterViewInit  {
   feedbackForm: FormGroup; //Tracks the value and validity state of a group of FormControl instances.
   feedbacks: Feedback[] = []; // array that will hold the feedback object
-  displayedColumns: string[] = ['category', 'title', 'content', 'favourite']; //column of the tabel
-  
+  columnsToDisplay: string[] = ['category', 'title', 'content', 'author', 'favourite']; //column of the tabel
+  dataSource = new MatTableDataSource(this.feedbacks);
+  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+  expandedElement!: Feedback | null;
 
   constructor(private feedbackService: FeedbackFormService) {
     this.feedbackForm = new FormGroup({
@@ -28,7 +36,7 @@ export class FeedbackFormComponent implements OnInit, AfterViewInit  {
   }
   @ViewChild('paginator') paginator!: MatPaginator ;
   
-  dataSource = new MatTableDataSource(this.feedbacks);
+
   // dataSource!: MatTableDataSource<Feedback>;
  
   // @ViewChild(MatSort, { static: false })
@@ -52,6 +60,7 @@ export class FeedbackFormComponent implements OnInit, AfterViewInit  {
 getFeedbacks() {
   this.feedbackService.getFeedback().subscribe((response) => {
     this.feedbacks = response.reverse();
+    
     this.dataSource = new MatTableDataSource(this.feedbacks); //sets the dataSource property 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator; //sets the paginator property 
@@ -81,6 +90,6 @@ getFeedbacks() {
       this.getFeedbacks();
     });
   }
-
+  isExpansionDetailRow = (index: number, row: any) => row.hasOwnProperty('detailRow');
 
 }

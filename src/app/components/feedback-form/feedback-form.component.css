@@ -3,3 +3,10 @@
     flex-direction: column;
     align-items: flex-start;
   }
+
+  mat-cell{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }

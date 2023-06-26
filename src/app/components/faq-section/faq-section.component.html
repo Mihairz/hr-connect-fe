@@ -33,9 +33,16 @@
   <div class="container-faqs">
     <!-- https://material.angular.io/cdk/drag-drop/overview#cdk-drag-drop-sorting  we have have a drop list material component that then drags and drops the accordions and arranges by the order item-->
 
-    <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
-
-    <div *ngFor="let category of faqCategories">
+  <!-- When you click on a button you go to the catagory -->
+    <div class="category-buttons">
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Important_HR_announcement')">Important HR Announcement</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Upcoming_events')">Upcoming Events</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Policy_changes')">Policy Changes</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Training_opportunities')">Training Opportunities</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('News')">Latest Updates</button>
+    </div>
+      <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
+    <div *ngFor="let category of faqCategories" [id]="category">
       <!-- filter the categories that do not have any items in them so they don't appear when we are searching for data  -->
       <div *ngIf="filteredFaqsByCategory[category].length > 0">
       <!-- the faq will have an updated name instead of the one in the database-->
@@ -96,6 +103,7 @@
                   {{ faq.content }}
                 </div>
                 <div class="card">
+                  <!-- if there is no documentUrl the card will not appear -->
                   <div class="card-body" *ngIf="faq.documentUrl">
                     For more details please click on this document
                     <a href="{{ faq.documentUrl }}" target="_blank">this document</a>

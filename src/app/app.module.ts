@@ -60,6 +60,8 @@ import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.compo
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { SecondNavbarComponent } from './components/second-navbar/second-navbar.component';
+
 
 
 
@@ -90,6 +92,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FileUploadComponent,
     FeedbackPageComponent,
     FeedbackFormComponent,
+    SecondNavbarComponent,
+   
    
 
   ],
@@ -121,6 +125,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSnackBarModule,
     MatRippleModule,
     MatSlideToggleModule,
+ 
   ],
   providers: [
     AuthInterceptorProvider,

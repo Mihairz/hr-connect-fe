@@ -5,3 +5,11 @@
 .text-style{
     white-space: pre-wrap
 }
+.img-fluid rounded{
+    margin-left: auto;
+    margin-right: auto;
+}
+.mb-4 image{
+    margin-left: auto !important;
+    margin-right: auto !important;
+}

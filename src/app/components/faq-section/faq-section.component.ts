@@ -133,5 +133,12 @@ categoryDisplayNames: {[key: string]: string} = {
   "Training_opportunities": "Training Opportunities",
   "News": "Latest Updates"
 };
+//Method that uses scrollIntoView to get you to your desired category section
+scrollToCategory(category: string) {
+  const element = document.getElementById(category);
+  if (element) {
+    element.scrollIntoView();
+  }
+}
 
 }
