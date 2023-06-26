@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { RequestUser } from 'src/app/models/request-user';
 import { RequestHrService } from 'src/app/services/request-hr.service';
 
@@ -8,8 +9,13 @@ import { RequestHrService } from 'src/app/services/request-hr.service';
   styleUrls: ['./request-details-modal.component.css']
 })
 export class RequestDetailsModalComponent {
+
   @Output() newCloseModalEvent = new EventEmitter<string>();
+  @Output() newGetRequestsEvent = new EventEmitter<string>(); // Creem un eveniment nou care va fi transmis componentei parinte (output)
   @Input() editedRequest: RequestUser = new RequestUser();
+
+  deleteRequestSubscription: Subscription = new Subscription();
+
 
   particlesScriptElement: HTMLScriptElement;
   particlesSettingsScriptElement: HTMLScriptElement;
@@ -35,6 +41,13 @@ export class RequestDetailsModalComponent {
   closeModal() {
     this.newCloseModalEvent.emit();
     // Functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte si va inchide modala
+  }
+
+  // apeleaza functia deleteRequest() din serviciul RequestUser injectat iar apoi emite evenimentul newGetUsersEvent catre componenta parinte
+  deleteRequest() {
+    this.deleteRequestSubscription = this.requestHrService.deleteRequest(this.editedRequest.id).subscribe((response) => { 
+      this.newGetRequestsEvent.emit();
+    })
   }
 }
  

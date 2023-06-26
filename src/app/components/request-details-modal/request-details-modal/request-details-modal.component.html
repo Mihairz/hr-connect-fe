@@ -70,7 +70,7 @@
                         </tr>
                         <tr>
                             <td>Position:</td>
-                            <td>{{editedRequest.responder.position}}</td>
+                            <td>{{editedRequest.responder.position.replace('_',' ')}}</td>
                         </tr>
                         <tr>
                             <td>Name:</td>
@@ -91,47 +91,51 @@
 
             <div class="request-details-container">
                 <h3 class="subtitle">Details</h3>
-                <section class="request-text">
+                <section class="employee-certificate-text">
                     <h3>ADEVERINȚĂ</h3>
     
-                    Prin prezenta, se adeverește că domnul/doamna <p class="unchangeable-field">BE-LAST-NAME BE-FIRST-NAME
+                    Prin prezenta, se adeverește că domnul/doamna <p class="unchangeable-field">{{editedRequest.requester?.lastName}} {{editedRequest.requester?.firstName}}
                     </p>
     
-                    domiciliat/ă în <p class="unchangeable-field">BE-COUNTRY</p>,
+                    domiciliat/ă în <p class="unchangeable-field">{{editedRequest.requester?.address?.country}}</p>,
     
-                    județul <p class="unchangeable-field">BE-COUNTY</p>,
+                    județul <p class="unchangeable-field">{{editedRequest.requester?.address?.county}}</p>,
     
-                    localitatea <p class="unchangeable-field">BE-CITY</p>,
+                    localitatea <p class="unchangeable-field">{{editedRequest.requester?.address?.city}}</p>,
     
-                    <p class="unchangeable-field">BE-STREET BE-STREET-NR BE-FLAT-NUMBER</p>
+                    <p class="unchangeable-field">{{editedRequest.requester?.address?.street}} {{editedRequest.requester?.address?.streetNumber}} {{editedRequest.requester?.address?.flatNumber}}</p>
     
-                    identificat/ă prin CNP <p class="unchangeable-field">BE-CNP</p>
+                    identificat/ă prin CNP <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.cnp}}</p>
     
                     act de identitate CI
     
-                    seria <p class="unchangeable-field">BE-IDENTITY-CARD-SERIES</p>
+                    seria <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.series}}</p>
     
-                    nr. <p class="unchangeable-field">BE-IDENTITY-CARD-NR</p>
+                    nr. <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.number}}</p>
     
-                    eliberat de <p class="unchangeable-field">BE-IDENTITY-CARD-ISSUER</p>
+                    eliberat de <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.issuer}}</p>
     
-                    la data de <p class="unchangeable-field">BE-IDENTITY-CARD-ISSUING-DATE</p>,
+                    la data de <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.issuingDate}}</p>,
     
                     este angajat(ă) al/a HR Connect
                     pe perioadă nedeterminată/determinată începând cu data de <p class="unchangeable-field">
-                        BE-USER-JOIN-DATE</p>,
+                        {{editedRequest.requester?.joinDate}}</p>,
     
-                    în funcția de <p class="unchangeable-field">BE-POSITION</p>,
+                    în funcția de <p class="unchangeable-field">{{editedRequest.requester?.position?.replace('_',' ')}}</p>,
     
                     conform
-                    contractului individual de muncă nr. <p class="unchangeable-field">BE-USER-ID</p>/2048,
+                    contractului individual de muncă nr. <p class="unchangeable-field">{{editedRequest.requester?.id}}</p>/2048,
                     înregistrat în Registrul General de evidență a salariaților conform legii.
     
                     Prezenta se eliberează spre a-i servi la 
                 </section>
             </div>
 
-            <div class="action-buttons-container"></div>
+            <div class="action-buttons-container">
+                <button>Approve</button>
+                <button>Deny</button>
+                <button type="button" class="btn btn-danger" (click)="deleteRequest()">Delete</button>
+            </div>
 
 
 

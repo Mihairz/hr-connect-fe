@@ -237,6 +237,14 @@ color of the placeholder text when some input was written but the input field si
     margin:0px 20px 20px 20px;
 }
 
+.request-data-container td{
+    width: 50%;
+}
+
+.request-data-container td:nth-child(odd){
+    font-weight: bold;
+}
+
 .action-buttons-container, .request-details-container, .request-data-container div{
     background: white;
     border-radius: 20px;
@@ -257,13 +265,13 @@ color of the placeholder text when some input was written but the input field si
     display: inline-block;
 }
 
-.request-text{
-    padding:0px 20px;
+.employee-certificate-text{
+    margin: 20px;
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px;
-    padding-bottom: 0;
 }
 
 h3{
     text-align:center;
+    padding-bottom: 10px;
 }

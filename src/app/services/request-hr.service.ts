@@ -12,4 +12,8 @@ export class RequestHrService{
   getRequests(): Observable<RequestUser[]> {
     return this.http.get<RequestUser[]>('http://localhost:8082/request/allRequests');
   }
+
+  deleteRequest(id?: number): Observable<{}> {
+    return this.http.delete(`http://localhost:8082/request?id=${id}`, {}) as Observable<{}>
+  }
 }
