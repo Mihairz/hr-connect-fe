@@ -57,7 +57,7 @@ const routes: Routes = [
   { path: 'faq', component: FaqPageComponent},
 
 
-  {path: 'requests', component: RequestsPageComponent}
+  {path: 'requests', component: RequestsPageComponent},
 
 
   { path: 'feedback', component: FeedbackPageComponent},
