@@ -10,7 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   selector: 'app-requests-user',
   templateUrl: './requests-user.component.html',
   styleUrls: ['./requests-user.component.css']
-})
+}) 
 export class RequestsUserComponent implements OnInit {
 
   constructor(private userService: UserService, private sanitizer: DomSanitizer) { }
@@ -39,7 +39,6 @@ export class RequestsUserComponent implements OnInit {
   submitRequestSubscription: Subscription = new Subscription();
 
   ngOnInit() {
-    const id = 2; // o sa luam id-ul sau e-mail-ul din token, dar momentan il hardcodam
     this.getUser(); // obtinem datele utilizatorului logat
   }
 
@@ -47,7 +46,7 @@ export class RequestsUserComponent implements OnInit {
   getUser() {
     this.userService.getUserSelf().subscribe((responseUserProfile) => {
       this.userProfile = responseUserProfile;
-      // console.log(responseUserProfile);
+      console.log(responseUserProfile);
     });
   }
 

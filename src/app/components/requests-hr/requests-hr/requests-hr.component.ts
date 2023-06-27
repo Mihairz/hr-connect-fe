@@ -21,9 +21,7 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
   requestSubscription: Subscription = new Subscription();
 
   ngOnInit(): void {
-    // this.getAllPendingRequests();
-
-    this.getAllRequests();
+    this.getAllPendingRequests();
   }
 
 

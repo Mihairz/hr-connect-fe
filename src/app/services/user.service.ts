@@ -16,8 +16,8 @@ export class UserService {
     return this.http.get<User[]>('http://localhost:8082/user/all');
   }
 
-  getUserSelf(): Observable<any> {
-    return this.http.get<any>('http://localhost:8082/self');
+  getUserSelf(): Observable<User> {
+    return this.http.get<User>('http://localhost:8082/user/self'); 
   }
 
   addUser(user: User,loginDetails: LoginDetails, address: Address,  identityCard:IdentityCard): Observable<User> {
