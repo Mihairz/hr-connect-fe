@@ -3,7 +3,7 @@ export class User {
     department: string = '';
     function: string = '';
     role: string = '';
-    name: string = '';
+    lastName: string = '';
     email: string = '';
     phone: string = '';
     password: string = '';

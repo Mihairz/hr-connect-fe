@@ -2,8 +2,9 @@ export interface FaqContent {
    category: string;
     title: string;
     content: string;
-    order: number;
+    orderNumber: number;
     id: number;
+    documentUrl: string;
     
   
 

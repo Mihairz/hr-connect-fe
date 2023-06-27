@@ -20,15 +20,21 @@
     </mat-form-field>
   </div>
   <mat-form-field>
+
+    
      
     <select matNativeControl required [(ngModel)]="data.category">
-      <option value="Recruitment & Onboarding">Recruitment & Onboarding</option>
-      <option value="Compensation & Benefits">Compensation & Benefits</option>
-      <option value="Workplace Policies & Environments">Workplace Policies & Environment</option>
-      <option value="Professional Development & Performance">Professional Development & Performance</option>
-      <option value="Conflict Resolution & Employee Support">Training Opportunities</option>
-      <option value="Employee Resources & Services">Training Opportunities</option>
+     
+      <option value="Important_HR_announcement">Important Hr Announcements</option>
+      <option value="Upcoming_events">Upcoming events</option>
+      <option value="Policy_changes">Policies Changes</option>
+      <option value="Training_opportunities">Training Opportunities</option>
+      <option value="News">News</option>
     </select>
+  </mat-form-field>
+  <mat-form-field class="input">
+    Placeholder Section
+    <input matInput [(ngModel)]="data.documentUrl" placeholder="Document URL" />
   </mat-form-field>
   <app-file-upload></app-file-upload>
   <div class="modal__buttons">

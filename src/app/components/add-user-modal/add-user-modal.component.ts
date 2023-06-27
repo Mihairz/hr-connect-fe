@@ -72,7 +72,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       Validators.required,
     ]),
 
-    name: new FormControl('', [
+    lastName: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
       Validators.maxLength(50),
@@ -109,7 +109,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       department: this.editedUser.department,
       function: this.editedUser.function,
       role: this.editedUser.role,
-      name: this.editedUser.name,
+      lastName: this.editedUser.lastName,
       email: this.editedUser.email,
       phone: this.editedUser.phone,
       password: this.editedUser.password
@@ -144,7 +144,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
             this.errorMessage = 'Every user must be part of a department.';
             break;
           case !!this.userForm.controls.department.errors?.['pattern']:
-            this.errorMessage = 'Department name can contain only aphanumeric characters.';
+            this.errorMessage = 'Department lastName can contain only aphanumeric characters.';
             break;
           case !!this.userForm.controls.department.errors?.['minlength']:
             this.errorMessage = 'Department must contain at least 2 characters.';
@@ -166,7 +166,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
             this.errorMessage = 'Every user must be have a function.';
             break;
           case !!this.userForm.controls.function.errors?.['pattern']:
-            this.errorMessage = 'Function name can contain only aphanumeric characters.';
+            this.errorMessage = 'Function lastName can contain only aphanumeric characters.';
             break;
           case !!this.userForm.controls.function.errors?.['minlength']:
             console.log('min length error')
@@ -191,21 +191,21 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorMessage = 'Every user must have a role.'
         break;
 
-      // Checking if errors come from name field
-      case !!this.userForm.controls.name.errors:
-        this.errorSource = 'name';
+      // Checking if errors come from lastName field
+      case !!this.userForm.controls.lastName.errors:
+        this.errorSource = 'lastName';
         switch (true) {
-          case !!this.userForm.controls.name.errors?.['required']:
-            this.errorMessage = 'Every user must have a name.';
+          case !!this.userForm.controls.lastName.errors?.['required']:
+            this.errorMessage = 'Every user must have a lastName.';
             break;
-          case !!this.userForm.controls.name.errors?.['pattern']:
-            this.errorMessage = 'User name can contain only alphabetic characters.';
+          case !!this.userForm.controls.lastName.errors?.['pattern']:
+            this.errorMessage = 'User lastName can contain only alphabetic characters.';
             break;
-          case !!this.userForm.controls.name.errors?.['minlength']:
-            this.errorMessage = 'User name must contain at least 5 characters.';
+          case !!this.userForm.controls.lastName.errors?.['minlength']:
+            this.errorMessage = 'User lastName must contain at least 5 characters.';
             break;
-          case !!this.userForm.controls.name.errors?.['maxlength']:
-            this.errorMessage = 'User name can contain a maximum of 50 characters.';
+          case !!this.userForm.controls.lastName.errors?.['maxlength']:
+            this.errorMessage = 'User lastName can contain a maximum of 50 characters.';
             break;
           default:
             this.errorMessage = 'Something went wrong.';
@@ -303,7 +303,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       department: this.userForm.value.department || '',
       function: this.userForm.value.function || '',
       role: this.selectedRole || '',
-      name: this.userForm.value.name || '',
+      lastName: this.userForm.value.lastName || '',
       email: this.userForm.value.email || '',
       phone: this.userForm.value.phone || '',
       password: this.sanitizeInput(this.userForm.controls.password.value || "") || ''
@@ -325,7 +325,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       department: this.userForm.value.department || '',
       function: this.userForm.value.function || '',
       role: this.userForm.value.role || '',
-      name: this.userForm.value.name || '',
+      lastName: this.userForm.value.lastName || '',
       email: this.userForm.value.email || '',
       phone: this.userForm.value.phone || '',
       password: this.userForm.value.password || ''

@@ -5,6 +5,8 @@ import { FaqService } from 'src/app/services/faq.service';
 import { AddFaqModalComponent } from '../add-faq-modal/add-faq-modal.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
+
+
 // to filter by title used this tutorial: https://www.youtube.com/watch?v=lTOQ7Fjhcvk
 
 @Component({
@@ -15,14 +17,12 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class FaqSectionComponent implements OnInit {
   // all categories, helps us structure in html - put every item in its category an later
   faqCategories: string[] = [
-     "Recruitment & Onboarding",
-     "Compensation & Benefits",
-     "Workplace Policies & Environment",
-     "Professional Development & Performance",
-     "Conflict Resolution & Employee Support",
-     "Employee Resources & Services"
-
-
+    
+     "Important_HR_announcement",
+     "Upcoming_events",
+     "Policy_changes",
+     "Training_opportunities",
+     "News"
   ];
 
   faqsByCategory: {[key: string]: FaqContent[]} = {};
@@ -30,6 +30,8 @@ export class FaqSectionComponent implements OnInit {
   _filterText: string = ''; 
   filteredFaqs: FaqContent [] = []; 
   filteredFaqsByCategory: {[key: string]: FaqContent[]} = {};
+  // Add a new field to remember which category we're dragging from
+draggingFromCategory!: string;
 
 
 get filterText(){
@@ -71,7 +73,7 @@ editFaq(faq: FaqContent) {
 
 addFaq() {
   const dialogRef = this.dialog.open(AddFaqModalComponent, {
-    data: { category:'',title: '', content: '' , order:''}
+    data: { category:'',title: '', content: '' , orderNumber:'', documentUrl:''}
   });
   dialogRef.afterClosed().subscribe(result => {
     this.getFaqs();
@@ -102,20 +104,41 @@ filterFaqs() {
 
 
 
-
-//event handler - triggered when a drag and drop is done. changes the faqs array
-drop(event: CdkDragDrop<string[]>) {
-  moveItemInArray(this.faqs, event.previousIndex, event.currentIndex); 
-  this.updateFaqOrders();
+//when you drop an item checks if is in the same category then updates the order
+drop(event: CdkDragDrop<FaqContent[]>) {
+  if (event.previousContainer === event.container) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    this.updateFaqOrders(event.container.data);
+  }
 }
-//is a function that adds 1 to each order when an element and also updates the backend. 
-//This way we have a plus one in order after the drop above
-updateFaqOrders() {
-  this.faqs.forEach((faq, index) => {
-    faq.order = index + 1;
+// updates the faq order and sends the update to the database
+updateFaqOrders(faqs: FaqContent[]) {
+  faqs.forEach((faq, index) => {
+    faq.orderNumber = index + 1;
     this.faqsService.updateFaqContent(faq).subscribe();
   });
-  this.filteredFaqs = this.faqs; //the new faqs are copied into filteredFaqs so we can have the updated displayed
+}
+
+// Method to remember from which category we're starting the drag
+startDrag(category: string) {
+  this.draggingFromCategory = category;
+}
+
+// This is how we change the display name of the categories in the HTML
+categoryDisplayNames: {[key: string]: string} = {
+
+  "Important_HR_announcement": "Important HR announcement",
+  "Upcoming_events": "Upcoming events",
+  "Policy_changes": "Updates to Policy",
+  "Training_opportunities": "Training Opportunities",
+  "News": "Latest Updates"
+};
+//Method that uses scrollIntoView to get you to your desired category section
+scrollToCategory(category: string) {
+  const element = document.getElementById(category);
+  if (element) {
+    element.scrollIntoView();
+  }
 }
 
 }

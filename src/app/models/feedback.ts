@@ -3,6 +3,8 @@ export interface Feedback {
     category: string;
      title: string;
      content: string;
+     favourite: boolean;
+     author: string
           
    
  
