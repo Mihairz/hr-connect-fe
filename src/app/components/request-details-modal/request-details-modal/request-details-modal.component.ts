@@ -50,13 +50,16 @@ export class RequestDetailsModalComponent {
   denyRequest() {
     this.denyRequestSubscription = this.requestHrService.denyRequest(this.editedRequest.id).subscribe((response) => { 
       this.newGetRequestsEvent.emit();
+      this.closeModal();
     })
   }
 
   // apeleaza functia deleteRequest() din serviciul RequestUser injectat iar apoi emite evenimentul newGetUsersEvent catre componenta parinte
   approveRequest() {
+    console.log('APPROVE REQUEST');
     this.approveRequestSubscription = this.requestHrService.approveRequest(this.editedRequest.id).subscribe((response) => { 
       this.newGetRequestsEvent.emit();
+      this.closeModal();
     })
   }
 }

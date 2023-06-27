@@ -66,10 +66,27 @@
                             </div>
                             <div class="col-sm-9">
                                 {{userProfile.phoneNumber}}
+
+                                <button (click)="editPhoneNumber(userProfile)">change</button>
                             </div>
                         </div>
                         <hr>
 
+                        <div class="row">
+                            <div class="col-sm-3 text-secondary"> <!-- occupy 3 columns -->
+                                <h6 class="mb-0">Password</h6>
+                            </div>
+                            <ng-container *ngFor="let role of ['employee', 'hr', 'admin']">
+                                <div *appHasRole="role" class="col-sm-9">
+                                    <b>*********</b>
+
+                                    <button (click)="editPassword(userProfile)">change</button>
+                                </div>
+                            </ng-container>
+                        </div>
+                        <hr>
+ 
+                        <!-- TO DELETE -->
                         <div class="row">
                             <div class="col-sm-3 text-secondary"> <!-- occupy 3 columns -->
                                 <h6 class="mb-0">Role</h6>
@@ -85,7 +102,7 @@
                         <div class="action-buttons-container">
                             <app-user [user]="userProfile" [page]="'profile'"
                                 (newGetUsersEvent)="getUser()"
-                                (newEditUserEvent)="editUser($event)"></app-user>
+                               ></app-user>
                         </div>
 
                     </div>
@@ -94,7 +111,7 @@
 
 
 
-            <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType"
+            <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType" [modalRole]="modalRole"
                 (newCloseModalEvent)="closeModal()"
                 (newGetUsersEvent)="getUser()">
             </app-add-user-modal>

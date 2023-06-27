@@ -18,11 +18,11 @@ export class RequestHrService{
   }
 
   denyRequest(id?: number): Observable<any> {
-    return this.http.delete(`http://localhost:8082/request/respond-to-request?requestId=${id}&status=false`);  
+    return this.http.post(`http://localhost:8082/request/respond-to-request?requestId=${id}&isApproved=false`,{});  
   }
 
   approveRequest(id?: number): Observable<any> {
-    return this.http.delete(`http://localhost:8082/request/respond-to-request?requestId=${id}&status=true`); 
+    return this.http.post(`http://localhost:8082/request/respond-to-request?requestId=${id}&isApproved=true`,{}); 
   }
 
   addRequest(type:string,details:string): Observable<RequestUser>{
