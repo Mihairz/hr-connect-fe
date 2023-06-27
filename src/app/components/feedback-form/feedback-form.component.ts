@@ -38,7 +38,8 @@ export class FeedbackFormComponent implements OnInit, AfterViewInit {
     'title',
     'content',
     'author',
-    'favourite'
+    'favourite',
+    'delete'
    
   ]; //column of the tabel
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
@@ -97,6 +98,12 @@ export class FeedbackFormComponent implements OnInit, AfterViewInit {
         });
     }
   }
+  deleteFeedback(id:number ) {
+    this.feedbackService.deleteFeedback(id).subscribe(() => {
+      this.getFeedbacks()
+    });
+  }
+
 
   toggleFavourite(feedback: Feedback) {
     feedback.favourite = !feedback.favourite;

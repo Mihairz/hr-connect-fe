@@ -56,3 +56,7 @@
   .example-element-description-attribution {
     opacity: 0.5;
   }
+/* text in the content to have brackets  */
+  .text-style{
+    white-space: pre-wrap
+}

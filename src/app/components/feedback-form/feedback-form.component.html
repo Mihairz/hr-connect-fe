@@ -99,7 +99,18 @@
     <mat-slide-toggle [checked]="element.favourite" (change)="toggleFavourite(element)"></mat-slide-toggle>
   </td>
 </ng-container>
-
+<ng-container matColumnDef="delete">
+  <th mat-header-cell *matHeaderCellDef >Delete</th>
+  <td mat-cell *matCellDef="let element"> 
+    <button
+                  type="button"
+                  class="btn btn-secondary delete"
+                  (click)="deleteFeedback(element.id)"
+                >
+                  Delete
+                </button>
+  </td>
+</ng-container>
 
 
 
@@ -119,7 +130,7 @@
  <div class="example-element-detail"
       [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
    <div class="example-element-diagram">
-     <div class="example-element-position"> {{element.content}} </div>
+     <div class="example-element-position"><p class="text-style"> {{element.content}} </p></div>
     
    </div>
  
