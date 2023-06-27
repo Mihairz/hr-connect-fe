@@ -56,6 +56,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatRippleModule} from '@angular/material/core';
+
 import { RequestsPageComponent } from './pages/requests-page/requests-page.component';
 import { RequestsUserComponent } from './components/requests-user/requests-user.component';
 import { RequestsHrComponent } from './components/requests-hr/requests-hr/requests-hr.component';
@@ -63,6 +64,16 @@ import { RequestsHrComponent } from './components/requests-hr/requests-hr/reques
 
 import { RequestEachComponent } from './components/request-each/request-each/request-each.component';
 import { RequestDetailsModalComponent } from './components/request-details-modal/request-details-modal/request-details-modal.component';
+
+import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.component';
+import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
+
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { SecondNavbarComponent } from './components/second-navbar/second-navbar.component';
+
+
+
+
 
 
 @NgModule({
@@ -89,11 +100,19 @@ import { RequestDetailsModalComponent } from './components/request-details-modal
     AddFaqModalComponent,
     SpinnerComponent,
     FileUploadComponent,
+
     RequestsPageComponent,
     RequestsUserComponent,
     RequestsHrComponent,
     RequestEachComponent,
     RequestDetailsModalComponent,
+
+    FeedbackPageComponent,
+    FeedbackFormComponent,
+    SecondNavbarComponent,
+   
+   
+
 
   ],
   imports: [
@@ -122,7 +141,9 @@ import { RequestDetailsModalComponent } from './components/request-details-modal
     MatExpansionModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSlideToggleModule,
+ 
   ],
   providers: [
     AuthInterceptorProvider,

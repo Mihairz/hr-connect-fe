@@ -1,0 +1,163 @@
+<!-- A FormGroup aggregates the values of each child FormControl into one object, with each control name as the key.  -->
+<!-- onSubmit() Method called when the "submit" event is triggered on the form. Triggers the ngSubmit emitter to emit the "submit" event as its payload. -->
+<form [formGroup]="feedbackForm" (ngSubmit)="saveFeedback()">
+    <mat-form-field>
+      <mat-label>Select</mat-label>
+      <mat-select formControlName="category">
+        <mat-option value="feedback">Feedback</mat-option>
+        <mat-option value="suggestion">Suggestion</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Input</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Textarea</mat-label>
+      <textarea matInput formControlName="content"></textarea>
+    </mat-form-field>
+    <button type="submit">Submit</button>
+  </form>
+  <!-- https://material.angular.io/components/table/overview -->
+  <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner> - if we want a spinner -->
+<!-- </div> -->
+  <!-- <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"  >
+    
+    <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Type"> Type </mat-header-cell>
+        <mat-cell *matCellDef="let feedback"> {{feedback.category}} </mat-cell>
+    </ng-container>
+
+  
+    <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Title"> Title </mat-header-cell>
+        <mat-cell *matCellDef="let feedback"> {{feedback.title}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="content">
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Textarea"> Textarea </mat-header-cell>
+        <mat-cell *matCellDef="let feedback"> {{feedback.content}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="author">
+      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Textarea"> Author </mat-header-cell>
+      <mat-cell *matCellDef="let feedback"> {{feedback.author}} </mat-cell>
+  </ng-container>
+    <ng-container matColumnDef="favourite">
+      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Favourite"> Favourite </mat-header-cell>
+      <mat-cell *matCellDef="let feedback"> 
+        <mat-slide-toggle [checked]="feedback.favourite" (change)="toggleFavourite(feedback)"></mat-slide-toggle>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+    
+  </table> -->
+
+
+  <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
+  <!-- <ng-container *ngFor="let column of columnsToDisplay">
+    <ng-container [matColumnDef]="column" *ngIf="column != 'favourite'">
+      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+  </ng-container>
+  
+
+<ng-container matColumnDef="favourite">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header>Favourite</th>
+  <td mat-cell *matCellDef="let element"> 
+    <mat-slide-toggle [checked]="element.favourite" (change)="toggleFavourite(element)"></mat-slide-toggle>
+  </td>
+</ng-container> -->
+
+<ng-container matColumnDef="category">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+  <td mat-cell *matCellDef="let element"> {{element['category']}} </td>
+</ng-container>
+
+<ng-container matColumnDef="title">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+  <td mat-cell *matCellDef="let element"> {{element['title']}} </td>
+</ng-container>
+
+<ng-container matColumnDef="content">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Content </th>
+  <td mat-cell class= "content-text" *matCellDef="let element"> {{element['content']}} </td>
+</ng-container>
+
+<ng-container matColumnDef="author">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Author </th>
+  <td mat-cell *matCellDef="let element"> {{element['author']}} </td>
+</ng-container>
+
+<ng-container matColumnDef="favourite">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header>Favourite</th>
+  <td mat-cell *matCellDef="let element"> 
+    <mat-slide-toggle [checked]="element.favourite" (change)="toggleFavourite(element)"></mat-slide-toggle>
+  </td>
+</ng-container>
+<ng-container matColumnDef="delete">
+  <th mat-header-cell *matHeaderCellDef >Delete</th>
+  <td mat-cell *matCellDef="let element"> 
+    <button
+                  type="button"
+                  class="btn btn-secondary delete"
+                  (click)="deleteFeedback(element.id)"
+                >
+                  Delete
+                </button>
+  </td>
+</ng-container>
+
+
+
+<ng-container matColumnDef="expand">
+<th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+<td mat-cell *matCellDef="let element">
+ <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+   <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+   <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+ </button>
+</td>
+</ng-container>
+
+<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+<ng-container matColumnDef="expandedDetail">
+<td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+ <div class="example-element-detail"
+      [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+   <div class="example-element-diagram">
+     <div class="example-element-position"><p class="text-style"> {{element.content}} </p></div>
+    
+   </div>
+ 
+ </div>
+</td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+<tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
+ class="example-element-row"
+ [class.example-expanded-row]="expandedElement === element"
+ (click)="expandedElement = expandedElement === element ? null : element">
+</tr>
+
+<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+
+
+
+
+<mat-paginator [length]="feedbacks.length"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page"
+              #paginator>
+</mat-paginator>
+
+
+ <!-- https://material.angular.io/components/table/overview#table-row-binding this is to create an event -->
+  
