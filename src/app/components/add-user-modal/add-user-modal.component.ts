@@ -776,7 +776,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       loginDetails = {
         id: this.editedUser.loginDetails?.id,
         email: this.userForm.value.email || '',
-        password: this.editedUser.loginDetails?.password,
+        password: undefined,
         role: this.userForm.value.role || ''
       }
     }
