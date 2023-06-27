@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewsletterService } from 'src/app/services/newsletter.service';
 import { AddArticleModalComponent } from '../add-article-modal/add-article-modal.component';
 import { PageEvent } from '@angular/material/paginator';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 // to filter by title used this tutorial: https://www.youtube.com/watch?v=lTOQ7Fjhcvk
@@ -20,7 +21,7 @@ export class NewsletterArticleComponent implements OnInit {
   //this is for pagination, starting page
   p: number = 1;
   selectedCategory: string = '';
-
+  userRole: string = '' ;
 
   get filterText(){
     return this._filterText;
@@ -34,10 +35,11 @@ export class NewsletterArticleComponent implements OnInit {
 
   constructor(
     private articlesService: NewsletterService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService
   ) {}
   ngOnInit() {
-    
+    // this.userRole = this.authService.login;
     console.log('Newsletter article component works');
     this.getArticles();
     
@@ -64,7 +66,7 @@ export class NewsletterArticleComponent implements OnInit {
   addArticle() {
     const dialogRef = this.dialog.open(AddArticleModalComponent, {
     
-      data: { title: '', author: '', date: '', urlpic:'',  content: '', category: '' }
+      data: { title: '', author: '', date: '', urlpic:'',  content: '', typeOfContent: '' }
       
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -102,7 +104,7 @@ filterByCategory() {
 
   // Filter by category if a category is selected
   if (this.selectedCategory !== '') {
-    this.filteredArticles = this.articles.filter(article => article.category === this.selectedCategory);
+    this.filteredArticles = this.articles.filter(article => article.typeOfContent === this.selectedCategory);
 }
 
 }
