@@ -1,0 +1,90 @@
+h1 {
+    padding-top:100px;
+}
+h1, h4 {
+    text-align: center;
+}
+
+h4 {
+    padding-bottom: 20px;
+}
+
+
+.form-div {
+    position: absolute;
+    
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: calc(100vh - 200px);
+
+    border-radius: 20px;
+    box-sizing: border-box;
+    
+    width: 60%;
+
+    /* background: rgba(255, 255, 255, 0.7); */
+    /* background-color: pink; */
+    margin-bottom: 200px; 
+   
+
+}
+
+.input-container {
+    height: 50px;
+    position: relative;
+    width: 100%;
+}
+
+.unchangeable-field {
+    background-color: lightgray;
+    display: inline-block;
+}
+
+.input {
+    background-color: #0C2340;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #c4c5c5;
+    font-size: 18px;
+    height: 100%;
+    outline: 0;
+    padding: 4px 20px 0;
+    width: 100%;
+}
+
+.submit {
+    background-color: #00A3E3;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    cursor: pointer;
+    font-size: 18px;
+    height: 50px;
+    margin-top: 38px;
+    /* outline: 0; */
+    text-align: center;
+    width: 100%;
+}
+
+.request-text{
+    padding:60px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    padding-bottom: 0;
+}
+
+.request-text h3{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.document-model{
+    background-color: white;
+}
+
+#reason{
+    width: 600px;
+    border:1px solid grey;
+}

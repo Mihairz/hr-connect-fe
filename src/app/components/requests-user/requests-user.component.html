@@ -1,0 +1,109 @@
+<h1>Requests</h1>
+<h4>On this page you can submit requests to the HR. Please choose one of the predefined requests types or submit one of your own.</h4>
+ 
+<div class="form-div">
+
+    <div class="input-container">
+        Select request type:
+        <select id="reqType" class="input" name="reqType" (change)="onReqTypeChange()">
+            <option disabled selected value="">Request type</option>
+            <option *ngFor="let reqType of reqTypes" [value]="reqType">{{ reqType }}</option>
+        </select>
+    </div>
+
+
+
+    <!-- ADEVERINTA ANGAJAT -->
+    <div *ngIf="selectedReqType === 'Employee certificate'" class="document-model">
+        <form [formGroup]="employeeCertificateForm" autocomplete="off">
+
+
+            <section class="request-text">
+                <h3>ADEVERINȚĂ</h3>
+
+                Prin prezenta, se adeverește că domnul/doamna <p class="unchangeable-field">BE-LAST-NAME BE-FIRST-NAME
+                </p>
+
+                domiciliat/ă în <p class="unchangeable-field">BE-COUNTRY</p>,
+
+                județul <p class="unchangeable-field">BE-COUNTY</p>,
+
+                localitatea <p class="unchangeable-field">BE-CITY</p>,
+
+                <p class="unchangeable-field">BE-STREET BE-STREET-NR BE-FLAT-NUMBER</p>
+
+                identificat/ă prin CNP <p class="unchangeable-field">BE-CNP</p>
+
+                act de identitate CI
+
+                seria <p class="unchangeable-field">BE-IDENTITY-CARD-SERIES</p>
+
+                nr. <p class="unchangeable-field">BE-IDENTITY-CARD-NR</p>
+
+                eliberat de <p class="unchangeable-field">BE-IDENTITY-CARD-ISSUER</p>
+
+                la data de <p class="unchangeable-field">BE-IDENTITY-CARD-ISSUING-DATE</p>,
+
+                este angajat(ă) al/a HR Connect
+                pe perioadă nedeterminată/determinată începând cu data de <p class="unchangeable-field">
+                    BE-USER-JOIN-DATE</p>,
+
+                în funcția de <p class="unchangeable-field">BE-POSITION</p>,
+
+                conform
+                contractului individual de muncă nr. <p class="unchangeable-field">BE-USER-ID</p>/2048,
+                înregistrat în Registrul General de evidență a salariaților conform legii.
+
+                Prezenta se eliberează spre a-i servi la <input id="reason" type="text" formControlName="reason"
+                    placeholder="reason" required maxlength="250">
+                <label for="reason"></label>
+            </section>
+
+        </form>
+
+        <button type="button" class="submit" (click)="submitRequest()">Send request</button>
+        <!-- Butonul de submit request. La evenimentul click se apeleaza functia submitRequest() a componentei curente (requests-user) si cererea va fi aplicata-->
+    </div>
+
+
+    <!-- SCHIMBAT INFORMATII PERSONALE -->
+    <!-- <section *ngIf="selectedReqType==='Change personal data'" class="request-text">
+            I want to change my <select id="dataToChange" class="input" name="dataToChange"
+                formControlName="dataToChange" (change)="onDataToChangeChange()">
+                <option disabled selected value="">Data to change</option>
+                <option *ngFor="let dataToChange of changableData" [value]="dataToChange">{{ dataToChange }}</option>
+            </select>
+
+            <p *ngIf="selectedDataToChange === 'name'">
+                My new name is <input id="newName" type="text" formControlName="newName" placeholder="New name" required
+                    maxlength="50">
+                <label for="newName"></label>
+            </p>
+
+            <p *ngIf="selectedDataToChange === 'email'">
+                My new e-mail is <input id="newEmail" type="text" formControlName="newEmail" placeholder="New e-mail"
+                    required maxlength="50">
+                <label for="newEmail"></label>
+            </p>
+        </section> -->
+
+    <!-- CUSTOM REQUEST -->
+    <!-- <section *ngIf="selectedReqType==='Custom request'" class="request-text">
+            If you did not found the type of request you wish for among the existent templates, you can write your own
+            down below. Include all the necessary details for it.
+            <textarea id="customRequest"  formControlName="customRequest" name="customRequest" placeholder="Custom request" required rows="4" cols="50"></textarea>
+            <label for="customRequest"></label>
+        </section> -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

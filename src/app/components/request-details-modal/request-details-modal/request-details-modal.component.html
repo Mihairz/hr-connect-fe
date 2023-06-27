@@ -1,0 +1,147 @@
+<!-- The Modal -->
+<div class="modal glass">
+    <!-- Modal content -->
+    <div class="form-div glass">
+        <div id="particles-js"></div>
+        <span class="close" (click)="closeModal()">&times;</span>
+        <!-- Butonul de ascundere formular. La evenimentul click se apeleaza functia closeModal() a componentei curente (add-user-modal) si modala se va inchide-->
+
+        <div class="title">Request #{{editedRequest.id}}</div>
+
+        <div class="request-details-grid">
+
+            <div class="request-data-container">
+
+                <div class="requester-container">
+                    <h3 class="subtitle">Requester</h3>
+                    <table>
+                        <tr>
+                            <td>Department:</td>
+                            <td> {{editedRequest.requester?.department}}</td>
+                        </tr>
+                        <tr>
+                            <td>Position:</td>
+                            <td>{{editedRequest.requester?.position?.replace('_',' ')}}</td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{editedRequest.requester?.lastName}} {{editedRequest.requester?.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <td>E-mail:</td>
+                            <td>{{editedRequest.requester?.loginDetails?.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>{{editedRequest.requester?.phoneNumber}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="request-container">
+                    <h3 class="subtitle">Request</h3>
+                    <table>
+                        <tr>
+                            <td>Type:</td>
+                            <td>{{editedRequest.type}}</td>
+                        </tr>
+                        <tr>
+                            <td>Status:</td>
+                            <td [ngStyle]="{'color':editedRequest.status === 'Pending' ? '#00A3E3' : editedRequest.status === 'Approved' ? 'green' : 'red'}"><b>{{editedRequest.status}}</b></td>
+                        </tr>
+                        <tr>
+                            <td>Submit date:</td>
+                            <td>{{editedRequest.requestDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Finish date:</td>
+                            <td>{{editedRequest.finishDate}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="responder-container">
+                    <h3 class="subtitle">Responder</h3>
+                    <table *ngIf="editedRequest.responder">
+                        <tr>
+                            <td>Department:</td>
+                            <td>{{editedRequest.responder.department}}</td>
+                        </tr>
+                        <tr>
+                            <td>Position:</td>
+                            <td>{{editedRequest.responder.position.replace('_',' ')}}</td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{editedRequest.responder.lastName}} {{editedRequest.responder.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <td>E-mail:</td>
+                            <td>{{editedRequest.responder.loginDetails?.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>{{editedRequest.responder.phoneNumber}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="request-details-container">
+                <h3 class="subtitle">Details</h3>
+                <div class="request-details-content">
+                    <section class="employee-certificate-text"> 
+                        <!-- *ngIf={{editedRequest.type === 'employee_certificate'}} -->
+                        <h3>ADEVERINȚĂ</h3>
+        
+                        Prin prezenta, se adeverește că domnul/doamna <p class="unchangeable-field">{{editedRequest.requester?.lastName}} {{editedRequest.requester?.firstName}}
+                        </p>
+        
+                        domiciliat/ă în <p class="unchangeable-field">{{editedRequest.requester?.address?.country}}</p>,
+        
+                        județul <p class="unchangeable-field">{{editedRequest.requester?.address?.county}}</p>,
+        
+                        localitatea <p class="unchangeable-field">{{editedRequest.requester?.address?.city}}</p>,
+        
+                        <p class="unchangeable-field">{{editedRequest.requester?.address?.street}} {{editedRequest.requester?.address?.streetNumber}} {{editedRequest.requester?.address?.flatNumber}}</p>
+        
+                        identificat/ă prin CNP <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.cnp}}</p>
+        
+                        act de identitate CI
+        
+                        seria <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.series}}</p>
+        
+                        nr. <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.number}}</p>
+        
+                        eliberat de <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.issuer}}</p>
+        
+                        la data de <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.issuingDate}}</p>,
+        
+                        este angajat(ă) al/a HR Connect
+                        pe perioadă nedeterminată/determinată începând cu data de <p class="unchangeable-field">
+                            {{editedRequest.requester?.joinDate}}</p>,
+        
+                        în funcția de <p class="unchangeable-field">{{editedRequest.requester?.position?.replace('_',' ')}}</p>,
+        
+                        conform
+                        contractului individual de muncă nr. <p class="unchangeable-field">{{editedRequest.requester?.id}}</p>/2048,
+                        înregistrat în Registrul General de evidență a salariaților conform legii.
+        
+                        Prezenta se eliberează spre a-i servi la <p class="unchangeable-field">{{editedRequest.details}}</p>.
+                    </section>
+    
+                    <div class="action-buttons-container">
+                        <button type="button" class="btn btn-approve" (click)="approveRequest()">Approve</button>
+                        <button type="button" class="btn btn-danger" (click)="denyRequest()">Deny</button>
+                    </div>
+                </div>
+                
+            </div>
+
+        
+        </div>
+
+
+    </div>
+</div>

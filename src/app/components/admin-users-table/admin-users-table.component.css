@@ -1,16 +1,4 @@
 .users-table-div {
-    /* position: absolute;
-    top: 50%;
-    left: 50%; 
-    transform: translate(-50%, -50%);
-
-    /* background-color: palegreen; */
-    /* border-radius: 20px;
-    box-sizing: border-box;
-    height: 90%; 
-    padding: 20px;
-    width: 100%; */
-
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -66,4 +54,12 @@ th {
 
 th.mat-sort-header-sorted {
     color: black;
+}
+
+.mat-mdc-paginator-container {
+    background-color: #F2F7FB;
+}
+
+.mat-mdc-text-field-wrapper{
+    background-color: white;
 }

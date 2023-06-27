@@ -19,7 +19,11 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 
 import { isNotAuthenticatedGuard } from './guards/is-not-authenticated.guard';
 import { FaqPageComponent } from './pages/faq-page/faq-page.component';
+
+import { RequestsPageComponent } from './pages/requests-page/requests-page.component';
+
 import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.component';
+
 // Se foloseste pentru a bloca accesul la diferite rute utilizatorilor logati / Se atribuie rutelor destinate exclusiv utilizatorilor nelogati (ex. login-page)
 
 
@@ -44,14 +48,20 @@ const routes: Routes = [
     data: { roles: ['employee', 'hr'] }  // care au rol de employee sau hr (identificat din jwt)
   },
   {
-    path: 'profile/:id', component: ProfilePageComponent,
+    path: 'profile', component: ProfilePageComponent,
     canActivate: [isAuthenticatedGuard] // pagina de profile este accesibila doar utilizatorilor logati
   },
 
   { path: 'article/:id', component: FullDetailedArticleComponent }, // individual article page
   { path: 'newsletter', component: NewsletterPageComponent}, // the newsfeed and main page
   { path: 'faq', component: FaqPageComponent},
+
+
+  {path: 'requests', component: RequestsPageComponent}
+
+
   { path: 'feedback', component: FeedbackPageComponent},
+
 
 ];
 

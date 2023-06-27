@@ -17,8 +17,8 @@
 
                             <div class="mt-3">
                                 <!-- In Bootstrap, the class names that start with m refer to margin, and the class names that start with t refer to the top margin specifically. The number 3 in mt-3 represents the magnitude of the margin spacing.For example, mt-3 adds a margin-top spacing of 1rem (or 16 pixels) to the <div> element, pushing it down from the element above it. You can adjust the spacing size by changing the number in the class. -->
-                                <h4>{{userProfile.lastName}}</h4>
-                                <h6>{{userProfile.function}}</h6>
+                                <h4>{{userProfile.lastName}} {{userProfile.firstName}}</h4>
+                                <h6>{{userProfile.position}}</h6>
                             </div>
 
                         </div>
@@ -55,7 +55,7 @@
                                 <h6 class="mb-0">Email</h6>
                             </div>
                             <div class="col-sm-9">
-                                {{userProfile.email}}
+                                {{userProfile.loginDetails?.email}}
                             </div>
                         </div>
                         <hr>
@@ -65,7 +65,7 @@
                                 <h6 class="mb-0">Phone</h6>
                             </div>
                             <div class="col-sm-9">
-                                {{userProfile.phone}}
+                                {{userProfile.phoneNumber}}
                             </div>
                         </div>
                         <hr>
@@ -82,11 +82,11 @@
                         </div>
                         <hr>
 
-                        <div class="action-buttons-container">
+                        <!-- <div class="action-buttons-container">
                             <app-user [user]="userProfile" [page]="'profile'"
-                                (newGetUsersEvent)="getUser(userProfile.id || 0)"
+                                (newGetUsersEvent)="getUser()"
                                 (newEditUserEvent)="editUser($event)"></app-user>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
@@ -94,9 +94,10 @@
 
 
 
-            <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType"
+            <!-- <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType"
                 (newCloseModalEvent)="closeModal()"
-                (newGetUsersEvent)="getUser(userProfile.id || 0)"></app-add-user-modal>
+                (newGetUsersEvent)="getUser()">
+            </app-add-user-modal> -->
 
 
 

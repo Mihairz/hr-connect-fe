@@ -13,7 +13,7 @@ import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-admin-users-table',
   templateUrl: './admin-users-table.component.html',
-  styleUrls: ['./admin-users-table.component.css'],
+  styleUrls: ['./admin-users-table.component.css'], 
   encapsulation: ViewEncapsulation.None
 })
 
@@ -27,7 +27,7 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   // userList: User[] = [];  Initializam o lista goala care contine obiecte de tip User. Aceasta va fi populata la ngOnInit cu ajutorul metodei getUsers()
   dataSource = new MatTableDataSource<User>([]); // Initializam o lista goala care contine obiecte de tip User, sub forma MatTableDataSource ca sa poata fi paginabila si filtrabila de catre angular-material
 
-  columnsToDisplay = ['id', 'department', 'function', 'role', 'name', 'email', 'phone', 'action']; // Aici se specifica elementului html mat-table ce coloane din typescript sa se afiseze
+  columnsToDisplay = ['id', 'department', 'position', 'lastName', 'email', 'phoneNumber','joinDate','role', 'action']; // Aici se specifica elementului html mat-table ce coloane din typescript sa se afiseze
 
   // Am intampinat o problema pentru ca paginator-ul se incarca inaintea datelor si astfel era undefined (din cate am inteles). Aici era prima solutie pe care am implementat-o, folosind ngAfterViewInit si setTimeout, dar dupa am gasit o solutie si mai eleganta (cea de mai jos) (ambele solutii de aici https://stackoverflow.com/questions/48785965/angular-matpaginator-doesnt-get-initialized )
 
@@ -72,7 +72,7 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   editedUser = new User();
   modalType = "";
   modalRole = "admin";
-
+ 
   ngOnInit(): void {
     this.getUsers();
   }

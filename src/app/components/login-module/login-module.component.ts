@@ -62,7 +62,7 @@ export class LoginModuleComponent {
   // Creem metoda submitForm, ce va fi apelata cand se apasa butonul de login
   submitForm() {
     
-    
+    // COMMENTED FOR DEBUG ONLY - TO DECOMMENT
     // if (this.form.invalid) { // Daca formularul este receptionat ca invalid
     //   if (this.form.controls.email.errors?.['pattern']) { // Verificam daca este din cauza e-mail-ului
     //     this.errorMessage = 'Invalid e-mail format. Please enter a valid e-mail address.'; // Daca este din cauza e-mail-ului, afisam un mesaj despre asta
@@ -78,7 +78,7 @@ export class LoginModuleComponent {
       .subscribe(
         (response) => {
 
-          if (this.authService.userRole?.role === 'admin') {
+          if (this.authService.userLoginDetails?.role === 'admin') {
             this.router.navigate(['/admin']);
           } else {
             this.router.navigate(['/newsfeed']);

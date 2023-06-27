@@ -1,3 +1,14 @@
+export class RequestUser {
+    id?: number;
+    type: string = '';
+    details: string = '';
+    requestDate?: Date;
+    finishDate?: Date;
+    status: string = '';
+    requester?: User;
+    responder?: User;
+}
+
 export class User {
     id?: number;
 
@@ -20,7 +31,7 @@ export class User {
 export class LoginDetails { 
     id?: number = 0;
     email: string = '';
-    password?: string = '';
+    password: string = '';
     role: string = '';
 }
 
