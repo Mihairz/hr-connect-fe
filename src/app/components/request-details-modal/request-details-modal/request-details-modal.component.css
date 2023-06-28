@@ -262,11 +262,11 @@ color of the placeholder text when some input was written but the input field si
 }
 
 .unchangeable-field {
-    background-color: lightgray;
+    background-color: rgb(219, 218, 218);
     display: inline-block;
 }
 
-.employee-certificate-text{
+.document-model{
     margin: 20px;
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px;

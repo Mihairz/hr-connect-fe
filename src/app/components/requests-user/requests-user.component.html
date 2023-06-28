@@ -288,7 +288,7 @@
             </div>
         </ng-template>
 
-        <app-request-details-modal *ngIf="isModalOpen" [editedRequest]="editedRequest"
+        <app-request-details-modal *ngIf="isModalOpen" [editedRequest]="editedRequest" [userRole]="userRole"
             (newCloseModalEvent)="closeModal()"
             (newGetRequestsEvent)="getAllRequestsByUser()"></app-request-details-modal>
         <!-- Evenimentul newCloseModalEvent este emis din componenta copil add-user-modal si este receptionat de catre componenta parinte admin-home-page, care apeleaza functia proprie closeModal() si ascunde la loc formularul de adaugare utilizatori. -->

@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -20,8 +20,10 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
 
   requestSubscription: Subscription = new Subscription();
 
+  @Input() @Output() userRole?: string;
+
   ngOnInit(): void {
-    this.getAllPendingRequests();
+    this.getPendingRequests();
   }
 
 
@@ -66,12 +68,7 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
     (document.getElementById(cityName) as HTMLElement).style.display = "block";
   }
 
-  loadAllRequestsTab(){
-    this.getAllRequests();
-  }
-  loadJustAllPendingRequests(){
-    this.getAllPendingRequests();
-  }
+  
   
 
 
@@ -87,11 +84,25 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
   // modalRole = "hr";
 
   // apeleaza functia getRequests() din serviciul RequestUser injectat si populeaza lista
-  getAllRequests() {
+  // getAllRequests() {
+  //   this.isLoading = true; // am setat isLoading pe true la inceputul unui proces care poate dura mai mult
+
+  //   this.requestSubscription =
+  //     this.requestHrService.getAllRequests().subscribe((responseRequestsList) => {
+  //       // console.log(responseRequestsList);
+
+  //       this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
+
+  //       this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
+  //     });
+  // }
+
+  // apeleaza functia getRequests() din serviciul RequestUser injectat si populeaza lista
+  getPendingRequests() {
     this.isLoading = true; // am setat isLoading pe true la inceputul unui proces care poate dura mai mult
 
     this.requestSubscription =
-      this.requestHrService.getAllRequests().subscribe((responseRequestsList) => {
+      this.requestHrService.getAllPendingRequests().subscribe((responseRequestsList) => {
         // console.log(responseRequestsList);
 
         this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
@@ -101,11 +112,25 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
   }
 
   // apeleaza functia getRequests() din serviciul RequestUser injectat si populeaza lista
-  getAllPendingRequests() {
+  getApprovedRequests() {
     this.isLoading = true; // am setat isLoading pe true la inceputul unui proces care poate dura mai mult
 
     this.requestSubscription =
-      this.requestHrService.getAllPendingRequests().subscribe((responseRequestsList) => {
+      this.requestHrService.getAllApprovedRequests().subscribe((responseRequestsList) => {
+        // console.log(responseRequestsList);
+
+        this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
+
+        this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
+      });
+  }
+
+  // apeleaza functia getRequests() din serviciul RequestUser injectat si populeaza lista
+  getDeniedRequests() {
+    this.isLoading = true; // am setat isLoading pe true la inceputul unui proces care poate dura mai mult
+
+    this.requestSubscription =
+      this.requestHrService.getAllDeniedRequests().subscribe((responseRequestsList) => {
         // console.log(responseRequestsList);
 
         this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table

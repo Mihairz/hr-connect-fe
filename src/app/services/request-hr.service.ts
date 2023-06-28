@@ -17,6 +17,14 @@ export class RequestHrService{
     return this.http.get<RequestUser[]>('http://localhost:8082/request/allInPendingRequests');
   }
 
+  getAllDeniedRequests(): Observable<RequestUser[]> {
+    return this.http.get<RequestUser[]>('http://localhost:8082/request/allDeniedRequests');
+  }
+
+  getAllApprovedRequests(): Observable<RequestUser[]> {
+    return this.http.get<RequestUser[]>('http://localhost:8082/request/allApprovedRequests');
+  }
+
   getAllRequestsByUser(): Observable<RequestUser[]>{
     return this.http.get<RequestUser[]>('http://localhost:8082/request/allRequestsByUser');
   }

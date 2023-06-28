@@ -7,11 +7,14 @@
     </div>
 
     <div class="tabs">
-        <input type="radio" name="tabs" id="tabone" checked="checked" (click)="loadJustAllPendingRequests()">
-        <label for="tabone">Pending Requests</label>
+        <input type="radio" name="tabs" id="pending-requests-tab" checked="checked" (click)="getPendingRequests()">
+        <label for="pending-requests-tab">Pending</label>
 
-        <input type="radio" name="tabs" id="tabtwo" (click)="loadAllRequestsTab()">
-        <label for="tabtwo">All requests</label>
+        <input type="radio" name="tabs" id="approved-requests-tab" (click)="getApprovedRequests()">
+        <label for="approved-requests-tab">Approved</label>
+
+        <input type="radio" name="tabs" id="denied-requests-tab" (click)="getDeniedRequests()">
+        <label for="denied-requests-tab">Denied</label>
     </div>
 </div>
 
@@ -109,6 +112,6 @@
     </div>
 </ng-template>
 
-<app-request-details-modal *ngIf="isModalOpen" [editedRequest]="editedRequest" (newCloseModalEvent)="closeModal()"
-    (newGetRequestsEvent)="getAllPendingRequests()"></app-request-details-modal>
+<app-request-details-modal *ngIf="isModalOpen" [editedRequest]="editedRequest" [userRole]="userRole" (newCloseModalEvent)="closeModal()"
+    (newGetRequestsEvent)="getPendingRequests()"></app-request-details-modal>
 <!-- Evenimentul newCloseModalEvent este emis din componenta copil add-user-modal si este receptionat de catre componenta parinte admin-home-page, care apeleaza functia proprie closeModal() si ascunde la loc formularul de adaugare utilizatori. -->

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, SecurityContext, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SecurityContext, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription, map } from 'rxjs';
 import { User } from 'src/app/models/user';
@@ -22,7 +22,9 @@ export class RequestsUserComponent implements OnInit {
 
   
 
-  userProfile: User = new User();
+  @Output() userProfile: User = new User(); 
+
+  @Input() @Output() userRole?: string;
 
   // FORMULAR v =======================================================================================================================================================
 
@@ -166,6 +168,7 @@ export class RequestsUserComponent implements OnInit {
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, leaveIntervalString).subscribe(() => {
         console.log(this.selectedReqType+' applied for period: '+leaveIntervalString);
         this.getAllRequestsByUser();
+        this.requestForm.patchValue({details:undefined}); // reinitializeaza valoarea details a formularului
       })
 
     } else if (this.selectedReqType === 'Resignation'){
@@ -173,6 +176,7 @@ export class RequestsUserComponent implements OnInit {
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType,"").subscribe(() => {
         console.log('RESIGNATION SUBMITTED');
         this.getAllRequestsByUser();
+        this.requestForm.patchValue({details:undefined}); // reinitializeaza valoarea details a formularului
       })
 
     }
@@ -207,6 +211,7 @@ export class RequestsUserComponent implements OnInit {
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, sanitiziedDetails).subscribe(() => {
         console.log('REQUEST WITH SANITIZED DETAILS SUBMITTED');
         this.getAllRequestsByUser();
+        this.requestForm.patchValue({details:undefined}); // reinitializeaza valoarea details a formularului
       })
 
 
