@@ -17,6 +17,10 @@ export class RequestHrService{
     return this.http.get<RequestUser[]>('http://localhost:8082/request/allInPendingRequests');
   }
 
+  getAllRequestsByUser(): Observable<RequestUser[]>{
+    return this.http.get<RequestUser[]>('http://localhost:8082/request/allRequestsByUser');
+  }
+
   denyRequest(id?: number): Observable<any> {
     return this.http.post(`http://localhost:8082/request/respond-to-request?requestId=${id}&isApproved=false`,{});  
   }

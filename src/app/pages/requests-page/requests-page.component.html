@@ -1,9 +1,6 @@
 <app-navigation-bar></app-navigation-bar>
 <div id="requests-page">
-
-    <div class="form">
-        <app-requests-user *ngIf="userRole==='employee'"></app-requests-user>
-        <app-requests-hr *ngIf="userRole==='hr'"></app-requests-hr>
-    </div>
-</div> 
- 
+    <app-requests-user *ngIf="userRole==='employee'"></app-requests-user>
+    
+    <app-requests-hr *ngIf="userRole==='hr'"></app-requests-hr>
+</div>
