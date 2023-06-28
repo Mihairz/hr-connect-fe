@@ -34,11 +34,11 @@ export class FeedbackFormComponent implements OnInit, AfterViewInit {
   feedbackForm: FormGroup; //Tracks the value and validity state of a group of FormControl instances.
   feedbacks: Feedback[] = []; // array that will hold the feedback object
   columnsToDisplay: string[] = [
-    'category',
+    'type',
     'title',
-    'content',
+    'body',
     'author',
-    'favourite',
+    'rating',
     'delete'
    
   ]; //column of the tabel
@@ -49,9 +49,9 @@ export class FeedbackFormComponent implements OnInit, AfterViewInit {
 
   constructor(private feedbackService: FeedbackFormService) {
     this.feedbackForm = new FormGroup({
-      category: new FormControl('feedback'),
+      type: new FormControl('feedback'),
       title: new FormControl(''),
-      content: new FormControl(''),
+      body: new FormControl(''),
     });
   }
   @ViewChild('paginator') paginator!: MatPaginator;
@@ -106,7 +106,7 @@ export class FeedbackFormComponent implements OnInit, AfterViewInit {
 
 
   toggleFavourite(feedback: Feedback) {
-    feedback.favourite = !feedback.favourite;
+    feedback.rating = !feedback.rating;
 
     this.feedbackService.updateFeedback(feedback).subscribe(() => {
       this.getFeedbacks();

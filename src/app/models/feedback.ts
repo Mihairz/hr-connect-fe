@@ -1,9 +1,10 @@
 export interface Feedback {
     id: number;
-    category: string;
+   
      title: string;
-     content: string;
-     favourite: boolean;
+     type: string;
+     body: string;
+     rating: boolean;
      author: string
           
    
