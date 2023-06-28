@@ -1,82 +1,4 @@
-/* .modal__content {
-    background-color: white;
-    padding-bottom: 40px;
-    border-radius: 20px;
-    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
-    width: 800px;
-    max-width: 100%; 
-    max-height: 90vh; 
-    overflow: auto;
-    margin: auto;
-}
-
- 
-  .title {
-    
-    padding-top: 20px;
-    font-size: 20px; 
-    font-weight: bold;
-    color: #5e6c84;
-    text-align: center; 
-    margin-bottom: 20px; 
-    margin-top: 0;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 20px; 
-  }
-  
-  .inputs__container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .input {
-    margin-bottom: 10px;
-  }
-  
-  .textarea {
-    height: 200px; 
-  }
-  
-  button {
-    border: none;
-    border-radius: 4px;
-    height: 32px;
-    line-height: 32px;
-    margin-top: 10px;
-    padding: 0 12px;
-    font-size: 14px;
-    font-weight: 400;
-  }
-  
-  button.button {
-    background: #5aac44;
-    color: white;
-    text-shadow: none;
-    border: none;
-    box-shadow: none;
-  }
-  
-  button.button--pink {
-    background-color: #e91e63;
-    color: #fff;
-  }
-  
-  .modal__footer {
-    background-color: #f0f0f0;
-    padding: 20px 0;
-  }
-  
-  .modal__buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    position: relative;
-    margin-right: 20px;
-    z-index: 1;
-  }
-  
- */
-/* The Add User Modal (background) */
+/* The  Modal (background) */
 .modal {
   display: block;
   position: fixed;
@@ -92,7 +14,7 @@
   background: rgba(242, 247, 251, 0.2);
 }
 
-/* The Add User Modal */
+/* The  Modal */
 .form-div {
   position: absolute;
   top: 50%;
@@ -102,7 +24,8 @@
   border-radius: 20px;
   box-sizing: border-box;
   padding: 20px;
-  width: 1000px;
+  width: 800px;
+ 
 
   background: rgba(255, 255, 255, 0.7);
 }
@@ -268,7 +191,7 @@ color of the placeholder text when some input was written but the input field si
   cursor: pointer;
   font-size: 18px;
   height: 50px;
-  margin-top: 38px;
+  margin-top: 238px;
   /* outline: 0; */
   text-align: center;
   width: 100%;
@@ -295,24 +218,19 @@ color of the placeholder text when some input was written but the input field si
 .form-grid {
   display: flex;
   flex-direction: column;
+  height: 600px;
+  overflow-y: auto;
+  justify-content: space-around;
 }
 
-.user-details-container {
-  grid-area: 1 / 1 / 2 / 2;
+
+/* the size of the content box */
+.input-container.ic1 textarea.input {
+  height: 220px;
 }
 
-.contact-container {
-  grid-area: 2 / 1 / 3 / 2;
-}
+app-file-upload{
+  
+  z-index: 100;
 
-.personal-information-container {
-  grid-area: 1 / 2 / 3 / 3;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto 1fr;
-  grid-column-gap: 10px;
-}
-
-.personal-information-container h3 {
-  grid-area: 1 / 1 / 2 / 3;
 }

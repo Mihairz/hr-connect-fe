@@ -16,7 +16,7 @@
     
     <div class="input-container ic1">
       <select class="input"  matNativeControl required [(ngModel)]="data.category" placeholder="Category">
-       
+        <option value="" disabled>Select a Category</option>
         <option value="Important_HR_announcement">Important Hr Announcements</option>
         <option value="Upcoming_events">Upcoming events</option>
         <option value="Policy_changes">Policies Changes</option>
@@ -29,29 +29,28 @@
       <textarea class="input content"
         matInput
         [(ngModel)]="data.content"
-        id="formContent"
-        cols="28"
-        rows="7"
+        
         placeholder="Content"
       ></textarea>
     </div>
-  </div>
+
  
-  <div class="input-container ic1">
-    Placeholder Section
-    <input class="input" matInput [(ngModel)]="data.documentUrl" placeholder="Document URL" />
-  </div>
-  <app-file-upload></app-file-upload>
-  <div class="modal__buttons">
-    <button mat-button (click)="closeModal()">Anulare</button>
+    <app-file-upload></app-file-upload>
     <button
-      class="submit"
-      mat-button
-      cdkFocusInitial
-      (click)="saveArticle()"
-    >
-      Save
-    </button>
-  </div>
+    class="submit"
+   
+    cdkFocusInitial
+    (click)="saveArticle()"
+  >
+    Save
+  </button>
+
+ 
+  
+  
+    
+  
+  
+</div>
 </div>
 </div>
