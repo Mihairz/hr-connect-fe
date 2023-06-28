@@ -66,7 +66,7 @@ export class NewsletterArticleComponent implements OnInit {
   addArticle() {
     const dialogRef = this.dialog.open(AddArticleModalComponent, {
     
-      data: { title: '', author: '', date: '', urlpic:'',  content: '', typeOfContent: '' }
+      data: { title: '', author: '', date: '', urlpic:'',  content: '', contentType: '' }
       
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -104,7 +104,7 @@ filterByCategory() {
 
   // Filter by category if a category is selected
   if (this.selectedCategory !== '') {
-    this.filteredArticles = this.articles.filter(article => article.typeOfContent === this.selectedCategory);
+    this.filteredArticles = this.articles.filter(article => article.contentType === this.selectedCategory);
 }
 
 }

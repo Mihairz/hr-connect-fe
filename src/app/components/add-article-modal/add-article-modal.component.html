@@ -13,9 +13,9 @@
       <mat-form-field class="input">
         <input matInput [(ngModel)]="data.date" placeholder="Date">
       </mat-form-field>
-      <mat-form-field class="input">
+      <!-- <mat-form-field class="input">
         <input matInput [(ngModel)]="data.urlpic" placeholder="Url Picture">
-      </mat-form-field>
+      </mat-form-field> -->
    
       <app-file-upload></app-file-upload>
   
@@ -27,7 +27,7 @@
     <h4>Basic native select</h4>
     <mat-form-field>
      
-      <select matNativeControl required [(ngModel)]="data.typeOfContent">
+      <select matNativeControl required [(ngModel)]="data.contentType">
         <option value="News">News</option>
         <option value="HR Announcements">HR Announcements</option>
         <option value="Policy Changes">Policy Changes</option>
