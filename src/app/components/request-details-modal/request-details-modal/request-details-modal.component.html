@@ -131,10 +131,13 @@
                         Prezenta se eliberează spre a-i servi la <p class="unchangeable-field">{{editedRequest.details}}</p>.
                     </section>
     
-                    <div class="action-buttons-container">
-                        <button type="button" class="btn btn-approve" (click)="approveRequest()">Approve</button>
-                        <button type="button" class="btn btn-danger" (click)="denyRequest()">Deny</button>
-                    </div>
+                    <ng-template [ngIf]="editedRequest.status === 'Pending'">
+                        <div class="action-buttons-container">
+                            <button type="button" class="btn btn-approve" (click)="approveRequest()">Approve</button>
+                            <button type="button" class="btn btn-danger" (click)="denyRequest()">Deny</button>
+                        </div>
+                    </ng-template>
+                    
                 </div>
                 
             </div>
