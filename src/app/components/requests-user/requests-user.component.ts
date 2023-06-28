@@ -73,26 +73,29 @@ export class RequestsUserComponent implements OnInit {
 
   submitRequest() {
 
-    // Verificam formularul
-    if (this.requestForm.invalid) {
-      this.errorMessage = 'Something went wrong.' // to customize
-      return;
+    if (this.selectedReqType !== 'Resignation') {
+      // Verificam formularul
+      if (this.requestForm.invalid) {
+        this.errorMessage = 'Something went wrong.' // to customize
+        return;
+      }
     }
+
 
     const sanitiziedDetails = this.requestForm.value.details
       ? this.sanitizer.sanitize(SecurityContext.HTML, this.requestForm.value.details) || ''
       : ''
       ;
 
-    this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, sanitiziedDetails).subscribe(()=>{
+    this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, sanitiziedDetails).subscribe(() => {
       console.log('REQUEST SUBMITTED');
       this.getRequestsEvent.emit();
-      
+
     })
-    
+
   }
 
- 
+
 
   // DE STABILIT CU BE SUB CE FORMA TREBUIE TRIMISE
   // DUPA ASTA O SA MA GANDESC SI CE SE INTAMPLA DUPA CE SA DE SUBMIT (ex refresh pagina de request/ mesaj de confirmare/etc)

@@ -80,6 +80,37 @@
             <label for="details"></label>
         </section>
 
+        <section class="request-text" *ngIf="selectedReqType === 'Resignation'">
+            <h3>Demisie</h3>
+            Subsemnatul <p class="unchangeable-field">{{userProfile.lastName}} {{userProfile.firstName}}</p>,
+
+            domiciliat/ă în <p class="unchangeable-field">{{userProfile.address?.country}}</p>,
+
+            județul <p class="unchangeable-field">{{userProfile.address?.county}}</p>, 
+
+            localitatea <p class="unchangeable-field">{{userProfile.address?.city}}</p>, 
+
+            strada <p class="unchangeable-field">{{userProfile.address?.street}}, 
+                nr. {{userProfile.address?.streetNumber}}, 
+                apartament {{userProfile.address?.flatNumber}}</p>, 
+
+            identificat/ă prin CNP <p class="unchangeable-field">{{userProfile.identityCard?.cnp}}</p> 
+
+            act de identitate CI  seria <p class="unchangeable-field">{{userProfile.identityCard?.series}}</p> 
+            
+            nr. <p class="unchangeable-field">{{userProfile.identityCard?.number}}</p> 
+            
+            eliberat de <p class="unchangeable-field">{{userProfile.identityCard?.issuer}}</p> 
+            
+            la data de <p class="unchangeable-field">{{userProfile.identityCard?.issuingDate}}</p>, 
+            
+            angajat(ă) al/a HR Connect pe perioadă nedeterminată începând cu data de <p class="unchangeable-field">{{userProfile.joinDate}}</p>, 
+            
+            în funcția de <p class="unchangeable-field">{{userProfile.position.replaceAll('_',' ')}}</p>, 
+            
+            prin prezenta vă rog să îmi aprobați încetarea raporturilor de muncă prin demisie.
+        </section>
+
         <button type="button" class="submit" (click)="submitRequest()">Send request</button>
         <!-- Butonul de submit request. La evenimentul click se apeleaza functia submitRequest() a componentei curente (requests-user) si cererea va fi aplicata-->
 
