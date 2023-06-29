@@ -1,7 +1,7 @@
 h1 {
-
     text-align: center;
     font-weight: bold;
+    margin-bottom: 30px;
 }
 
 
@@ -24,7 +24,7 @@ h1 {
 
 .search-bar {
     height: 37px !important;
-    width: 16% !important;
+    width: 30% !important;
     border: 1px solid lightgrey !important;
 }
 
@@ -32,13 +32,15 @@ h1 {
     font-weight: 1000;
 }
 
-.btn-add {
-    background-color: #133C7F;
-    color: white;
-}
+
 
 th {
     background-color: #2282C1;
+    font-size:18px;
+}
+
+td {
+    font-size:17px !important;
 }
 
 .table {
@@ -89,6 +91,16 @@ th.mat-sort-header-sorted {
 }
 
 
+.tabs .pending:hover {
+    background-color: #5cc2eb;
+}
+.tabs .approved:hover {
+    background-color: #5ceb87;
+}
+.tabs .denied:hover {
+    background-color: #eb5c5c;
+}
+
 
 
 .tabs {
@@ -97,6 +109,7 @@ th.mat-sort-header-sorted {
 
 .tabs label {
     order: 1;
+    font-size: 17px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,3 +156,4 @@ th.mat-sort-header-sorted {
         margin-left: 50px;
     }
 }
+

@@ -130,11 +130,8 @@ export class RequestsUserComponent implements OnInit {
 
   onMedicalLeaveEndDateFocus(event: Event) {
     const input = event.target as HTMLInputElement;
-    const currentDate = new Date();
-    const minDate = new Date(currentDate.getTime() - 14 * 24 * 60 * 60 * 1000); // Subtract 14 days (2 weeks) from the current date
-    const minDateString = minDate.toISOString().split("T")[0];
     input.type = "date"; // schimba type-ul elementului din text in date, adica face placeholder sa dispara si afiseaza calendar
-    input.min = minDateString; // concediul medica poate fi aplicat incepand de maxim 2 saptamani in trecut fata de ziua curenta
+    input.min = this.startDate; // concediul medica poate fi aplicat incepand de maxim 2 saptamani in trecut fata de ziua curenta
   }
 
 
@@ -168,6 +165,7 @@ export class RequestsUserComponent implements OnInit {
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, leaveIntervalString).subscribe(() => {
         console.log(this.selectedReqType+' applied for period: '+leaveIntervalString);
         this.getAllRequestsByUser();
+        this.errorMessage='';
         this.requestForm.patchValue({details:undefined}); // reinitializeaza valoarea details a formularului
       })
 
@@ -176,6 +174,7 @@ export class RequestsUserComponent implements OnInit {
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType,"").subscribe(() => {
         console.log('RESIGNATION SUBMITTED');
         this.getAllRequestsByUser();
+        this.errorMessage='';
         this.requestForm.patchValue({details:undefined}); // reinitializeaza valoarea details a formularului
       })
 
@@ -211,6 +210,7 @@ export class RequestsUserComponent implements OnInit {
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, sanitiziedDetails).subscribe(() => {
         console.log('REQUEST WITH SANITIZED DETAILS SUBMITTED');
         this.getAllRequestsByUser();
+        this.errorMessage='';
         this.requestForm.patchValue({details:undefined}); // reinitializeaza valoarea details a formularului
       })
 
@@ -298,7 +298,7 @@ export class RequestsUserComponent implements OnInit {
       this.requestHrService.getAllRequestsByUser().subscribe((responseRequestsList) => {
         // console.log(responseRequestsList);
 
-        this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
+        this.dataSource = new MatTableDataSource(responseRequestsList.reverse()); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table, .reverse ca sa le afiseze de la cea mai noua la cea mai veche
 
         this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
       });

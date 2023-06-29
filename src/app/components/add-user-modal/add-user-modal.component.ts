@@ -687,7 +687,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
       phoneNumber: this.userForm.value.phoneNumber || '',
 
-      joinDate: new Date()
+      joinDate: new Date(),
     }
 
     // Creem obiectul loginDetails aferent ce urmeaza a fi introdus in baza de date

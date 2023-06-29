@@ -108,11 +108,11 @@
                 <h3 class="subtitle">Details</h3>
                 <div class="request-details-content">
 
-                    <section
+                    <section class="default-request-model"
                         *ngIf="editedRequest.type === 'Equipment_request' || editedRequest.type === 'Change_personal_data' || editedRequest.type === 'Custom_request' ">
                         {{editedRequest.details}}
                     </section>
-
+ 
 
                     <section class="document-model" *ngIf="editedRequest.type === 'Paid_leave'">
                         <h3>Cerere - Concediu de odihna</h3>

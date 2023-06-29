@@ -8,14 +8,14 @@
 
     <div class="tabs">
         <input type="radio" name="tabs" id="pending-requests-tab" checked="checked" (click)="getPendingRequests()">
-        <label for="pending-requests-tab">Pending</label>
+        <label for="pending-requests-tab" class="pending">Pending</label>
 
         <input type="radio" name="tabs" id="approved-requests-tab" (click)="getApprovedRequests()">
-        <label for="approved-requests-tab">Approved</label>
+        <label for="approved-requests-tab" class="approved">Approved</label>
 
         <input type="radio" name="tabs" id="denied-requests-tab" (click)="getDeniedRequests()">
-        <label for="denied-requests-tab">Denied</label>
-    </div>
+        <label for="denied-requests-tab" class="denied">Denied</label>
+    </div> 
 </div>
 
 <!-- Cu functia ngIf verificam variabila isLoading. Aceasta variabila incepe cu valoarea true, iar apoi este schimbata in false la sfarsitul setului de instructiuni. -->
@@ -35,7 +35,7 @@
 
 
 
-        <table mat-table [dataSource]="dataSource" matSort class="table table-hover">
+        <table mat-table [dataSource]="dataSource" matSort class="table table-hover" matSortActive="requestDate" matSortDirection="desc">
 
             <!-- ID Column -->
             <ng-container matColumnDef="id">

@@ -10,6 +10,12 @@ export class User {
     joinDate?: Date;
 
     phoneNumber: string = '';
+
+    vacationDays?: number = 0;
+    sickDays?: number = 0;
+
+    profileImagePath?: string = '';
+
     loginDetails?: LoginDetails;
     
     address?: Address;

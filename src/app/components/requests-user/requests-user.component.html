@@ -30,19 +30,17 @@
 
                 vă rog să-mi aprobați efectuarea unui concediu in perioada
 
-                <!-- <input id="startDate" type="text" placeholder="Start date:" required (focus)="onPaidLeaveStartDateFocus($event)" (input)="onPaidLeaveStartDateInput($event)">
-            <label for="startDate" class="placeholder"></label> 
-            -
-            <input id="endDate" type="text" placeholder="End date:" required  [max]="maxEndDate">
-            <label for="endDate" class="placeholder"></label> -->
-
                 <input id="startDate" type="text" placeholder="Start date:" required
-                    (focus)="onPaidLeaveStartDateFocus($event)" (input)="onPaidLeaveStartDateInput($event)">
+                    (focus)="onPaidLeaveStartDateFocus($event)" (input)="onPaidLeaveStartDateInput($event)"
+                    class="magic-date">
                 <label for="startDate" class="placeholder"></label>
                 -
                 <input id="endDate" type="text" placeholder="End date:" required [max]="maxEndDate"
-                    (focus)="onPaidLeaveEndDateFocus($event)" (input)="onEndDateInput($event)">
+                    (focus)="onPaidLeaveEndDateFocus($event)" (input)="onEndDateInput($event)" class="magic-date">
                 <label for="endDate" class="placeholder"></label>
+
+                <hr>
+                Zile de concediu de odihnă rămase: <b>{{userProfile.vacationDays}}</b>
 
             </section>
 
@@ -59,12 +57,16 @@
 
                 vă rog să-mi aprobați efectuarea unui concediu medical in perioada
                 <input id="startDate" type="text" placeholder="Start date:" required
-                    (focus)="onMedicalLeaveStartDateFocus($event)" (input)="onMedicalLeaveStartDateInput($event)">
+                    (focus)="onMedicalLeaveStartDateFocus($event)" (input)="onMedicalLeaveStartDateInput($event)"
+                    class="magic-date">
                 <label for="startDate" class="placeholder"></label>
                 -
                 <input id="endDate" type="text" placeholder="End date:" required [max]="maxEndDate"
-                    (focus)="onMedicalLeaveEndDateFocus($event)" (input)="onEndDateInput($event)">
+                    (focus)="onMedicalLeaveEndDateFocus($event)" (input)="onEndDateInput($event)" class="magic-date">
                 <label for="endDate" class="placeholder"></label>
+
+                <hr>
+                Zile de concediu medical rămase: <b>{{userProfile.sickDays}}</b>
 
             </section>
 
@@ -106,31 +108,35 @@
                 contractului individual de muncă nr. <p class="unchangeable-field">{{userProfile.id}}</p>/2048,
                 înregistrat în Registrul General de evidență a salariaților conform legii.
 
-                Prezenta se eliberează spre a-i servi la <input id="details" type="text" formControlName="details"
-                    placeholder="reason" required maxlength="250">
+                Prezenta se eliberează spre a-i servi la <textarea id="details" type="text" formControlName="details"
+                    placeholder="reason" required maxlength="250" name="details" rows="4" cols="50"></textarea>
                 <label for="details"></label>
             </section>
 
             <!-- CHANGE PERSONAL DATA -->
             <section *ngIf="selectedReqType==='Change_personal_data'" class="request-text">
-                <input id="details" type="text" formControlName="details"
-                    placeholder="Please provide here the personal data you wish to change" required maxlength="250">
+
                 <label for="details"></label>
+
+                <textarea id="details" type="text" formControlName="details"
+                placeholder="Please provide here the personal data you wish to change." required maxlength="250" name="details" rows="4" cols="50">
+                    
+                </textarea>
             </section>
 
             <!-- CUSTOM REQUEST -->
             <section *ngIf="selectedReqType==='Custom_request'" class="request-text">
-                <input id="details" type="text" formControlName="details"
-                    placeholder="Please describe here what kind of request do you need and all its necessary details"
-                    required maxlength="250">
+                <textarea id="details" type="text" formControlName="details"
+                    placeholder="Please describe here what kind of request do you need and all its necessary details."
+                    required maxlength="250" name="details" rows="4" cols="50"></textarea>
                 <label for="details"></label>
             </section>
 
             <!-- EQUIPMENT REQUEST -->
             <section *ngIf="selectedReqType==='Equipment_request'" class="request-text">
-                <input id="details" type="text" formControlName="details"
+                <textarea id="details" type="text" formControlName="details"
                     placeholder="Please write here the equipment you need and the reason you need it." required
-                    maxlength="250">
+                    maxlength="250"name="details" rows="4" cols="50"></textarea>
                 <label for="details"></label>
             </section>
 
@@ -174,6 +180,8 @@
             <!-- Butonul de submit request. La evenimentul click se apeleaza functia submitRequest() a componentei curente (requests-user) si cererea va fi aplicata-->
 
         </form>
+
+
     </div>
 
 
@@ -182,9 +190,10 @@
 
 
 
-    
 
     <div class="user-requests-history">
+        <hr>
+        <h2>History</h2>
         <!-- Cu functia ngIf verificam variabila isLoading. Aceasta variabila incepe cu valoarea true, iar apoi este schimbata in false la sfarsitul setului de instructiuni. -->
         <ng-template [ngIf]="isLoading" [ngIfElse]="displayList">
             <p>
@@ -202,7 +211,8 @@
 
 
 
-                <table mat-table [dataSource]="dataSource" matSort class="table table-hover">
+                <table mat-table [dataSource]="dataSource" matSort class="table table-hover" matSortActive="requestDate"
+                    matSortDirection="desc">
 
                     <!-- ID Column -->
                     <ng-container matColumnDef="id">

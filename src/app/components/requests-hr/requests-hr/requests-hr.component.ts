@@ -105,7 +105,7 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
       this.requestHrService.getAllPendingRequests().subscribe((responseRequestsList) => {
         // console.log(responseRequestsList);
 
-        this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
+        this.dataSource = new MatTableDataSource(responseRequestsList.reverse()); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table, .reverse ca sa le afiseze de la cea mai noua la cea mai veche
 
         this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
       });
@@ -119,7 +119,7 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
       this.requestHrService.getAllApprovedRequests().subscribe((responseRequestsList) => {
         // console.log(responseRequestsList);
 
-        this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
+        this.dataSource = new MatTableDataSource(responseRequestsList.reverse()); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table, .reverse ca sa le afiseze de la cea mai noua la cea mai veche
 
         this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
       });
@@ -133,7 +133,7 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
       this.requestHrService.getAllDeniedRequests().subscribe((responseRequestsList) => {
         // console.log(responseRequestsList);
 
-        this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
+        this.dataSource = new MatTableDataSource(responseRequestsList.reverse()); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table, .reverse ca sa le afiseze de la cea mai noua la cea mai veche
 
         this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
       });
