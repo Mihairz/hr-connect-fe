@@ -26,7 +26,8 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
     this.getPendingRequests();
   }
 
-
+ 
+  
 
   // SETARI TABEL 
   dataSource = new MatTableDataSource<RequestUser>([]); // Initializam o lista goala care contine obiecte de tip RequestUser, sub forma MatTableDataSource ca sa poata fi paginabila si filtrabila de catre angular-material
@@ -48,26 +49,23 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
     }
   }
   searchControl = new FormControl('', [Validators.pattern(/^[a-zA-Z0-9\s]*$/)]); // Make search bar accept only alphanumeric 
+  
   applyFilter(event: Event) {
     if (this.searchControl.hasError('pattern')){
       return; // if user inputs special characters into searchbar, applyFilter does not reach dataSource / page doesn't reload / nothing is searched
     } else{ 
       const filterValue = (event.target as HTMLInputElement).value; // user input
-      this.dataSource.filter = filterValue.trim().toLowerCase(); // toLowerCase because that's how mat-table filter algorithm functions
+      this.dataSource.filter = filterValue.trim().toLowerCase(); 
+      this.dataSource.filterPredicate = this.filterPredicate;
+      // toLowerCase because that's how mat-table filter algorithm functions
       // Angular automatically sanitizes the input provided by users when using data binding or property binding. Therefore, when we bind the filterValue to the this.dataSource.filter, it is automatically sanitized.
     }
   }
 
-  
-  openCity(cityName: string): void {
-    let i: number;
-    const x = document.getElementsByClassName("city");
-    for (i = 0; i < x.length; i++) {
-      (x[i] as HTMLElement).style.display = "none";
-    }
-    (document.getElementById(cityName) as HTMLElement).style.display = "block";
+  filterPredicate(data: RequestUser, filter: string): boolean {
+    const searchText = data.type.toLowerCase() + data.requester?.department.toLowerCase() + data.requester?.firstName.toLowerCase() + data.requester?.lastName.toLowerCase() + data.requester?.loginDetails?.email.toLowerCase();
+    return searchText.includes(filter.toLowerCase());
   }
-
   
   
 
