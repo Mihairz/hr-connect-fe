@@ -298,7 +298,7 @@ export class RequestsUserComponent implements OnInit {
       this.requestHrService.getAllRequestsByUser().subscribe((responseRequestsList) => {
         // console.log(responseRequestsList);
 
-        this.dataSource = new MatTableDataSource(responseRequestsList.reverse()); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table, .reverse ca sa le afiseze de la cea mai noua la cea mai veche
+        this.dataSource = new MatTableDataSource(responseRequestsList.reverse()); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
 
         this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
       });

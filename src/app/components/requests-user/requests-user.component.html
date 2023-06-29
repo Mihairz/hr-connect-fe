@@ -119,8 +119,9 @@
                 <label for="details"></label>
 
                 <textarea id="details" type="text" formControlName="details"
-                placeholder="Please provide here the personal data you wish to change." required maxlength="250" name="details" rows="4" cols="50">
-                    
+                    placeholder="Please provide here the personal data you wish to change." required maxlength="250"
+                    name="details" rows="4" cols="50">
+
                 </textarea>
             </section>
 
@@ -136,7 +137,7 @@
             <section *ngIf="selectedReqType==='Equipment_request'" class="request-text">
                 <textarea id="details" type="text" formControlName="details"
                     placeholder="Please write here the equipment you need and the reason you need it." required
-                    maxlength="250"name="details" rows="4" cols="50"></textarea>
+                    maxlength="250" name="details" rows="4" cols="50"></textarea>
                 <label for="details"></label>
             </section>
 
@@ -222,17 +223,13 @@
 
                     <!-- Request type Column -->
                     <ng-container matColumnDef="requestType">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header
-                            sortActionDescription="Sort by request type">
-                            Type
-                        </th>
-                        <td mat-cell *matCellDef="let element">{{element.type.replaceAll('_',' ')}}</td>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+                        <td mat-cell *matCellDef="let element">{{ element.type }}</td>
                     </ng-container>
 
                     <!-- Department Column -->
                     <ng-container matColumnDef="department">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header
-                            sortActionDescription="Sort by department">
+                        <th mat-header-cell *matHeaderCellDef>
                             Department
                         </th>
                         <td mat-cell *matCellDef="let element">{{element.requester.department.replace('_',' ')}}</td>
@@ -240,7 +237,7 @@
 
                     <!-- Name Column -->
                     <ng-container matColumnDef="lastName">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">Name
+                        <th mat-header-cell *matHeaderCellDef>Name
                         </th>
                         <td mat-cell *matCellDef="let element">{{element.requester.lastName}}
                             {{element.requester.firstName}}

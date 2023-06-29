@@ -5,6 +5,7 @@ export class RequestUser {
     requestDate?: Date;
     finishDate?: Date;
     status: string = '';
+
     requester?: User;
     responder?: User;
 }
