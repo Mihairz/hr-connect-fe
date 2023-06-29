@@ -6,5 +6,6 @@ export interface NewsletterArticle {
     content: string;
     urlpic:string;
     contentType: string;
+    orderNumber: number;
 
 }
