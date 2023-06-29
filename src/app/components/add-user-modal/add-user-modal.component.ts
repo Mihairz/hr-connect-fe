@@ -656,6 +656,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   addUser() {
 
     // Am ales sa verific input-ul password separat pentru ca difera la updateUser() 
+    // Aici, in addUser, este interzi ca inputul de parola sa fie gol.
     switch (true) {
       case (this.userForm.value.password == ''):
         this.errorSource = 'password';
@@ -727,13 +728,62 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
   updateUser() {
 
+    // Verificam mai intai daca modala este apelata din profil de change number/password, daca nu, inseamna ca este apelata de pe pagina de administrator
+
     if (this.modalRole === 'editPhoneNumber') {
-      console.log('UPDATE PHONE NUMBER REQUEST')
+      
+      
+      // Checking if errors come from phone field
+      if (!!this.userForm.controls.phoneNumber.errors) {
+        this.errorSource = 'phone';
+        switch (true) {
+          case !!this.userForm.controls.phoneNumber.errors?.['required']:
+            this.errorMessage = 'Every user must have a phone number.';
+            break;
+          case !!this.userForm.controls.phoneNumber.errors?.['pattern']:
+            this.errorMessage = 'Phone number can contain only numeric characters.';
+            break;
+          case !!this.userForm.controls.phoneNumber.errors?.['minlength']:
+            this.errorMessage = 'Phone number must contain at least 10 characters.';
+            break;
+          case !!this.userForm.controls.phoneNumber.errors?.['maxlength']:
+            this.errorMessage = 'Phone number can contain maximum 10 characters.';
+            break;
+        }
+      }
+
+      this.updatedUserSubscription = this.userService.updatePhoneNumber(this.userForm.value.phoneNumber ? this.userForm.value.phoneNumber:'').subscribe(() => {
+        this.newGetUsersEvent.emit();
+        this.closeModal();
+      })
+
     } else if (this.modalRole === 'editPassword') {
       console.log('EDIT PASSWORD REQUEST')
+
+      switch (true) {
+        case (this.userForm.value.password == ''):
+          this.errorSource = 'password';
+          this.errorMessage = 'Every user must have a password.';
+          return;
+        case ((this.userForm.value.password?.length || 0) < 7):
+          this.errorSource = 'password';
+          this.errorMessage = 'Password must contain at least 7 characters.';
+          return;
+        case ((this.userForm.value.password?.length || 0) > 60):
+          this.errorSource = 'password';
+          this.errorMessage = 'Password can contain maximum 60 characters.';
+          return;
+      }
+
+      this.updatedUserSubscription = this.userService.updatePassword(this.userForm.value.password ? this.userForm.value.password:'').subscribe(() => {
+        this.newGetUsersEvent.emit();
+        this.closeModal();
+      })
+
     } else {
 
       // Am ales sa verific input-ul password separat pentru ca difera la addUser() 
+      // Aici, in edit user, se verifica parola doar daca s-a introdus ceva in campul de parola. Asta pentru ca daca nu s-a introdus, insemna doar ca administratorul nu a avut nevoie sa schimbe parola ci doar alt camp.
       if (this.userForm.value.password != '') {
         switch (true) {
           case ((this.userForm.value.password?.length || 0) < 7):
@@ -810,9 +860,8 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         issuingDate: this.userForm.value.issuingDate || undefined,
       }
 
-      console.log('reached here')
+      
       // Apelam functia de updateUser() si ii pasam ca parametru obiectele de tip user, login details, address, identity card create anterior
-
 
       this.updatedUserSubscription = this.userService.updateUser(user, loginDetails, address, identityCard).subscribe(() => {
         this.newGetUsersEvent.emit();

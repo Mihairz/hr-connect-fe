@@ -19,7 +19,7 @@ h2 {
 
 
 .form-div {
-    
+    background-color: white;
 
     left: 50%;
     
@@ -39,6 +39,14 @@ h2 {
 .input-container {
     height: 50px;
     position: relative;
+    width: 100%;
+}
+
+.ic-2{
+    margin-top: 48px;
+}
+
+.personal-data-input{
     width: 100%;
 }
 

@@ -14,9 +14,10 @@
 
 
 
-
+            <!-- COLOANA STANGA -->
             <div class="request-data-container">
 
+                <!-- REQUESTER -->
                 <div class="requester-container">
                     <h3 class="subtitle">Requester</h3>
                     <table>
@@ -43,12 +44,13 @@
                     </table>
                 </div>
 
+                <!-- REQUEST -->
                 <div class="request-container">
                     <h3 class="subtitle">Request</h3>
                     <table>
                         <tr>
                             <td>Type:</td>
-                            <td>{{editedRequest.type.replaceAll('_',' ')}}</td>
+                            <td><b>{{editedRequest.type.replaceAll('_',' ')}}</b></td>
                         </tr>
                         <tr>
                             <td>Status:</td>
@@ -68,6 +70,7 @@
                     </table>
                 </div>
 
+                <!-- RESPONDER -->
                 <div class="responder-container">
                     <h3 class="subtitle">Responder</h3>
                     <table *ngIf="editedRequest.responder">
@@ -103,17 +106,22 @@
 
 
 
-
+            <!-- COLOANA DREAPTA -->
             <div class="request-details-container">
                 <h3 class="subtitle">Details</h3>
                 <div class="request-details-content">
 
+                    <!-- BAZAT PE TIPUL DE CERERE SE VA INCARCA UN TEMPLATE DIFERIT: -->
+
                     <section class="default-request-model"
-                        *ngIf="editedRequest.type === 'Equipment_request' || editedRequest.type === 'Change_personal_data' || editedRequest.type === 'Custom_request' ">
+                        *ngIf="editedRequest.type === 'Equipment_request' || editedRequest.type === 'Custom_request' ">
                         {{editedRequest.details}}
                     </section>
- 
 
+                    <section class="default-request-model" *ngIf="editedRequest.type === 'Change_personal_data'">
+                        <div [innerHTML]="changeDataRequestDetailsStringFormat(editedRequest.details)"></div>
+                    </section>
+  
                     <section class="document-model" *ngIf="editedRequest.type === 'Paid_leave'">
                         <h3>Cerere - Concediu de odihna</h3>
 

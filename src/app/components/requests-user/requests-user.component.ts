@@ -35,6 +35,23 @@ export class RequestsUserComponent implements OnInit {
   onReqTypeChange() {
     this.selectedReqType = (<HTMLSelectElement>document.getElementById('reqType')).value; // schimba valoarea selected request type
     this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
+    this.errorMessage = '';
+  }
+
+
+
+  datasToChange: string[] = ['First name', 'Last name'];
+  selectedDataToChange: string = '';
+
+
+
+
+  // Urmareste valoarea campului data to change (care este un dropdown cu mai multe optiuni)
+  onDataToChangeChange() {
+    this.selectedDataToChange = (<HTMLSelectElement>document.getElementById('dataToChange')).value; // schimba valoarea selected request type
+
+    console.log(this.selectedDataToChange);
+    this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
   }
 
 
@@ -160,23 +177,71 @@ export class RequestsUserComponent implements OnInit {
 
     if (this.selectedReqType === 'Paid_leave' || this.selectedReqType === 'Medical_leave') {
 
-      const leaveIntervalString = `${this.startDate}_${this.endDate}`;
+      const leaveIntervalString = `${this.startDate}_${this.endDate}`; // creem formatul necesar ce trebuie transmis in baza de date bazat pe valorile introduse de utilizator
 
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, leaveIntervalString).subscribe(() => {
         console.log(this.selectedReqType + ' applied for period: ' + leaveIntervalString);
-        this.getAllRequestsByUser();
-        this.errorMessage = '';
+        this.getAllRequestsByUser(); // se da refresh la tabelul de requests
+        this.errorMessage = ''; // in caz ca inainte am introdus ceva gresit si dupa corect, vrem sa scapam de error message
         this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
         this.startDate = ''; // reinitializeaza valoarea start date 
         this.endDate = ''; // reinitializeaza valoarea end date
       })
 
+    } else if (this.selectedReqType === 'Change_personal_data') {
+
+      if(this.errorMessage) {this.errorMessage='';}
+
+      let changeDataStringFormat = ``;
+
+      // verificam manual input-ul utilizatorului
+      switch (true) {
+        case (!!!this.requestForm.value.details):
+          this.errorMessage = 'Required field.';
+          return;
+        case (this.requestForm.value.details?.length === undefined || this.requestForm.value.details.length < 2):
+          console.log('mustcontain2');
+          this.errorMessage = 'Must contain minimum 2 characters.';
+          return;
+        case (this.requestForm.value.details?.length || 0 > 20):
+          this.errorMessage = 'Can contain maximum 250 characters.';
+          return;
+      }
+
+      // creem manual/hardcodat string-ul sub formatul necesar pentru requestul catre baza de date, bazat pe campul selectat de utilizator
+      // formatul necesar la momentul actual pentru request-ul in baza de date este columnName_oldValue_columnName_newValue 
+      switch (this.selectedDataToChange) {
+        case 'First name':
+          changeDataStringFormat = ('firstName_' + this.userProfile.firstName + '_firstName_' + this.requestForm.value.details);
+          // console.log(changeDataStringFormat);
+
+          this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, changeDataStringFormat).subscribe(() => {
+            console.log('change first name submitted');
+            this.getAllRequestsByUser(); // se da refresh la tabelul de requests
+            this.errorMessage = ''; // in caz ca inainte am introdus ceva gresit si dupa corect, vrem sa scapam de error message
+            this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
+          })
+          
+          break;
+        case 'Last name':
+          changeDataStringFormat = 'lastName_' + this.userProfile.lastName + '_lastName_' + this.requestForm.value.details;
+          // console.log(changeDataStringFormat);
+
+          this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, changeDataStringFormat).subscribe(() => {
+            console.log('change last name submitted');
+            this.getAllRequestsByUser(); // se da refresh la tabelul de requests
+            this.errorMessage = ''; // in caz ca inainte am introdus ceva gresit si dupa corect, vrem sa scapam de error message
+            this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
+          })
+
+          break;
+      }
     } else if (this.selectedReqType === 'Resignation') {
 
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, "").subscribe(() => {
         console.log('RESIGNATION SUBMITTED');
-        this.getAllRequestsByUser();
-        this.errorMessage = '';
+        this.getAllRequestsByUser(); // se da refresh la tabelul de requests
+        this.errorMessage = ''; // in caz ca inainte am introdus ceva gresit si dupa corect, vrem sa scapam de error message
         this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
       })
 
@@ -238,7 +303,7 @@ export class RequestsUserComponent implements OnInit {
   // SETARI TABEL 
   dataSource = new MatTableDataSource<RequestUser>([]); // Initializam o lista goala care contine obiecte de tip RequestUser, sub forma MatTableDataSource ca sa poata fi paginabila si filtrabila de catre angular-material
 
-  columnsToDisplay = ['id', 'requestType', 'department', 'lastName', 'email', 'status', 'requestDate', 'finishDate', 'action']; // Aici se specifica elementului html mat-table ce coloane din typescript sa se afiseze
+  columnsToDisplay = ['id', 'requestType', 'status', 'requestDate', 'finishDate', 'action']; // Aici se specifica elementului html mat-table ce coloane din typescript sa se afiseze
 
   // Am intampinat o problema pentru ca paginator-ul se incarca inaintea datelor si astfel era undefined (din cate am inteles). Am gasit solutii aici https://stackoverflow.com/questions/48785965/angular-matpaginator-doesnt-get-initialized
 
