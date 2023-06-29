@@ -30,9 +30,11 @@
 
                     <div class="input-container ic1">
                         <select id="role" class="input" name="role" formControlName="role" (change)="onRoleChange()">
-                            <option disabled selected value="">Role</option>
+                            <option disabled selected value="">Select a role</option>
                             <option *ngFor="let role of roles" [value]="role">{{ role.replace('_',' ') }}</option>
                         </select>
+
+                        <label for="role" class="placeholder">Role:</label>
                     </div>
                     <div *ngIf="errorSource === 'role'" class="alert alert-danger" role="alert">
                         {{ errorMessage }}
@@ -41,10 +43,12 @@
                     <div class="input-container ic2">
                         <select id="department" class="input" name="department" formControlName="department"
                             (change)="onDepartmentChange()">
-                            <option disabled selected value="">Department</option>
+                            <option disabled selected value="">Select a department</option>
                             <option *ngFor="let department of departments" [value]="department">{{
                                 department.replace('_',' ') }}</option>
                         </select>
+
+                        <label for="department" class="placeholder">Department:</label>
                     </div>
                     <div *ngIf="errorSource === 'department'" class="alert alert-danger" role="alert">
                         {{ errorMessage }}
@@ -53,10 +57,12 @@
                     <div class="input-container ic2">
                         <select id="position" class="input" name="position" formControlName="position"
                             (change)="onPositionChange()">
-                            <option disabled selected value="">Position</option>
+                            <option disabled selected value="">Select a position</option>
                             <option *ngFor="let position of positions" [value]="position">{{ position.replace('_',' ')
                                 }}</option>
                         </select>
+
+                        <label for="position" class="placeholder">Position:</label>
                     </div>
                     <div *ngIf="errorSource === 'position'" class="alert alert-danger" role="alert">
                         {{ errorMessage }}
@@ -166,9 +172,10 @@
 
                         <div class="input-container ic2">
                             <!-- la fiecare input specificam numele variabilei din typescript -->
-                            <input id="issuingDate" class="input" type="text" formControlName="issuingDate"
-                                placeholder="Identity Card issuing date:" required onfocus="(this.type = 'date')">
-                            <label for="issuingDate" class="placeholder"></label>
+                            <input id="issuingDate" class="input" type="date" formControlName="issuingDate"
+                             required>
+
+                            <label for="issuingDate" class="placeholder">ID Issuing Date:</label>
                         </div>
                         <div *ngIf="errorSource === 'issuingDate'" class="alert alert-danger" role="alert">
                             {{ errorMessage }}

@@ -64,10 +64,10 @@
                             <div class="col-sm-3 text-secondary">
                                 <h6 class="mb-0">Phone</h6>
                             </div>
-                            <div class="col-sm-9">
+                            <div class="col-sm-9 editable-field">
                                 {{userProfile.phoneNumber}}
 
-                                <button (click)="editPhoneNumber(userProfile)">change</button>
+                                <a (click)="editPhoneNumber(userProfile)"><u>change</u></a>
                             </div>
                         </div>
                         <hr>
@@ -76,13 +76,13 @@
                             <div class="col-sm-3 text-secondary"> <!-- occupy 3 columns -->
                                 <h6 class="mb-0">Password</h6>
                             </div>
-                            <ng-container *ngFor="let role of ['employee', 'hr', 'admin']">
-                                <div *appHasRole="role" class="col-sm-9">
+                            
+                                <div class="col-sm-9 editable-field">
                                     <b>*********</b>
 
-                                    <button (click)="editPassword(userProfile)">change</button>
+                                    <a (click)="editPassword(userProfile)"><u>change</u></a>
                                 </div>
-                            </ng-container>
+                            
                         </div>
                         <hr>
  

@@ -20,9 +20,9 @@ export class RequestsUserComponent implements OnInit {
 
   constructor(private userService: UserService, private sanitizer: DomSanitizer, private requestHrService: RequestHrService) { }
 
-  
 
-  @Output() userProfile: User = new User(); 
+
+  @Output() userProfile: User = new User();
 
   @Input() @Output() userRole?: string;
 
@@ -34,7 +34,7 @@ export class RequestsUserComponent implements OnInit {
   // Urmareste valoarea campului request type(care este un dropdown cu mai multe optiuni)
   onReqTypeChange() {
     this.selectedReqType = (<HTMLSelectElement>document.getElementById('reqType')).value; // schimba valoarea selected request type
-    this.requestForm.patchValue({details:undefined}); // reinitializeaza valoarea details a formularului
+    this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
   }
 
 
@@ -163,19 +163,21 @@ export class RequestsUserComponent implements OnInit {
       const leaveIntervalString = `${this.startDate}_${this.endDate}`;
 
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, leaveIntervalString).subscribe(() => {
-        console.log(this.selectedReqType+' applied for period: '+leaveIntervalString);
+        console.log(this.selectedReqType + ' applied for period: ' + leaveIntervalString);
         this.getAllRequestsByUser();
-        this.errorMessage='';
-        this.requestForm.patchValue({details:undefined}); // reinitializeaza valoarea details a formularului
+        this.errorMessage = '';
+        this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
+        this.startDate = ''; // reinitializeaza valoarea start date 
+        this.endDate = ''; // reinitializeaza valoarea end date
       })
 
-    } else if (this.selectedReqType === 'Resignation'){
+    } else if (this.selectedReqType === 'Resignation') {
 
-      this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType,"").subscribe(() => {
+      this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, "").subscribe(() => {
         console.log('RESIGNATION SUBMITTED');
         this.getAllRequestsByUser();
-        this.errorMessage='';
-        this.requestForm.patchValue({details:undefined}); // reinitializeaza valoarea details a formularului
+        this.errorMessage = '';
+        this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
       })
 
     }
@@ -199,7 +201,7 @@ export class RequestsUserComponent implements OnInit {
             break;
         }
 
-        return; 
+        return;
       }
 
       const sanitiziedDetails = this.requestForm.value.details
@@ -210,8 +212,8 @@ export class RequestsUserComponent implements OnInit {
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, sanitiziedDetails).subscribe(() => {
         console.log('REQUEST WITH SANITIZED DETAILS SUBMITTED');
         this.getAllRequestsByUser();
-        this.errorMessage='';
-        this.requestForm.patchValue({details:undefined}); // reinitializeaza valoarea details a formularului
+        this.errorMessage = '';
+        this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
       })
 
 
@@ -236,7 +238,7 @@ export class RequestsUserComponent implements OnInit {
   // SETARI TABEL 
   dataSource = new MatTableDataSource<RequestUser>([]); // Initializam o lista goala care contine obiecte de tip RequestUser, sub forma MatTableDataSource ca sa poata fi paginabila si filtrabila de catre angular-material
 
-  columnsToDisplay = ['id','requestType','department', 'lastName', 'email','status','requestDate','finishDate','action']; // Aici se specifica elementului html mat-table ce coloane din typescript sa se afiseze
+  columnsToDisplay = ['id', 'requestType', 'department', 'lastName', 'email', 'status', 'requestDate', 'finishDate', 'action']; // Aici se specifica elementului html mat-table ce coloane din typescript sa se afiseze
 
   // Am intampinat o problema pentru ca paginator-ul se incarca inaintea datelor si astfel era undefined (din cate am inteles). Am gasit solutii aici https://stackoverflow.com/questions/48785965/angular-matpaginator-doesnt-get-initialized
 
@@ -254,9 +256,9 @@ export class RequestsUserComponent implements OnInit {
   }
   searchControl = new FormControl('', [Validators.pattern(/^[a-zA-Z0-9\s]*$/)]); // Make search bar accept only alphanumeric 
   applyFilter(event: Event) {
-    if (this.searchControl.hasError('pattern')){
+    if (this.searchControl.hasError('pattern')) {
       return; // if user inputs special characters into searchbar, applyFilter does not reach dataSource / page doesn't reload / nothing is searched
-    } else{ 
+    } else {
       const filterValue = (event.target as HTMLInputElement).value; // user input
       this.dataSource.filter = filterValue.trim().toLowerCase(); // toLowerCase because that's how mat-table filter algorithm functions
       // Angular automatically sanitizes the input provided by users when using data binding or property binding. Therefore, when we bind the filterValue to the this.dataSource.filter, it is automatically sanitized.
@@ -284,7 +286,7 @@ export class RequestsUserComponent implements OnInit {
   //   this.openModal();
   // }
 
-  viewDetails(requestUser: RequestUser){
+  viewDetails(requestUser: RequestUser) {
     // this.modalType 
     this.editedRequest = requestUser;
     this.openModal();
@@ -306,12 +308,12 @@ export class RequestsUserComponent implements OnInit {
 
 
 
-  
+
   // REQUESTS HISTORY ^ ================================================================================================================================================
 }
 
 
-   
 
-  
+
+
 
