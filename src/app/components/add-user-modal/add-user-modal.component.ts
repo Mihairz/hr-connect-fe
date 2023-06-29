@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, SecurityContext } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, SecurityContext, TemplateRef } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
   @Input() editedUser: User = new User();
   @Input() modalType: String = '';
-  @Input() modalRole: String = ''; 
+  @Input() modalRole: String = '';
 
   particlesScriptElement: HTMLScriptElement;
   particlesSettingsScriptElement: HTMLScriptElement;
@@ -42,6 +42,8 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     this.particlesHostingElement = document.createElement("script");
     this.particlesHostingElement.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
     document.body.appendChild(this.particlesHostingElement);
+
+
   }
 
 
@@ -211,6 +213,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // Daca modala a fost apelata de pe butonul Edit, initializam formularul completat cu datele utilizatorului ce urmeaza a fi editat. 
     // Daca modala a fost apelata de pe butonul Add, initializam formularul cu campurile goale 
     console.log('modal type: ' + this.modalType);
+    console.log('ADD USER MODAL MODAL ROLE:' + this.modalRole);
 
     this.userForm.patchValue({
       role: this.editedUser.loginDetails?.role || "",
@@ -667,7 +670,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorMessage = 'Password can contain maximum 60 characters.';
         return;
     }
-    
+
     // Verificam restul input-urilor
     if (this.userForm.invalid) {
       this.handleUserFormError();
@@ -684,7 +687,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
       phoneNumber: this.userForm.value.phoneNumber || '',
 
-      joinDate: new Date()
+      joinDate: new Date(),
     }
 
     // Creem obiectul loginDetails aferent ce urmeaza a fi introdus in baza de date
@@ -724,89 +727,104 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
   updateUser() {
 
-    // Am ales sa verific input-ul password separat pentru ca difera la addUser() 
-    if(this.userForm.value.password != ''){
-      switch (true) {
-        case ((this.userForm.value.password?.length || 0) <7):
-          this.errorSource = 'password';
-          this.errorMessage = 'Password must contain at least 7 characters.';
-          return;
-        case ((this.userForm.value.password?.length || 0) > 60):
-          this.errorSource = 'password';
-          this.errorMessage = 'Password can contain maximum 60 characters.';
-          return;
-      }
-    }
-    
-    // Verificam restul input-urilor
-    if (this.userForm.invalid) {
-      this.handleUserFormError();
-      return;
-    }
-
-
-    // Creem obiectul de tip user cu valorile completate in formular
-    const user = {
-      id: this.editedUser.id,
-
-      department: this.userForm.value.department || '',
-      position: this.userForm.value.position || '',
-
-      firstName: this.userForm.value.firstName || '',
-      lastName: this.userForm.value.lastName || '',
-
-      phoneNumber: this.userForm.value.phoneNumber || '',
-
-      joinDate: this.editedUser.joinDate,
-    }
-
-
-
-    // Creem obiectul de tip login details cu valorile completate in formular
-    let loginDetails: LoginDetails;
-
-    if (!!this.userForm.controls.password.value) {
-      loginDetails = {
-        id: this.editedUser.loginDetails?.id,
-        email: this.userForm.value.email || '',
-        password: this.sanitizeInput(this.userForm.controls.password.value || "") || '',
-        role: this.userForm.value.role || ''
-      }
+    if (this.modalRole === 'editPhoneNumber') {
+      console.log('UPDATE PHONE NUMBER REQUEST')
+    } else if (this.modalRole === 'editPassword') {
+      console.log('EDIT PASSWORD REQUEST')
     } else {
-      loginDetails = {
-        id: this.editedUser.loginDetails?.id,
-        email: this.userForm.value.email || '',
-        password: undefined,
-        role: this.userForm.value.role || ''
+
+      // Am ales sa verific input-ul password separat pentru ca difera la addUser() 
+      if (this.userForm.value.password != '') {
+        switch (true) {
+          case ((this.userForm.value.password?.length || 0) < 7):
+            this.errorSource = 'password';
+            this.errorMessage = 'Password must contain at least 7 characters.';
+            return;
+          case ((this.userForm.value.password?.length || 0) > 60):
+            this.errorSource = 'password';
+            this.errorMessage = 'Password can contain maximum 60 characters.';
+            return;
+        }
       }
+
+      // Verificam restul input-urilor
+      if (this.userForm.invalid) {
+        this.handleUserFormError();
+        return;
+      }
+
+      // Creem obiectul de tip user cu valorile completate in formular
+      const user = {
+        id: this.editedUser.id,
+
+        department: this.userForm.value.department || '',
+        position: this.userForm.value.position || '',
+
+        firstName: this.userForm.value.firstName || '',
+        lastName: this.userForm.value.lastName || '',
+
+        phoneNumber: this.userForm.value.phoneNumber || '',
+
+        joinDate: this.editedUser.joinDate,
+      }
+
+
+
+      // Creem obiectul de tip login details cu valorile completate in formular
+      let loginDetails: LoginDetails;
+
+      if (!!this.userForm.controls.password.value) {
+        loginDetails = {
+          id: this.editedUser.loginDetails?.id,
+          email: this.userForm.value.email || '',
+          password: this.sanitizeInput(this.userForm.controls.password.value || "") || '',
+          role: this.userForm.value.role || ''
+        }
+      } else {
+        loginDetails = {
+          id: this.editedUser.loginDetails?.id,
+          email: this.userForm.value.email || '',
+          password: undefined,
+          role: this.userForm.value.role || ''
+        }
+      }
+
+      // Creem obiectul de tip address cu valorile completate in formular
+      const address = {
+        id: this.editedUser.address?.id,
+        country: this.userForm.value.country || '',
+        county: this.userForm.value.county || '',
+        city: this.userForm.value.city || '',
+        street: this.userForm.value.street || '',
+        streetNumber: this.userForm.value.streetNumber || '',
+        flatNumber: this.userForm.value.flatNumber || '',
+      }
+
+      // Creem obiectul de tip identity card cu valorile completate in formular
+      const identityCard = {
+        id: this.editedUser.identityCard?.id,
+        cnp: this.userForm.value.cnp || '',
+        number: this.userForm.value.number || 0,
+        series: this.userForm.value.series || '',
+        issuer: this.userForm.value.issuer || '',
+        issuingDate: this.userForm.value.issuingDate || undefined,
+      }
+
+      console.log('reached here')
+      // Apelam functia de updateUser() si ii pasam ca parametru obiectele de tip user, login details, address, identity card create anterior
+
+
+      this.updatedUserSubscription = this.userService.updateUser(user, loginDetails, address, identityCard).subscribe(() => {
+        this.newGetUsersEvent.emit();
+        this.closeModal();
+
+      })
+
     }
 
-    // Creem obiectul de tip address cu valorile completate in formular
-    const address = {
-      id: this.editedUser.address?.id,
-      country: this.userForm.value.country || '',
-      county: this.userForm.value.county || '',
-      city: this.userForm.value.city || '',
-      street: this.userForm.value.street || '',
-      streetNumber: this.userForm.value.streetNumber || '',
-      flatNumber: this.userForm.value.flatNumber || '',
-    }
 
-    // Creem obiectul de tip identity card cu valorile completate in formular
-    const identityCard = {
-      id: this.editedUser.identityCard?.id,
-      cnp: this.userForm.value.cnp || '',
-      number: this.userForm.value.number || 0,
-      series: this.userForm.value.series || '',
-      issuer: this.userForm.value.issuer || '',
-      issuingDate: this.userForm.value.issuingDate || undefined,
-    }
 
-    // Apelam functia de updateUser() si ii pasam ca parametru obiectele de tip user, login details, address, identity card create anterior
-    this.updatedUserSubscription = this.userService.updateUser(user, loginDetails, address, identityCard).subscribe(() => {
-      this.newGetUsersEvent.emit();
-      this.closeModal();
-    })
+
   }
 
   ngOnDestroy(): void {

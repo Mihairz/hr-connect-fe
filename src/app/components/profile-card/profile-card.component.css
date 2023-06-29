@@ -124,4 +124,12 @@
     }
 }
 
+a,
+a label {
+    cursor: pointer;
+}
 
+.editable-field{
+    display: flex;
+    justify-content: space-between;
+}

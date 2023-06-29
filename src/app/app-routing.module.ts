@@ -29,38 +29,44 @@ import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.compo
 
 const routes: Routes = [
 
-  { path: '', 
-  component: NewsletterPageComponent, // TO CHANGE WITH PROFILE
-  canActivate: [isAuthenticatedGuard], }, 
+  {
+    path: '',
+    component: ProfilePageComponent,
+    canActivate: [isAuthenticatedGuard] // pagina este accesibila doar utilizatorilor logati
+  },
   {
     path: 'login',
     component: LoginPageComponent,
-    canActivate: [isNotAuthenticatedGuard] // pagina de login este accesibila doar utilizatorilor nelogati
-  }, 
+    canActivate: [isNotAuthenticatedGuard] // pagina este accesibila doar utilizatorilor nelogati
+  },
   {
     path: 'admin', component: AdminHomePageComponent,
-    canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina de admin este accesibila doar de catre utilizatorii logati
+    canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina este accesibila doar de catre utilizatorii logati
     data: { roles: ['admin'] }, // care au rol de admin (identificat din jwt)
   },
-  { 
+  {
     path: 'newsfeed', component: NewsletterPageComponent,
-    canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina de admin este accesibila doar de catre utilizatorii logati
+    canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina este accesibila doar de catre utilizatorii logati
     data: { roles: ['employee', 'hr'] }  // care au rol de employee sau hr (identificat din jwt)
   },
   {
     path: 'profile', component: ProfilePageComponent,
-    canActivate: [isAuthenticatedGuard] // pagina de profile este accesibila doar utilizatorilor logati
+    canActivate: [isAuthenticatedGuard], // pagina de profile este accesibila doar utilizatorilor logati
   },
 
   { path: 'article/:id', component: FullDetailedArticleComponent }, // individual article page
-  { path: 'newsletter', component: NewsletterPageComponent}, // the newsfeed and main page
-  { path: 'faq', component: FaqPageComponent},
+  { path: 'newsletter', component: NewsletterPageComponent }, // the newsfeed and main page
+  { path: 'faq', component: FaqPageComponent },
 
 
-  {path: 'requests', component: RequestsPageComponent},
+  {
+    path: 'requests', component: RequestsPageComponent,
+    canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina este accesibila doar de catre utilizatorii logati
+    data: { roles: ['employee', 'hr'] } // care au rol de employee sau hr (identificat din jwt)},
+  },  
 
 
-  { path: 'feedback', component: FeedbackPageComponent},
+  { path: 'feedback', component: FeedbackPageComponent },
 
 
 ];

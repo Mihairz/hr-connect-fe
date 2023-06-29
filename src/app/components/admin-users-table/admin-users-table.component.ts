@@ -69,7 +69,7 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
 
   isLoading = false; // pentru a astepta incarcarea paginii, adica pentru a astepta pana cand se incarca toti utilizatorii
   isModalOpen = false; // Formularul de adaugare utilizatori noi este prestabilit ascuns
-  editedUser = new User();
+  editedUser = new User(); 
   modalType = "";
   modalRole = "admin";
  

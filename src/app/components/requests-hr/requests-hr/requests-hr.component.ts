@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -20,11 +20,14 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
 
   requestSubscription: Subscription = new Subscription();
 
+  @Input() @Output() userRole?: string;
+
   ngOnInit(): void {
-    this.getAllPendingRequests();
+    this.getPendingRequests();
   }
 
-
+ 
+  
 
   // SETARI TABEL 
   dataSource = new MatTableDataSource<RequestUser>([]); // Initializam o lista goala care contine obiecte de tip RequestUser, sub forma MatTableDataSource ca sa poata fi paginabila si filtrabila de catre angular-material
@@ -46,32 +49,24 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
     }
   }
   searchControl = new FormControl('', [Validators.pattern(/^[a-zA-Z0-9\s]*$/)]); // Make search bar accept only alphanumeric 
+  
   applyFilter(event: Event) {
     if (this.searchControl.hasError('pattern')){
       return; // if user inputs special characters into searchbar, applyFilter does not reach dataSource / page doesn't reload / nothing is searched
     } else{ 
       const filterValue = (event.target as HTMLInputElement).value; // user input
-      this.dataSource.filter = filterValue.trim().toLowerCase(); // toLowerCase because that's how mat-table filter algorithm functions
+      this.dataSource.filter = filterValue.trim().toLowerCase(); 
+      this.dataSource.filterPredicate = this.filterPredicate;
+      // toLowerCase because that's how mat-table filter algorithm functions
       // Angular automatically sanitizes the input provided by users when using data binding or property binding. Therefore, when we bind the filterValue to the this.dataSource.filter, it is automatically sanitized.
     }
   }
 
+  filterPredicate(data: RequestUser, filter: string): boolean {
+    const searchText = data.type.toLowerCase() + data.requester?.department.toLowerCase() + data.requester?.firstName.toLowerCase() + data.requester?.lastName.toLowerCase() + data.requester?.loginDetails?.email.toLowerCase();
+    return searchText.includes(filter.toLowerCase());
+  }
   
-  openCity(cityName: string): void {
-    let i: number;
-    const x = document.getElementsByClassName("city");
-    for (i = 0; i < x.length; i++) {
-      (x[i] as HTMLElement).style.display = "none";
-    }
-    (document.getElementById(cityName) as HTMLElement).style.display = "block";
-  }
-
-  loadAllRequestsTab(){
-    this.getAllRequests();
-  }
-  loadJustAllPendingRequests(){
-    this.getAllPendingRequests();
-  }
   
 
 
@@ -87,28 +82,56 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
   // modalRole = "hr";
 
   // apeleaza functia getRequests() din serviciul RequestUser injectat si populeaza lista
-  getAllRequests() {
-    this.isLoading = true; // am setat isLoading pe true la inceputul unui proces care poate dura mai mult
+  // getAllRequests() {
+  //   this.isLoading = true; // am setat isLoading pe true la inceputul unui proces care poate dura mai mult
 
-    this.requestSubscription =
-      this.requestHrService.getAllRequests().subscribe((responseRequestsList) => {
-        // console.log(responseRequestsList);
+  //   this.requestSubscription =
+  //     this.requestHrService.getAllRequests().subscribe((responseRequestsList) => {
+  //       // console.log(responseRequestsList);
 
-        this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
+  //       this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
 
-        this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
-      });
-  }
+  //       this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
+  //     });
+  // }
 
   // apeleaza functia getRequests() din serviciul RequestUser injectat si populeaza lista
-  getAllPendingRequests() {
+  getPendingRequests() {
     this.isLoading = true; // am setat isLoading pe true la inceputul unui proces care poate dura mai mult
 
     this.requestSubscription =
       this.requestHrService.getAllPendingRequests().subscribe((responseRequestsList) => {
         // console.log(responseRequestsList);
 
-        this.dataSource = new MatTableDataSource(responseRequestsList); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table
+        this.dataSource = new MatTableDataSource(responseRequestsList.reverse()); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table, .reverse ca sa le afiseze de la cea mai noua la cea mai veche
+
+        this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
+      });
+  }
+
+  // apeleaza functia getRequests() din serviciul RequestUser injectat si populeaza lista
+  getApprovedRequests() {
+    this.isLoading = true; // am setat isLoading pe true la inceputul unui proces care poate dura mai mult
+
+    this.requestSubscription =
+      this.requestHrService.getAllApprovedRequests().subscribe((responseRequestsList) => {
+        // console.log(responseRequestsList);
+
+        this.dataSource = new MatTableDataSource(responseRequestsList.reverse()); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table, .reverse ca sa le afiseze de la cea mai noua la cea mai veche
+
+        this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
+      });
+  }
+
+  // apeleaza functia getRequests() din serviciul RequestUser injectat si populeaza lista
+  getDeniedRequests() {
+    this.isLoading = true; // am setat isLoading pe true la inceputul unui proces care poate dura mai mult
+
+    this.requestSubscription =
+      this.requestHrService.getAllDeniedRequests().subscribe((responseRequestsList) => {
+        // console.log(responseRequestsList);
+
+        this.dataSource = new MatTableDataSource(responseRequestsList.reverse()); // atribuim rezultatul request-ului listei ce va fi afisata in mat-table, .reverse ca sa le afiseze de la cea mai noua la cea mai veche
 
         this.isLoading = false; // doar dupa ce se vor finaliza intructiunile time consuming variabila isLoading va fi setata inapoi pe false
       });

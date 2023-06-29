@@ -10,6 +10,11 @@
 
         <div class="request-details-grid">
 
+
+
+
+
+
             <div class="request-data-container">
 
                 <div class="requester-container">
@@ -43,19 +48,22 @@
                     <table>
                         <tr>
                             <td>Type:</td>
-                            <td>{{editedRequest.type}}</td>
+                            <td>{{editedRequest.type.replaceAll('_',' ')}}</td>
                         </tr>
                         <tr>
                             <td>Status:</td>
-                            <td [ngStyle]="{'color':editedRequest.status === 'Pending' ? '#00A3E3' : editedRequest.status === 'Approved' ? 'green' : 'red'}"><b>{{editedRequest.status}}</b></td>
+                            <td
+                                [ngStyle]="{'color':editedRequest.status === 'Pending' ? '#00A3E3' : editedRequest.status === 'Approved' ? 'green' : 'red'}">
+                                <b>{{editedRequest.status}}</b>
+                            </td>
                         </tr>
                         <tr>
                             <td>Submit date:</td>
-                            <td>{{editedRequest.requestDate}}</td>
+                            <td>{{formatDate(editedRequest.requestDate)}}</td>
                         </tr>
                         <tr>
                             <td>Finish date:</td>
-                            <td>{{editedRequest.finishDate}}</td>
+                            <td>{{formatDate(editedRequest.finishDate)}}</td>
                         </tr>
                     </table>
                 </div>
@@ -88,58 +96,166 @@
 
             </div>
 
+
+
+
+
+
+
+
+
             <div class="request-details-container">
                 <h3 class="subtitle">Details</h3>
                 <div class="request-details-content">
-                    <section class="employee-certificate-text"> 
-                        <!-- *ngIf={{editedRequest.type === 'employee_certificate'}} -->
-                        <h3>ADEVERINȚĂ</h3>
-        
-                        Prin prezenta, se adeverește că domnul/doamna <p class="unchangeable-field">{{editedRequest.requester?.lastName}} {{editedRequest.requester?.firstName}}
-                        </p>
-        
+
+                    <section class="default-request-model"
+                        *ngIf="editedRequest.type === 'Equipment_request' || editedRequest.type === 'Change_personal_data' || editedRequest.type === 'Custom_request' ">
+                        {{editedRequest.details}}
+                    </section>
+ 
+
+                    <section class="document-model" *ngIf="editedRequest.type === 'Paid_leave'">
+                        <h3>Cerere - Concediu de odihna</h3>
+
+                        Subsemnatul <p class="unchangeable-field">{{editedRequest.requester?.lastName}}
+                            {{editedRequest.requester?.firstName}}</p>,
+
+                        angajat(ă) al/a HR Connect pe perioadă nedeterminată
+                        începând cu data de <p class="unchangeable-field">
+                            {{formatDate(editedRequest.requester?.joinDate)}}</p>,
+
+                        în funcția de <p class="unchangeable-field">{{editedRequest.requester?.position?.replace('_','
+                            ')}}</p>,
+
+                        vă rog să-mi aprobați efectuarea unui concediu in perioada <p class="unchangeable-field">
+                            {{formatPeriod(editedRequest.details)}}</p>.
+                    </section>
+
+
+                    <section class="document-model" *ngIf="editedRequest.type === 'Medical_leave'">
+                        <h3>Cerere - Concediu medical</h3>
+
+                        Subsemnatul <p class="unchangeable-field">{{editedRequest.requester?.lastName}}
+                            {{editedRequest.requester?.firstName}}</p>,
+
+                        angajat(ă) al/a HR Connect pe perioadă nedeterminată
+                        începând cu data de <p class="unchangeable-field">
+                            {{formatDate(editedRequest.requester?.joinDate)}}</p>,
+
+                        în funcția de <p class="unchangeable-field">{{editedRequest.requester?.position?.replace('_','
+                            ')}}</p>,
+
+                        vă rog să-mi aprobați efectuarea unui concediu medical in perioada <p
+                            class="unchangeable-field">{{formatPeriod(editedRequest.details)}}</p>.
+                    </section>
+
+
+                    <section class="document-model" *ngIf="editedRequest.type === 'Employed_status'">
+
+                        <h3>Adeverință</h3>
+
+                        Prin prezenta, se adeverește că domnul/doamna <p class="unchangeable-field">
+                            {{editedRequest.requester?.lastName}} {{editedRequest.requester?.firstName}}</p>
+
                         domiciliat/ă în <p class="unchangeable-field">{{editedRequest.requester?.address?.country}}</p>,
-        
+
                         județul <p class="unchangeable-field">{{editedRequest.requester?.address?.county}}</p>,
-        
+
                         localitatea <p class="unchangeable-field">{{editedRequest.requester?.address?.city}}</p>,
-        
-                        <p class="unchangeable-field">{{editedRequest.requester?.address?.street}} {{editedRequest.requester?.address?.streetNumber}} {{editedRequest.requester?.address?.flatNumber}}</p>
-        
-                        identificat/ă prin CNP <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.cnp}}</p>
-        
+
+                        <p class="unchangeable-field">{{editedRequest.requester?.address?.street}}
+                            {{editedRequest.requester?.address?.streetNumber}}
+                            {{editedRequest.requester?.address?.flatNumber}}</p>
+
+                        identificat/ă prin CNP <p class="unchangeable-field">
+                            {{editedRequest.requester?.identityCard?.cnp}}</p>
+
                         act de identitate CI
-        
+
                         seria <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.series}}</p>
-        
+
                         nr. <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.number}}</p>
-        
+
                         eliberat de <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.issuer}}</p>
-        
-                        la data de <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.issuingDate}}</p>,
-        
+
+                        la data de <p class="unchangeable-field">
+                            {{formatDate(editedRequest.requester?.identityCard?.issuingDate)}}
+                        </p>,
+
                         este angajat(ă) al/a HR Connect
                         pe perioadă nedeterminată/determinată începând cu data de <p class="unchangeable-field">
-                            {{editedRequest.requester?.joinDate}}</p>,
-        
-                        în funcția de <p class="unchangeable-field">{{editedRequest.requester?.position?.replace('_',' ')}}</p>,
-        
+                            {{formatDate(editedRequest.requester?.joinDate)}}</p>,
+
+                        în funcția de <p class="unchangeable-field">{{editedRequest.requester?.position?.replace('_','
+                            ')}}</p>,
+
                         conform
-                        contractului individual de muncă nr. <p class="unchangeable-field">{{editedRequest.requester?.id}}</p>/2048,
+                        contractului individual de muncă nr. <p class="unchangeable-field">
+                            {{editedRequest.requester?.id}}</p>/2048,
                         înregistrat în Registrul General de evidență a salariaților conform legii.
-        
-                        Prezenta se eliberează spre a-i servi la <p class="unchangeable-field">{{editedRequest.details}}</p>.
+
+                        Prezenta se eliberează spre a-i servi la <p class="unchangeable-field">{{editedRequest.details}}
+                        </p>.
                     </section>
-    
-                    <div class="action-buttons-container">
-                        <button type="button" class="btn btn-approve" (click)="approveRequest()">Approve</button>
-                        <button type="button" class="btn btn-danger" (click)="denyRequest()">Deny</button>
-                    </div>
+
+
+                    <section class="document-model" *ngIf="editedRequest.type === 'Resignation'">
+                        <h3>Demisie</h3>
+
+                        Subsemnatul <p class="unchangeable-field">{{editedRequest.requester?.lastName}}
+                            {{editedRequest.requester?.firstName}}</p>,
+
+                        domiciliat/ă în <p class="unchangeable-field">{{editedRequest.requester?.address?.country}}</p>,
+
+                        județul <p class="unchangeable-field">{{editedRequest.requester?.address?.county}}</p>,
+
+                        localitatea <p class="unchangeable-field">{{editedRequest.requester?.address?.city}}</p>,
+
+                        strada <p class="unchangeable-field">{{editedRequest.requester?.address?.street}},
+
+                            nr. {{editedRequest.requester?.address?.streetNumber}},
+
+                            apartament {{editedRequest.requester?.address?.flatNumber}}</p>,
+
+                        identificat/ă prin CNP <p class="unchangeable-field">
+                            {{editedRequest.requester?.identityCard?.cnp}}</p>
+
+                        act de identitate CI seria <p class="unchangeable-field">
+                            {{editedRequest.requester?.identityCard?.series}}</p>
+
+                        nr. <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.number}}</p>
+
+                        eliberat de <p class="unchangeable-field">{{editedRequest.requester?.identityCard?.issuer}}</p>
+
+                        la data de <p class="unchangeable-field">
+                            {{formatDate(editedRequest.requester?.identityCard?.issuingDate)}}</p>,
+
+                        angajat(ă) al/a HR Connect pe perioadă nedeterminată începând cu data de <p
+                            class="unchangeable-field">{{formatDate(editedRequest.requester?.joinDate)}}</p>,
+
+                        în funcția de <p class="unchangeable-field">{{editedRequest.requester?.position?.replace('_','
+                            ')}}</p>,
+
+                        prin prezenta vă rog să îmi aprobați încetarea raporturilor de muncă prin demisie.
+                    </section>
+
+
+                    <ng-template [ngIf]="userRole === 'hr' && editedRequest.status === 'Pending'">
+
+                        <div class="action-buttons-container">
+                            <button type="button" class="btn btn-approve" (click)="approveRequest()">Approve</button>
+                            <button type="button" class="btn btn-danger" (click)="denyRequest()">Deny</button>
+                        </div>
+
+                    </ng-template>
+
+
+
                 </div>
-                
+
             </div>
 
-        
+
         </div>
 
 

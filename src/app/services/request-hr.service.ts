@@ -17,12 +17,24 @@ export class RequestHrService{
     return this.http.get<RequestUser[]>('http://localhost:8082/request/allInPendingRequests');
   }
 
+  getAllDeniedRequests(): Observable<RequestUser[]> {
+    return this.http.get<RequestUser[]>('http://localhost:8082/request/allDeniedRequests');
+  }
+
+  getAllApprovedRequests(): Observable<RequestUser[]> {
+    return this.http.get<RequestUser[]>('http://localhost:8082/request/allApprovedRequests');
+  }
+
+  getAllRequestsByUser(): Observable<RequestUser[]>{
+    return this.http.get<RequestUser[]>('http://localhost:8082/request/allRequestsByUser');
+  }
+
   denyRequest(id?: number): Observable<any> {
-    return this.http.delete(`http://localhost:8082/request/respond-to-request?requestId=${id}&status=false`);  
+    return this.http.post(`http://localhost:8082/request/respond-to-request?requestId=${id}&isApproved=false`,{});  
   }
 
   approveRequest(id?: number): Observable<any> {
-    return this.http.delete(`http://localhost:8082/request/respond-to-request?requestId=${id}&status=true`); 
+    return this.http.post(`http://localhost:8082/request/respond-to-request?requestId=${id}&isApproved=true`,{}); 
   }
 
   addRequest(type:string,details:string): Observable<RequestUser>{
