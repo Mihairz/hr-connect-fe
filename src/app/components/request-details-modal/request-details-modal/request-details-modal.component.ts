@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { data } from 'jquery';
 import { Subscription } from 'rxjs';
 import { RequestUser } from 'src/app/models/request-user';
 import { User } from 'src/app/models/user';
@@ -60,6 +61,34 @@ export class RequestDetailsModalComponent {
   formatDate(date?: Date){
     return date?.toString().split('-').reverse().join('-');
   }
+
+  camelCaseToNormalString(input: string): string {
+    // Split the input string into an array of words
+    const words = input.split(/(?=[A-Z])/);
+  
+    // Capitalize the first letter of each word and convert the rest to lowercase
+    const transformedWords = words.map(word => {
+      const firstLetter = word.charAt(0).toUpperCase();
+      const restOfWord = word.slice(1).toLowerCase();
+      return `${firstLetter}${restOfWord}`;
+    });
+  
+    // Join the transformed words with a space in between
+    const transformedString = transformedWords.join(' ');
+  
+    return transformedString;
+  }
+
+  changeDataRequestDetailsStringFormat(input: string): string {
+    const parts = input.split('_');
+    const dataThatWasChanged = this.camelCaseToNormalString(parts[0]);
+    const oldValue = parts[1];
+    const newValue = parts[3];
+  
+    return `Old ${dataThatWasChanged}: ${oldValue}<br>New ${dataThatWasChanged}: ${newValue}`;
+  }
+  
+  
   
 
   closeModal() {

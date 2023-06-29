@@ -28,6 +28,14 @@ export class UserService {
     return this.http.put<User>('http://localhost:8082/user', {user,loginDetails,address,identityCard} );
   }
 
+  updatePhoneNumber(phoneNumber?: string): Observable<User>{
+    return this.http.post<User>('http://localhost:8082/user/self',phoneNumber);
+  }
+
+  updatePassword(password?: string): Observable<User>{
+    return this.http.post<User>('http://localhost:8082/user/self',password);
+  }
+
   deleteUser(id: number): Observable<{}> {
     return this.http.delete(`http://localhost:8082/user?id=${id}`, {}) as Observable<{}>
   }
