@@ -5,6 +5,7 @@ export interface NewsletterArticle {
     date: string;
     content: string;
     urlpic:string;
-    typeOfContent: string;
+    contentType: string;
+    orderNumber: number;
 
 }

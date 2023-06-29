@@ -13,6 +13,7 @@ export class AddFaqModalComponent {
     public dialogRef: MatDialogRef<AddFaqModalComponent>,
     private aService: FaqService,
     @Inject(MAT_DIALOG_DATA) public data: FaqContent
+    
   ) {}
   ngOnInit() {
   }
@@ -34,5 +35,7 @@ export class AddFaqModalComponent {
     }
 
   }
+  
 
+  
 }

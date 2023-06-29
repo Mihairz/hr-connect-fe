@@ -47,7 +47,7 @@ export class NewsletterArticleComponent implements OnInit {
 
   getArticles() {
     this.articlesService.getNewsletterArticles().subscribe((response) => {
-      this.articles = response.reverse(); // nu e good practice si ar trebui din backend sa sortam aceste articole ca cel nou sa fie in fata
+      this.articles = response.sort((b, a) => b.orderNumber - a.orderNumber); // nu e good practice si ar trebui din backend sa sortam aceste articole ca cel nou sa fie in fata
       this.filteredArticles = this.articles; // we make sure that filteredArticles array is a copy of articles | we will use filteredArticles in our function
     
       console.log(response);
@@ -64,9 +64,14 @@ export class NewsletterArticleComponent implements OnInit {
     });
   }
   addArticle() {
+    // Getting the last article in the articles list.  If the list is empty, lastArticle will be undefined.
+    const lastArticle = this.articles[this.articles.length - 1];
+     // If lastArticle exists, get its orderNumber and add 1 to it. If lastArticle doesn't exist, set newOrderNumber to 1.
+    const newOrderNumber = lastArticle ? lastArticle.orderNumber + 1 : 1;
+
     const dialogRef = this.dialog.open(AddArticleModalComponent, {
     
-      data: { title: '', author: '', date: '', urlpic:'',  content: '', typeOfContent: '' }
+      data: { title: '', author: '', date: '', urlpic:'',  content: '', contentType: '' , orderNumber:newOrderNumber}
       
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -104,7 +109,7 @@ filterByCategory() {
 
   // Filter by category if a category is selected
   if (this.selectedCategory !== '') {
-    this.filteredArticles = this.articles.filter(article => article.typeOfContent === this.selectedCategory);
+    this.filteredArticles = this.articles.filter(article => article.contentType === this.selectedCategory);
 }
 
 }

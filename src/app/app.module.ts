@@ -76,6 +76,7 @@ import { SecondNavbarComponent } from './components/second-navbar/second-navbar.
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,6 +111,7 @@ import { SecondNavbarComponent } from './components/second-navbar/second-navbar.
     FeedbackPageComponent,
     FeedbackFormComponent,
     SecondNavbarComponent,
+  
    
    
 

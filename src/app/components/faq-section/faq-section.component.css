@@ -10,3 +10,8 @@
 .form-control{
     margin-bottom: 30px;
 }
+.accordion-body {
+  word-wrap: break-word;
+  padding: 10px;
+
+}
