@@ -71,6 +71,13 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
     this.openModal();
   }
 
+  editProfilePicture(user:User){
+    this.editedUser = user;
+    this.modalRole = 'editProfilePicture';
+    console.log('PROFILE CARD MODAL ROLE: '+this.modalRole)
+    this.openModal();
+  }
+
 
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();

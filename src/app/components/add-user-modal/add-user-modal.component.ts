@@ -75,8 +75,35 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   }
 
 
+  selectedProfilePicture: File | undefined;
+  previewProfilePicture: string | undefined;
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (this.userForm) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.selectedProfilePicture = file;
+        this.previewProfilePicture = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+
+  uploadProfilePicture() {
+    if (this.selectedProfilePicture) {
+      this.userService.uploadProfilePicture(this.selectedProfilePicture).subscribe(() => {
+        this.newGetUsersEvent.emit();
+        this.closeModal();
+      });
+    }
+  }
+
   // Creem formularul si campurile acestuia, cu restrictiile specifice
   userForm = new FormGroup({
+
+    profilePicture: new FormControl(''),
 
     // USER DETAILS ==============================================================================================================================================
     role: new FormControl('', [
@@ -730,9 +757,14 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
     // Verificam mai intai daca modala este apelata din profil de change number/password, daca nu, inseamna ca este apelata de pe pagina de administrator
 
+    if (this.modalRole === 'editProfilePicture') {
+      console.log('PROFILE PICTURE VALUE: ' + this.userForm.value.profilePicture);
+      return;
+    }
+
     if (this.modalRole === 'editPhoneNumber') {
-      
-      
+
+
       // Checking if errors come from phone field
       if (!!this.userForm.controls.phoneNumber.errors) {
         this.errorSource = 'phone';
@@ -752,7 +784,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         }
       }
 
-      this.updatedUserSubscription = this.userService.updatePhoneNumber(this.userForm.value.phoneNumber ? this.userForm.value.phoneNumber:'').subscribe(() => {
+      this.updatedUserSubscription = this.userService.updatePhoneNumber(this.userForm.value.phoneNumber ? this.userForm.value.phoneNumber : '').subscribe(() => {
         this.newGetUsersEvent.emit();
         this.closeModal();
       })
@@ -775,7 +807,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
           return;
       }
 
-      this.updatedUserSubscription = this.userService.updatePassword(this.userForm.value.password ? this.userForm.value.password:'').subscribe(() => {
+      this.updatedUserSubscription = this.userService.updatePassword(this.userForm.value.password ? this.userForm.value.password : '').subscribe(() => {
         this.newGetUsersEvent.emit();
         this.closeModal();
       })
@@ -860,7 +892,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         issuingDate: this.userForm.value.issuingDate || undefined,
       }
 
-      
+
       // Apelam functia de updateUser() si ii pasam ca parametru obiectele de tip user, login details, address, identity card create anterior
 
       this.updatedUserSubscription = this.userService.updateUser(user, loginDetails, address, identityCard).subscribe(() => {
