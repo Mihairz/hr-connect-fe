@@ -29,11 +29,11 @@ export class UserService {
   }
 
   updatePhoneNumber(phoneNumber?: string): Observable<User>{
-    return this.http.post<User>('http://localhost:8082/user/self',phoneNumber);
+    return this.http.post<User>('http://localhost:8082/user/self',{phoneNumber});
   }
 
   updatePassword(password?: string): Observable<User>{
-    return this.http.post<User>('http://localhost:8082/user/self',password);
+    return this.http.post<User>('http://localhost:8082/user/self',{password});
   }
 
   deleteUser(id: number): Observable<{}> {
