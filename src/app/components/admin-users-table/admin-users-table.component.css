@@ -4,6 +4,7 @@
     align-items: flex-end;
     flex-direction: column;
     gap: 10px;
+    
 }
 
 .search-and-add-container{
@@ -20,17 +21,25 @@
 }
 
 .mdc-data-table__header-cell{
-    font-weight: 1000;
+    font-size:20px;
+    font-weight: bolder;
 }
 
 .btn-add{
     background-color: #133C7F;
     color:white;
+    font-weight: bolder !important;
 }
 
 th {
     background-color: #2282C1;
 }
+
+.mdc-data-table__cell{
+    font-size:15px !important;
+    /* font-weight: bolder; */
+}
+
 
 .table{
     border: 1px solid lightgrey !important;

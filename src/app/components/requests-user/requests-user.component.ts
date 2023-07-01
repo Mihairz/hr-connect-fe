@@ -28,7 +28,7 @@ export class RequestsUserComponent implements OnInit {
 
   // FORMULAR v =======================================================================================================================================================
 
-  reqTypes: string[] = ['Paid_leave', 'Medical_leave', 'Equipment_request', 'Change_personal_data', 'Employed_status', 'Resignation', 'Custom_request'];
+  reqTypes: string[] = ['Paid_leave', 'Medical_leave', 'Training_request', 'Change_personal_data', 'Employed_status', 'Resignation', 'Custom_request'];
   selectedReqType: string = '';
 
   // Urmareste valoarea campului request type(care este un dropdown cu mai multe optiuni)
@@ -275,6 +275,8 @@ export class RequestsUserComponent implements OnInit {
         ;
 
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, sanitiziedDetails).subscribe(() => {
+
+        console.log('DETAILS:'+sanitiziedDetails);
         console.log('REQUEST WITH SANITIZED DETAILS SUBMITTED');
         this.getAllRequestsByUser();
         this.errorMessage = '';

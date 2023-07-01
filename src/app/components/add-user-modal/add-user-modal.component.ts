@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, SecurityContext, TemplateRef } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { LoginDetails, User } from 'src/app/models/user';
@@ -14,6 +15,10 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   @Output() newCloseModalEvent = new EventEmitter<string>();
   @Output() newGetUsersEvent = new EventEmitter<string>();
 
+  actionState: string = '';
+  @Output() actionStateChange: EventEmitter<string> = new EventEmitter<string>();
+
+
   @Input() editedUser: User = new User();
   @Input() modalType: String = '';
   @Input() modalRole: String = '';
@@ -25,7 +30,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   addUserSubscription: Subscription = new Subscription();
   updatedUserSubscription: Subscription = new Subscription();
 
-  constructor(private userService: UserService, private sanitizer: DomSanitizer) {
+  constructor(private userService: UserService, private sanitizer: DomSanitizer, private _snackBar: MatSnackBar) {
     // Injectam serviciul user pentru a putea folosii metodele din acesta (put si post http requests in cazul nostru)
 
     // adaugam in mod dinamic fisierul ce contine logica pentru fundalul animat, particle.js (din folder-ul assets al angular) la HTML-ul componentei
@@ -45,6 +50,16 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
 
   }
+
+
+  // openSnackBar(message: string, action: string) {
+  //   this._snackBar.open(message, action,);
+  // }
+  // // {
+  // //   duration: 30000
+  // // }
+
+
 
 
 
@@ -105,9 +120,9 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       );
     }
   }
-  
-  
-  
+
+
+
 
   // Creem formularul si campurile acestuia, cu restrictiile specifice
   userForm = new FormGroup({
@@ -762,12 +777,18 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     })
   }
 
+
+
   updateUser() {
 
     // Verificam mai intai daca modala este apelata din profil de change number/password, daca nu, inseamna ca este apelata de pe pagina de administrator
 
     if (this.modalRole === 'editProfilePicture') {
       this.uploadProfilePicture();
+
+      this.actionState = 'success';
+      this.actionStateChange.emit(this.actionState);
+
       return;
     }
 
@@ -795,6 +816,11 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
       this.updatedUserSubscription = this.userService.updatePhoneNumber(this.userForm.value.phoneNumber ? this.userForm.value.phoneNumber : '').subscribe(() => {
         this.newGetUsersEvent.emit();
+
+        this.actionState = 'success';
+        this.actionStateChange.emit(this.actionState);
+
+
         this.closeModal();
       })
 
@@ -818,6 +844,10 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
       this.updatedUserSubscription = this.userService.updatePassword(this.userForm.value.password ? this.userForm.value.password : '').subscribe(() => {
         this.newGetUsersEvent.emit();
+
+        this.actionState = 'success';
+        this.actionStateChange.emit(this.actionState);
+
         this.closeModal();
       })
 

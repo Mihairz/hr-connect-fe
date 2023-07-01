@@ -1,3 +1,5 @@
+<app-navigation-bar></app-navigation-bar>
+
 <!-- Deoarece am injectat AuthService in typescript-ul componentei admin-home-page, avem acces si putem verifica starea variabilei isLoggedIn, astfel putem afisa componenta admin-home-page exclusiv pentru utilizatorii logati. -->
 <div id="admin-home-page" *ngIf="authService.isLoggedIn$ | async">
     <h1>Admin dashboard</h1>

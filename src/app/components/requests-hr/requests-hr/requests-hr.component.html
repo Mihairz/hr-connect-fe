@@ -21,9 +21,7 @@
 
 <!-- Cu functia ngIf verificam variabila isLoading. Aceasta variabila incepe cu valoarea true, iar apoi este schimbata in false la sfarsitul setului de instructiuni. -->
 <ng-template [ngIf]="isLoading" [ngIfElse]="displayList">
-    <p>
-        Loading...
-    </p>
+    <app-spinner></app-spinner>
 </ng-template>
 
 <ng-template #displayList>

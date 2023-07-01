@@ -138,14 +138,15 @@
                 <label for="details"></label>
             </section>
 
-            <!-- EQUIPMENT REQUEST -->
-            <section *ngIf="selectedReqType==='Equipment_request'" class="request-text">
+            <!-- TRAINING REQUEST -->
+            <section *ngIf="selectedReqType==='Training_request'" class="request-text">
                 <textarea id="details" type="text" formControlName="details"
-                    placeholder="Please write here the equipment you need and the reason you need it." required
+                    placeholder="Please write here the training you want to enroll in and the necessary details." required
                     maxlength="250" name="details" rows="4" cols="50"></textarea>
                 <label for="details"></label>
             </section>
 
+            <!-- RESIGNATION -->
             <section class="request-text" *ngIf="selectedReqType === 'Resignation'">
                 <h3>Demisie</h3>
                 Subsemnatul <p class="unchangeable-field">{{userProfile.lastName}} {{userProfile.firstName}}</p>,
@@ -202,9 +203,7 @@
         <h2>History</h2>
         <!-- Cu functia ngIf verificam variabila isLoading. Aceasta variabila incepe cu valoarea true, iar apoi este schimbata in false la sfarsitul setului de instructiuni. -->
         <ng-template [ngIf]="isLoading" [ngIfElse]="displayList">
-            <p>
-                Loading...
-            </p>
+            <app-spinner></app-spinner>
         </ng-template>
 
         <ng-template #displayList>

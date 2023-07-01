@@ -3,6 +3,10 @@
     gap: 5px;
 }
 
+.btn{
+    font-weight: bold !important;
+}
+
 .btn-edit{
     background-color: #00A3E3;
     color: white;

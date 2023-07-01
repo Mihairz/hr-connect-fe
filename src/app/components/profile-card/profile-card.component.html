@@ -10,9 +10,11 @@
 
                             <div class="profilepic">
                                 <img class="profilepic__image"
-                                    src="https://images.pexels.com/photos/16160855/pexels-photo-16160855/free-photo-of-smiling-man-in-eyeglasses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width="150" height="150" alt="profile picture" />
+                                    src="https://images.pexels.com/photos/16160855/pexels-photo-16160855/free-photo-of-smiling-man-in-eyeglasses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                    width="150" height="150" alt="profile picture" />
                                 <div class="profilepic__content">
-                                    <span class="profilepic__text" (click)="editProfilePicture(userProfile)">Change</span>
+                                    <span class="profilepic__text"
+                                        (click)="editProfilePicture(userProfile)">Change</span>
                                 </div>
                             </div>
                             <!-- Needs to be sqaure to obtain a circle icon, otherwise the icon will be oval -->
@@ -112,12 +114,25 @@
 
 
 
-            <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType"
+            <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType" (actionStateChange)="handleActionStateChange($event)"
                 [modalRole]="modalRole" (newCloseModalEvent)="closeModal()" (newGetUsersEvent)="getUser()">
             </app-add-user-modal>
 
 
 
+
         </div>
+
+
     </div>
+
+    <ng-template [ngIf]="actionState === 'success'">
+        <div  class="alert-container">
+            <div id='hideMe' class="alert alert-success" role="alert">
+                Changes have been saved!
+            </div>
+        </div>
+        
+    </ng-template>
+    
 </div>

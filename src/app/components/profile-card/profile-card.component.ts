@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
@@ -45,11 +45,19 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
   modalType = "editModalType";
   modalRole = '';
 
+  actionState:string='';
+  handleActionStateChange(newState: string) {
+    // Handle the updated action state
+    this.actionState = newState;
+  }
+  
+
   body: any = document.querySelector("body");
 
   openModal() {
     this.isModalOpen = true;
     this.body.style.overflow = "hidden";
+    this.actionState = '';
   }
   closeModal() {
     this.isModalOpen = false;
