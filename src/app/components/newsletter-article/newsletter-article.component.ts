@@ -71,7 +71,7 @@ export class NewsletterArticleComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AddArticleModalComponent, {
     
-      data: { title: '', createdBy: '', createdDate: '', urlpic:'',  content: '', contentType: '' , orderNumber:newOrderNumber}
+      data: { title: '', createdBy: '', createdDate: '',  content: '', contentType: '' , orderNumber:newOrderNumber}
       
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -111,6 +111,8 @@ filterByCategory() {
   if (this.selectedCategory !== '') {
     this.filteredArticles = this.articles.filter(article => article.contentType === this.selectedCategory);
 }
+
+
 
 }
 }

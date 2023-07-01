@@ -149,12 +149,14 @@ section {
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  font-size: 13px;
+  height: 120px;
 }
 /* dispay-ul categoriei pe card */
 .badge{
   color: black;
   background-color: rgba(219, 213, 213, 0.549);
-  margin-top: 10px;
+  margin-top: 15px;
 }
 .search-bar-top{
   width: 450px;
@@ -164,4 +166,11 @@ section {
 }
 .the-name-of-app{
   color: white;
+}
+/* the date of the article */
+.date-of-article{
+  margin-left: 5px ;
+  margin-top: 10px;
+  font-style: italic;
+  font-size: 11px;
 }

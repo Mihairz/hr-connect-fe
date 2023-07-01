@@ -25,9 +25,7 @@ export class NewsletterService {
     return this.http.post('http://localhost:8082/article', postObject) as Observable<NewsletterArticle>
   }
 
-  // updateNewsletterArticle(postObject: NewsletterArticle) {
-  //   return this.http.put(`http://localhost:4000/articles/${postObject.id}`, postObject) as Observable<NewsletterArticle>
-  // }
+  
   updateNewsletterArticle(postObject: NewsletterArticle) {
     return this.http.post('http://localhost:8082/article', postObject) as Observable<NewsletterArticle>
   }

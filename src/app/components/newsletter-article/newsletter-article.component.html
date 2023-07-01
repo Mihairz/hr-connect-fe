@@ -31,7 +31,7 @@
     <!-- paginator with ngx-paginator https://www.youtube.com/watch?v=qJ1UHAbGTWw&t=432s  + http://michaelbromley.github.io/ngx-pagination/#/-->
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
-    <!-- <app-spinner></app-spinner> -->
+    <app-spinner></app-spinner>
     <div class="container-articles">
       <!-- is a for and gets all the articles one by one -->
       <div
@@ -49,10 +49,10 @@
                 <span class="badge badge-pill badge-danger">{{
                   article.contentType
                 }}</span>
-                <p>{{article.createdDate}}</p>
+                <div class="date-of-article">
+                <p>Created on {{ article.createdDate | date:'dd/MM/yyyy' }}</p>
               </div>
-
-              
+              </div>
             </div>
             <p class="card-text">
               {{ article.content }}
