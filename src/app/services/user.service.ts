@@ -41,20 +41,24 @@ export class UserService {
     formData.append('image', image, image.name);
 
 
+    // afiseaza body ul request-ului
     const result: { [key: string]: string | number | File } = {};
     formData.forEach((value, key) => {
       if (value instanceof File) {
         result[key] = value;
       } else {
-        result[key] = key === 'age' ? +value : value;
+        result[key] = key === 'image' ? +value : value;
       }
     });
-
     console.log(result);
 
 
     return this.http.post<User>('http://localhost:8082/user/upload-image', formData);
   }
+
+  // getProfilePicture():Observable<User> {
+  //   return this.http.get<User>('http://localhost:8082/user/get-image');
+  // }
 
 
   deleteUser(id: number): Observable<{}> {

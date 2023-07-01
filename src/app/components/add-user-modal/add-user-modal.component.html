@@ -291,14 +291,9 @@
 
             <!-- Campurile care se afiseaza daca modala este deschisa de la change profile picture de pe pagina de profil -->
             <ng-template [ngIf]="modalRole==='editProfilePicture'">
-                <!-- <div class="input-container ic2">
-                    <input id="profilePicture" class="input" type="password" formControlName="profilePicture"
-                        placeholder=" " maxlength="60">
-                    <label for="profilePicture" class="placeholder">Password:</label>
-                </div> -->
-
-                <input type="file" (change)="onFileSelected($event)" formControlName="profilePicture">
-                <button type="button" (click)="uploadProfilePicture()">Upload Picture</button>
+                
+                <input type="file" (change)="onFileSelected($event)" formControlName="profilePicture" accept="image/*">
+                
 
             </ng-template>
 

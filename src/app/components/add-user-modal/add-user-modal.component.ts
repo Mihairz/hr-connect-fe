@@ -93,17 +93,26 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
   uploadProfilePicture() {
     if (this.selectedProfilePicture) {
-      this.userService.uploadProfilePicture(this.selectedProfilePicture).subscribe(() => {
-        this.newGetUsersEvent.emit();
-        this.closeModal();
-      });
+      this.userService.uploadProfilePicture(this.selectedProfilePicture).subscribe(
+        () => {
+          this.newGetUsersEvent.emit();
+          this.closeModal();
+        },
+        (error: any) => {
+          console.error(error);
+          // Handle any errors that occurred during the request
+        }
+      );
     }
   }
+  
+  
+  
 
   // Creem formularul si campurile acestuia, cu restrictiile specifice
   userForm = new FormGroup({
 
-    profilePicture: new FormControl(''),
+    profilePicture: new FormControl(null, [Validators.required]),
 
     // USER DETAILS ==============================================================================================================================================
     role: new FormControl('', [
@@ -758,7 +767,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // Verificam mai intai daca modala este apelata din profil de change number/password, daca nu, inseamna ca este apelata de pe pagina de administrator
 
     if (this.modalRole === 'editProfilePicture') {
-      console.log('PROFILE PICTURE VALUE: ' + this.userForm.value.profilePicture);
+      this.uploadProfilePicture();
       return;
     }
 
