@@ -9,13 +9,14 @@
                         <div class="d-flex flex-column align-items-center text-center">
 
                             <div class="profilepic">
-                                <img class="profilepic__image"
-                                    src="https://images.pexels.com/photos/16160855/pexels-photo-16160855/free-photo-of-smiling-man-in-eyeglasses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                                    width="150" height="150" alt="profile picture" />
+
+                                <img *ngIf="loadedProfileImage; else defaultProfilePicture" [src]="loadedProfileImage" class="profilepic__image" width="150" height="150" alt="profile picture" />
+                                <ng-template #defaultProfilePicture><img src="https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png" alt="default-profile-picture" class="profilepic__image" width="155" height="155"></ng-template>
+
                                 <div class="profilepic__content">
-                                    <span class="profilepic__text"
-                                        (click)="editProfilePicture(userProfile)">Change</span>
+                                    <span class="profilepic__text" (click)="editProfilePicture(userProfile)">Change</span>
                                 </div>
+
                             </div>
                             <!-- Needs to be sqaure to obtain a circle icon, otherwise the icon will be oval -->
 

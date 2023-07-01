@@ -56,9 +56,11 @@ export class UserService {
     return this.http.post<User>('http://localhost:8082/user/upload-image', formData);
   }
 
-  // getProfilePicture():Observable<User> {
-  //   return this.http.get<User>('http://localhost:8082/user/get-image');
-  // }
+  getProfilePicture(): Observable<Blob> {
+    return this.http.get('http://localhost:8082/user/get-image', { responseType: 'blob' });
+  }
+  // { responseType: 'blob' } is specified. This tells the HttpClient to expect the response to be of type Blob. The responseType property is set to 'blob' to ensure that the response is treated as binary data.
+  
 
 
   deleteUser(id: number): Observable<{}> {
