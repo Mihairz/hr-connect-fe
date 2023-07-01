@@ -1,45 +1,51 @@
-<div class="modal__content">
-    <div class="gradient-line"></div>
+<div class="modal glass">
+  <div class="form-div glass">
+    <span class="close" (click)="closeModal()">&times;</span>
     <h2 class="title">Add/Edit article</h2>
-    <div class="inputs__container">
-      <mat-form-field class="input">
-        <input matInput [(ngModel)]="data.title" placeholder="Title">
-      </mat-form-field>
-  
-      <mat-form-field class="input">
-        <input matInput [(ngModel)]="data.author" placeholder="Author">
-      </mat-form-field>
-  
-      <mat-form-field class="input">
-        <input matInput [(ngModel)]="data.date" placeholder="Date">
-      </mat-form-field>
+    
+      <div class="input-container ic1"> 
+      
+        <input class="input" type="text" [(ngModel)]="data.title" placeholder="Title" />
+     
+    </div>
+    
       <!-- <mat-form-field class="input">
         <input matInput [(ngModel)]="data.urlpic" placeholder="Url Picture">
       </mat-form-field> -->
-   
+
       <app-file-upload></app-file-upload>
-  
-      <mat-form-field class="input textarea">
-        <textarea matInput [(ngModel)]="data.content" id="formContent" cols="28" rows="7"
-          placeholder="Content"></textarea>
-      </mat-form-field>
-    </div>
-    <h4>Basic native select</h4>
-    <mat-form-field>
-     
-      <select matNativeControl required [(ngModel)]="data.contentType">
+
+      <div class="input-container ic1">
+        <textarea class="input content"
+          matInput
+          [(ngModel)]="data.content"
+       
+          placeholder="Content"
+        ></textarea>
+      </div>
+   
+    
+      <div class="input-container ic1">
+      <select class="input" required [(ngModel)]="data.contentType">
+        <option disabled selected value="">Select a category of article</option>
         <option value="News">News</option>
         <option value="HR Announcements">HR Announcements</option>
         <option value="Policy Changes">Policy Changes</option>
         <option value="Upcoming Events">Upcoming Events</option>
         <option value="Training Opportunities">Training Opportunities</option>
       </select>
-    </mat-form-field>
-    
-      <div class="modal__buttons">
-        <button mat-button (click)="closeModal()">Anulare</button>
-        <button class="button button--pink" mat-button cdkFocusInitial (click)="saveArticle()">Save</button>
-      </div>
-    
+</div>
+
+    <div class="modal__buttons">
+     
+      <button
+        class="submit"
+        
+        (click)="saveArticle()"
+      >
+        Save
+      </button>
+    </div>
   </div>
-  
+  </div>
+

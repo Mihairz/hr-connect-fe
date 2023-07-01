@@ -1,11 +1,13 @@
+
+
 export interface Feedback {
-    id: number;
-   
+     id: number;
      title: string;
      type: string;
      body: string;
      rating: boolean;
-     author: string
+     created_by_id:string;
+     author_name?: string;
           
    
  

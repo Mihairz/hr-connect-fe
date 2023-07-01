@@ -1,5 +1,6 @@
 <!-- A FormGroup aggregates the values of each child FormControl into one object, with each control name as the key.  -->
 <!-- onSubmit() Method called when the "submit" event is triggered on the form. Triggers the ngSubmit emitter to emit the "submit" event as its payload. -->
+<div class="form-div">
 <form [formGroup]="feedbackForm" (ngSubmit)="saveFeedback()">
     <mat-form-field>
       <mat-label>Select</mat-label>
@@ -16,62 +17,15 @@
       <mat-label>Textarea</mat-label>
       <textarea matInput formControlName="body"></textarea>
     </mat-form-field>
+    
     <button type="submit">Submit</button>
   </form>
-  <!-- https://material.angular.io/components/table/overview -->
-  <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
-    <mat-spinner></mat-spinner> - if we want a spinner -->
-<!-- </div> -->
-  <!-- <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"  >
-    
-    <ng-container matColumnDef="category">
-        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Type"> Type </mat-header-cell>
-        <mat-cell *matCellDef="let feedback"> {{feedback.category}} </mat-cell>
-    </ng-container>
-
-  
-    <ng-container matColumnDef="title">
-        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Title"> Title </mat-header-cell>
-        <mat-cell *matCellDef="let feedback"> {{feedback.title}} </mat-cell>
-    </ng-container>
-
-    
-    <ng-container matColumnDef="content">
-        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Textarea"> Textarea </mat-header-cell>
-        <mat-cell *matCellDef="let feedback"> {{feedback.content}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="author">
-      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Textarea"> Author </mat-header-cell>
-      <mat-cell *matCellDef="let feedback"> {{feedback.author}} </mat-cell>
-  </ng-container>
-    <ng-container matColumnDef="favourite">
-      <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Favourite"> Favourite </mat-header-cell>
-      <mat-cell *matCellDef="let feedback"> 
-        <mat-slide-toggle [checked]="feedback.favourite" (change)="toggleFavourite(feedback)"></mat-slide-toggle>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
-    
-  </table> -->
+</div>
+ 
 
 
   <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
-  <!-- <ng-container *ngFor="let column of columnsToDisplay">
-    <ng-container [matColumnDef]="column" *ngIf="column != 'favourite'">
-      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-    </ng-container>
-  </ng-container>
-  
-
-<ng-container matColumnDef="favourite">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header>Favourite</th>
-  <td mat-cell *matCellDef="let element"> 
-    <mat-slide-toggle [checked]="element.favourite" (change)="toggleFavourite(element)"></mat-slide-toggle>
-  </td>
-</ng-container> -->
+ 
 
 <ng-container matColumnDef="type">
   <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
@@ -88,9 +42,9 @@
   <td mat-cell class= "content-text" *matCellDef="let element"> {{element['body']}} </td>
 </ng-container>
 
-<ng-container matColumnDef="author">
+<ng-container matColumnDef="created_by_id">
   <th mat-header-cell *matHeaderCellDef mat-sort-header> Author </th>
-  <td mat-cell *matCellDef="let element"> {{element['author']}} </td>
+  <td mat-cell *matCellDef="let element"> {{element['created_by_id']}} </td>
 </ng-container>
 
 <ng-container matColumnDef="rating">
@@ -117,6 +71,7 @@
 <ng-container matColumnDef="expand">
 <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
 <td mat-cell *matCellDef="let element">
+  <!-- if the row is expanded it sets to null collapsing the row otherwise expandedElement is element and expands it -->
  <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
    <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
    <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
