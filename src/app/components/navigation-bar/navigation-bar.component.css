@@ -2,11 +2,12 @@
 .navbar.navbar-expand-lg.navbar-light {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr ;
-  height: 56px;
+  height: 54px;
   padding-top: 0px;
   padding-bottom: 0px;
   padding-left: 25px;
   padding-right: 25px;
+ 
 }
 .brand-container{
   display: flex;
@@ -37,9 +38,10 @@
 /* the text underneath the icon  */
 .nav-link {
   color: white;
-  font-size: 11px;
+  font-size: 10.5px;
   padding: 0;
   margin-top: -5px;
+  font-family: 'Raleway' ,Arial, Helvetica, sans-serif ;
 }
 .ng-fa-icon {
   color: white;
@@ -94,12 +96,14 @@ mat-icon {
   grid-column-end: 3;
 
 }
-
+/* the name of HR connect */
 .the-name-of-app {
   color: white !important;
-  font-size: 14px !important;
+  font-size: 15px !important;
   margin-top: auto !important;
   margin-bottom: auto;
+  font-family: 'Raleway' ,Arial, Helvetica, sans-serif ;
+  margin-left: -5px;
 }
 .logout-area{
   display: flex;
@@ -116,8 +120,9 @@ mat-icon {
  
 }
 .vr{
+  margin-right: 5px;
   width: 1.5px;
-  align-self: stretch;
+  height: 50px;
   grid-column-start: 3;
   grid-column-end: 4;
 }

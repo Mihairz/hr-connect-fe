@@ -52,6 +52,12 @@
                 <p>{{article.date}}</p>
               </div>
 
+              
+            </div>
+            <p class="card-text">
+              {{ article.content }}
+            </p>
+            <div class="read-more-container">
               <div class="button-container">
                 <button
                   type="button"
@@ -68,11 +74,6 @@
                   Delete
                 </button>
               </div>
-            </div>
-            <p class="card-text">
-              {{ article.content }}
-            </p>
-            <div class="read-more-container">
               <!-- routerLink - Angular specific - when clicked will navigate to the route in the brackets - for instance - article/1 , 1 being fetched in the backend  -->
               <a [routerLink]="['/article', article.id]" class="btn btn-primary"
                 >Read more</a
