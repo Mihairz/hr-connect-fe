@@ -62,6 +62,7 @@
           *ngFor="let faq of filteredFaqsByCategory[category]"
           cdkDrag
           [cdkDragData]="faq"
+          class="category-container"
         >
           <div class="accordion" id="accordionPanelsStayOpen">
             <div class="accordion-item">
