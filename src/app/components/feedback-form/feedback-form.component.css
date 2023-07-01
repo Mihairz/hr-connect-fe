@@ -60,21 +60,9 @@
   .text-style{
     white-space: pre-wrap
 }
-
-.form-div {
-  background-color: white;
-
-  left: 50%;
-  
-  max-height: calc(100vh - 200px);
-
-  border-radius: 20px;
-  box-sizing: border-box;
-
-  width: 60%;
-
-
-  grid-area: 1 / 1 / 2 / 2;
-
-
+.feedback-form{
+  display: flex;
+  flex-direction:column;
+  margin-left: auto;
+  margin-right: auto;
 }

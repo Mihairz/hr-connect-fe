@@ -1,4 +1,5 @@
 
+import { User } from "./user";
 
 export interface Feedback {
      id: number;
@@ -6,8 +7,8 @@ export interface Feedback {
      type: string;
      body: string;
      rating: boolean;
-     created_by_id:string;
-     author_name?: string;
+     createdBy?:User;
+
           
    
  

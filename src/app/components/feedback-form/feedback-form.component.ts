@@ -38,7 +38,7 @@ export class FeedbackFormComponent implements OnInit, AfterViewInit {
     'type',
     'title',
     'body',
-    'created_by_id',
+    'createdBy',
     'rating',
     'delete'
    
@@ -76,6 +76,7 @@ export class FeedbackFormComponent implements OnInit, AfterViewInit {
       this.feedbacks = response.reverse();
      
       this.dataSource = new MatTableDataSource(this.feedbacks); //sets the dataSource property
+     console.log(this.dataSource);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator; //sets the paginator property
     });
