@@ -223,8 +223,8 @@ a label {
 }
 
 .alert-container{
-    bottom: 0;
     position: absolute;
+    top: 0;
     left: 44%;
 }
 

@@ -97,7 +97,11 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   }
 
 
-
+  actionState:string='';
+  handleActionStateChange(newState: string) {
+    // Handle the updated action state
+    this.actionState = newState;
+  }
 
 
   body: any = document.querySelector("body");
@@ -105,6 +109,7 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   openModal() {
     this.isModalOpen = true;
     this.body.style.overflow = "hidden";
+    this.actionState = '';
   }
   closeModal() {
     this.isModalOpen = false;

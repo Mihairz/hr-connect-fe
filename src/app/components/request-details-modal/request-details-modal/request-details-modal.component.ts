@@ -14,6 +14,10 @@ export class RequestDetailsModalComponent {
 
   @Output() newCloseModalEvent = new EventEmitter<string>();
   @Output() newGetRequestsEvent = new EventEmitter<string>(); // Creem un eveniment nou care va fi transmis componentei parinte (output)
+
+  actionState: string = '';
+  @Output() actionStateChange: EventEmitter<string> = new EventEmitter<string>();
+
   @Input() editedRequest: RequestUser = new RequestUser();
   @Input() userRole?: string;
 
@@ -102,6 +106,10 @@ export class RequestDetailsModalComponent {
   denyRequest() {
     this.denyRequestSubscription = this.requestHrService.denyRequest(this.editedRequest.id).subscribe((response) => {
       this.newGetRequestsEvent.emit();
+
+      this.actionState = 'deny';
+      this.actionStateChange.emit(this.actionState);
+
       this.closeModal();
     })
   }
@@ -111,6 +119,10 @@ export class RequestDetailsModalComponent {
     console.log('APPROVE REQUEST');
     this.approveRequestSubscription = this.requestHrService.approveRequest(this.editedRequest.id).subscribe((response) => {
       this.newGetRequestsEvent.emit();
+
+      this.actionState = 'approve';
+      this.actionStateChange.emit(this.actionState);
+
       this.closeModal();
     })
   }

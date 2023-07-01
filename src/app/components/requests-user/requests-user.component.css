@@ -165,7 +165,8 @@ textarea{
 }
 
 .mdc-data-table__header-cell {
-    font-weight: 1000;
+    font-size: 30px;
+    font-weight: bolder;
 }
 
 .btn-add {
@@ -190,6 +191,10 @@ td {
     background-color: #DDECF6 !important;
 }
 
+.mdc-data-table__cell{
+    font-size:25px !important;
+    /* font-weight: bolder; */
+}
 
 .mat-mdc-row .mat-mdc-cell {
     border-top: 1px solid #dee2e6;
@@ -283,4 +288,40 @@ th.mat-sort-header-sorted {
         width: 100%;
         margin-left: 50px;
     }
+}
+
+#hideMe {
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    opacity:1;
+    transition:opacity 500ms;
+}
+@keyframes cssAnimation {
+    to {
+        opacity: 0;
+      
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        opacity: 0;
+    }
+}
+
+.alert-container{
+    position: absolute;
+    top: 0;
+    left: 44%;
+}
+
+.alert {
+    font-size: 20px !important;
+    font-weight: bold !important;
 }

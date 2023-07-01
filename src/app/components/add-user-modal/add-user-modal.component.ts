@@ -127,7 +127,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   // Creem formularul si campurile acestuia, cu restrictiile specifice
   userForm = new FormGroup({
 
-    profilePicture: new FormControl(null, [Validators.required]),
+    profilePicture: new FormControl(null),
 
     // USER DETAILS ==============================================================================================================================================
     role: new FormControl('', [
@@ -771,6 +771,10 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // Apelam functia de addUser si ii pasam ca parametru obiectele de tip user,login details, address, identity card create anterior
     this.addUserSubscription = this.userService.addUser(user, loginDetails, address, identityCard).subscribe(() => {
       this.newGetUsersEvent.emit();
+
+      this.actionState = 'successAddUser';
+      this.actionStateChange.emit(this.actionState);
+
       this.closeModal();
       // Dupa ce utilizatorul este adaugat,add-user-modal va emite un eveniment pe nume newGetUsersEvent ce va fi receptionat de catre componenta parinte (admin-home-page), iar lista de utilizatori de pe ecran isi va da refresh, astfel afisand inclusiv ultimul utilizator adaugat.
       // De asemenea functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
@@ -936,6 +940,10 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
       this.updatedUserSubscription = this.userService.updateUser(user, loginDetails, address, identityCard).subscribe(() => {
         this.newGetUsersEvent.emit();
+
+        this.actionState = 'success';
+        this.actionStateChange.emit(this.actionState);
+
         this.closeModal();
 
       })

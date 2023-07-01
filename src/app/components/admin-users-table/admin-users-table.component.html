@@ -5,11 +5,6 @@
 
 <ng-template #displayList>
 
-   
-
-   
-
-
     <div class="users-table-div">
 
         <div class="search-and-add-container">
@@ -92,8 +87,24 @@
         </mat-paginator>
         <!-- Here, we bind the pageSize and pageIndex properties of the MatPaginator to the corresponding properties of the dataSource.paginator. We also set a default value of 20 for the pageSize in case the paginator object is null or undefined. -->
     </div>
+
+    <ng-template [ngIf]="actionState === 'successAddUser'">
+        <div  class="alert-container">
+            <div id='hideMe' class="alert alert-success" role="alert">
+                User added successfully !
+            </div>
+        </div>
+    </ng-template>
+    <ng-template [ngIf]="actionState === 'success'">
+        <div  class="alert-container">
+            <div id='hideMe' class="alert alert-success" role="alert">
+                Changes have been saved !
+            </div>
+        </div>
+    </ng-template>
+
 </ng-template>
 
-<app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType" [modalRole]="modalRole"
+<app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType" [modalRole]="modalRole" (actionStateChange)="handleActionStateChange($event)"
     (newCloseModalEvent)="closeModal()" (newGetUsersEvent)="getUsers()"></app-add-user-modal>
 <!-- Evenimentul newCloseModalEvent este emis din componenta copil add-user-modal si este receptionat de catre componenta parinte admin-home-page, care apeleaza functia proprie closeModal() si ascunde la loc formularul de adaugare utilizatori. -->

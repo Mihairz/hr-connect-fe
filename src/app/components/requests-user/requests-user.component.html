@@ -183,11 +183,18 @@
                 {{ errorMessage }}
             </div>
 
-            <button type="button" class="submit" (click)="submitRequest()">Send request</button>
+            <button type="button" class="submit" (click)="submitRequest()"><b>Send request</b></button>
             <!-- Butonul de submit request. La evenimentul click se apeleaza functia submitRequest() a componentei curente (requests-user) si cererea va fi aplicata-->
 
         </form>
 
+        <ng-template [ngIf]="actionState === 'success'">
+            <div  class="alert-container">
+                <div id='hideMe' class="alert alert-success" role="alert">
+                    Your request has been submitted!
+                </div>
+            </div>  
+        </ng-template>
 
     </div>
 
@@ -228,7 +235,7 @@
                     <!-- Request type Column -->
                     <ng-container matColumnDef="requestType">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-                        <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+                        <td mat-cell *matCellDef="let element">{{ element.type.replaceAll('_',' ') }}</td>
                     </ng-container>
 
                     
@@ -240,7 +247,7 @@
                         </th>
                         <td mat-cell *matCellDef="let element" [ngStyle]="{'color':
                 element.status === 'Pending' ? '#00A3E3' : element.status === 'Approved' ? 'green' : 'red'}">
-                            {{element.status}}</td>
+                            <b>{{element.status}}</b></td>
                     </ng-container>
 
                     <!-- Request date Column -->

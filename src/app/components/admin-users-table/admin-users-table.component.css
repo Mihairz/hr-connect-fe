@@ -72,3 +72,39 @@ th.mat-sort-header-sorted {
 .mat-mdc-text-field-wrapper{
     background-color: white;
 }
+
+#hideMe {
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    opacity:1;
+    transition:opacity 500ms;
+}
+@keyframes cssAnimation {
+    to {
+        opacity: 0;
+      
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        opacity: 0;
+    }
+}
+
+.alert-container{
+    position: absolute;
+    left: 44%;
+    top: 0;
+}
+
+.alert {
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
