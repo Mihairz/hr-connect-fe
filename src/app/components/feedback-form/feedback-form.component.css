@@ -18,6 +18,9 @@ h2 {
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
+  width: 600px;
+  
+  
 }
 /*  the text above the form */
 .upper-text {
@@ -25,9 +28,12 @@ h2 {
   padding-bottom: 20px;
   width: 500px;
 }
-.card.form-container{
-width: 400px;
+/* make some distance from the table to the form */
+.mat-elevation-z8{
+  margin-top: 30px;
 }
+
+
 :host {
   display: flex;
   flex-direction: column;

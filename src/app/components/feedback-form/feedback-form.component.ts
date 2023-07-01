@@ -35,6 +35,7 @@ export class FeedbackFormComponent implements OnInit, AfterViewInit {
   feedbackForm: FormGroup; //Tracks the value and validity state of a group of FormControl instances.
   feedbacks: Feedback[] = []; // array that will hold the feedback object
   columnsToDisplay: string[] = [
+    'id',
     'type',
     'title',
     'body',
