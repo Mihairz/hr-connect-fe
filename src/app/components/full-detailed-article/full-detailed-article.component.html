@@ -1,54 +1,47 @@
-<app-navigation-bar></app-navigation-bar>
-
-<div *ngIf="article" class="full-article-container">
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-lg-8">
-        <!-- Post content-->
-        <article>
-          <!-- Post header-->
-          <header class="mb-4">
-            <!-- Post title-->
-            <h1 class="fw-bolder mb-1">{{ article.title }}</h1>
-            <!-- Post meta content-->
-            <div class="text-muted fst-italic mb-2">
-              {{ article.createdDate }} by {{ article.createdBy.firstName.concat(" ").concat(article.createdBy.lastName) }}
-            </div>
-            <!-- Post categories-->
-            <a
-              class="badge bg-secondary text-decoration-none link-light"
-              href="#!"
-              >{{ article.contentType }}</a
-            >
-          </header>
-          <!-- Preview image figure-->
-          <figure class="mb-4 image" >
-            <img
-              class="img-fluid rounded"
-              src=""
-              alt="..."
-            />
-          </figure>
-          <!-- Post content-->
-          <section class="mb-5">
-            <p class="text-style">{{ article.content }}</p>
-          </section>
-        </article>
-      </div>
-      <!-- Side widgets-->
-      <div class="col-lg-4">
-        <div class="card mb-4">
-          <div class="card-header">Submited By</div>
-          <div class="card-body">
-            <img
-              class="card-img-top author"
-              src="https://meragor.com/files/styles//ava_800_800_wm/avatar-211523-000242.png"
-            />
-            <p class="fs-5 mb-4">{{ article.author }}</p>
-            <p class="fs-5 mb-4">role of the author</p>
-          </div>
-        </div>
+<body>
+  <app-navigation-bar></app-navigation-bar>
+  <div *ngIf="article" class="container">
+    <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+      <div class="col-md-6 px-0">
+        <h1 class="display-4 font-italic">{{ article.title }}</h1>
       </div>
     </div>
   </div>
-</div>
+
+  <main *ngIf="article" role="main" class="container">
+    <div class="row">
+      <div class="col-md-8 blog-main">
+        <div class="blog-post">
+          <p class="blog-post-meta">
+            Submitted by
+            {{
+              article.createdBy.firstName
+                .concat(" ")
+                .concat(article.createdBy.lastName)
+            }}
+            on {{ article.createdDate | date : "dd/MM/yyyy" }}
+          </p>
+
+    
+          <div class="centered-content">
+         
+            <div class="grid-container">
+              <img class="article-image" src="https://img.freepik.com/premium-photo/beautiful-landscape-which-depicts-sunrise-mountains-with-morning-mist-3d-illustration_717906-1269.jpg">
+              
+              <div class="p-3 mb-3 bg-light rounded">
+                <h4 class="font-italic">About</h4>
+                <p class="mb-0">{{article.createdBy.firstName}} works in the {{article.createdBy.department}} department as a {{article.createdBy.position}} since {{article.createdBy.joinDate | date : "dd/MM/yyyy"}} </p>
+              </div>
+            </div>
+        
+
+            <hr />
+            <p>{{ article.content }}</p>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
