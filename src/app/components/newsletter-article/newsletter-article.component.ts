@@ -47,8 +47,9 @@ export class NewsletterArticleComponent implements OnInit {
 
   getArticles() {
     this.articlesService.getNewsletterArticles().subscribe((response) => {
-      this.articles = response.sort((b, a) => b.orderNumber - a.orderNumber); // nu e good practice si ar trebui din backend sa sortam aceste articole ca cel nou sa fie in fata
-      this.filteredArticles = this.articles; // we make sure that filteredArticles array is a copy of articles | we will use filteredArticles in our function
+     // this.articles = response.sort((a, b) => b.orderNumber - a.orderNumber); // nu e good practice si ar trebui din backend sa sortam aceste articole ca cel nou sa fie in fata
+     this.articles = response.reverse(); // nu e good practice si ar trebui din backend sa sortam aceste articole ca cel nou sa fie in fata
+     this.filteredArticles = this.articles; // we make sure that filteredArticles array is a copy of articles | we will use filteredArticles in our function
     
       console.log(response);
     });
@@ -65,13 +66,13 @@ export class NewsletterArticleComponent implements OnInit {
   }
   addArticle() {
     // Getting the last article in the articles list.  If the list is empty, lastArticle will be undefined.
-    const lastArticle = this.articles[this.articles.length - 1];
+    //const lastArticle = this.articles[this.articles.length - 1];
      // If lastArticle exists, get its orderNumber and add 1 to it. If lastArticle doesn't exist, set newOrderNumber to 1.
-    const newOrderNumber = lastArticle ? lastArticle.orderNumber + 1 : 1;
+    //const newOrderNumber = lastArticle ? lastArticle.orderNumber + 1 : 1;
 
     const dialogRef = this.dialog.open(AddArticleModalComponent, {
     
-      data: { title: '', createdBy: '', createdDate: '',  content: '', contentType: '' , orderNumber:newOrderNumber}
+      data: { title: '', createdBy: '', createdDate: '',  content: '', contentType: '' }
       
     });
     dialogRef.afterClosed().subscribe(result => {
