@@ -28,7 +28,7 @@ export class RequestsUserComponent implements OnInit {
 
   // FORMULAR v =======================================================================================================================================================
 
-  reqTypes: string[] = ['Paid_leave', 'Medical_leave', 'Equipment_request', 'Change_personal_data', 'Employed_status', 'Resignation', 'Custom_request'];
+  reqTypes: string[] = ['Paid_leave', 'Medical_leave', 'Training_request', 'Change_personal_data', 'Employed_status', 'Resignation', 'Custom_request'];
   selectedReqType: string = '';
 
   // Urmareste valoarea campului request type(care este un dropdown cu mai multe optiuni)
@@ -36,6 +36,7 @@ export class RequestsUserComponent implements OnInit {
     this.selectedReqType = (<HTMLSelectElement>document.getElementById('reqType')).value; // schimba valoarea selected request type
     this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
     this.errorMessage = '';
+    this.actionState = '';
   }
 
 
@@ -59,6 +60,9 @@ export class RequestsUserComponent implements OnInit {
   errorMessage: string = '';
 
   submitRequestSubscription: Subscription = new Subscription();
+
+  actionState:string='';
+  
 
   ngOnInit() {
     this.getUser(); // obtinem datele utilizatorului logat
@@ -181,11 +185,13 @@ export class RequestsUserComponent implements OnInit {
 
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, leaveIntervalString).subscribe(() => {
         console.log(this.selectedReqType + ' applied for period: ' + leaveIntervalString);
+        this.actionState = '';
         this.getAllRequestsByUser(); // se da refresh la tabelul de requests
         this.errorMessage = ''; // in caz ca inainte am introdus ceva gresit si dupa corect, vrem sa scapam de error message
         this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
         this.startDate = ''; // reinitializeaza valoarea start date 
         this.endDate = ''; // reinitializeaza valoarea end date
+        this.actionState = 'success';
       })
 
     } else if (this.selectedReqType === 'Change_personal_data') {
@@ -217,9 +223,11 @@ export class RequestsUserComponent implements OnInit {
 
           this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, changeDataStringFormat).subscribe(() => {
             console.log('change first name submitted');
+            this.actionState = '';
             this.getAllRequestsByUser(); // se da refresh la tabelul de requests
             this.errorMessage = ''; // in caz ca inainte am introdus ceva gresit si dupa corect, vrem sa scapam de error message
             this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
+            this.actionState = 'success';
           })
           
           break;
@@ -229,9 +237,11 @@ export class RequestsUserComponent implements OnInit {
 
           this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, changeDataStringFormat).subscribe(() => {
             console.log('change last name submitted');
+            this.actionState = '';
             this.getAllRequestsByUser(); // se da refresh la tabelul de requests
             this.errorMessage = ''; // in caz ca inainte am introdus ceva gresit si dupa corect, vrem sa scapam de error message
             this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
+            this.actionState = 'success';
           })
 
           break;
@@ -240,9 +250,11 @@ export class RequestsUserComponent implements OnInit {
 
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, "").subscribe(() => {
         console.log('RESIGNATION SUBMITTED');
+        this.actionState = '';
         this.getAllRequestsByUser(); // se da refresh la tabelul de requests
         this.errorMessage = ''; // in caz ca inainte am introdus ceva gresit si dupa corect, vrem sa scapam de error message
         this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
+        this.actionState = 'success';
       })
 
     }
@@ -275,10 +287,14 @@ export class RequestsUserComponent implements OnInit {
         ;
 
       this.submitRequestSubscription = this.requestHrService.addRequest(this.selectedReqType, sanitiziedDetails).subscribe(() => {
+
+        console.log('DETAILS:'+sanitiziedDetails);
         console.log('REQUEST WITH SANITIZED DETAILS SUBMITTED');
+        this.actionState = '';
         this.getAllRequestsByUser();
         this.errorMessage = '';
         this.requestForm.patchValue({ details: undefined }); // reinitializeaza valoarea details a formularului
+        this.actionState = 'success';
       })
 
 

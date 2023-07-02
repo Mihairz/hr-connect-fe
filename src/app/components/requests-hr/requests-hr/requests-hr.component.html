@@ -3,7 +3,7 @@
 <div class="search-and-tabs-container">
     <div class="search-container">
         <input matInput [formControl]="searchControl" (keyup)="applyFilter($event)" placeholder="Search"
-                class="search-bar" #input>
+            class="search-bar" #input>
 
     </div>
 
@@ -16,14 +16,29 @@
 
         <input type="radio" name="tabs" id="denied-requests-tab" (click)="getDeniedRequests()">
         <label for="denied-requests-tab" class="denied">Denied</label>
-    </div> 
+    </div>
 </div>
+
+
+<ng-template [ngIf]="actionState === 'approve'">
+    <div class="alert-container">
+        <div id='hideMe' class="alert alert-success" role="alert">
+            Request approved!
+        </div>
+    </div>
+</ng-template>
+
+<ng-template [ngIf]="actionState === 'deny'">
+    <div class="alert-container">
+        <div id='hideMe' class="alert alert-danger" role="alert">
+            Request denied!
+        </div>
+    </div>
+</ng-template>
 
 <!-- Cu functia ngIf verificam variabila isLoading. Aceasta variabila incepe cu valoarea true, iar apoi este schimbata in false la sfarsitul setului de instructiuni. -->
 <ng-template [ngIf]="isLoading" [ngIfElse]="displayList">
-    <p>
-        Loading...
-    </p>
+    <app-spinner></app-spinner>
 </ng-template>
 
 <ng-template #displayList>
@@ -31,12 +46,13 @@
 
     <div class="requests-table-div">
 
-        
 
 
 
 
-        <table mat-table [dataSource]="dataSource" matSort class="table table-hover" matSortActive="requestDate" matSortDirection="desc">
+
+        <table mat-table [dataSource]="dataSource" matSort class="table table-hover" matSortActive="requestDate"
+            matSortDirection="desc">
 
             <!-- ID Column -->
             <ng-container matColumnDef="id">
@@ -111,8 +127,9 @@
         </mat-paginator>
         <!-- Here, we bind the pageSize and pageIndex properties of the MatPaginator to the corresponding properties of the dataSource.paginator. We also set a default value of 20 for the pageSize in case the paginator object is null or undefined. -->
     </div>
+
 </ng-template>
 
-<app-request-details-modal *ngIf="isModalOpen" [editedRequest]="editedRequest" [userRole]="userRole" (newCloseModalEvent)="closeModal()"
-    (newGetRequestsEvent)="getPendingRequests()"></app-request-details-modal>
+<app-request-details-modal *ngIf="isModalOpen" [editedRequest]="editedRequest" [userRole]="userRole" (actionStateChange)="handleActionStateChange($event)"
+    (newCloseModalEvent)="closeModal()" (newGetRequestsEvent)="getPendingRequests()"></app-request-details-modal>
 <!-- Evenimentul newCloseModalEvent este emis din componenta copil add-user-modal si este receptionat de catre componenta parinte admin-home-page, care apeleaza functia proprie closeModal() si ascunde la loc formularul de adaugare utilizatori. -->

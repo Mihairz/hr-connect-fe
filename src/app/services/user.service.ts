@@ -17,24 +17,51 @@ export class UserService {
   }
 
   getUserSelf(): Observable<User> {
-    return this.http.get<User>('http://localhost:8082/user/self'); 
+    return this.http.get<User>('http://localhost:8082/user/self');
   }
 
-  addUser(user: User,loginDetails: LoginDetails, address: Address,  identityCard:IdentityCard): Observable<User> {
-    return this.http.put<User>('http://localhost:8082/user', {user,loginDetails,address,identityCard} );
+  addUser(user: User, loginDetails: LoginDetails, address: Address, identityCard: IdentityCard): Observable<User> {
+    return this.http.put<User>('http://localhost:8082/user', { user, loginDetails, address, identityCard });
   }
 
-  updateUser(user: User,loginDetails: LoginDetails, address: Address,  identityCard:IdentityCard): Observable<User> {
-    return this.http.put<User>('http://localhost:8082/user', {user,loginDetails,address,identityCard} );
+  updateUser(user: User, loginDetails: LoginDetails, address: Address, identityCard: IdentityCard): Observable<User> {
+    return this.http.put<User>('http://localhost:8082/user', { user, loginDetails, address, identityCard });
   }
 
-  updatePhoneNumber(phoneNumber?: string): Observable<User>{
-    return this.http.post<User>('http://localhost:8082/user/self',{phoneNumber});
+  updatePhoneNumber(phoneNumber?: string): Observable<User> {
+    return this.http.post<User>('http://localhost:8082/user/self', { phoneNumber });
   }
 
-  updatePassword(password?: string): Observable<User>{
-    return this.http.post<User>('http://localhost:8082/user/self',{password});
+  updatePassword(password?: string): Observable<User> {
+    return this.http.post<User>('http://localhost:8082/user/self', { password });
   }
+
+  uploadProfilePicture(image: File): Observable<User> {
+    const formData = new FormData();
+    formData.append('image', image, image.name);
+
+
+    // afiseaza body ul request-ului
+    const result: { [key: string]: string | number | File } = {};
+    formData.forEach((value, key) => {
+      if (value instanceof File) {
+        result[key] = value;
+      } else {
+        result[key] = key === 'image' ? +value : value;
+      }
+    });
+    console.log(result);
+
+
+    return this.http.post<User>('http://localhost:8082/user/upload-image', formData);
+  }
+
+  getProfilePicture(): Observable<Blob> {
+    return this.http.get('http://localhost:8082/user/get-image', { responseType: 'blob' });
+  }
+  // { responseType: 'blob' } is specified. This tells the HttpClient to expect the response to be of type Blob. The responseType property is set to 'blob' to ensure that the response is treated as binary data.
+  
+
 
   deleteUser(id: number): Observable<{}> {
     return this.http.delete(`http://localhost:8082/user?id=${id}`, {}) as Observable<{}>

@@ -2,6 +2,7 @@ h1 {
     text-align: center;
     font-weight: bold;
     margin-bottom: 30px;
+    margin-top:10px;
 }
 
 
@@ -28,9 +29,7 @@ h1 {
     border: 1px solid lightgrey !important;
 }
 
-.mdc-data-table__header-cell {
-    font-weight: 1000;
-}
+
 
 
 
@@ -49,6 +48,16 @@ td {
 
 .mat-mdc-header-cell {
     background-color: #DDECF6 !important;
+}
+
+.mdc-data-table__header-cell {
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.mdc-data-table__cell{
+    font-size:20px !important;
+    /* font-weight: bolder; */
 }
 
 
@@ -157,3 +166,39 @@ th.mat-sort-header-sorted {
     }
 }
 
+
+#hideMe {
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    opacity:1;
+    transition:opacity 500ms;
+}
+@keyframes cssAnimation {
+    to {
+        opacity: 0;
+      
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        opacity: 0;
+    }
+}
+
+.alert-container{
+    position: absolute;
+    top: 0;
+    left: 45%;
+}
+
+.alert {
+    font-size: 20px !important;
+    font-weight: bold !important;
+}

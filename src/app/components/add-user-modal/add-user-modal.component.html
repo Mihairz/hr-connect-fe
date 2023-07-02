@@ -14,7 +14,7 @@
         - De catre employee, de pe pagina de profil, apasnd butonul de change din dreptul campului password Caz in care se va afisa doar 1 camp: password, necompletat. -->
 
         <!-- Titlul difera in functie de sursa deschiderii modalei -->
-        <ng-container *ngIf="modalType === 'editModalType'; else addModalType"> 
+        <ng-container *ngIf="modalType === 'editModalType'; else addModalType">
             <div class="title" *ngIf="modalRole === 'editPhoneNumber'">Change phone number</div>
             <div class="title" *ngIf="modalRole === 'editPassword'">Change password</div>
             <div class="title" *ngIf="modalRole === 'admin'">Edit Account</div>
@@ -28,7 +28,7 @@
         <form [formGroup]="userForm" autocomplete="off" class="form-grid">
             <!-- Specificam numele formularului din typescript -->
 
-            
+
             <ng-template [ngIf]="modalRole==='admin'">
                 <!-- Campurile care se incarca daca modala e deschisa de admin -->
 
@@ -262,7 +262,7 @@
 
             </ng-template>
 
-            
+
             <!-- Campurile care se afiseaza daca modala este deschisa de la change phone de pe pagina de profil -->
             <ng-template [ngIf]="modalRole==='editPhoneNumber'">
                 <div class="input-container ic2">
@@ -289,6 +289,12 @@
 
 
 
+            <!-- Campurile care se afiseaza daca modala este deschisa de la change profile picture de pe pagina de profil -->
+            <ng-template [ngIf]="modalRole==='editProfilePicture'">
+                
+                <input type="file" (change)="onFileSelected($event)" formControlName="profilePicture" accept="image/*">
+                
+            </ng-template>
 
 
 
@@ -317,3 +323,4 @@
 
     </div>
 </div>
+

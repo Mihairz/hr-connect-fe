@@ -138,14 +138,15 @@
                 <label for="details"></label>
             </section>
 
-            <!-- EQUIPMENT REQUEST -->
-            <section *ngIf="selectedReqType==='Equipment_request'" class="request-text">
+            <!-- TRAINING REQUEST -->
+            <section *ngIf="selectedReqType==='Training_request'" class="request-text">
                 <textarea id="details" type="text" formControlName="details"
-                    placeholder="Please write here the equipment you need and the reason you need it." required
+                    placeholder="Please write here the training you want to enroll in and the necessary details." required
                     maxlength="250" name="details" rows="4" cols="50"></textarea>
                 <label for="details"></label>
             </section>
 
+            <!-- RESIGNATION -->
             <section class="request-text" *ngIf="selectedReqType === 'Resignation'">
                 <h3>Demisie</h3>
                 Subsemnatul <p class="unchangeable-field">{{userProfile.lastName}} {{userProfile.firstName}}</p>,
@@ -182,11 +183,18 @@
                 {{ errorMessage }}
             </div>
 
-            <button type="button" class="submit" (click)="submitRequest()">Send request</button>
+            <button type="button" class="submit" (click)="submitRequest()"><b>Send request</b></button>
             <!-- Butonul de submit request. La evenimentul click se apeleaza functia submitRequest() a componentei curente (requests-user) si cererea va fi aplicata-->
 
         </form>
 
+        <ng-template [ngIf]="actionState === 'success'">
+            <div  class="alert-container">
+                <div id='hideMe' class="alert alert-success" role="alert">
+                    Your request has been submitted!
+                </div>
+            </div>  
+        </ng-template>
 
     </div>
 
@@ -202,9 +210,7 @@
         <h2>History</h2>
         <!-- Cu functia ngIf verificam variabila isLoading. Aceasta variabila incepe cu valoarea true, iar apoi este schimbata in false la sfarsitul setului de instructiuni. -->
         <ng-template [ngIf]="isLoading" [ngIfElse]="displayList">
-            <p>
-                Loading...
-            </p>
+            <app-spinner></app-spinner>
         </ng-template>
 
         <ng-template #displayList>
@@ -229,7 +235,7 @@
                     <!-- Request type Column -->
                     <ng-container matColumnDef="requestType">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-                        <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+                        <td mat-cell *matCellDef="let element">{{ element.type.replaceAll('_',' ') }}</td>
                     </ng-container>
 
                     
@@ -241,7 +247,7 @@
                         </th>
                         <td mat-cell *matCellDef="let element" [ngStyle]="{'color':
                 element.status === 'Pending' ? '#00A3E3' : element.status === 'Approved' ? 'green' : 'red'}">
-                            {{element.status}}</td>
+                            <b>{{element.status}}</b></td>
                     </ng-container>
 
                     <!-- Request date Column -->

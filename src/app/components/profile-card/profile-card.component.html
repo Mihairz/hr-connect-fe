@@ -8,11 +8,17 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
 
-                            <div class="profile-picture-container">
-                                <img src="https://images.pexels.com/photos/16160855/pexels-photo-16160855/free-photo-of-smiling-man-in-eyeglasses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                                    alt="profile-picture" class="profile-picture">
-                                <!-- Needs to be sqaure to obtain a circle icon, otherwise the icon will be oval -->
+                            <div class="profilepic">
+
+                                <img *ngIf="loadedProfileImage; else defaultProfilePicture" [src]="loadedProfileImage" class="profilepic__image" width="150" height="150" alt="profile picture" />
+                                <ng-template #defaultProfilePicture><img src="https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png" alt="default-profile-picture" class="profilepic__image" width="155" height="155"></ng-template>
+
+                                <div class="profilepic__content">
+                                    <span class="profilepic__text" (click)="editProfilePicture(userProfile)">Change</span>
+                                </div>
+
                             </div>
+                            <!-- Needs to be sqaure to obtain a circle icon, otherwise the icon will be oval -->
 
 
                             <div class="mt-3">
@@ -76,16 +82,16 @@
                             <div class="col-sm-3 text-secondary"> <!-- occupy 3 columns -->
                                 <h6 class="mb-0">Password</h6>
                             </div>
-                            
-                                <div class="col-sm-9 editable-field">
-                                    <b>*********</b>
 
-                                    <a (click)="editPassword(userProfile)"><u>change</u></a>
-                                </div>
-                            
+                            <div class="col-sm-9 editable-field">
+                                <b>*********</b>
+
+                                <a (click)="editPassword(userProfile)"><u>change</u></a>
+                            </div>
+
                         </div>
                         <hr>
- 
+
                         <!-- TO DELETE -->
                         <div class="row">
                             <div class="col-sm-3 text-secondary"> <!-- occupy 3 columns -->
@@ -100,9 +106,7 @@
                         <hr>
 
                         <div class="action-buttons-container">
-                            <app-user [user]="userProfile" [page]="'profile'"
-                                (newGetUsersEvent)="getUser()"
-                               ></app-user>
+                            <app-user [user]="userProfile" [page]="'profile'" (newGetUsersEvent)="getUser()"></app-user>
                         </div>
 
                     </div>
@@ -111,13 +115,24 @@
 
 
 
-            <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType" [modalRole]="modalRole"
-                (newCloseModalEvent)="closeModal()"
-                (newGetUsersEvent)="getUser()">
+            <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType" (actionStateChange)="handleActionStateChange($event)"
+                [modalRole]="modalRole" (newCloseModalEvent)="closeModal()" (newGetUsersEvent)="getUser()">
             </app-add-user-modal>
 
 
 
+
         </div>
+
+
     </div>
+ 
+    <ng-template [ngIf]="actionState === 'success'">
+        <div  class="alert-container">
+            <div id='hideMe' class="alert alert-success" role="alert">
+                Changes have been saved!
+            </div>
+        </div>  
+    </ng-template>
+    
 </div>

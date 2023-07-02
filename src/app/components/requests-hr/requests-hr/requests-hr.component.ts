@@ -26,6 +26,11 @@ export class RequestsHrComponent implements OnInit, OnDestroy{
     this.getPendingRequests();
   }
 
+  actionState:string='';
+  handleActionStateChange(newState: string) {
+    // Handle the updated action state
+    this.actionState = newState;
+  }
  
   
 

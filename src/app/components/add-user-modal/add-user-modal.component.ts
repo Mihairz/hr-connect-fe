@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, SecurityContext, TemplateRef } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { LoginDetails, User } from 'src/app/models/user';
@@ -14,6 +15,10 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   @Output() newCloseModalEvent = new EventEmitter<string>();
   @Output() newGetUsersEvent = new EventEmitter<string>();
 
+  actionState: string = '';
+  @Output() actionStateChange: EventEmitter<string> = new EventEmitter<string>();
+
+
   @Input() editedUser: User = new User();
   @Input() modalType: String = '';
   @Input() modalRole: String = '';
@@ -25,7 +30,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   addUserSubscription: Subscription = new Subscription();
   updatedUserSubscription: Subscription = new Subscription();
 
-  constructor(private userService: UserService, private sanitizer: DomSanitizer) {
+  constructor(private userService: UserService, private sanitizer: DomSanitizer, private _snackBar: MatSnackBar) {
     // Injectam serviciul user pentru a putea folosii metodele din acesta (put si post http requests in cazul nostru)
 
     // adaugam in mod dinamic fisierul ce contine logica pentru fundalul animat, particle.js (din folder-ul assets al angular) la HTML-ul componentei
@@ -45,6 +50,16 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
 
   }
+
+
+  // openSnackBar(message: string, action: string) {
+  //   this._snackBar.open(message, action,);
+  // }
+  // // {
+  // //   duration: 30000
+  // // }
+
+
 
 
 
@@ -75,8 +90,45 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   }
 
 
+  selectedProfilePicture: File | undefined;
+  previewProfilePicture: string | undefined;
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (this.userForm) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.selectedProfilePicture = file;
+        this.previewProfilePicture = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+
+  uploadProfilePicture() {
+    if (this.selectedProfilePicture) {
+      this.userService.uploadProfilePicture(this.selectedProfilePicture).subscribe(
+        () => {
+          this.newGetUsersEvent.emit();
+          this.closeModal();
+        },
+        (error: any) => {
+          console.error(error);
+          // Handle any errors that occurred during the request
+        }
+      );
+    }
+  }
+
+
+  
+
+
   // Creem formularul si campurile acestuia, cu restrictiile specifice
   userForm = new FormGroup({
+
+    profilePicture: new FormControl(null),
 
     // USER DETAILS ==============================================================================================================================================
     role: new FormControl('', [
@@ -720,19 +772,34 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
     // Apelam functia de addUser si ii pasam ca parametru obiectele de tip user,login details, address, identity card create anterior
     this.addUserSubscription = this.userService.addUser(user, loginDetails, address, identityCard).subscribe(() => {
       this.newGetUsersEvent.emit();
+
+      this.actionState = 'successAddUser';
+      this.actionStateChange.emit(this.actionState);
+
       this.closeModal();
       // Dupa ce utilizatorul este adaugat,add-user-modal va emite un eveniment pe nume newGetUsersEvent ce va fi receptionat de catre componenta parinte (admin-home-page), iar lista de utilizatori de pe ecran isi va da refresh, astfel afisand inclusiv ultimul utilizator adaugat.
       // De asemenea functia closeModal() va emite un eveniment pe nume newCloseModalEvent ce va fi receptionat de catre componenta parinte (admin-home-page) si va inchide modala
     })
   }
 
+
+
   updateUser() {
 
     // Verificam mai intai daca modala este apelata din profil de change number/password, daca nu, inseamna ca este apelata de pe pagina de administrator
 
+    if (this.modalRole === 'editProfilePicture') {
+      this.uploadProfilePicture();
+
+      this.actionState = 'success';
+      this.actionStateChange.emit(this.actionState);
+
+      return;
+    }
+
     if (this.modalRole === 'editPhoneNumber') {
-      
-      
+
+
       // Checking if errors come from phone field
       if (!!this.userForm.controls.phoneNumber.errors) {
         this.errorSource = 'phone';
@@ -752,8 +819,13 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         }
       }
 
-      this.updatedUserSubscription = this.userService.updatePhoneNumber(this.userForm.value.phoneNumber ? this.userForm.value.phoneNumber:'').subscribe(() => {
+      this.updatedUserSubscription = this.userService.updatePhoneNumber(this.userForm.value.phoneNumber ? this.userForm.value.phoneNumber : '').subscribe(() => {
         this.newGetUsersEvent.emit();
+
+        this.actionState = 'success';
+        this.actionStateChange.emit(this.actionState);
+
+
         this.closeModal();
       })
 
@@ -775,8 +847,12 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
           return;
       }
 
-      this.updatedUserSubscription = this.userService.updatePassword(this.userForm.value.password ? this.userForm.value.password:'').subscribe(() => {
+      this.updatedUserSubscription = this.userService.updatePassword(this.userForm.value.password ? this.userForm.value.password : '').subscribe(() => {
         this.newGetUsersEvent.emit();
+
+        this.actionState = 'success';
+        this.actionStateChange.emit(this.actionState);
+
         this.closeModal();
       })
 
@@ -860,11 +936,15 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         issuingDate: this.userForm.value.issuingDate || undefined,
       }
 
-      
+
       // Apelam functia de updateUser() si ii pasam ca parametru obiectele de tip user, login details, address, identity card create anterior
 
       this.updatedUserSubscription = this.userService.updateUser(user, loginDetails, address, identityCard).subscribe(() => {
         this.newGetUsersEvent.emit();
+
+        this.actionState = 'success';
+        this.actionStateChange.emit(this.actionState);
+
         this.closeModal();
 
       })

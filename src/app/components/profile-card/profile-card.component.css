@@ -1,5 +1,5 @@
 /*v--PROFILE--v*/
-.container{
+.container {
     overflow: hidden;
 }
 
@@ -7,6 +7,7 @@
     padding: 15px;
     margin-top: 50px;
     overflow: hidden;
+    font-weight: bold;
 }
 
 .card {
@@ -29,7 +30,7 @@
 .gutters-sm {
     margin-right: -8px;
     margin-left: -8px;
-    padding-top:55px;
+    padding-top: 55px;
 }
 
 .gutters-sm>.col,
@@ -82,6 +83,8 @@
 
 
 .profile-picture-container {
+    position: relative;
+
     width: 150px;
     /* Set the width of the container div */
     height: 150px;
@@ -95,6 +98,9 @@
     align-items: center;
     overflow: hidden;
     /* Hide any overflow from the image */
+
+    overflow: hidden;
+    background-color: #111;
 }
 
 .profile-picture {
@@ -129,7 +135,108 @@ a label {
     cursor: pointer;
 }
 
-.editable-field{
+.editable-field {
     display: flex;
     justify-content: space-between;
 }
+
+
+.profilepic {
+    position: relative;
+    width: 150px;
+    /* Set the width of the container div */
+    height: 150px;
+    /* Set the height of the container div */
+    border-radius: 50%;
+
+    /* Center the image vertically and horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+    background-color: #111;
+}
+
+.profilepic:hover .profilepic__content {
+    opacity: 1;
+}
+
+.profilepic:hover .profilepic__image {
+    opacity: .5;
+}
+
+.profilepic__image {
+    object-fit: cover;
+    opacity: 1;
+    transition: opacity .2s ease-in-out;
+}
+
+.profilepic__content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+}
+
+
+.profilepic__text {
+    text-transform: uppercase;
+    font-size: 12px;
+    width: 50%;
+    text-align: center;
+
+    cursor:pointer;
+}
+
+#hideMe {
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    opacity:1;
+    transition:opacity 500ms;
+}
+@keyframes cssAnimation {
+    to {
+        opacity: 0;
+      
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        opacity: 0;
+    }
+}
+
+.alert-container{
+    position: absolute;
+    top: 0;
+    left: 44%;
+}
+
+.alert {
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+
+h4, h6 {
+    font-weight: bold !important;
+}
+
+
+
+

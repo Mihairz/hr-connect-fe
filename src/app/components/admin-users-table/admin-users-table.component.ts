@@ -9,6 +9,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Params } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-users-table',
@@ -22,6 +23,7 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService, private _liveAnnouncer: LiveAnnouncer, private route: ActivatedRoute, private router: Router) { }
 
   userSubscription: Subscription = new Subscription();
+  
 
   // SETARI TABEL 
   // userList: User[] = [];  Initializam o lista goala care contine obiecte de tip User. Aceasta va fi populata la ngOnInit cu ajutorul metodei getUsers()
@@ -95,7 +97,11 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   }
 
 
-
+  actionState:string='';
+  handleActionStateChange(newState: string) {
+    // Handle the updated action state
+    this.actionState = newState;
+  }
 
 
   body: any = document.querySelector("body");
@@ -103,6 +109,7 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
   openModal() {
     this.isModalOpen = true;
     this.body.style.overflow = "hidden";
+    this.actionState = '';
   }
   closeModal() {
     this.isModalOpen = false;
