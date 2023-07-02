@@ -64,6 +64,22 @@ export class NewsletterArticleComponent implements OnInit {
       this.getArticles();
     });
   }
+
+
+  editCoverImage(article: NewsletterArticle) {
+    // this.editedUser = user;
+    // this.modalRole = 'editProfilePicture';
+    // console.log('PROFILE CARD MODAL ROLE: ' + this.modalRole)
+    // this.openModal();
+
+    const dialogRef = this.dialog.open(AddArticleModalComponent, {
+      data: { ...article , coverImage:'editCoverImage'}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getArticles();
+    });
+  }
+
   addArticle() {
     // Getting the last article in the articles list.  If the list is empty, lastArticle will be undefined.
     //const lastArticle = this.articles[this.articles.length - 1];

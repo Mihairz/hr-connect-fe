@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
 
-                            <div class="profilepic">
+                            <div class="profilepic"> 
 
                                 <img *ngIf="loadedProfileImage; else defaultProfilePicture" [src]="loadedProfileImage" class="profilepic__image" width="150" height="150" alt="profile picture" />
                                 <ng-template #defaultProfilePicture><img src="https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png" alt="default-profile-picture" class="profilepic__image" width="155" height="155"></ng-template>

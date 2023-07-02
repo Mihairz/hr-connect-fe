@@ -25,6 +25,27 @@ export class NewsletterService {
     return this.http.post('http://localhost:8082/article', postObject) as Observable<NewsletterArticle>
   }
 
+
+  uploadCoverImage(image: File): Observable<NewsletterArticle> {
+    const formData = new FormData();
+    formData.append('image', image, image.name);
+
+
+    // // afiseaza body ul request-ului
+    // const result: { [key: string]: string | number | File } = {};
+    // formData.forEach((value, key) => {
+    //   if (value instanceof File) {
+    //     result[key] = value;
+    //   } else {
+    //     result[key] = key === 'image' ? +value : value;
+    //   }
+    // });
+    // console.log(result);
+
+
+    return this.http.post<NewsletterArticle>('http://localhost:8082/article/upload-image', formData);
+  }
+
   
   updateNewsletterArticle(postObject: NewsletterArticle) {
     return this.http.post('http://localhost:8082/article', postObject) as Observable<NewsletterArticle>

@@ -5,6 +5,7 @@ export interface NewsletterArticle {
     author: string;
     createdDate: Date;
     content: string;
+    coverImage?: string;
     contentType: string;
     orderNumber: number;
     createdBy: User;

@@ -109,7 +109,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   uploadProfilePicture() {
     if (this.selectedProfilePicture) {
       this.userService.uploadProfilePicture(this.selectedProfilePicture).subscribe(
-        () => {
+        () => { 
           this.newGetUsersEvent.emit();
           this.closeModal();
         },

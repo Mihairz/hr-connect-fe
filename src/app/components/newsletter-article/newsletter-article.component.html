@@ -3,18 +3,9 @@
     <div class="search-and-add-button">
       <div>
         <!-- ngModel connect our input to filterText -->
-        <input
-          class="search-bar-top"
-          type="text"
-          placeholder="Search by title"
-          [(ngModel)]="filterText"
-        />
+        <input class="search-bar-top" type="text" placeholder="Search by title" [(ngModel)]="filterText" />
       </div>
-      <button
-        type="button"
-        class="btn btn-light addArticle"
-        (click)="addArticle()"
-      >
+      <button type="button" class="btn btn-light addArticle" (click)="addArticle()">
         Add Article
       </button>
       <!-- ngModel binds selectedCategory variable to the value in the dropdown -->
@@ -34,24 +25,40 @@
     <app-spinner></app-spinner>
     <div class="container-articles">
       <!-- is a for and gets all the articles one by one -->
-      <div
-        *ngFor="
+      <div *ngFor="
           let article of filteredArticles
             | paginate : { itemsPerPage: 5, currentPage: p }
-        "
-      >
+        ">
         <div class="card">
-          <img src="" class="card-img-top" />
+
+          <div class="profilepic">
+
+            <img
+              src="https://images.pexels.com/photos/13357691/pexels-photo-13357691.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+              class="profilepic__image" alt="profile picture" />
+            <!-- [src]="loadedProfileImage" -->
+            <!-- <ng-template #defaultProfilePicture><img
+                src="https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png"
+                alt="default-profile-picture" class="profilepic__image" width="155" height="155"></ng-template> -->
+
+            <div class="profilepic__content">
+              <span class="profilepic__text" (click)="editCoverImage(article)" >Change</span>
+              
+            </div>
+
+          </div>
+
+
           <div class="card-body">
             <div class="top-of-card">
               <div class="title-badge-container">
                 <h5 class="card-title">{{ article.title }}</h5>
                 <span class="badge badge-pill badge-danger">{{
                   article.contentType
-                }}</span>
+                  }}</span>
                 <div class="date-of-article">
-                <p>Created on {{ article.createdDate | date:'dd/MM/yyyy' }}</p>
-              </div>
+                  <p>Created on {{ article.createdDate | date:'dd/MM/yyyy' }}</p>
+                </div>
               </div>
             </div>
             <p class="card-text">
@@ -59,25 +66,15 @@
             </p>
             <div class="read-more-container">
               <div class="button-container">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  (click)="editArticle(article)"
-                >
+                <button type="button" class="btn btn-secondary" (click)="editArticle(article)">
                   Edit
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-secondary delete"
-                  (click)="deleteArticle(article.id)"
-                >
+                <button type="button" class="btn btn-secondary delete" (click)="deleteArticle(article.id)">
                   Delete
                 </button>
               </div>
               <!-- routerLink - Angular specific - when clicked will navigate to the route in the brackets - for instance - article/1 , 1 being fetched in the backend  -->
-              <a [routerLink]="['/article', article.id]" class="btn btn-primary"
-                >Read more</a
-              >
+              <a [routerLink]="['/article', article.id]" class="btn btn-primary">Read more</a>
             </div>
           </div>
         </div>
