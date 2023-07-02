@@ -1,202 +1,17 @@
-/* 
-.r-link{
-    display: var(--rLinkDisplay, inline-flex) !important;
-  }
-  
-  .r-link[href]{
-    color: var(--rLinkColor) !important;
-    text-decoration: var(--rLinkTextDecoration, none) !important;
-  }
-  
-  .r-list{
-    padding-left: var(--rListPaddingLeft, 0) !important;
-    margin-top: var(--rListMarginTop, 0) !important;
-    margin-bottom: var(--rListMarginBottom, 0) !important;
-    list-style: var(--rListListStyle, none) !important;
-  }
-  
-   */
-/*
-  =====
-  CORE STYLES
-  =====
-  */
 
-/* .menu{
-    --rLinkColor: var(--menuLinkColor, currentColor);
-  }
-  
-  .menu__link{
-    display: var(--menuLinkDisplay, block);
-  } */
-
-/* 
-  focus state 
-  */
-
-/* .menu__link:focus{
-    outline: var(--menuLinkOutlineWidth, 2px) solid var(--menuLinkOutlineColor, currentColor);
-    outline-offset: var(--menuLinkOutlineOffset);
-  } */
-
-/* 
-  fading siblings
-  */
-
-/* .menu:hover .menu__link:not(:hover){
-    --rLinkColor: var(--menuLinkColorUnactive, rgba(22, 22, 22, .35));
-  } */
-
-/*
-  =====
-  PRESENTATION STYLES
-  =====
-  */
-
-/* .menu{
-    background-color: var(--menuBackgroundColor, #f0f0f0);
-    box-shadow: var(--menuBoxShadow, 0 1px 3px 0 rgba(0, 0, 0, .12), 0 1px 2px 0 rgba(0, 0, 0, .24));
-  }
-  
-  .menu__list{
-    display: flex;  
-  }
-  
-  .menu__link{
-    padding: var(--menuLinkPadding, 1.5rem 2.5rem);
-    font-weight: 700;
-    text-transform: uppercase;
-  } */
-
-/* 
-  =====
-  TEXT UNDERLINED
-  =====
-  */
-
-/* .text-underlined{
-    position: relative;
-    overflow: hidden;
-  
-    will-change: color;
-    transition: color .25s ease-out;  
-  }
-  
-  .text-underlined::before, 
-  .text-underlined::after{
-    content: "";
-    width: 0;
-    height: 3px;
-    background-color: var(--textUnderlinedLineColor, currentColor);
-  
-    will-change: width;
-    transition: width .1s ease-out;
-  
-    position: absolute;
-    bottom: 0;
-  }
-  
-  .text-underlined::before{
-    left: 50%;
-    transform: translateX(-50%); 
-  }
-  
-  .text-underlined::after{
-    right: 50%;
-    transform: translateX(50%); 
-  }
-  
-  .text-underlined:hover::before, 
-  .text-underlined:hover::after{
-    width: 100%;
-    transition-duration: .2s;
-  } */
-
-/*
-  =====
-  SETTINGS
-  =====
-  */
-
-/* .page__custom-settings{
-    --menuBackgroundColor: #133C7F;
-    --menuLinkColor: #fff;
-    --menuLinkColorUnactive: #eae8f7;
-    --menuLinkOutlineOffset: -.5rem; 
-  } */
-
-/*
-  =====
-  DEMO
-  =====
-  */
-
-/* body{
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Open Sans, Ubuntu, Fira Sans, Helvetica Neue, sans-serif;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;  
-    flex-direction: column;
-  }
-  
-  .page{
-    box-sizing: border-box;
-
-    margin: auto;
-  }
-  
-  .page__menu:nth-child(n+2){
-    margin-top: 3rem;
-  }
-  
-  
-  .substack{
-    border:1px solid #EEE; 
-    background-color: #fff;
-    width: 100%;
-    max-width: 480px;
-    height: 280px;
-    margin: 1rem auto;;
-  }
-  
-  .linktr{
-    display: flex;
-    justify-content: flex-end;
-    padding: 2rem;
-    text-align: center;
-  }
-  
-  .linktr__goal{
-    background-color: rgb(209, 246, 255);
-    color: rgb(8, 49, 112);
-    box-shadow: rgb(8 49 112 / 24%) 0px 2px 8px 0px;
-    border-radius: 2rem;
-    padding: .75rem 1.5rem;
-  }
-  
-  .r-link{
-      --uirLinkDisplay: var(--rLinkDisplay, inline-flex);
-      --uirLinkTextColor: var(--rLinkTextColor);
-      --uirLinkTextDecoration: var(--rLinkTextDecoration, none);
-  
-      display: var(--uirLinkDisplay) !important;
-      color: var(--uirLinkTextColor) !important;
-      text-decoration: var(--uirLinkTextDecoration) !important;
-  }
-  .page__menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-  }
-  */
-.navbar {
+.navbar.navbar-expand-lg.navbar-light {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr ;
   height: 54px;
   padding-top: 0px;
   padding-bottom: 0px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 25px;
+  padding-right: 25px;
+ 
+}
+.brand-container{
+  display: flex;
+  
 }
 .navbar-brand {
   width: 41px;
@@ -206,20 +21,27 @@
   width: 400px;
 }
 .nav-icon-and-text {
+ 
   display: flex;
   flex-direction: column;
   text-align: center;
+  margin-left: 5px;
+  margin-right: 5px;
   width: 80px;
   height: 52px;
   justify-content: center;
+  padding-top: 5px;
 }
 .navbar {
   background-color: #133c7f;
 }
+/* the text underneath the icon  */
 .nav-link {
   color: white;
-  font-size: 11px;
+  font-size: 10.5px;
   padding: 0;
+  margin-top: -5px;
+  font-family: 'Raleway' ,Arial, Helvetica, sans-serif ;
 }
 .ng-fa-icon {
   color: white;
@@ -235,6 +57,7 @@ mat-icon {
 }
 /* the vertical separator */
 .vr {
+  align-self: stretch;
   background-color: #f2f7fb;
   width: 1px;
 }
@@ -252,58 +75,65 @@ mat-icon {
   color: rgb(144, 49, 49);
 }
 /* same as the nav-icon-and-text it is the box that captures all of them */
-.d-inline-block {
+/* .d-inline-block {
+  
   display: flex;
   flex-direction: column;
   text-align: center;
   width: 80px;
   height: 52px;
   justify-content: center;
-}
-.account-image {
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-}
+} */
+
 /* the bar after the navbar brand */
-#navbarNavDropdown {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 10%;
-}
+
 /* just the container of all the links with icons */
 .link-icons-on-the-navbar {
   display: flex;
   justify-content: center;
   margin: 0 auto;
-}
-#style-2 {
-  position: relative;
-  transition: color 0.3s ease-in-out;
-}
+  grid-column-start: 2;
+  grid-column-end: 3;
 
-#style-2::before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  height: 3px;
-  background-color: var(--link-1);
-  transform: scaleX(0);
-  transition: transform 0.3s ease-in-out;
 }
-
-#style-2:hover {
-  color: var(--link-1);
-}
-
-#style-2:hover::before {
-  transform: scaleX(1);
-}
+/* the name of HR connect */
 .the-name-of-app {
   color: white !important;
-  font-size: 14px !important;
+  font-size: 15px !important;
   margin-top: auto !important;
   margin-bottom: auto;
+  font-family: 'Raleway' ,Arial, Helvetica, sans-serif ;
+  margin-left: -5px;
+}
+.logout-area{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+.logout-text{
+ color:white;
+ margin-top: auto;
+ margin-bottom: auto;
+ margin-left: 30px;
+ 
+}
+.vr{
+  margin-right: 5px;
+  width: 1.5px;
+  height: 50px;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+.btn-danger {
+  background-color: transparent;
+  border: none;
+  color: white; 
 }
 
+.btn-danger:hover {
+  background-color: white;
+  border:none;
+  color: inherit; /* optional: change to preferred color */
+}

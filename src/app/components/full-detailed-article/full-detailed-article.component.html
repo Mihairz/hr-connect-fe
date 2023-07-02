@@ -12,7 +12,7 @@
             <h1 class="fw-bolder mb-1">{{ article.title }}</h1>
             <!-- Post meta content-->
             <div class="text-muted fst-italic mb-2">
-              {{ article.date }} by {{ article.author }}
+              {{ article.createdDate }} by {{ article.createdBy.firstName.concat(" ").concat(article.createdBy.lastName) }}
             </div>
             <!-- Post categories-->
             <a

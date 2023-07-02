@@ -69,9 +69,19 @@ section {
   align-items: center;
   width: 100%;
 }
+.btn.btn-secondary {
+  height: 40px;
+  width: 80px;
+  
+}
 
+/* delete button */
 .btn.btn-secondary.delete {
   margin-left: 10px;
+  margin-right: 20px;
+  background-color: rgb(244, 84, 84);
+  border-color:rgb(244, 84, 84);
+  
 }
 
 /* CSS pentru card-ul cu content-ul articolului */
@@ -102,10 +112,12 @@ section {
 /* title of the card */
 .card-title {
   font-weight: bold;
-  margin: 0;
+  margin-left: 0;
   margin-top: auto;
   margin-bottom: auto;
-  font-size: px;
+  
+  font-size: 16px;
+
   
 }
 
@@ -120,18 +132,14 @@ section {
 /* edit and delete buttons are together */
 .button-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .read-more-container {
-  display: flex;
-  justify-content: flex-end;
-}
-/* here we have the title and the buttons in one container */
-.top-of-card{
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  
+  grid-template-columns: 3fr 1fr;
+ 
 }
+
 
 /* webkit-box doesn't work on older browsers */
 /*line clamp = number of lines for the article*/
@@ -141,9 +149,14 @@ section {
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  font-size: 13px;
+  height: 120px;
 }
+/* dispay-ul categoriei pe card */
 .badge{
   color: black;
+  background-color: rgba(219, 213, 213, 0.549);
+  margin-top: 15px;
 }
 .search-bar-top{
   width: 450px;
@@ -153,4 +166,11 @@ section {
 }
 .the-name-of-app{
   color: white;
+}
+/* the date of the article */
+.date-of-article{
+  margin-left: 5px ;
+  margin-top: 10px;
+  font-style: italic;
+  font-size: 11px;
 }
