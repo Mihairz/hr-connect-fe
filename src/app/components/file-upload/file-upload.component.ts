@@ -30,7 +30,7 @@ export class FileUploadComponent  {
   formData.set ("name", this.name)
   formData.set("file",this.file)
   //submit this data in API - this is just a placeholder
-  this.http.post('http://localhost:3001/upload/uploadFiles',formData).subscribe(
+  this.http.post('http://localhost:8082/article/upload-image?id=${this}',formData).subscribe(
     (response) => {});
 
  }

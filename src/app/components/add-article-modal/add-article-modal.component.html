@@ -10,7 +10,13 @@
     </div>
     
 
-      <app-file-upload></app-file-upload>
+      <!-- <app-file-upload></app-file-upload> -->
+      <!-- Campurile care se afiseaza daca modala este deschisa de la change profile picture de pe pagina de profil -->
+      <ng-template [ngIf]="data.coverImage==='editCoverImage'">
+                
+        <input type="file" (change)="onImageSelected($event)" accept="image/*">
+        
+       </ng-template>
 
       <div class="input-container ic1">
         <textarea class="input content"

@@ -94,6 +94,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
   previewProfilePicture: string | undefined;
 
   onFileSelected(event: any) {
+    console.log('am intrat in on file selected');
     const file: File = event.target.files[0];
     if (this.userForm) {
       const reader = new FileReader();
@@ -103,10 +104,13 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       };
       reader.readAsDataURL(file);
     }
+    console.log('selectedProfilePicture in onFileSelected method: '+this.selectedProfilePicture);
+    console.log('am terminat on file selected');
   }
 
 
   uploadProfilePicture() {
+    console.log('selectedProfilePicture in uploadProfilePicture method: '+this.selectedProfilePicture);
     if (this.selectedProfilePicture) {
       this.userService.uploadProfilePicture(this.selectedProfilePicture).subscribe(
         () => { 

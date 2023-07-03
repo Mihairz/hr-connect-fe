@@ -31,19 +31,18 @@
         ">
         <div class="card">
 
-          <div class="profilepic">
+          <div class="coverpic">
+            
+            <img *ngIf="article.coverImageUrl" else defaultCoverImage [src]='article.coverImageUrl' class="coverpic__image">
+            <ng-template #defaultCoverImage>
+              <img  class="coverpic__image" src="assets/images/logo-white-on-blue.jpeg" alt="article cover image">
+            </ng-template>
+            
+            
 
-            <img
-              src="https://images.pexels.com/photos/13357691/pexels-photo-13357691.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-              class="profilepic__image" alt="profile picture" />
-            <!-- [src]="loadedProfileImage" -->
-            <!-- <ng-template #defaultProfilePicture><img
-                src="https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png"
-                alt="default-profile-picture" class="profilepic__image" width="155" height="155"></ng-template> -->
 
-            <div class="profilepic__content">
-              <span class="profilepic__text" (click)="editCoverImage(article)" >Change</span>
-              
+            <div class="coverpic__content">
+              <span class="coverpic__text" (click)="editCoverImage(article)">Change</span>
             </div>
 
           </div>

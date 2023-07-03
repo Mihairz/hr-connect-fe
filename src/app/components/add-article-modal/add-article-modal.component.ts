@@ -28,27 +28,39 @@ export class AddArticleModalComponent {
     this.dialogRef.close();
   }
 
+
+
+  
+
+
+
   selectedCoverImage: File | undefined;
   previewCoverImage: string | undefined;
 
-  onFileSelected(event: any) {
+  onImageSelected(event: any) {
+    console.log('am apelat on image selected');
     const file: File = event.target.files[0];
-
+  
     const reader = new FileReader();
+  
     reader.onload = () => {
       this.selectedCoverImage = file;
       this.previewCoverImage = reader.result as string;
-
-      reader.readAsDataURL(file);
-    }
+    };
+  
+    reader.readAsDataURL(file); // Move this line outside the onload event handler
+  
+    console.log('am terminat on image selected');
   }
 
-  uploadProfilePicture() {
+  uploadCoverImage() {
+    console.log('selectedCoverImage value in uploadCoverImage method: '+this.selectedCoverImage);
     if (this.selectedCoverImage) {
-      this.aService.uploadProfilePicture(this.selectedCoverImage).subscribe(
+      console.log('am recunoscut sleecte cover image');
+      this.aService.uploadCoverImage(this.selectedCoverImage,this.data.id).subscribe(
         () => {
-          this.newGetUsersEvent.emit();
-          this.closeModal();
+          console.log('am ajuns si in upload method');
+          this.dialogRef.close();
         },
         (error: any) => {
           console.error(error);
@@ -57,6 +69,11 @@ export class AddArticleModalComponent {
       );
     }
   }
+
+
+
+
+
 
   saveArticle() {
     this.data.createdDate = new Date();
@@ -68,6 +85,8 @@ export class AddArticleModalComponent {
 
         if (this.data.coverImage === 'editCoverImage') {
           // edit cover image request
+          console.log('am conectat ok insturctiunea pe buton');
+          this.uploadCoverImage();
         } else {
           this.aService.updateNewsletterArticle(this.data).subscribe(() => {
             this.dialogRef.close();

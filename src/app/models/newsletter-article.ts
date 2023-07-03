@@ -6,8 +6,8 @@ export interface NewsletterArticle {
     createdDate: Date;
     content: string;
     coverImage?: string;
+    coverImageUrl?: string | ArrayBuffer | null;
     contentType: string;
     orderNumber: number;
     createdBy: User;
-
 }
