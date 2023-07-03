@@ -4,8 +4,8 @@ export interface FaqContent {
     content: string;
     orderNumber: number;
     id: number;
-    documentUrl: string;
-    
-  
 
+    
+    documentState?:string;
+    documentUrl?: string;
 }
