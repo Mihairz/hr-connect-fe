@@ -55,6 +55,7 @@ export class NewsletterArticleComponent implements OnInit {
 
       this.filteredArticles.forEach((article) => {
         this.getProfilePicture(article)
+        console.log('ARTICLE COVER IMAGE URL '+article.id+': '+article.coverImageUrl)
       })
     });
   }
@@ -87,7 +88,7 @@ export class NewsletterArticleComponent implements OnInit {
 
 
   getProfilePicture(article: NewsletterArticle) {
-    if(!!!article.coverImageUrl){
+    
       this.articlesService.getCoverImage(article.id).subscribe((response: Blob) => {
         const reader = new FileReader();  // FileReader class allows reading the contents of files
         reader.onloadend = () => { // Assigns a callback function to the onloadend event of the FileReader. The callback function will be executed when the reading operation is completed.
@@ -99,7 +100,7 @@ export class NewsletterArticleComponent implements OnInit {
         // initiates the reading operation by calling the readAsDataURL method of the FileReader.
         // The response object, which is a Blob representing the profile picture, is passed as an argument to read its contents.
       });
-    }
+    
     
   }
 

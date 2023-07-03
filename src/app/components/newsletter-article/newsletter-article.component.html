@@ -32,13 +32,16 @@
         <div class="card">
 
           <div class="coverpic">
-            
-            <img *ngIf="article.coverImageUrl" else defaultCoverImage [src]='article.coverImageUrl' class="coverpic__image">
+
+            <img *ngIf="article.coverImageUrl else defaultCoverImage"  [src]='article.coverImageUrl'
+              class="coverpic__image">
             <ng-template #defaultCoverImage>
-              <img  class="coverpic__image" src="assets/images/logo-white-on-blue.jpeg" alt="article cover image">
+              <img class="coverpic__image" src="assets/images/logo-white-on-blue.jpeg" alt="article cover image">
             </ng-template>
-            
-            
+
+           
+
+
 
 
             <div class="coverpic__content">
