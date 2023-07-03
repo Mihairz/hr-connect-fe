@@ -36,11 +36,11 @@
 
   <!-- When you click on a button you go to the catagory -->
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Important_HR_announcement')">Important HR Announcement</button>
-      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Upcoming_events')">Upcoming Events</button>
-      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Policy_changes')">Policy Changes</button>
-      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Training_opportunities')">Training Opportunities</button>
-      <button type="button" class="btn btn-primary" (click)="scrollToCategory('News')">Latest Updates</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Important_HR_announcement')">Payroll and Compensation</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Upcoming_events')">Performance</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Policy_changes')">Time Off and Leave</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Training_opportunities')">Training and Development</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('News')">Workplace Safety</button>
     </div>
     <button type="button" class="btn btn-light addFaq" (click)="addFaq()">
       Add FAQ
@@ -108,7 +108,7 @@
                   {{ faq.content }}
                 </div>
                 <div class="card">
-                  <!-- if there is no documentUrl the card will not appear -->
+                  <!-- HERE WE HIDE THE DOCUMENT - if there is no documentUrl the card will not appear -->
                   <div class="card-body" *ngIf="faq.documentUrl">
                     For more details please click on this document
                     <a href="{{ faq.documentUrl }}" target="_blank">this document</a>
