@@ -61,28 +61,27 @@ export class NewsletterArticleComponent implements OnInit {
   }
   editArticle(article: NewsletterArticle) {
 
-
     const dialogRef = this.dialog.open(AddArticleModalComponent, {
       data: { ...article }
     });
+
     dialogRef.afterClosed().subscribe(result => {
       this.getArticles();
     });
+    
   }
 
 
   editCoverImage(article: NewsletterArticle) {
-    // this.editedUser = user;
-    // this.modalRole = 'editProfilePicture';
-    // console.log('PROFILE CARD MODAL ROLE: ' + this.modalRole)
-    // this.openModal();
 
     const dialogRef = this.dialog.open(AddArticleModalComponent, {
-      data: { ...article, coverImage: 'editCoverImage' }
+      data: { ...article, coverImageState: 'editCoverImage' }
     });
+
     dialogRef.afterClosed().subscribe(result => {
       this.getArticles();
     });
+
   }
 
 

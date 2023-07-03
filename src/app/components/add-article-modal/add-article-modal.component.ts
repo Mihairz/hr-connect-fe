@@ -12,16 +12,35 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./add-article-modal.component.css']
 })
 export class AddArticleModalComponent {
+  particlesScriptElement: HTMLScriptElement;
+  particlesSettingsScriptElement: HTMLScriptElement;
+  particlesHostingElement: HTMLScriptElement;
 
   constructor(
     public dialogRef: MatDialogRef<AddArticleModalComponent>,
     private aService: NewsletterService,
     private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: NewsletterArticle
-  ) { }
+  ) { 
+    // adaugam in mod dinamic fisierul ce contine logica pentru fundalul animat, particle.js (din folder-ul assets al angular) la HTML-ul componentei
+    this.particlesScriptElement = document.createElement("script");
+    this.particlesScriptElement.src = "assets/particles.js";
+    document.body.appendChild(this.particlesScriptElement);
+
+    // adaugam in mod dinamic fisierul ce contine setarile pentru fundalul animat, particle.js (din folder-ul assets al angular) la HTML-ul componentei
+    this.particlesSettingsScriptElement = document.createElement("script");
+    this.particlesSettingsScriptElement.src = "assets/particles-settings.js";
+    document.body.appendChild(this.particlesSettingsScriptElement);
+
+    // adaugam in mod dinamic elementul ce contine scriptul pentru hostingul? fundalului animat
+    this.particlesHostingElement = document.createElement("script");
+    this.particlesHostingElement.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
+    document.body.appendChild(this.particlesHostingElement);
+
+  }
 
   ngOnInit() {
-    console.log(this.data.coverImage)
+    
   }
 
   closeModal(): void {
@@ -38,7 +57,6 @@ export class AddArticleModalComponent {
   previewCoverImage: string | undefined;
 
   onImageSelected(event: any) {
-    console.log('am apelat on image selected');
     const file: File = event.target.files[0];
   
     const reader = new FileReader();
@@ -48,26 +66,21 @@ export class AddArticleModalComponent {
       this.previewCoverImage = reader.result as string;
     };
   
-    reader.readAsDataURL(file); // Move this line outside the onload event handler
-  
-    console.log('am terminat on image selected');
+    reader.readAsDataURL(file); 
   }
 
   uploadCoverImage() {
-    console.log('selectedCoverImage value in uploadCoverImage method: '+this.selectedCoverImage);
+
     if (this.selectedCoverImage) {
-      console.log('am recunoscut sleecte cover image');
-      this.aService.uploadCoverImage(this.selectedCoverImage,this.data.id).subscribe(
-        () => {
-          console.log('am ajuns si in upload method');
+      this.aService.uploadCoverImage(this.selectedCoverImage,this.data.id).subscribe(() => {
           this.dialogRef.close();
         },
         (error: any) => {
           console.error(error);
-          // Handle any errors that occurred during the request
         }
       );
     }
+
   }
 
 
@@ -83,14 +96,16 @@ export class AddArticleModalComponent {
 
       if (this.data.id) { // if id exists we update
 
-        if (this.data.coverImage === 'editCoverImage') {
-          // edit cover image request
-          console.log('am conectat ok insturctiunea pe buton');
+        if (this.data.coverImageState === 'editCoverImage') {
+
           this.uploadCoverImage();
+
         } else {
+
           this.aService.updateNewsletterArticle(this.data).subscribe(() => {
             this.dialogRef.close();
           })
+
         }
 
       }

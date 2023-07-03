@@ -2,7 +2,7 @@
 
 <!-- Deoarece am injectat AuthService in typescript-ul componentei admin-home-page, avem acces si putem verifica starea variabilei isLoggedIn, astfel putem afisa componenta admin-home-page exclusiv pentru utilizatorii logati. -->
 <div id="admin-home-page" *ngIf="authService.isLoggedIn$ | async">
-    <h1>Admin dashboard</h1>
+    <h1>Admin dashboard</h1> 
     <app-admin-users-table></app-admin-users-table>
 </div>
 <!-- The async pipe is used here to subscribe to the isLoggedIn$ observable from the authService and handle its asynchronous value. It allows the template to automatically update whenever the value emitted by the observable changes. -->
