@@ -24,6 +24,8 @@ export class NewsletterArticleComponent implements OnInit {
   selectedCategory: string = '';
   userRole: string = '';
 
+  modalCloseCause:string = '';
+
   get filterText() {
     return this._filterText;
   }
@@ -48,6 +50,7 @@ export class NewsletterArticleComponent implements OnInit {
 
   getArticles() {
     this.articlesService.getNewsletterArticles().subscribe((response) => {
+
       // this.articles = response.sort((a, b) => b.orderNumber - a.orderNumber); // nu e good practice si ar trebui din backend sa sortam aceste articole ca cel nou sa fie in fata
       this.articles = response.reverse(); // nu e good practice si ar trebui din backend sa sortam aceste articole ca cel nou sa fie in fata
       this.filteredArticles = this.articles; // we make sure that filteredArticles array is a copy of articles | we will use filteredArticles in our function
@@ -55,8 +58,8 @@ export class NewsletterArticleComponent implements OnInit {
 
       this.filteredArticles.forEach((article) => {
         this.getProfilePicture(article)
-        console.log('ARTICLE COVER IMAGE URL '+article.id+': '+article.coverImageUrl)
       })
+
     });
   }
   editArticle(article: NewsletterArticle) {
@@ -66,6 +69,7 @@ export class NewsletterArticleComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.modalCloseCause = result;
       this.getArticles();
     });
     
@@ -79,6 +83,7 @@ export class NewsletterArticleComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.modalCloseCause = result;
       this.getArticles();
     });
 
@@ -115,12 +120,13 @@ export class NewsletterArticleComponent implements OnInit {
 
     });
     dialogRef.afterClosed().subscribe(result => {
-
+      this.modalCloseCause = result;
       this.getArticles();
     });
   }
   deleteArticle(id: number) {
     this.articlesService.deleteNewsletterArticle(id).subscribe(() => {
+      this.modalCloseCause = 'articleDeleteSuccess'
       this.getArticles()
     });
   }

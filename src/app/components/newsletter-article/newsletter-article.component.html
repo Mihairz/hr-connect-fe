@@ -85,4 +85,35 @@
   <!-- paginator with ngx-paginator https://www.youtube.com/watch?v=qJ1UHAbGTWw&t=432s  + http://michaelbromley.github.io/ngx-pagination/#/-->
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
+  <ng-template [ngIf]="modalCloseCause === 'coverImageUploadSuccess' || modalCloseCause==='coverImageEditSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        Cover image uploaded successfully !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'articleUpdateSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        Changes have been saved !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'articleAddSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        New article has been added !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'articleDeleteSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-danger" role="alert">
+        Article has been removed !
+      </div>
+    </div>
+  </ng-template>
 </div>

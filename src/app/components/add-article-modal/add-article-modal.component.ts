@@ -36,12 +36,14 @@ export class AddArticleModalComponent {
     this.particlesHostingElement = document.createElement("script");
     this.particlesHostingElement.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
     document.body.appendChild(this.particlesHostingElement);
-
   }
 
   ngOnInit() {
     
   }
+
+
+  modalCloseCause:string = '';
 
   closeModal(): void {
     this.dialogRef.close();
@@ -73,7 +75,8 @@ export class AddArticleModalComponent {
 
     if (this.selectedCoverImage) {
       this.aService.uploadCoverImage(this.selectedCoverImage,this.data.id).subscribe(() => {
-          this.dialogRef.close();
+        this.modalCloseCause = 'coverImageUploadSuccess';  
+        this.dialogRef.close(this.modalCloseCause);
         },
         (error: any) => {
           console.error(error);
@@ -103,7 +106,8 @@ export class AddArticleModalComponent {
         } else {
 
           this.aService.updateNewsletterArticle(this.data).subscribe(() => {
-            this.dialogRef.close();
+            this.modalCloseCause = 'articleUpdateSuccess';
+            this.dialogRef.close(this.modalCloseCause);
           })
 
         }
@@ -111,7 +115,8 @@ export class AddArticleModalComponent {
       }
       else { //if id doesn't exist we add article
         this.aService.addNewsletterArticle(this.data).subscribe(() => {
-          this.dialogRef.close();
+          this.modalCloseCause = 'articleAddSuccess';
+          this.dialogRef.close(this.modalCloseCause);
         })
       }
     });
