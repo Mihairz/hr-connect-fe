@@ -104,8 +104,6 @@ export class NewsletterArticleComponent implements OnInit {
         // initiates the reading operation by calling the readAsDataURL method of the FileReader.
         // The response object, which is a Blob representing the profile picture, is passed as an argument to read its contents.
       });
-    
-    
   }
 
   addArticle() {

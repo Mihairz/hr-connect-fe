@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FaqContent } from 'src/app/models/faq';
 import { FaqService } from 'src/app/services/faq.service';
 
@@ -13,13 +13,13 @@ export class AddFaqModalComponent {
     public dialogRef: MatDialogRef<AddFaqModalComponent>,
     private aService: FaqService,
     @Inject(MAT_DIALOG_DATA) public data: FaqContent
-    
-  ) {}
+
+  ) { }
   ngOnInit() {
   }
 
   closeModal(): void {
-    this.dialogRef.close(); 
+    this.dialogRef.close();
   }
 
 
@@ -30,24 +30,25 @@ export class AddFaqModalComponent {
 
   onPDFSelected(event: any) {
     const file: File = event.target.files[0];
-  
+
     const reader = new FileReader();
-  
+
     reader.onload = () => {
       this.selectedPDF = file;
       this.previewPDF = reader.result as string;
     };
-  
-    reader.readAsDataURL(file); 
+
+    reader.readAsDataURL(file);
   }
 
   uploadPDF() {
 
     if (this.selectedPDF) {
-      this.aService.uploadPDF(this.selectedPDF,this.data.id).subscribe(() => {
+      this.aService.uploadPDF(this.selectedPDF, this.data.id).subscribe(() => {
         // this.modalCloseCause = 'coverImageUploadSuccess';  (this.modalCloseCause)
+        this.data.documentState = 'faqHasPDF';
         this.dialogRef.close();
-        },
+      },
         (error: any) => {
           console.error(error);
         }
@@ -79,7 +80,7 @@ export class AddFaqModalComponent {
     }
 
   }
-  
 
-  
+
+
 }

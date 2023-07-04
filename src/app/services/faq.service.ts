@@ -55,13 +55,25 @@ export class FaqService {
     return this.http.post<FaqContent>('http://localhost:8082/faq/upload-file', formData);
   }
 
-  // getCoverImage(id: number): Observable<Blob> {
-  //   return this.http.get(`http://localhost:8082/article/get-image?id=${id}`, { responseType: 'blob' });
-  // }
 
-  getCoverImage(id: number): Observable<Blob> {
-    return this.http.get(`http://localhost:8082/article/get-image?id=${id}`, { responseType: 'blob' });
+
+  getPDF(id: number): Observable<File> {
+    return this.http.get(`http://localhost:8082/faq/get-file?id=${id}`, { responseType: 'blob' })
+      .pipe(
+        map((response: Blob) => {
+          const file = new File([response], `document_${id}.pdf`, { type: 'application/pdf' });
+          return file;
+        })
+      );
   }
+  // The responseType option is set to 'blob', indicating that the response should be treated as a binary blob.
+  // The map operator is used to transform the response into a File object.
+  // The transformed File object is returned as an Observable<File>.
+  // By specifying the response type as 'blob', you can access the raw binary data of the PDF file, create a File object using that data, and return it as the result of the observable.
+
+
+
+
 
 
 

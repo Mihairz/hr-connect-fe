@@ -4,6 +4,7 @@ export interface FaqContent {
     content: string;
     orderNumber: number;
     id: number;
+    faqFilePath:string;
 
     
     documentState?:string;

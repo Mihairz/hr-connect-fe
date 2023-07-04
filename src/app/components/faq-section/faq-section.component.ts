@@ -59,6 +59,7 @@ getFaqs() {
     });
     this.filterFaqs(); 
     console.log(response);
+    
   });
 }
 editFaq(faq: FaqContent) {
@@ -72,6 +73,10 @@ editFaq(faq: FaqContent) {
 }
 
 
+
+
+
+
 addPDF(faq:FaqContent) {
   const dialogRef = this.dialog.open(AddFaqModalComponent, {
     data: {...faq, documentState:'editPDF' }
@@ -80,6 +85,33 @@ addPDF(faq:FaqContent) {
     this.getFaqs();
   });
 }
+
+
+
+downloadPDF(id:number): void {
+  this.faqsService.getPDF(id).subscribe((file: File) => {
+    const url = URL.createObjectURL(file);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `document_${id}.pdf`;
+    link.click();
+    URL.revokeObjectURL(url);
+  });
+}
+// The downloadPDF() method is called when the user clicks the "Download PDF" button.
+// It retrieves the id from the faqContent object (assuming you have the faqContent property containing the data).
+// The getPDF(id) method is called on your service to fetch the PDF file as a File object.
+// The subscribe() function is used to handle the response and trigger the download process.
+// Inside the subscription, a temporary URL is created using URL.createObjectURL() for the File object.
+// A dynamic <a> element is created, and the temporary URL and desired filename are set.
+// The link is triggered programmatically using link.click(), initiating the download of the PDF file.
+// After the download is completed, URL.revokeObjectURL() is called to release the temporary URL.
+
+
+
+
+
+
 
 
 
@@ -107,8 +139,12 @@ filterFaqs() {
   } else {
     for (let category of this.faqCategories) { // the function goes through each category in this.faqCategories using a for loop - then filters based on what was written in the textbox
       this.filteredFaqsByCategory[category] = this.faqsByCategory[category].filter((faq) => {
+
+        console.log('FAQ #'+faq.id+ ' Document State: '+faq.documentState+' Document URL: '+faq.documentUrl+' faqFilePath: '+faq.faqFilePath) 
+
          //found here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#searching_in_array
-        return faq.title.toLowerCase().includes(this._filterText.toLowerCase()); // the filtered Faqs gets the filtered items that match the filter for the title and then are presented on the page - see filteredFaqsByCategory[category] in html 
+        return faq.title.toLowerCase().includes(this._filterText.toLowerCase()); // the filtered Faqs gets the filtered items that match the filter for the title and then are presented on the page - see filteredFaqsByCategory[category] in html
+        
       });
     }
   }
