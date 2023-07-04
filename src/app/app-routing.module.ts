@@ -22,6 +22,7 @@ import { FaqPageComponent } from './pages/faq-page/faq-page.component';
 import { RequestsPageComponent } from './pages/requests-page/requests-page.component';
 
 import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.component';
+import { BenefitsPageComponent } from './pages/benefits-page/benefits-page.component';
 
 // Se foloseste pentru a bloca accesul la diferite rute utilizatorilor logati / Se atribuie rutelor destinate exclusiv utilizatorilor nelogati (ex. login-page)
 
@@ -66,7 +67,7 @@ const routes: Routes = [
 
 
   { path: 'feedback', component: FeedbackPageComponent },
-
+  { path: 'benefits', component: BenefitsPageComponent },
 
 ];
 
