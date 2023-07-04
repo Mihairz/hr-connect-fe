@@ -70,6 +70,7 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SecondNavbarComponent } from './components/second-navbar/second-navbar.component';
+import { BenefitsPageComponent } from './pages/benefits-page/benefits-page.component';
 
 
 
@@ -111,6 +112,7 @@ import { SecondNavbarComponent } from './components/second-navbar/second-navbar.
     FeedbackPageComponent,
     FeedbackFormComponent,
     SecondNavbarComponent,
+    BenefitsPageComponent,
   
    
    
