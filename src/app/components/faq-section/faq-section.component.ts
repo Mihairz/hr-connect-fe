@@ -71,6 +71,18 @@ editFaq(faq: FaqContent) {
   });
 }
 
+
+addPDF(faq:FaqContent) {
+  const dialogRef = this.dialog.open(AddFaqModalComponent, {
+    data: {...faq, documentState:'editPDF' }
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    this.getFaqs();
+  });
+}
+
+
+
 addFaq() {
   const dialogRef = this.dialog.open(AddFaqModalComponent, {
     data: { category:'',title: '', content: '' , orderNumber:'', documentUrl:''}

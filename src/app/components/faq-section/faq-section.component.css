@@ -4,68 +4,85 @@
   padding-top: 60px;
   display: flex;
   flex-direction: column;
-  height: 100vh; /* percentage that fills the viewpoint*/
+  height: 100vh;
+  /* percentage that fills the viewpoint*/
   margin: 0 auto;
 }
-.form-control{
-    margin-bottom: 30px;
+
+.form-control {
+  margin-bottom: 30px;
 }
+
 .accordion-body {
   word-wrap: break-word;
   padding: 10px;
 
 }
+
 /* the buttons that are anchors to their category */
-.btn-group{
+.btn-group {
   width: 1100px;
   margin-bottom: 10px;
   margin-top: -10px;
-  font-family: 'Opens Sans',Arial, Helvetica, sans-serif;
+  font-family: 'Opens Sans', Arial, Helvetica, sans-serif;
 }
 
-.btn.btn-primary{
+.btn.btn-primary {
   background-color: #929498;
   border-color: #f8f9f9;
 
 }
+
 /* add faq button */
-.addFaq{
+.addFaq {
   background-color: white;
-  border-color:black;
+  border-color: black;
   margin-bottom: 10px;
 }
+
 /* title of category */
-.category-title{
+.category-title {
   margin-bottom: 20px;
   margin-top: 20px;
   font-size: 20px;
   font-weight: bold;
-  font-family: 'Opens Sans',Arial, Helvetica, sans-serif;
+  font-family: 'Opens Sans', Arial, Helvetica, sans-serif;
 }
+
 /* both buttons of edit and delete */
-.btn-secondary{
+.btn-secondary {
   width: 70px;
   border: none;
   background-color: #6c757d;
 }
+
 /* delete button */
-.delete{
-margin-left: 5px;
-background-color: #f45454;
+.delete {
+  margin-left: 5px;
+  background-color: #f45454;
 }
+
+.upload-pdf {
+  width:150px;
+  margin-left: 5px;
+  background-color: #73b772;
+}
+
 /* the faq title */
-.faq-header{
-  font-family: 'Opens Sans',Arial, Helvetica, sans-serif;
+.faq-header {
+  font-family: 'Opens Sans', Arial, Helvetica, sans-serif;
   font-size: 36px;
   margin-bottom: 10px;
-  
+
 }
+
 /* text after FAQ */
-.introduction-text{
-  font-family: 'PT Sans',Arial, Helvetica, sans-serif;
+.introduction-text {
+  font-family: 'PT Sans', Arial, Helvetica, sans-serif;
 }
+
 /* the header of the accordion */
-.accordion-button{
+.accordion-button {
   font-size: 18px;
-  font-family: 'PT Sans',Arial, Helvetica, sans-serif;
+  font-family: 'PT Sans', Arial, Helvetica, sans-serif;
 }

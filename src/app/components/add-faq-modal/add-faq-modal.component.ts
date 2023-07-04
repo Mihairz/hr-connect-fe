@@ -19,14 +19,58 @@ export class AddFaqModalComponent {
   }
 
   closeModal(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(); 
   }
 
-  saveArticle() {
-    if (this.data.id) {
-      this.aService.updateFaqContent(this.data).subscribe(() => {
+
+
+
+  selectedPDF: File | undefined;
+  previewPDF: string | undefined;
+
+  onPDFSelected(event: any) {
+    const file: File = event.target.files[0];
+  
+    const reader = new FileReader();
+  
+    reader.onload = () => {
+      this.selectedPDF = file;
+      this.previewPDF = reader.result as string;
+    };
+  
+    reader.readAsDataURL(file); 
+  }
+
+  uploadPDF() {
+
+    if (this.selectedPDF) {
+      this.aService.uploadPDF(this.selectedPDF,this.data.id).subscribe(() => {
+        // this.modalCloseCause = 'coverImageUploadSuccess';  (this.modalCloseCause)
         this.dialogRef.close();
-      })
+        },
+        (error: any) => {
+          console.error(error);
+        }
+      );
+    }
+
+  }
+
+
+
+  saveArticle() {
+    if (this.data.id) { // if id exists we update
+
+      if (this.data.documentState === 'editPDF') {
+
+        this.uploadPDF();
+
+      } else {
+        this.aService.updateFaqContent(this.data).subscribe(() => {
+          this.dialogRef.close();
+        })
+      }
+
     }
     else {
       this.aService.addFaqContent(this.data).subscribe(() => {

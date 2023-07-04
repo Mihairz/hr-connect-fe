@@ -71,7 +71,7 @@ export class NewsletterArticleComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.modalCloseCause = result;
       this.getArticles();
-    });
+    }); 
     
   }
 
