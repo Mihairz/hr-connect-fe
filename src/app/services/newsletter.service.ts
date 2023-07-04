@@ -40,16 +40,16 @@ export class NewsletterService {
 
 
     // afiseaza body ul request-ului
-    console.log('UPLOAD COVER IMAGE BODY: ');
-    const result: { [key: string]: string | number | File } = {};
-    formData.forEach((value, key) => {
-      if (value instanceof File) {
-        result[key] = value;
-      } else {
-        result[key] = key === 'image' ? +value : value;
-      }
-    });
-    console.log(result);
+    // console.log('UPLOAD COVER IMAGE BODY: ');
+    // const result: { [key: string]: string | number | File } = {};
+    // formData.forEach((value, key) => {
+    //   if (value instanceof File) {
+    //     result[key] = value;
+    //   } else {
+    //     result[key] = key === 'image' ? +value : value;
+    //   }
+    // });
+    // console.log(result);
 
 
     return this.http.post<NewsletterArticle>('http://localhost:8082/article/upload-image', formData);

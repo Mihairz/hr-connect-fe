@@ -4,7 +4,7 @@
       <!-- ngModel connect our input to filterText -->
       <input class="search-bar-top" type="text" placeholder="Search by title" [(ngModel)]="filterText" />
     </div>
-    <button type="button" class="btn btn-light addArticle" (click)="addArticle()">
+    <button *ngIf="userRole === 'hr'" type="button" class="btn btn-light addArticle" (click)="addArticle()">
       Add Article
     </button>
     <!-- ngModel binds selectedCategory variable to the value in the dropdown -->
@@ -30,22 +30,32 @@
         ">
       <div class="card">
 
+
         <div class="coverpic">
 
-          <img *ngIf="article.coverImageUrl else defaultCoverImage" [src]='article.coverImageUrl'
-            class="coverpic__image">
-          <ng-template #defaultCoverImage>
-            <img class="coverpic__image" src="assets/images/logo-white-on-blue.jpeg" alt="article cover image">
+          <!-- Cover image can trigger update cover image if logged user is hr -->
+          <ng-template [ngIf]="userRole === 'hr'">
+            <img *ngIf="article.coverImageUrl else defaultCoverImage" [src]='article.coverImageUrl'
+              class="coverpic__image">
+
+            <ng-template #defaultCoverImage>
+              <img class="coverpic__image" src="assets/images/logo-white-on-blue.jpeg" alt="article cover image">
+            </ng-template>
+
+            <div class="coverpic__content">
+              <span class="coverpic__text" (click)="editCoverImage(article)">Change</span>
+            </div>
           </ng-template>
 
+          <!-- Cover image cannot triger update cover image if logged user is not hr -->
+          <ng-template [ngIf]="userRole === 'employee'">
+            <img *ngIf="article.coverImageUrl else defaultCoverImage" [src]='article.coverImageUrl'
+             >
 
-
-
-
-
-          <div class="coverpic__content">
-            <span class="coverpic__text" (click)="editCoverImage(article)">Change</span>
-          </div>
+            <ng-template #defaultCoverImage>
+              <img  src="assets/images/logo-white-on-blue.jpeg" alt="article cover image">
+            </ng-template>
+          </ng-template>
 
         </div>
 
@@ -66,7 +76,7 @@
             {{ article.content }}
           </p>
           <div class="read-more-container">
-            <div class="button-container">
+            <div *ngIf=" userRole === 'hr' " class="button-container">
               <button type="button" class="btn btn-secondary" (click)="editArticle(article)">
                 Edit
               </button>
