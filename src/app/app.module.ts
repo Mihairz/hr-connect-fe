@@ -33,7 +33,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
-import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
+
 import { HasRoleDirective } from './directives/has-role.directive';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
@@ -92,7 +92,6 @@ import { SecondNavbarComponent } from './components/second-navbar/second-navbar.
     AddArticleModalComponent,
     NavigationBarComponent,
     FullDetailedArticleComponent,
-    NewsfeedMihaiComponent,
     HasRoleDirective,
     ProfilePageComponent,
     ProfileCardComponent,

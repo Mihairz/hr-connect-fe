@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FaqContent } from 'src/app/models/faq';
 import { MatDialog } from '@angular/material/dialog';
 import { FaqService } from 'src/app/services/faq.service';
@@ -15,6 +15,9 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./faq-section.component.css']
 })
 export class FaqSectionComponent implements OnInit {
+
+  @Input() userRole?: string;
+
   // all categories, helps us structure in html - put every item in its category an later
   faqCategories: string[] = [
     

@@ -14,7 +14,6 @@ import { hasRoleGuard } from './guards/has-role.guard';
 // Verifica daca utilizatorul autentificat face parte din categoria de utilizatori admisi pentru o pagina, in functie de prezenta sau absenta unei proprietati pe nume 'role' din token-ul jwt. Daca nu este autorizat, este redirectionat catre pagina de login.
 // Se aplica ca si proprietate canActivate + proprietate 'data:{role:'admin/employee/hr'} la rutele paginilor ce nu vrem sa fie accesibile de utilizatorii neautorizati.
 
-import { NewsfeedMihaiComponent } from './pages/newsfeed-mihai/newsfeed-mihai.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 import { isNotAuthenticatedGuard } from './guards/is-not-authenticated.guard';

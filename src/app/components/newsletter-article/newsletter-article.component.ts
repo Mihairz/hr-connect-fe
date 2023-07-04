@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NewsletterArticle } from 'src/app/models/newsletter-article';
 import { MatDialog } from '@angular/material/dialog';
 import { NewsletterService } from 'src/app/services/newsletter.service';
@@ -16,13 +16,16 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./newsletter-article.component.css'],
 })
 export class NewsletterArticleComponent implements OnInit {
+
+  @Input() userRole?: string;
+
   articles: NewsletterArticle[] = [];
   _filterText: string = '';
   filteredArticles: NewsletterArticle[] = [];
   //this is for pagination, starting page
   p: number = 1;
   selectedCategory: string = '';
-  userRole: string = '';
+  
 
   modalCloseCause:string = '';
 
