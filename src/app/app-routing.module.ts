@@ -34,40 +34,68 @@ const routes: Routes = [
     component: ProfilePageComponent,
     canActivate: [isAuthenticatedGuard] // pagina este accesibila doar utilizatorilor logati
   },
+
   {
     path: 'login',
     component: LoginPageComponent,
     canActivate: [isNotAuthenticatedGuard] // pagina este accesibila doar utilizatorilor nelogati
   },
+
   {
     path: 'admin', component: AdminHomePageComponent,
     canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina este accesibila doar de catre utilizatorii logati
     data: { roles: ['admin'] }, // care au rol de admin (identificat din jwt)
   },
+
   {
     path: 'newsfeed', component: NewsletterPageComponent,
     canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina este accesibila doar de catre utilizatorii logati
     data: { roles: ['employee', 'hr'] }  // care au rol de employee sau hr (identificat din jwt)
   },
+
+  {
+    path: 'newsletter', component: NewsletterPageComponent,
+    canActivate: [isAuthenticatedGuard, hasRoleGuard],
+    data: { roles: ['employee', 'hr'] }
+  },
+
+  {
+    path: 'article/:id', component: FullDetailedArticleComponent,
+    canActivate: [isAuthenticatedGuard, hasRoleGuard],
+    data: { roles: ['employee', 'hr'] }
+  },
+
   {
     path: 'profile', component: ProfilePageComponent,
     canActivate: [isAuthenticatedGuard], // pagina de profile este accesibila doar utilizatorilor logati
   },
 
-  { path: 'article/:id', component: FullDetailedArticleComponent }, // individual article page
-  { path: 'newsletter', component: NewsletterPageComponent }, // the newsfeed and main page
-  { path: 'faq', component: FaqPageComponent },
+  {
+    path: 'faq', component: FaqPageComponent,
+    canActivate: [isAuthenticatedGuard, hasRoleGuard],
+    data: { roles: ['employee', 'hr'] }
+  },
 
 
   {
     path: 'requests', component: RequestsPageComponent,
     canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina este accesibila doar de catre utilizatorii logati
     data: { roles: ['employee', 'hr'] } // care au rol de employee sau hr (identificat din jwt)},
-  },  
+  },
 
 
-  { path: 'feedback', component: FeedbackPageComponent },
-  { path: 'benefits', component: BenefitsPageComponent },
+  {
+    path: 'feedback', component: FeedbackPageComponent,
+    canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina este accesibila doar de catre utilizatorii logati
+    data: { roles: ['employee', 'hr'] } // care au rol de employee sau hr (identificat din jwt)},  
+  },
+
+
+  {
+    path: 'benefits', component: BenefitsPageComponent,
+    canActivate: [isAuthenticatedGuard, hasRoleGuard], // pagina este accesibila doar de catre utilizatorii logati
+    data: { roles: ['employee', 'hr'] } // care au rol de employee sau hr (identificat din jwt)}, 
+  },
 
 ];
 

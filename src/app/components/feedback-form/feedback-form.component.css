@@ -12,6 +12,10 @@ h2 {
   padding-top: 20px;
 }
 
+.mat-elevation-z0{
+  margin-top: 20px !important;
+}
+
 /* text in the content to have brackets  */
 .text-style {
   white-space: pre-wrap;
