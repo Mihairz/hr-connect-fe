@@ -1,6 +1,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Noto+Serif&family=Open+Sans&family=Oswald&family=PT+Sans&family=Raleway&display=swap" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Noto+Serif&family=Open+Sans&family=Oswald&family=PT+Sans&family=Raleway&display=swap"
+  rel="stylesheet">
 <div class="search-and-accordion-container">
   <h2 class="faq-header">Frequently Asked Questions</h2>
   <p class="introduction-text">
@@ -18,108 +20,140 @@
   <div class="search-and-add-button">
     <div>
       <!-- ngModel connect our input to filterText -->
-      <input
-        class="form-control"
-        id="myInput"
-        type="text"
-        placeholder="Search by FAQ title.."
-        [(ngModel)]="filterText"
-      />
+      <input class="form-control" id="myInput" type="text" placeholder="Search by FAQ title.."
+        [(ngModel)]="filterText" />
     </div>
-    
+
   </div>
 
   <app-spinner></app-spinner>
-  
+
   <div class="container-faqs">
     <!-- https://material.angular.io/cdk/drag-drop/overview#cdk-drag-drop-sorting  we have have a drop list material component that then drags and drops the accordions and arranges by the order item-->
 
-  <!-- When you click on a button you go to the catagory -->
+    <!-- When you click on a button you go to the catagory -->
     <div class="btn-group" role="group" aria-label="Basic example">
+
       <button type="button" class="btn btn-primary" (click)="scrollToCategory('Important_HR_announcement')">Payroll and Compensation</button>
       <button type="button" class="btn btn-primary" (click)="scrollToCategory('Upcoming_events')">Performance</button>
       <button type="button" class="btn btn-primary" (click)="scrollToCategory('Policy_changes')">Time Off and Leave</button>
       <button type="button" class="btn btn-primary" (click)="scrollToCategory('Training_opportunities')">Training and Development</button>
       <button type="button" class="btn btn-primary" (click)="scrollToCategory('News')">Workplace Safety</button>
+
     </div>
-    <button type="button" class="btn btn-light addFaq" (click)="addFaq()">
+    <button *ngIf="userRole==='hr'" type="button" class="btn btn-light addFaq" (click)="addFaq()">
       Add FAQ
     </button>
-      <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
+    <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
     <div *ngFor="let category of faqCategories" [id]="category">
       <!-- filter the categories that do not have any items in them so they don't appear when we are searching for data  -->
       <div *ngIf="filteredFaqsByCategory[category].length > 0">
-      <!-- the faq will have an updated name instead of the one in the database-->
-      <h2 class="category-title">{{ categoryDisplayNames[category] }}</h2>
-     
-      <div
-        cdkDropList
-        [cdkDropListData]="filteredFaqsByCategory[category]"
-        (cdkDropListDropped)="drop($event)"
-      >
-      
-        <div
-          *ngFor="let faq of filteredFaqsByCategory[category]"
-          cdkDrag
-          [cdkDragData]="faq"
-          class="category-container"
-        >
-          <div class="accordion" id="accordionPanelsStayOpen">
-            <div class="accordion-item">
-              <!-- we give an id to all the accordion headers | aria-expanded -> expanded or not |  -->
-              <!-- [attr.data-bs-target] -> attribute binding https://stackoverflow.com/questions/35943518/how-to-pass-variable-to-data-target-angular-2  -->
-              <h2
-                class="accordion-header"
-                id="panelsStayOpen-heading{{ faq.id }}"
-              >
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  [attr.data-bs-target]="'#panelsStayOpen-collapse' + faq.id"
-                  aria-expanded="false"
-                >
-                  <!-- without binding above the accordions would not open/ same for closure -->
-                   {{ faq.title }}
-                </button>
-                <div class="button-container">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    (click)="editFaq(faq)"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-secondary delete"
-                    (click)="deleteFaq(faq.id)"
-                  >
-                    Delete
-                  </button>
+        <!-- the faq will have an updated name instead of the one in the database-->
+        <h2 class="category-title">{{ categoryDisplayNames[category] }}</h2>
+
+
+
+
+
+
+
+
+        <div cdkDropList [cdkDropListData]="filteredFaqsByCategory[category]" (cdkDropListDropped)="drop($event)">
+
+          <ng-template [ngIf]="userRole==='hr'">
+            <div *ngFor="let faq of filteredFaqsByCategory[category]" cdkDrag [cdkDragData]="faq"
+              class="category-container">
+              <div class="accordion" id="accordionPanelsStayOpen">
+                <div class="accordion-item">
+                  <!-- we give an id to all the accordion headers | aria-expanded -> expanded or not |  -->
+                  <!-- [attr.data-bs-target] -> attribute binding https://stackoverflow.com/questions/35943518/how-to-pass-variable-to-data-target-angular-2  -->
+                  <h2 class="accordion-header" id="panelsStayOpen-heading{{ faq.id }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      [attr.data-bs-target]="'#panelsStayOpen-collapse' + faq.id" aria-expanded="false">
+                      <!-- without binding above the accordions would not open/ same for closure -->
+                      {{ faq.title }}
+                    </button>
+                    <div *ngIf="userRole==='hr'" class="button-container">
+                      <button type="button" class="btn btn-secondary" (click)="editFaq(faq)">
+                        Edit
+                      </button>
+                      <button type="button" class="btn btn-secondary delete" (click)="deleteFaq(faq.id)">
+                        Delete
+                      </button>
+
+                      <button type="button" class="btn btn-secondary upload-pdf" (click)="addPDF(faq)">
+                        Upload document
+                      </button>
+                    </div>
+                  </h2>
+                  <div id="panelsStayOpen-collapse{{ faq.id }}" class="accordion-collapse collapse"
+                    [attr.aria-labelledby]="'panelsStayOpen-heading' + faq.id">
+                    <div class="accordion-body">
+                      {{ faq.content }}
+                    </div>
+                    <div class="card">
+
+                      <!-- if there is no documentUrl the card will not appear -->
+                      <div class="card-body" *ngIf="faq.faqFilePath">
+                        For more details please download this document
+                        <button (click)="downloadPDF(faq.id)">Download PDF</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </h2>
-              <div
-                id="panelsStayOpen-collapse{{ faq.id }}"
-                class="accordion-collapse collapse"
-                [attr.aria-labelledby]="'panelsStayOpen-heading' + faq.id"
-              >
-                <div class="accordion-body">
-                  {{ faq.content }}
-                </div>
-                <div class="card">
-                  <!-- HERE WE HIDE THE DOCUMENT - if there is no documentUrl the card will not appear -->
-                  <div class="card-body" *ngIf="faq.documentUrl">
-                    For more details please click on this document
-                    <a href="{{ faq.documentUrl }}" target="_blank">this document</a>
+
+          </ng-template>
+
+
+
+
+
+          <!-- Employees can't drag and drop and can't see buttons -->
+          <ng-template [ngIf]="userRole==='employee'">
+            <div *ngFor="let faq of filteredFaqsByCategory[category]" class="category-container">
+              <div class="accordion" id="accordionPanelsStayOpen">
+                <div class="accordion-item">
+                  <!-- we give an id to all the accordion headers | aria-expanded -> expanded or not |  -->
+                  <!-- [attr.data-bs-target] -> attribute binding https://stackoverflow.com/questions/35943518/how-to-pass-variable-to-data-target-angular-2  -->
+                  <h2 class="accordion-header" id="panelsStayOpen-heading{{ faq.id }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      [attr.data-bs-target]="'#panelsStayOpen-collapse' + faq.id" aria-expanded="false">
+                      <!-- without binding above the accordions would not open/ same for closure -->
+                      {{ faq.title }}
+                    </button>
+                  </h2>
+                  <div id="panelsStayOpen-collapse{{ faq.id }}" class="accordion-collapse collapse"
+                    [attr.aria-labelledby]="'panelsStayOpen-heading' + faq.id">
+                    <div class="accordion-body">
+                      {{ faq.content }}
+                    </div>
+                    <div class="card">
+
+                      <!-- if there is no documentUrl the card will not appear -->
+                      <div class="card-body" *ngIf="faq.faqFilePath">
+                        For more details please download this document
+                        <button (click)="downloadPDF(faq.id)">Download PDF</button>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </ng-template>
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </div>
-    </div>
     </div>
   </div>
 </div>

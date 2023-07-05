@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { MatIconRegistry} from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser';
@@ -12,8 +12,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navigation-bar.component.css']
 })
 export class NavigationBarComponent {
-  faHouse=faHouse;
-  //creates custom icons in  material -- not working as of now
+
+  @Input() userRole?: string;
+
   title ='custom icon';
   constructor(
     private matIconRegistry: MatIconRegistry,

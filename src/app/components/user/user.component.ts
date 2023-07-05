@@ -24,6 +24,9 @@ export class UserComponent implements OnDestroy {
   @Output() newEditUserEvent = new EventEmitter<User>();
   @Input() page:String = '';
 
+  actionState: string = '';
+  @Output() actionStateChange: EventEmitter<string> = new EventEmitter<string>();
+
   // Emite evenimentul newEditUserEvent catre componenta parinte pasand ca si atribut user-ul din input
   editUser() {
     this.newEditUserEvent.emit(this.user);
@@ -32,6 +35,10 @@ export class UserComponent implements OnDestroy {
   // apeleaza functia deleteUser() din serviciul user injectat iar apoi emite un eveniment-ul newGetUsersEvent catre componenta parinte
   deleteUser() {
     this.deleteUserSubscription = this.userService.deleteUser(this.user.id || 0).subscribe((response) => { // 
+
+      this.actionState = 'userArchived';
+      this.actionStateChange.emit(this.actionState);
+
       this.newGetUsersEvent.emit();
     })
   }
