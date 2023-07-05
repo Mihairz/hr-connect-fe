@@ -1,36 +1,4 @@
-/* html,
-section {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-}
-
-section {
-  flex-direction: column;
-} */
-
-/* .container__article {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding-top: 160px;
-}
-.article {
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
-    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
-  margin: 10px 40px;
-  background-color: white;
-  padding: 10px;
-  padding-bottom: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  width: 1000px;
-} */
 
 .container-articles {
   display: flex;

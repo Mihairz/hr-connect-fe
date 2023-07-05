@@ -43,7 +43,7 @@ export class AddArticleModalComponent {
   }
 
 
-  modalCloseCause:string = '';
+  modalCloseCause:string = ''; 
 
   closeModal(): void {
     this.dialogRef.close();

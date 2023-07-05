@@ -46,8 +46,8 @@
         Development</button>
       <button type="button" class="btn btn-primary" (click)="scrollToCategory('News')">Workplace Safety</button>
 
-    </div> 
-    
+    </div>
+
     <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
     <div *ngFor="let category of faqCategories" [id]="category">
       <!-- filter the categories that do not have any items in them so they don't appear when we are searching for data  -->
@@ -65,6 +65,7 @@
         <div cdkDropList [cdkDropListData]="filteredFaqsByCategory[category]" (cdkDropListDropped)="drop($event)">
 
           <ng-template [ngIf]="userRole==='hr'">
+
             <div *ngFor="let faq of filteredFaqsByCategory[category]" cdkDrag [cdkDragData]="faq"
               class="category-container">
               <div class="accordion" id="accordionPanelsStayOpen">
@@ -107,6 +108,10 @@
                 </div>
               </div>
             </div>
+
+
+
+
           </ng-template>
 
 
@@ -157,8 +162,59 @@
 
 
 
+
+
         </div>
       </div>
     </div>
   </div>
+
+
+
+
+  <ng-template [ngIf]="modalCloseCause === 'faqUploadSuccess' || modalCloseCause==='faqEditSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        FAQ uploaded successfully !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'faqUpdateSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        Changes have been saved !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'faqAddSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        New faq has been added !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'faqDeleteSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-danger" role="alert">
+        FAQ has been removed !
+      </div>
+    </div>
+  </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>

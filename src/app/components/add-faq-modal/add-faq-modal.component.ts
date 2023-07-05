@@ -33,9 +33,12 @@ export class AddFaqModalComponent {
     this.particlesHostingElement = document.createElement("script");
     this.particlesHostingElement.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
     document.body.appendChild(this.particlesHostingElement);
-   }
+  }
   ngOnInit() {
   }
+
+
+  modalCloseCause: string = '';
 
   closeModal(): void {
     this.dialogRef.close();
@@ -66,7 +69,8 @@ export class AddFaqModalComponent {
       this.aService.uploadPDF(this.selectedPDF, this.data.id).subscribe(() => {
         // this.modalCloseCause = 'coverImageUploadSuccess';  (this.modalCloseCause)
         this.data.documentState = 'faqHasPDF';
-        this.dialogRef.close();
+        this.modalCloseCause = 'faqUploadSuccess';
+        this.dialogRef.close(this.modalCloseCause);
       },
         (error: any) => {
           console.error(error);
@@ -87,14 +91,16 @@ export class AddFaqModalComponent {
 
       } else {
         this.aService.updateFaqContent(this.data).subscribe(() => {
-          this.dialogRef.close();
+          this.modalCloseCause = 'faqUpdateSuccess';
+          this.dialogRef.close(this.modalCloseCause);
         })
       }
 
     }
     else {
       this.aService.addFaqContent(this.data).subscribe(() => {
-        this.dialogRef.close();
+        this.modalCloseCause = 'faqAddSuccess';
+        this.dialogRef.close(this.modalCloseCause);
       })
     }
 

@@ -27,7 +27,7 @@ export class NewsletterArticleComponent implements OnInit {
   selectedCategory: string = '';
   
 
-  modalCloseCause:string = '';
+  modalCloseCause:string = ''; 
 
   get filterText() {
     return this._filterText;

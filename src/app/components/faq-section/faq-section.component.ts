@@ -18,6 +18,8 @@ export class FaqSectionComponent implements OnInit {
 
   @Input() userRole?: string;
 
+  modalCloseCause:string = '';
+
   // all categories, helps us structure in html - put every item in its category an later
   faqCategories: string[] = [
     
@@ -70,8 +72,8 @@ editFaq(faq: FaqContent) {
     data: { ...faq }
   });
   dialogRef.afterClosed().subscribe(result => {
+    this.modalCloseCause = result;
     this.getFaqs();
-   
   });
 }
 
@@ -85,6 +87,7 @@ addPDF(faq:FaqContent) {
     data: {...faq, documentState:'editPDF' }
   });
   dialogRef.afterClosed().subscribe(result => {
+    this.modalCloseCause = result;
     this.getFaqs();
   });
 }
@@ -123,15 +126,15 @@ addFaq() {
     data: { category:'',title: '', content: '' , orderNumber:'', documentUrl:''}
   });
   dialogRef.afterClosed().subscribe(result => {
+    this.modalCloseCause = result;
     this.getFaqs();
-   
   });
 }
 
 deleteFaq(id:number ) {
   this.faqsService.deleteFaqContent(id).subscribe(() => {
+    this.modalCloseCause = 'faqDeleteSuccess'
     this.getFaqs();
-    
   });
 }
 
