@@ -4,7 +4,6 @@
   href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Noto+Serif&family=Open+Sans&family=Oswald&family=PT+Sans&family=Raleway&display=swap"
   rel="stylesheet">
 <div class="search-and-accordion-container">
-  <h2 class="faq-header">Frequently Asked Questions</h2>
   <p class="introduction-text">
     FAQs are posted here in response to questions sent by staff members. Click
     any of the topics to see a list of questions and answers materials in order
@@ -23,6 +22,10 @@
       <input class="form-control" id="myInput" type="text" placeholder="Search by FAQ title.."
         [(ngModel)]="filterText" />
     </div>
+
+    <button *ngIf="userRole==='hr'" type="button" class="btn btn-light addFaq" (click)="addFaq()">
+      Add FAQ
+    </button>
 
   </div>
 
@@ -43,10 +46,8 @@
         Development</button>
       <button type="button" class="btn btn-primary" (click)="scrollToCategory('News')">Workplace Safety</button>
 
-    </div>
-    <button *ngIf="userRole==='hr'" type="button" class="btn btn-light addFaq" (click)="addFaq()">
-      Add FAQ
-    </button>
+    </div> 
+    
     <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
     <div *ngFor="let category of faqCategories" [id]="category">
       <!-- filter the categories that do not have any items in them so they don't appear when we are searching for data  -->
