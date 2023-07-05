@@ -23,6 +23,7 @@ import { RequestsPageComponent } from './pages/requests-page/requests-page.compo
 
 import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.component';
 import { BenefitsPageComponent } from './pages/benefits-page/benefits-page.component';
+import { FullArticlePageComponent } from './pages/full-article-page/full-article-page.component';
 
 // Se foloseste pentru a bloca accesul la diferite rute utilizatorilor logati / Se atribuie rutelor destinate exclusiv utilizatorilor nelogati (ex. login-page)
 
@@ -60,7 +61,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'article/:id', component: FullDetailedArticleComponent,
+    path: 'article/:id', component: FullArticlePageComponent,
     canActivate: [isAuthenticatedGuard, hasRoleGuard],
     data: { roles: ['employee', 'hr'] }
   },

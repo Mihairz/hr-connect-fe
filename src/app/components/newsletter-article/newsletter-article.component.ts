@@ -60,7 +60,7 @@ export class NewsletterArticleComponent implements OnInit {
       console.log(response);
 
       this.filteredArticles.forEach((article) => {
-        this.getProfilePicture(article)
+        this.getCoverImage(article)
       })
 
     });
@@ -94,7 +94,7 @@ export class NewsletterArticleComponent implements OnInit {
 
 
 
-  getProfilePicture(article: NewsletterArticle) {
+  getCoverImage(article: NewsletterArticle) {
     
       this.articlesService.getCoverImage(article.id).subscribe((response: Blob) => {
         const reader = new FileReader();  // FileReader class allows reading the contents of files
