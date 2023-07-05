@@ -1,7 +1,6 @@
 <!-- A FormGroup aggregates the values of each child FormControl into one object, with each control name as the key.  -->
 <!-- onSubmit() Method called when the "submit" event is triggered on the form. Triggers the ngSubmit emitter to emit the "submit" event as its payload. -->
 <div class="feedback-page">
-  <h2>Feedback</h2>
   <p class="upper-text">Use the form below to send us your comments. We read all feedbacks and suggestions and we will try to solve them as soon as possible.
   For any other enquires please email our team at hr@hr-connect.com</p>
 <div class="card form-containter">
@@ -12,7 +11,7 @@
       <mat-select formControlName="type">
         <mat-option value="Feedback">Feedback</mat-option>
         <mat-option value="Suggestion">Suggestion</mat-option>
-      </mat-select>
+      </mat-select> 
     </mat-form-field>
     <mat-form-field>
       <mat-label>Title</mat-label>
@@ -29,7 +28,7 @@
 </div>
 
 
-  <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z0">
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
