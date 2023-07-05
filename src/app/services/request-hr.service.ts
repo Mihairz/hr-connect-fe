@@ -41,4 +41,10 @@ export class RequestHrService{
     return this.http.put<RequestUser>('http://localhost:8082/request/add',{type,details});
   }
 
+  getStatistics(): Observable<any>{
+    var x = this.http.get<RequestUser>('http://localhost:8082/request/statistics');
+    console.log(x);
+    return x;
+  }
+
 }

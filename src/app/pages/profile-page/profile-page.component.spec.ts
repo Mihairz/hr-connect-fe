@@ -5,7 +5,7 @@ import { ProfilePageComponent } from './profile-page.component';
 describe('ProfilePageComponent', () => {
   let component: ProfilePageComponent;
   let fixture: ComponentFixture<ProfilePageComponent>;
-
+  let title: string;
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ProfilePageComponent]

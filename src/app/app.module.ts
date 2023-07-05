@@ -71,8 +71,8 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SecondNavbarComponent } from './components/second-navbar/second-navbar.component';
 
-
-
+import { CanvasJSAngularStockChartsModule } from '@canvasjs/angular-stockcharts';
+import { DoughnutChartIndexlabelComponent } from './components/charts/doughnut.chart.indexlabel.component';
 
 
 
@@ -113,7 +113,7 @@ import { SecondNavbarComponent } from './components/second-navbar/second-navbar.
     SecondNavbarComponent,
   
    
-   
+    DoughnutChartIndexlabelComponent,
 
 
   ],
@@ -146,6 +146,7 @@ import { SecondNavbarComponent } from './components/second-navbar/second-navbar.
     MatRippleModule,
     MatSlideToggleModule,
  
+    CanvasJSAngularStockChartsModule
   ],
   providers: [
     AuthInterceptorProvider,
