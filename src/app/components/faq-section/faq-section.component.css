@@ -6,7 +6,8 @@
   flex-direction: column;
   height: 100vh;
   /* percentage that fills the viewpoint*/
-  margin: 0 auto;
+  margin: 1000px auto;
+  margin-top: 0px;
 }
 
 .search-and-add-button{
