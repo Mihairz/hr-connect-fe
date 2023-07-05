@@ -4,7 +4,6 @@
   href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Noto+Serif&family=Open+Sans&family=Oswald&family=PT+Sans&family=Raleway&display=swap"
   rel="stylesheet">
 <div class="search-and-accordion-container">
-  <h2 class="faq-header">Frequently Asked Questions</h2>
   <p class="introduction-text">
     FAQs are posted here in response to questions sent by staff members. Click
     any of the topics to see a list of questions and answers materials in order
@@ -23,6 +22,10 @@
       <input class="form-control" id="myInput" type="text" placeholder="Search by FAQ title.."
         [(ngModel)]="filterText" />
     </div>
+
+    <button *ngIf="userRole==='hr'" type="button" class="btn btn-light addFaq" (click)="addFaq()">
+      Add FAQ
+    </button>
 
   </div>
 
@@ -44,9 +47,7 @@
       <button type="button" class="btn btn-primary" (click)="scrollToCategory('News')">Workplace Safety</button>
 
     </div>
-    <button *ngIf="userRole==='hr'" type="button" class="btn btn-light addFaq" (click)="addFaq()">
-      Add FAQ
-    </button>
+
     <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
     <div *ngFor="let category of faqCategories" [id]="category">
       <!-- filter the categories that do not have any items in them so they don't appear when we are searching for data  -->
@@ -64,6 +65,7 @@
         <div cdkDropList [cdkDropListData]="filteredFaqsByCategory[category]" (cdkDropListDropped)="drop($event)">
 
           <ng-template [ngIf]="userRole==='hr'">
+
             <div *ngFor="let faq of filteredFaqsByCategory[category]" cdkDrag [cdkDragData]="faq"
               class="category-container">
               <div class="accordion" id="accordionPanelsStayOpen">
@@ -106,6 +108,10 @@
                 </div>
               </div>
             </div>
+
+
+
+
           </ng-template>
 
 
@@ -156,8 +162,59 @@
 
 
 
+
+
         </div>
       </div>
     </div>
   </div>
+
+
+
+
+  <ng-template [ngIf]="modalCloseCause === 'faqUploadSuccess' || modalCloseCause==='faqEditSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        FAQ uploaded successfully !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'faqUpdateSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        Changes have been saved !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'faqAddSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        New faq has been added !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'faqDeleteSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-danger" role="alert">
+        FAQ has been removed !
+      </div>
+    </div>
+  </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>

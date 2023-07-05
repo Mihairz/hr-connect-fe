@@ -4,9 +4,19 @@
   padding-top: 60px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100vh;
   /* percentage that fills the viewpoint*/
-  margin: 0 auto;
+  margin: 1000px auto;
+  margin-top: 0px;
+}
+
+.search-and-add-button{
+  display: flex;
+  height: 34px;
+  margin-bottom:20px;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .form-control {
@@ -19,6 +29,12 @@
 
 }
 
+.button-container{
+  padding-bottom: 5px;
+  padding-right:5px;
+  text-align:end;
+}
+
 /* the buttons that are anchors to their category */
 .btn-group {
   width: 1100px;
@@ -29,15 +45,16 @@
 
 .btn.btn-primary {
   background-color: #929498;
-  border-color: #f8f9f9;
+  border-color: #f8f9f9; 
 
 }
 
 /* add faq button */
 .addFaq {
-  background-color: white;
-  border-color: black;
-  margin-bottom: 10px;
+  background-color: #133C7F;
+  color:white;
+  font-weight: bolder !important;
+  height: 100%;
 }
 
 /* title of category */
@@ -47,6 +64,12 @@
   font-size: 20px;
   font-weight: bold;
   font-family: 'Opens Sans', Arial, Helvetica, sans-serif;
+}
+
+#myInput{
+  height: 34px;
+  width:300%;
+  margin: 0 !important;
 }
 
 /* both buttons of edit and delete */
@@ -85,4 +108,45 @@
 .accordion-button {
   font-size: 18px;
   font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+}
+
+
+
+
+
+
+
+#hideMe {
+  -moz-animation: cssAnimation 0s ease-in 5s forwards;
+  
+  -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+  
+  -o-animation: cssAnimation 0s ease-in 5s forwards;
+  
+  animation: cssAnimation 0s ease-in 5s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  opacity:1;
+  transition:opacity 500ms;
+}
+@keyframes cssAnimation {
+  to {
+      opacity: 0;
+    
+  }
+}
+@-webkit-keyframes cssAnimation {
+  to {
+      opacity: 0;
+  }
+}
+
+.alert-container{
+  position: absolute;
+  top: 0;
+}
+
+.alert {
+  font-size: 20px !important;
+  font-weight: bold !important;
 }

@@ -81,7 +81,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
       console.log('Selected department: ', this.selectedDepartment);
   }
 
-  positions: string[] = ['Backend_Developer', 'Frontend_Developer', 'Fullstack_Developer', 'Project_Manager', 'Scrum_Mater', 'QA_Analyst', 'Business_Analyst', 'Vice_President', 'Director', 'CEO'];
+  positions: string[] = ['Backend_Developer', 'Frontend_Developer', 'Fullstack_Developer', 'Project_Manager', 'Scrum_Master', 'QA_Analyst', 'Business_Analyst', 'Vice_President', 'Director', 'CEO'];
   selectedPosition: string = '';
   // Urmareste valoarea campului position (care este un dropdown cu mai multe optiuni)
   onPositionChange() {

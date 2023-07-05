@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { Feedback } from 'src/app/models/feedback';
@@ -50,6 +50,8 @@ export class FeedbackFormComponent implements OnInit, AfterViewInit {
   expandedElement!: Feedback | null;
 
   feedbackAuthor!: string | null;
+
+  @Input() userRole?: string;
 
   constructor(private feedbackService: FeedbackFormService) {
     this.feedbackForm = new FormGroup({

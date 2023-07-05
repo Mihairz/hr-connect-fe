@@ -5,7 +5,10 @@
     background-color: #F2F7FB;
     position: relative;
     overflow: auto;
-    padding: 10px;
-    padding-top:55px;
 }
 
+h1 {
+    text-align: center;
+    font-weight: bolder;
+    margin-top: 100px;
+}

@@ -2,11 +2,16 @@
 <div class="modal glass">
  <!-- Modal content -->
  <div class="form-div glass">
+  <div id="particles-js"></div>
  <span class="close" (click)="closeModal()">&times;</span>
         <!-- Butonul de ascundere formular. La evenimentul click se apeleaza functia closeModal() a componentei curente  si modala se va inchide-->
 
 
-  <h2 class="title">Add/Edit FAQ</h2>
+        <div class="title" *ngIf="data.documentState==='editPDF'; else AddEditFAQTitle">Upload document</div>
+        <ng-template #AddEditFAQTitle>
+          <div class="title">Add/Edit FAQ</div>
+        </ng-template>
+        
   <div class="form-grid">
 
     <input *ngIf="data.documentState==='editPDF'; else EditFAQ" type="file"
