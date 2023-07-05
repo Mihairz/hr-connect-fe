@@ -282,5 +282,7 @@ color of the placeholder text when some input was written but the input field si
   display: none;
 }
 
-
+textarea {
+  height: 300px;
+}
 
