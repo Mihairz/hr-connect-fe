@@ -4,6 +4,7 @@
 
     <span class="close" (click)="closeModal()">&times;</span>
 
+
     <div class="title" *ngIf="data.coverImageState==='editCoverImage'; else AddEditArticleTitle">Upload cover image</div>
     <ng-template #AddEditArticleTitle>
       <div class="title">Add/Edit article</div>
@@ -17,6 +18,7 @@
  
 
     <ng-template #AddEditArticle>
+
 
       <div class="input-container ic1">
         <input class="input" type="text" [(ngModel)]="data.title" placeholder="Title" maxlength="80"/>

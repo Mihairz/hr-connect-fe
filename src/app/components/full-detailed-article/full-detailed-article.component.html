@@ -1,54 +1,53 @@
-<app-navigation-bar></app-navigation-bar>
 
-<div *ngIf="article" class="full-article-container">
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-lg-8">
-        <!-- Post content-->
-        <article>
-          <!-- Post header-->
-          <header class="mb-4">
-            <!-- Post title-->
-            <h1 class="fw-bolder mb-1">{{ article.title }}</h1>
-            <!-- Post meta content-->
-            <div class="text-muted fst-italic mb-2">
-              {{ article.createdDate }} by {{ article.createdBy.firstName.concat(" ").concat(article.createdBy.lastName) }}
-            </div>
-            <!-- Post categories-->
-            <a
-              class="badge bg-secondary text-decoration-none link-light"
-              href="#!"
-              >{{ article.contentType }}</a
-            >
-          </header>
-          <!-- Preview image figure-->
-          <figure class="mb-4 image" >
-            <img
-              class="img-fluid rounded"
-              src=""
-              alt="..."
-            />
-          </figure>
-          <!-- Post content-->
-          <section class="mb-5">
-            <p class="text-style">{{ article.content }}</p>
-          </section>
-        </article>
-      </div>
-      <!-- Side widgets-->
-      <div class="col-lg-4">
-        <div class="card mb-4">
-          <div class="card-header">Submited By</div>
-          <div class="card-body">
-            <img
-              class="card-img-top author"
-              src="https://meragor.com/files/styles//ava_800_800_wm/avatar-211523-000242.png"
-            />
-            <p class="fs-5 mb-4">{{ article.author }}</p>
-            <p class="fs-5 mb-4">role of the author</p>
-          </div>
-        </div>
-      </div>
+  <app-navigation-bar></app-navigation-bar>
+  <!-- <div class="card title">
+  <div class="image-container">
+    <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_614507060_403479.jpg" class="card-image-top">
+  </div>
+    <div *ngIf="article" class="card-body">
+      <h5 class="card-title">{{ article.title }}</h5>
+      <p class="card-text"><small class="text-muted"> Submitted by
+        {{
+          article.createdBy.firstName
+            .concat(" ")
+            .concat(article.createdBy.lastName)
+        }}
+        on {{ article.createdDate | date : "dd/MM/yyyy" }}</small></p>
     </div>
   </div>
-</div>
+  <div *ngIf="article" class="card content">
+   <div class="content-container">
+    <p>{{ article.content }}</p>
+    <div class="card about">
+      <p class="text-about-header" >About</p>
+      <img class="employee-image" src="https://i.pinimg.com/564x/6e/be/a5/6ebea5dbbe07d8bee942e0ed6fbb5c0d.jpg">
+     <p class="text-employee"> {{article.createdBy.firstName}} works in the {{article.createdBy.department}} department as a {{article.createdBy.position}} since {{article.createdBy.joinDate | date : "dd/MM/yyyy"}}</p>
+
+    </div>
+  </div>
+  </div> -->
+
+  <div *ngIf="article" class="container-flex-center">
+    <div class="title"></div>
+    <h1>{{ article.title }}</h1>
+
+    <p class="container-text"><small class="text-muted"> Submitted by
+      {{
+        article.createdBy.firstName
+          .concat(" ")
+          .concat(article.createdBy.lastName)
+      }}
+      on {{ article.createdDate | date : "dd/MM/yyyy" }}</small></p>
+      <div class="image-container">
+        <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_614507060_403479.jpg" class="card-image-top">
+      </div>
+  </div>
+  <div *ngIf="article" class="card content">
+    <div class="content-container">
+     <p class="article-content">{{ article.content }}</p>
+     <div class="card about">
+       <p class="text-about-header" >About</p>
+       <img class="employee-image" src="https://i.pinimg.com/564x/6e/be/a5/6ebea5dbbe07d8bee942e0ed6fbb5c0d.jpg">
+      <p class="text-employee"> {{article.createdBy.firstName}} works in the {{article.createdBy.department}} department as a {{article.createdBy.position}} since {{article.createdBy.joinDate | date : "dd/MM/yyyy"}}</p>
+ 
+     </div>

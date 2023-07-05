@@ -33,14 +33,13 @@
 
     <!-- When you click on a button you go to the catagory -->
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Important_HR_announcement')">Important HR
-        Announcement</button>
-      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Upcoming_events')">Upcoming
-        Events</button>
-      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Policy_changes')">Policy Changes</button>
-      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Training_opportunities')">Training
-        Opportunities</button>
-      <button type="button" class="btn btn-primary" (click)="scrollToCategory('News')">Latest Updates</button>
+
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Important_HR_announcement')">Payroll and Compensation</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Upcoming_events')">Performance</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Policy_changes')">Time Off and Leave</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('Training_opportunities')">Training and Development</button>
+      <button type="button" class="btn btn-primary" (click)="scrollToCategory('News')">Workplace Safety</button>
+
     </div>
     <button *ngIf="userRole==='hr'" type="button" class="btn btn-light addFaq" (click)="addFaq()">
       Add FAQ
@@ -102,8 +101,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+
           </ng-template>
 
 
@@ -137,6 +135,7 @@
                         <button (click)="downloadPDF(faq.id)">Download PDF</button>
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>

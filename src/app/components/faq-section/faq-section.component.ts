@@ -178,11 +178,11 @@ startDrag(category: string) {
 // This is how we change the display name of the categories in the HTML
 categoryDisplayNames: {[key: string]: string} = {
 
-  "Important_HR_announcement": "Important HR announcement",
-  "Upcoming_events": "Upcoming events",
-  "Policy_changes": "Updates to Policy",
-  "Training_opportunities": "Training Opportunities",
-  "News": "Latest Updates"
+  "Important_HR_announcement": "Payroll and Compensation",
+  "Upcoming_events": "Performance",
+  "Policy_changes": "Time Off and Leave",
+  "Training_opportunities": "Training and Development",
+  "News": "Workplace Safety"
 };
 //Method that uses scrollIntoView to get you to your desired category section
 scrollToCategory(category: string) {
