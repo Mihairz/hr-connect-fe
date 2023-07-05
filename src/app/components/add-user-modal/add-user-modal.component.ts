@@ -198,8 +198,8 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
     number: new FormControl(0, [
       Validators.required,
-      Validators.min(100000), // ????????????????????????????????????????????????????
-      Validators.max(999999),
+      Validators.minLength(6), // ????????????????????????????????????????????????????
+      Validators.maxLength(6),
       Validators.pattern('^[0-9]+$') // only numeric
     ]),
 
@@ -218,21 +218,21 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
 
     country: new FormControl('', [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(2),
       Validators.maxLength(50),
       Validators.pattern(/^[a-zA-Z\s]*$/) // only alphabetic with spaces
     ]),
 
     county: new FormControl('', [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(2),
       Validators.maxLength(50),
       Validators.pattern(/^[a-zA-Z\s]*$/) // only alphabetic with spaces
     ]),
 
     city: new FormControl('', [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(2),
       Validators.maxLength(50),
       Validators.pattern(/^[a-zA-Z\s]*$/) // only alphabetic with spaces
     ]),
@@ -479,16 +479,16 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorSource = 'series';
         switch (true) {
           case !!this.userForm.controls.series.errors?.['required']:
-            this.errorMessage = 'Identity card must have a series.';
+            this.errorMessage = 'ID must have a series.';
             break;
           case !!this.userForm.controls.series.errors?.['pattern']:
-            this.errorMessage = 'Identity card series can contain only alphabetic characters.';
+            this.errorMessage = 'ID series can contain only alphabetic characters.';
             break;
           case !!this.userForm.controls.series.errors?.['minlength']:
-            this.errorMessage = 'Identity card series must contain at least 2 characters.';
+            this.errorMessage = 'ID series must contain at least 2 characters.';
             break;
           case !!this.userForm.controls.series.errors?.['maxlength']:
-            this.errorMessage = 'Identity card series can contain maximum 3 characters.';
+            this.errorMessage = 'ID series can contain maximum 3 characters.';
             break;
           default:
             this.errorMessage = 'Something went wrong.';
@@ -501,16 +501,16 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorSource = 'number';
         switch (true) {
           case !!this.userForm.controls.number.errors?.['required']:
-            this.errorMessage = 'Identity card must have a number.';
+            this.errorMessage = 'ID must have a number.';
             break;
           case !!this.userForm.controls.number.errors?.['pattern']:
-            this.errorMessage = 'Identity card number can contain only numeric characters.';
+            this.errorMessage = 'ID number can contain only numeric characters.';
             break;
           case !!this.userForm.controls.number.errors?.['minlength']:
-            this.errorMessage = 'Identity card number must contain at least 6 digits.';
+            this.errorMessage = 'ID number must contain at least 6 digits.';
             break;
           case !!this.userForm.controls.number.errors?.['maxlength']:
-            this.errorMessage = 'Identity card number can contain maximum 6 digits.';
+            this.errorMessage = 'ID number can contain maximum 6 digits.';
             break;
           default:
             this.errorMessage = 'Something went wrong.';
@@ -523,16 +523,16 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorSource = 'issuer';
         switch (true) {
           case !!this.userForm.controls.issuer.errors?.['required']:
-            this.errorMessage = 'Identity card must have a issuer.';
+            this.errorMessage = 'ID must have a issuer.';
             break;
           case !!this.userForm.controls.issuer.errors?.['pattern']:
-            this.errorMessage = 'Identity card issuer can contain only alphanumeric characters.';
+            this.errorMessage = 'ID issuer can contain only alphanumeric characters.';
             break;
           case !!this.userForm.controls.issuer.errors?.['minlength']:
-            this.errorMessage = 'Identity card issuer must contain at least 2 characters.';
+            this.errorMessage = 'ID issuer must contain at least 2 characters.';
             break;
           case !!this.userForm.controls.issuer.errors?.['maxlength']:
-            this.errorMessage = 'Identity card issuer can contain maximum 15 characters.';
+            this.errorMessage = 'ID issuer can contain maximum 15 characters.';
             break;
           default:
             this.errorMessage = 'Something went wrong.';
@@ -545,7 +545,7 @@ export class AddUserModalComponent implements OnDestroy, OnInit {
         this.errorSource = 'issuingDate';
         switch (true) {
           case !!this.userForm.controls.issuingDate.errors?.['required']:
-            this.errorMessage = 'Identity card must have an issuing date.';
+            this.errorMessage = 'ID must have an issuing date.';
             break;
           default:
             this.errorMessage = 'Something went wrong.';
