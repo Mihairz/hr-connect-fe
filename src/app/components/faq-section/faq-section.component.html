@@ -52,52 +52,107 @@
         <!-- the faq will have an updated name instead of the one in the database-->
         <h2 class="category-title">{{ categoryDisplayNames[category] }}</h2>
 
+
+
+
+
+
+
+
         <div cdkDropList [cdkDropListData]="filteredFaqsByCategory[category]" (cdkDropListDropped)="drop($event)">
 
-          <div *ngFor="let faq of filteredFaqsByCategory[category]" cdkDrag [cdkDragData]="faq"
-            class="category-container">
-            <div class="accordion" id="accordionPanelsStayOpen">
-              <div class="accordion-item">
-                <!-- we give an id to all the accordion headers | aria-expanded -> expanded or not |  -->
-                <!-- [attr.data-bs-target] -> attribute binding https://stackoverflow.com/questions/35943518/how-to-pass-variable-to-data-target-angular-2  -->
-                <h2 class="accordion-header" id="panelsStayOpen-heading{{ faq.id }}">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    [attr.data-bs-target]="'#panelsStayOpen-collapse' + faq.id" aria-expanded="false">
-                    <!-- without binding above the accordions would not open/ same for closure -->
-                    {{ faq.title }}
-                  </button>
-                  <div *ngIf="userRole==='hr'" class="button-container">
-                    <button type="button" class="btn btn-secondary" (click)="editFaq(faq)">
-                      Edit
+          <ng-template [ngIf]="userRole==='hr'">
+            <div *ngFor="let faq of filteredFaqsByCategory[category]" cdkDrag [cdkDragData]="faq"
+              class="category-container">
+              <div class="accordion" id="accordionPanelsStayOpen">
+                <div class="accordion-item">
+                  <!-- we give an id to all the accordion headers | aria-expanded -> expanded or not |  -->
+                  <!-- [attr.data-bs-target] -> attribute binding https://stackoverflow.com/questions/35943518/how-to-pass-variable-to-data-target-angular-2  -->
+                  <h2 class="accordion-header" id="panelsStayOpen-heading{{ faq.id }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      [attr.data-bs-target]="'#panelsStayOpen-collapse' + faq.id" aria-expanded="false">
+                      <!-- without binding above the accordions would not open/ same for closure -->
+                      {{ faq.title }}
                     </button>
-                    <button type="button" class="btn btn-secondary delete" (click)="deleteFaq(faq.id)">
-                      Delete
-                    </button>
+                    <div *ngIf="userRole==='hr'" class="button-container">
+                      <button type="button" class="btn btn-secondary" (click)="editFaq(faq)">
+                        Edit
+                      </button>
+                      <button type="button" class="btn btn-secondary delete" (click)="deleteFaq(faq.id)">
+                        Delete
+                      </button>
 
-                    <button type="button" class="btn btn-secondary upload-pdf" (click)="addPDF(faq)">
-                      Upload document
-                    </button>
+                      <button type="button" class="btn btn-secondary upload-pdf" (click)="addPDF(faq)">
+                        Upload document
+                      </button>
+                    </div>
+                  </h2>
+                  <div id="panelsStayOpen-collapse{{ faq.id }}" class="accordion-collapse collapse"
+                    [attr.aria-labelledby]="'panelsStayOpen-heading' + faq.id">
+                    <div class="accordion-body">
+                      {{ faq.content }}
+                    </div>
+                    <div class="card">
 
-
-                  </div>
-                </h2>
-                <div id="panelsStayOpen-collapse{{ faq.id }}" class="accordion-collapse collapse"
-                  [attr.aria-labelledby]="'panelsStayOpen-heading' + faq.id">
-                  <div class="accordion-body">
-                    {{ faq.content }}
-                  </div>
-                  <div class="card">
-
-                    <!-- if there is no documentUrl the card will not appear -->
-                    <div class="card-body" *ngIf="faq.faqFilePath">
-                      For more details please download this document
-                      <button (click)="downloadPDF(faq.id)">Download PDF</button>
+                      <!-- if there is no documentUrl the card will not appear -->
+                      <div class="card-body" *ngIf="faq.faqFilePath">
+                        For more details please download this document
+                        <button (click)="downloadPDF(faq.id)">Download PDF</button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </ng-template>
+
+
+
+
+
+          <!-- Employees can't drag and drop and can't see buttons -->
+          <ng-template [ngIf]="userRole==='employee'">
+            <div *ngFor="let faq of filteredFaqsByCategory[category]" class="category-container">
+              <div class="accordion" id="accordionPanelsStayOpen">
+                <div class="accordion-item">
+                  <!-- we give an id to all the accordion headers | aria-expanded -> expanded or not |  -->
+                  <!-- [attr.data-bs-target] -> attribute binding https://stackoverflow.com/questions/35943518/how-to-pass-variable-to-data-target-angular-2  -->
+                  <h2 class="accordion-header" id="panelsStayOpen-heading{{ faq.id }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      [attr.data-bs-target]="'#panelsStayOpen-collapse' + faq.id" aria-expanded="false">
+                      <!-- without binding above the accordions would not open/ same for closure -->
+                      {{ faq.title }}
+                    </button>
+                  </h2>
+                  <div id="panelsStayOpen-collapse{{ faq.id }}" class="accordion-collapse collapse"
+                    [attr.aria-labelledby]="'panelsStayOpen-heading' + faq.id">
+                    <div class="accordion-body">
+                      {{ faq.content }}
+                    </div>
+                    <div class="card">
+
+                      <!-- if there is no documentUrl the card will not appear -->
+                      <div class="card-body" *ngIf="faq.faqFilePath">
+                        For more details please download this document
+                        <button (click)="downloadPDF(faq.id)">Download PDF</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </div>
     </div>
