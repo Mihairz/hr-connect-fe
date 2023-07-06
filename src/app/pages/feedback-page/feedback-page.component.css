@@ -4,7 +4,7 @@
     height: 100%;
     background-color: #F2F7FB;
     position: relative;
-    overflow: auto;
+    display: inline-table;
 }
 
 h1 {

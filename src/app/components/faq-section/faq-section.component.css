@@ -8,6 +8,7 @@
   height: 100vh;
   /* percentage that fills the viewpoint*/
   margin: 1000px auto;
+  margin-bottom: 500px !important;
   margin-top: 0px;
 }
 

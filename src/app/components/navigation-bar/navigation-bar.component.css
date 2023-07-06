@@ -34,6 +34,8 @@
 }
 .navbar {
   background-color: #133c7f;
+  overflow: hidden;
+  overflow-y: hidden;
 }
 /* the text underneath the icon  */
 .nav-link {
@@ -99,11 +101,12 @@ mat-icon {
 /* the name of HR connect */
 .the-name-of-app {
   color: white !important;
-  font-size: 15px !important;
+  font-size: 17px !important;
   margin-top: auto !important;
   margin-bottom: auto;
   font-family: 'Raleway' ,Arial, Helvetica, sans-serif ;
   margin-left: -5px;
+  text-decoration: none !important;
 }
 .logout-area{
   display: flex;
