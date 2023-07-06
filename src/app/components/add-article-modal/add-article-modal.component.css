@@ -94,7 +94,7 @@
 .input-container {
   height: 50px;
   position: relative;
-  width: 100%;
+  width: 100%; 
 }
 
 .ic1 {
@@ -204,6 +204,12 @@ color of the placeholder text when some input was written but the input field si
 }
 
 textarea {
-  height: 300px;
+  height: 200px !important;
+  margin-bottom: 20px;
 }
-
+select{
+  margin-top:140px;
+}
+.modal__buttons{
+  margin-top:140px;
+}

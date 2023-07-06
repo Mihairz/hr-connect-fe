@@ -1,53 +1,61 @@
+<main>
 
-  <app-navigation-bar></app-navigation-bar>
-  <div class="card title">
-  <div class="image-container">
-    <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_614507060_403479.jpg" class="card-image-top">
-  </div>
-    <div *ngIf="article" class="card-body">
-      <h5 class="card-title">{{ article.title }}</h5>
-      <p class="card-text"><small class="text-muted"> Submitted by
-        {{
-          article.createdBy.firstName
-            .concat(" ")
-            .concat(article.createdBy.lastName)
-        }}
-        on {{ article.createdDate | date : "dd/MM/yyyy" }}</small></p>
-    </div>
-  </div>
-  <div *ngIf="article" class="card content">
-   <div class="content-container">
-    <p>{{ article.content }}</p>
-    <div class="card about">
-      <p class="text-about-header" >About</p>
-      <img class="employee-image" src="https://i.pinimg.com/564x/6e/be/a5/6ebea5dbbe07d8bee942e0ed6fbb5c0d.jpg">
-     <p class="text-employee"> {{article.createdBy.firstName}} works in the {{article.createdBy.department}} department as a {{article.createdBy.position}} since {{article.createdBy.joinDate | date : "dd/MM/yyyy"}}</p>
 
-    </div>
-  </div>
-  </div>
 
-  <!-- <div *ngIf="article" class="container-flex-center">
-    <div class="title"></div>
-    <h1>{{ article.title }}</h1>
-
-    <p class="container-text"><small class="text-muted"> Submitted by
-      {{
-        article.createdBy.firstName
-          .concat(" ")
-          .concat(article.createdBy.lastName)
-      }}
-      on {{ article.createdDate | date : "dd/MM/yyyy" }}</small></p>
-      <div class="image-container">
-        <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_614507060_403479.jpg" class="card-image-top">
+  <div *ngIf="article">
+    <div class="header">
+      <div class="title">
+        <h1 class="title__name">{{ article.title }}</h1>
+        <h2 class="title__categories">
+          <span class="categories__icon material-symbols-outlined">sell</span>
+          <span class="categories__item">{{article.contentType}}</span>
+        </h2>
       </div>
+
+      <div class="stats">
+        <div class="stats__stat">
+          <p class="stat__name">Author</p>
+          <p class="stat__value">{{
+            article.createdBy.lastName
+            .concat(" ")
+            .concat(article.createdBy.firstName)
+            }}</p>
+        </div>
+
+        <div class="stats__divider"></div>
+
+        <div class="stats__stat">
+          <p class="stat__name">Position</p>
+          <p class="stat__value">{{article.createdBy.position.replaceAll('_',' ')}}</p>
+        </div>
+
+        <div class="stats__divider"></div>
+
+        <div class="stats__stat">
+          <p class="stat__name">published</p>
+          <p class="stat__value">{{ article.createdDate | date : "dd/MM/yyyy" }}</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="content">
+      <img *ngIf="article?.coverImageUrl else defaultCoverImage" [src]='article.coverImageUrl'>
+
+      <ng-template #defaultCoverImage>
+        <img src="assets/images/logo-white-on-blue.jpeg" alt="article cover image">
+      </ng-template>
+
+      <br><br><br>
+
+      <p>
+        {{ article.content }}
+      </p>
+
+    </div>
   </div>
-  <div *ngIf="article" class="card content">
-    <div class="content-container">
-     <p class="article-content">{{ article.content }}</p>
-     <div class="card about">
-       <p class="text-about-header" >About</p>
-       <img class="employee-image" src="https://i.pinimg.com/564x/6e/be/a5/6ebea5dbbe07d8bee942e0ed6fbb5c0d.jpg">
-      <p class="text-employee"> {{article.createdBy.firstName}} works in the {{article.createdBy.department}} department as a {{article.createdBy.position}} since {{article.createdBy.joinDate | date : "dd/MM/yyyy"}}</p>
- 
-     </div> -->
+
+
+
+</main>
